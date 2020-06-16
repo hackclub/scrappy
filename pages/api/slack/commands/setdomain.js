@@ -25,7 +25,7 @@ export default async (req, res) => {
       domainCount++
     })
 
-    await fetch(
+    const vercelFetch = await fetch(
       `https://api.vercel.com/v1/QmdYCqhZxcLiKpZcQw7dpcqu5B7rmt2k7BbKmdaq6ojwoS/alias`,
       {
         method: 'POST',
@@ -38,10 +38,7 @@ export default async (req, res) => {
         })
       }
     )
-      .then(r => {
-        const result = r.json()
-        console.log(result)
-      })
+      .then(r => r.json())
       .catch(err => {
         if (domainCount > 50) {
           sendCommandResponse(
@@ -54,6 +51,7 @@ export default async (req, res) => {
           `Couldn't set your domain. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.`
         )
       })
+    console.log(vercelFetch)
     sendCommandResponse(
       command.response_url,
       `Custom domain \`${command.text}\` set!\n\n
