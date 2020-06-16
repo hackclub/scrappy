@@ -1,0 +1,7 @@
+ping: pong
+messages:
+  join: |
+    Welcome to the Summer Scrapbook, <@${this.user}>!
+    To get started, post a photo or video of a project you're working on—it can be anything!
+    Your update will be added to your personal scrapbook, which I'll share with you after your
+    first post.
