@@ -1,4 +1,4 @@
-import { react, deleteScrap } from '../../../../lib/api-utils'
+import { react, deleteScrap, postEphemeral } from '../../../../lib/api-utils'
 
 const deleteThreadedMessages = async (ts, channel) => {
   const result = await fetch(
@@ -30,6 +30,7 @@ const deleteThreadedMessages = async (ts, channel) => {
       ).then((r) => r.json())
     })
   )
+  postEphemeral(channel, `Your scrapbook update has been deleted :boom:`)
 }
 
 export default async (req, res) => {
