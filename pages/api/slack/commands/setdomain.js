@@ -37,18 +37,23 @@ export default async (req, res) => {
           domain: command.text
         })
       }
-    ).catch(err => {
-      if (domainCount > 50) {
+    )
+      .then(r => {
+        const result = r.json()
+        console.log(result)
+      })
+      .catch(err => {
+        if (domainCount > 50) {
+          sendCommandResponse(
+            command.response_url,
+            `Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains. :/`
+          )
+        }
         sendCommandResponse(
           command.response_url,
-          `Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains. :/`
+          `Couldn't set your domain. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.`
         )
-      }
-      sendCommandResponse(
-        command.response_url,
-        `Couldn't set your domain. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.`
-      )
-    })
+      })
     sendCommandResponse(
       command.response_url,
       `Custom domain \`${command.text}\` set!\n\n
