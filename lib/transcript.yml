@@ -1,0 +1,27 @@
+ping: pong
+messages:
+  join: |
+    Welcome to the Summer Scrapbook, <@${this.user}>!
+    To get started, post a photo or video of a project you're working on—it can be anything!
+    Your update will be added to your personal scrapbook, which I'll share with you after your
+    first post.
+  streak:
+    1: |
+      Groovy! Congratulations <@${this.userID}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is generating and going live at ${this.scrapbookLink}.
+      Type \`/setcss <link to styles.css>\`.
+      Make sure to post every day to keep your streak going!
+    2: Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
+    3: I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
+    4: Ding dong! That's day 4!!!
+    5: 5 whole straight days later! You're doing amazing sweaty!!
+    6: 6 days! You've almost made it to a week!!! Don't stop now!
+    7: A WHOLE WEEK OF STREAKS?!?! https://www.youtube.com/watch?v=i0dmSIAzWeQ
+    '7+':
+      - Yahoo! ${this.scrapbookLink}
+      - ':yay: ${this.scrapbookLink}'
+      - ':dance::dance1::dance2: ${this.scrapbookLink}'
+      - ':parrotwave1::parrotwave2::parrotwave3::parrotwave4::parrotwave5::parrotwave6::parrotwave7: ${this.scrapbookLink}'
+      - |
+        :congaparrot::congaparrot::congaparrot::congaparrot:
+        ${this.scrapbookLink}
+        :congaparrot::congaparrot::congaparrot::congaparrot:
