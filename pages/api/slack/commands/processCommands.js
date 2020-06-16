@@ -1,11 +1,4 @@
-// wait specified ms
-function wait(ms) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve()
-    }, ms)
-  })
-}
+import { wait } from "../../../../lib/api-utils"
 
 // Slack expects a very quick response to all webhooks it sends out. This
 // function returns quickly back to Slack with status OK and then passes off

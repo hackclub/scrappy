@@ -1,17 +1,11 @@
-// wait specified ms
-function wait(ms) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve()
-    }, ms)
-  })
-}
-
 // Slack expects a very quick response to all webhooks it sends out. This
 // function returns quickly back to Slack with status OK and then passes off
+
+import { wait } from "../../../lib/api-utils"
+
 // the data sent to us to another serverless function for longer processing.
 export default async (req, res) => {
-  const { challenge, event } = req.body
+  const { challenge } = req.body
 
   // pass URL setup challenge Slack sends us
   if (challenge) {

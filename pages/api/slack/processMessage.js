@@ -79,15 +79,7 @@ async function handleEdit(event) {
 async function handleCreate(event) {
   const { files = [], channel, ts, user, text } = event
   const r = await react('add', channel, ts, 'beachball')
-  console.log('the channel of the day is...', channel, event)
-  console.log('showing r', r)
 
-  console.log(
-    'Event channel',
-    channel,
-    'matched',
-    process.env.CHANNEL + '. Continuing...'
-  )
   await react('add', channel, ts, 'beachball')
 
   let attachments = []
@@ -104,9 +96,6 @@ async function handleCreate(event) {
       }
     })
   )
-
-  console.log('Attachments:', attachments)
-  console.log('Videos:', videos)
 
   const userRecord = await getUserRecord(user)
   await updatesTable.create({
@@ -141,14 +130,11 @@ async function handleCreate(event) {
 
 export default async (req, res) => {
   const { event } = req.body
-  console.log("Handling", event.type, event.subtype)
 
   if (event.channel !== process.env.CHANNEL) {
     // console.log('Ignoring event in', event.channel, 'because I only listen in on', process.env.CHANNEL)
     return await res.json({ ok: true })
   }
-
-  console.log("In the right channel, continuing...")
 
   if (event.subtype === 'member_joined_channel' || event.subtype === 'group_joined' || event.subtype === 'channel_join') {
     // someone has joined the channel– let's greet them!

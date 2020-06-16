@@ -5,8 +5,6 @@ import {
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
-  await res.status(200).end()
-
   const command = req.body
   if (command.text === '') {
     sendCommandResponse(

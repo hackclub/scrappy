@@ -7,8 +7,6 @@ import {
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
-  await res.status(200).end()
-
   const userId = req.body.user_id
   const record = await getUserRecord(userId)
   const display = await canDisplayStreaks(userId)

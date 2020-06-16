@@ -5,7 +5,6 @@ export const getProfile = async (username) => {
   const accounts = await getRawUsers()
   if (!accounts) console.error('Could not fetch accounts')
   const user = find(accounts, ['fields.Username', username]) || {}
-  // console.log('User', user)
   return user && user?.fields?.Username ? transformUser(user) : {}
 }
 
