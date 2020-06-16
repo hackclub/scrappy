@@ -1,6 +1,7 @@
 import { react, deleteScrap, postEphemeral } from '../../../../lib/api-utils'
 
 const deleteThreadedMessages = async (ts, channel, user) => {
+  console.log(`USER: ${user}`)
   const result = await fetch(
     `https://slack.com/api/conversations.replies?channel=${channel}&ts=${ts}`,
     {
@@ -35,6 +36,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 
 export default async (req, res) => {
   const { channel, message, thread_ts } = req.body.event
+  console.log(req.body.event)
 
   const ts = thread_ts || message.thread_ts
   if (ts) {
