@@ -13,7 +13,8 @@ import {
   updatesTable,
   accountsTable,
   displayStreaks,
-  getReplyMessage
+  getReplyMessage,
+  fetchProfile
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
@@ -60,6 +61,7 @@ export default async (req, res) => {
   })
 
   await displayStreaks(user, updatedStreakCount)
+  await fetchProfile(userRecord.fields['Username'])
 
   const updatedUserRecord = await getUserRecord(user)
   const replyMessage = getReplyMessage(

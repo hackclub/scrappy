@@ -1,4 +1,4 @@
-import { react, deleteScrap, postEphemeral } from '../../../../lib/api-utils'
+import { react, deleteScrap, postEphemeral, getUserRecord, fetchProfile } from '../../../../lib/api-utils'
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   const result = await fetch(
@@ -31,6 +31,8 @@ const deleteThreadedMessages = async (ts, channel, user) => {
     })
   )
   postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user)
+  const userRecord = await getUserRecord(user)
+  await fetchProfile(userRecord.fields['Username'])
 }
 
 export default async (req, res) => {
