@@ -18,6 +18,7 @@ import {
 
 export default async (req, res) => {
   const { files = [], channel, ts, user, text } = req.body.event
+  console.log(req.body.event)
 
   let attachments = []
   let videos = []
@@ -48,16 +49,24 @@ export default async (req, res) => {
 
   const updatedStreakCount = userRecord.fields['Streak Count'] + 1
 
+  if (userRecord.fields['New Member'] && updatedStreakCount > 1) {
+    accountsTable.update(userRecord.id, {
+      'New Member': false
+    })
+  }
+
   await accountsTable.update(userRecord.id, {
     'Streak Count': updatedStreakCount
   })
 
   await displayStreaks(user, updatedStreakCount)
 
+  const updatedUserRecord = await getUserRecord(user)
   const replyMessage = getReplyMessage(
     user,
     userRecord.fields['Username'],
-    updatedStreakCount
+    updatedStreakCount,
+    updatedUserRecord.fields['New Member']
   )
 
   // remove beachball react, add final summer-of-making react
