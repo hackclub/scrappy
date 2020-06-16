@@ -18,7 +18,7 @@ export default async (req, res) => {
     })
 
     let domainCount
-    const updates = await updatesTable.read({
+    const updates = await accountsTable.read({
       filterByFormula: `{Custom Domain} != ''`
     })
     updates.forEach(() => {
