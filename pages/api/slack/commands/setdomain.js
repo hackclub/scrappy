@@ -17,16 +17,13 @@ export default async (req, res) => {
       'Custom Domain': command.text
     })
 
-    let domainCount
     const updates = await accountsTable.read({
       filterByFormula: `{Custom Domain} != ''`
     })
-    updates.forEach(() => {
-      domainCount++
-    })
+    const domainCount = updates.length
 
     const vercelFetch = await fetch(
-      `https://api.vercel.com/v1/projects/QmdYCqhZxcLiKpZcQw7dpcqu5B7rmt2k7BbKmdaq6ojwoS/alias`,
+      `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias`,
       {
         method: 'POST',
         headers: {
@@ -40,6 +37,7 @@ export default async (req, res) => {
     )
       .then(r => r.json())
       .catch(err => {
+        console.log(`Error while setting custom domain ${command.text}: ${err}`)
         if (domainCount > 50) {
           sendCommandResponse(
             command.response_url,
