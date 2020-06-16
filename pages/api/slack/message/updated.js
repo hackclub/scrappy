@@ -20,7 +20,7 @@ export default async (req, res) => {
     react('remove', req.body.event.channel, prevTs, 'beachball'),
     postEphemeral(req.body.event.channel, `Your update has been edited! You should see it update on the website in a few seconds.`, req.body.event.message.user)
   ])
-  await fetchProfile(userRecord.fields['Username'])
+  fetchProfile(userRecord.fields['Username'])
 
   res.status(200).json({ ok: true })
 }

@@ -32,7 +32,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
   )
   postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user)
   const userRecord = await getUserRecord(user)
-  await fetchProfile(userRecord.fields['Username'])
+  fetchProfile(userRecord.fields['Username'])
 }
 
 export default async (req, res) => {

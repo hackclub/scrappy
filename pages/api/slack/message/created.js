@@ -61,7 +61,7 @@ export default async (req, res) => {
   })
 
   await displayStreaks(user, updatedStreakCount)
-  await fetchProfile(userRecord.fields['Username'])
+  fetchProfile(userRecord.fields['Username'])
 
   const updatedUserRecord = await getUserRecord(user)
   const replyMessage = getReplyMessage(
