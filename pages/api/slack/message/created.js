@@ -5,19 +5,27 @@ This is triggered when a new post shows up in the #scrapbook channel
 - posts with attachments should be added to the scrapbook & replied to with a threaded message
 */
 
-import { getPublicFileUrl, getUserRecord, reply, react, updatesTable, accountsTable, displayStreaks, getReplyMessage } from "../../../../lib/api-utils"
+import {
+  getPublicFileUrl,
+  getUserRecord,
+  reply,
+  react,
+  updatesTable,
+  accountsTable,
+  displayStreaks,
+  getReplyMessage
+} from '../../../../lib/api-utils'
 
 export default async (req, res) => {
   const { files = [], channel, ts, user, text } = req.body.event
-
-  await react('add', channel, ts, 'beachball')
 
   let attachments = []
   let videos = []
   let videoPlaybackIds = []
 
-  await Promise.all(
-    files.map(async file => {
+  await Promise.all([
+    react('add', channel, ts, 'beachball'),
+    ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(file.url_private)
       attachments.push({ url: publicUrl.url })
       if (publicUrl.muxId) {
@@ -25,9 +33,9 @@ export default async (req, res) => {
         videoPlaybackIds.push(publicUrl.muxPlaybackId)
       }
     })
-  )
+  ])
+  let userRecord = await getUserRecord(user)
 
-  const userRecord = await getUserRecord(user)
   await updatesTable.create({
     'Slack Account': [userRecord.id],
     'Post Time': new Date().toUTCString(),
@@ -38,24 +46,26 @@ export default async (req, res) => {
     'Mux Playback IDs': videoPlaybackIds.toString()
   })
 
-  const record = await getUserRecord(user)
-  const updatedStreakCount = record.fields['Streak Count'] + 1
+  const updatedStreakCount = userRecord.fields['Streak Count'] + 1
 
-  await accountsTable.update(record.id, {
+  await accountsTable.update(userRecord.id, {
     'Streak Count': updatedStreakCount
   })
 
   await displayStreaks(user, updatedStreakCount)
 
+  const replyMessage = getReplyMessage(
+    user,
+    userRecord.fields['Username'],
+    updatedStreakCount
+  )
+
   // remove beachball react, add final summer-of-making react
   await Promise.all([
     react('remove', channel, ts, 'beachball'),
-    react('add', channel, ts, 'summer-of-making')
+    react('add', channel, ts, 'summer-of-making'),
+    reply(channel, ts, replyMessage)
   ])
-
-  const updatedRecord = await getUserRecord(user)
-  const replyMessage = await getReplyMessage(user, updatedRecord.fields['Username'], updatedRecord.fields['Streak Count'])
-  await reply(channel, ts, replyMessage)
 
   return res.json({ ok: true })
 }
