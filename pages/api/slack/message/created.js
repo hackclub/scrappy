@@ -29,6 +29,7 @@ export default async (req, res) => {
     react('add', channel, ts, 'beachball'),
     ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(file.url_private)
+      console.log('public url', publicUrl)
       attachments.push({ url: publicUrl.url })
       if (publicUrl.muxId) {
         videos.push(publicUrl.muxId)
