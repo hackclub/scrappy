@@ -51,7 +51,7 @@ export default async (req, res) => {
     'Slack Account': [userRecord.id],
     'Post Time': new Date().toUTCString(),
     'Message Timestamp': ts,
-    Text: formattedText,
+    Text: text,
     Attachments: attachments,
     'Mux Asset IDs': videos.toString(),
     'Mux Playback IDs': videoPlaybackIds.toString()
