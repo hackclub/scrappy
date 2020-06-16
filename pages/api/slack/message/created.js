@@ -37,6 +37,9 @@ export default async (req, res) => {
     })
   ])
   let userRecord = await getUserRecord(user)
+  console.log(videos)
+  console.log(attachments)
+  console.log(userRecord)
 
   await updatesTable.create({
     'Slack Account': [userRecord.id],
