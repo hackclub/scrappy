@@ -12,7 +12,7 @@ messages:
     If you have any questions, feel free to reach out to staff in <#C0C78SG9L> :-).
   streak:
     1: |
-      Groovy! Congratulations <@${this.userID}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is generating and going live at ${this.scrapbookLink}.
+      Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is generating and going live at ${this.scrapbookLink}.
       Type \`/setcss <link to styles.css>\`.
       Make sure to post every day to keep your streak going!
     2: Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
