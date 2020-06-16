@@ -6,7 +6,10 @@ messages:
     Your update will be added to your personal scrapbook, which I'll share with you after your
     first post.
   streak:
-    1: Groovy! Congratulations <@${this.userID}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is generating and going live at ${this.scrapbookLink}.
+    1: |
+      Groovy! Congratulations <@${this.userID}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is generating and going live at ${this.scrapbookLink}.
+      Type \`/setcss <link to styles.css>\`.
+      Make sure to post every day to keep your streak going!
     2: Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
     3: I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
     4: Ding dong! That's day 4!!!
