@@ -15,7 +15,8 @@ import {
   displayStreaks,
   getReplyMessage,
   fetchProfile,
-  formatText
+  formatText,
+  incrementStreakCount
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
@@ -56,17 +57,7 @@ export default async (req, res) => {
     'Mux Playback IDs': videoPlaybackIds.toString()
   })
 
-  const updatedStreakCount = userRecord.fields['Streak Count'] + 1
-
-  if (userRecord.fields['New Member'] && updatedStreakCount > 1) {
-    accountsTable.update(userRecord.id, {
-      'New Member': false
-    })
-  }
-
-  await accountsTable.update(userRecord.id, {
-    'Streak Count': updatedStreakCount
-  })
+  incrementStreakCount(user)
 
   await displayStreaks(user, updatedStreakCount)
   fetchProfile(userRecord.fields['Username'])
