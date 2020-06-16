@@ -59,23 +59,5 @@ export default async (req, res) => {
 
   incrementStreakCount(user)
 
-  await displayStreaks(user, updatedStreakCount)
-  fetchProfile(userRecord.fields['Username'])
-
-  const updatedUserRecord = await getUserRecord(user)
-  const replyMessage = getReplyMessage(
-    user,
-    userRecord.fields['Username'],
-    updatedStreakCount,
-    updatedUserRecord.fields['New Member']
-  )
-
-  // remove beachball react, add final summer-of-making react
-  await Promise.all([
-    react('remove', channel, ts, 'beachball'),
-    react('add', channel, ts, 'summer-of-making'),
-    reply(channel, ts, replyMessage)
-  ])
-
   return res.json({ ok: true })
 }
