@@ -1,33 +1,25 @@
 {
-  "name": "@hackclub/summer-streaks",
+  "name": "@hackclub/scrappy-bot",
   "version": "1.0.0",
-  "author": "Lachlan Campbell <lachlan@hackclub.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
-    "@hackclub/icons": "^0.0.3",
-    "@hackclub/meta": "^1.0.0",
-    "@hackclub/theme": "^0.1.1",
-    "@mdx-js/loader": "^1.6.5",
-    "@mux/mux-node": "^2.8.0",
-    "@next/mdx": "^9.4.4",
-    "@segment/snippet": "^4.12.0",
     "airtable-plus": "^1.0.4",
-    "cheerio": "^1.0.0-rc.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "form-data": "^3.0.0",
-    "hls.js": "^0.13.2",
     "lodash": "^4.17.15",
     "next": "^9.4.4",
     "react": "^16.13.1",
-    "react-calendar-heatmap": "^1.8.1",
-    "react-dom": "^16.13.1",
-    "react-lazy-load-image-component": "^1.5.0-beta.0",
-    "react-masonry-css": "^1.0.14",
-    "swr": "^0.2.3"
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
   }
 }
