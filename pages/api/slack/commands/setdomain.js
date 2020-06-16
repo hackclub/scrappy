@@ -23,7 +23,7 @@ export default async (req, res) => {
     const domainCount = updates.length
 
     const vercelFetch = await fetch(
-      `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias`,
+      `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
       {
         method: 'POST',
         headers: {
