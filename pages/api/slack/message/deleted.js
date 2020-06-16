@@ -1,6 +1,6 @@
 import { react, deleteScrap, postEphemeral } from '../../../../lib/api-utils'
 
-const deleteThreadedMessages = async (ts, channel) => {
+const deleteThreadedMessages = async (ts, channel, user) => {
   const result = await fetch(
     `https://slack.com/api/conversations.replies?channel=${channel}&ts=${ts}`,
     {
@@ -30,7 +30,7 @@ const deleteThreadedMessages = async (ts, channel) => {
       ).then((r) => r.json())
     })
   )
-  postEphemeral(channel, `Your scrapbook update has been deleted :boom:`)
+  postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user)
 }
 
 export default async (req, res) => {
@@ -41,7 +41,7 @@ export default async (req, res) => {
     await Promise.all([
       react('add', channel, ts, 'beachball'),
       deleteScrap(ts),
-      deleteThreadedMessages(ts, channel)
+      deleteThreadedMessages(ts, channel, message.user)
     ])
     await Promise.all([
       await react('remove', channel, ts, 'beachball'),
