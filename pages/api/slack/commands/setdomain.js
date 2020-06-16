@@ -31,7 +31,7 @@ export default async (req, res) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${VC_SCRAPBOOK_TOKEN}`
+          Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
         },
         body: JSON.stringify({
           domain: command.text
