@@ -26,7 +26,7 @@ export default async (req, res) => {
     })
 
     const vercelFetch = await fetch(
-      `https://api.vercel.com/v1/QmdYCqhZxcLiKpZcQw7dpcqu5B7rmt2k7BbKmdaq6ojwoS/alias`,
+      `https://api.vercel.com/v1/projects/QmdYCqhZxcLiKpZcQw7dpcqu5B7rmt2k7BbKmdaq6ojwoS/alias`,
       {
         method: 'POST',
         headers: {
