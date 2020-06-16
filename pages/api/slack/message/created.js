@@ -57,7 +57,7 @@ export default async (req, res) => {
     'Mux Playback IDs': videoPlaybackIds.toString()
   })
 
-  incrementStreakCount(user)
+  incrementStreakCount(user, channel, ts)
 
   return res.json({ ok: true })
 }
