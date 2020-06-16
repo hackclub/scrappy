@@ -1,24 +1,40 @@
 // Slack expects a very quick response to all webhooks it sends out. This
 // function returns quickly back to Slack with status OK and then passes off
 
-import { wait } from "../../../lib/api-utils"
-
 // the data sent to us to another serverless function for longer processing.
 export default async (req, res) => {
-  const { challenge } = req.body
+  const { challenge, event } = req.body
 
   // pass URL setup challenge Slack sends us
   if (challenge) {
     return await res.json({ challenge })
   }
 
+  res.status(200).json({ ok: true })
+
+  if (event.channel != process.env.CHANNEL) {
+    // console.log('Ignoring event in', event.channel, 'because I only listen in on', process.env.CHANNEL)
+    return
+  }
+
+  let method
+  if (event.type === 'member_joined_channel') {
+    method = 'joined'
+  } else if (event?.message?.subtype === 'tombstone') {
+    method = 'deleted'
+  } else if (event.subtype === 'file_share') {
+    method = 'created'
+  } else if (event.subtype === 'message_changed') {
+    method = 'updated'
+  } else {
+    return
+  }
+
   //                v- should be http or https, fallback to http just in case
   const protocol = (req.headers['x-forwarded-proto'] || 'http') + '://'
-  const backendUrl = protocol + req.headers.host + '/api/slack/processMessage'
+  const backendUrl = protocol + req.headers.host + '/api/slack/message/' + method
 
-  // queue this to start. we don't expect it to finish by the time this
-  // function is cancelled
-  const backendReq = fetch(backendUrl, {
+  await fetch(backendUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -26,13 +42,4 @@ export default async (req, res) => {
     },
     body: JSON.stringify(req.body)
   })
-
-  // give the above function a little time to get going
-  await wait(500)
-
-  // respond for slack
-  res.json({ ok: true })
-
-  // wait for function to finish
-  await backendReq
 }

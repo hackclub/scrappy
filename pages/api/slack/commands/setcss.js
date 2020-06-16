@@ -49,9 +49,10 @@ export default async (req, res) => {
     await accountsTable.update(user.id, {
       'CSS URL': url
     })
-    sendCommandResponse(
+    await sendCommandResponse(
       command.response_url,
       `Your CSS file, ${url} has been linked to your profile!`
     )
   }
+  res.status(200).end()
 }
