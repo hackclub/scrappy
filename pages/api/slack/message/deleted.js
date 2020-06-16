@@ -35,7 +35,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 }
 
 export default async (req, res) => {
-  const { channel, message, thread_ts } = req.body.event
+  const { channel, message, previous_message, thread_ts } = req.body.event
   console.log(req.body.event)
 
   const ts = thread_ts || message.thread_ts
@@ -43,7 +43,7 @@ export default async (req, res) => {
     await Promise.all([
       react('add', channel, ts, 'beachball'),
       deleteScrap(ts),
-      deleteThreadedMessages(ts, channel, message.user)
+      deleteThreadedMessages(ts, channel, previous_message.user)
     ])
     await Promise.all([
       await react('remove', channel, ts, 'beachball'),
