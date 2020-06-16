@@ -50,15 +50,15 @@ export default async (req, res) => {
       if (vercelFetch.error) {
         sendCommandResponse(
           command.response_url,
-          `Couldn't set your domain. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.`
+          `Couldn't set your domain \`${command.text}\`. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.`
         )
       }
       else {
         sendCommandResponse(
           command.response_url,
-          `Custom domain \`${command.text}\` set!\n\n
-        *Your next steps*: create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`. \n\n
-        You're one of 50 people who can add a custom domain during the Summer of Making. There are *${50 - domainCount}* domains spots left.
+          `Custom domain \`${command.text}\` set!
+          \n\n*Your next steps*: create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
+        \n\nYou're one of 50 people who can add a custom domain during the Summer of Making. There are *${50 - domainCount}* domains spots left.
         `
         )
       }
