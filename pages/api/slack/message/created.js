@@ -14,12 +14,16 @@ import {
   accountsTable,
   displayStreaks,
   getReplyMessage,
-  fetchProfile
+  fetchProfile,
+  formatText
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
   const { files = [], channel, ts, user, text } = req.body.event
   console.log(req.body.event)
+
+  const formattedText = await formatText(text)
+  console.log(formattedText)
 
   let attachments = []
   let videos = []
@@ -46,7 +50,7 @@ export default async (req, res) => {
     'Slack Account': [userRecord.id],
     'Post Time': new Date().toUTCString(),
     'Message Timestamp': ts,
-    Text: text,
+    Text: formattedText,
     Attachments: attachments,
     'Mux Asset IDs': videos.toString(),
     'Mux Playback IDs': videoPlaybackIds.toString()
