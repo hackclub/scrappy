@@ -1,10 +1,15 @@
 ping: pong
 messages:
   join: |
-    Welcome to the Summer Scrapbook, <@${this.user}>!
-    To get started, post a photo or video of a project you're working on—it can be anything!
-    Your update will be added to your personal scrapbook, which I'll share with you after your
-    first post.
+    Hey there <@{this.user}>! I hope you brought your gluestix and silly-scissors!
+
+    For the @staff who built me, a key part in their learning journey was _showing up every day_. <#${process.env.CHANNEL}> is a place to post what you're learning, making, and doing every day. It keeps a streak of how many consecutive days you've been doing it and sets your Slack status accordingly, generating a beautiful website with your progress along the way at https://scrapbook.hackclub.com.
+
+    <#${process.env.CHANNEL}> will only be open from June 18th - August 15th for the Summer of Making. To get started, post a photo or video of something you've been up to today.
+
+    Want to see what others are doing? See <@UARKJATPW>'s scrapbook at https://scrapbook.hackclub.com/clairebookworm or <@U0C7B14Q3>'s at https://scrapbook.hackclub.com/msw/.
+
+    If you have any questions, feel free to reach out to staff in <#C0C78SG9L> :-).
   streak:
     1: |
       Groovy! Congratulations <@${this.userID}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is generating and going live at ${this.scrapbookLink}.
