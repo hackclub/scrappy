@@ -1,8 +1,8 @@
 import { getUserRecord, setStatus } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
-  console.log(req.body)
-  const user = req.body.user
+  console.log(req.body.event)
+  const user = req.body.event.user
   const statusEmoji = user.profile.status_emoji
 
   if (statusEmoji.includes('ghost-')) {
