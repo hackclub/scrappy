@@ -23,7 +23,7 @@ export default async (req, res) => {
       sendCommandResponse(
         command.response_url,
         `You must give a URL to a GitHub Gist or CSS file somewhere on the web.
-        \n\nTry this one, which sets your background to hot pink! \`/setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\``
+        Try this one, which sets your background to hot pink! \`/setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\``
       )
     }
   } else if (url.includes('gist.github.com')) {
