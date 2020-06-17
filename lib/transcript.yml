@@ -1,7 +1,7 @@
 ping: pong
 messages:
   join: |
-    Hey there <@{this.user}>! I hope you brought your gluestix and silly-scissors!
+    Hey there <@${this.user}>! I hope you brought your gluestix and silly-scissors!
 
     For the @staff who built me, a key part in their learning journey was _showing up every day_. <#${process.env.CHANNEL}> is a place to post what you're learning, making, and doing every day. It keeps a streak of how many consecutive days you've been doing it and sets your Slack status accordingly, generating a beautiful website with your progress along the way at https://scrapbook.hackclub.com.
 
