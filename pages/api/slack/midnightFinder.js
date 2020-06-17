@@ -25,7 +25,17 @@ export default async (req, res) => {
         accountsTable.update(user.id, {
           'Streak Count': 0
         })
-        displayStreaks(userId, 0)
+        await fetch('https://slack.com/api/users.profile.set', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.SLACK_USER_TOKEN}`
+          },
+          body: JSON.stringify({
+            user: userId,
+            profile: { status_text: '', status_emoji: `` }
+          })
+        })
         fetch('https://slack.com/api/chat.postMessage', {
           method: 'POST',
           headers: {
