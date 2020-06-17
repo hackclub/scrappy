@@ -12,11 +12,10 @@ export default async (req, res) => {
 
   res.status(200).json({ ok: true })
 
-  if (event.channel != process.env.CHANNEL) {
+  if (event.channel != process.env.CHANNEL && event.type !== 'user_change') {
     // console.log('Ignoring event in', event.channel, 'because I only listen in on', process.env.CHANNEL)
     return
   }
-  console.log(event)
 
   let method
   if (event.type === 'member_joined_channel') {
