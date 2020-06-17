@@ -11,8 +11,8 @@ messages:
   streak:
     1: |
       Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at ${this.scrapbookLink}.
-      Ifyou want to link a custom CSS file to your page, type `/setcss <link to css file>
-      You just started a streak! Keep posting every day to add to your streak. Type `/summerstreaks` to display your streak in your status.
+      If you want to link a custom CSS file to your page, type \`/setcss <link to css file>\`
+      You just started a streak! Keep posting every day to add to your streak. Type \`/summerstreaks\` to display your streak in your status.
     2: Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
     3: I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
     4: Ding dong! That's day 4!!!
