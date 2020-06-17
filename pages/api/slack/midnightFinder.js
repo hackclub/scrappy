@@ -1,4 +1,5 @@
 import { accountsTable, updatesTable, displayStreaks } from '../../../lib/api-utils'
+import { times } from 'lodash'
 
 export default async (req, res) => {
   res.status(200).end()
@@ -20,7 +21,7 @@ export default async (req, res) => {
         filterByFormula: `FIND('${username}', {ID}) > 0`
       })
       const createdTime = Date.parse(latestUpdate[0]?.fields['Post Time'])
-      if (Date.now() - createdTime > 86400000) {
+      if (Date.parse(timeString) - createdTime > 86400000) {
         console.log(`It's midnight for ${username} and it's been 48 hours since they last posted. Resetting their streak...`)
         accountsTable.update(user.id, {
           'Streak Count': 0
