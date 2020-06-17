@@ -19,11 +19,12 @@ export default async (req, res) => {
       })
       sendCommandResponse(command.response_url, `Your CSS file has been removed from your profile.
       If you would like to re-add it, type \`/setcss <link to css file>\`.`)
+    } else {
+      sendCommandResponse(
+        command.response_url,
+        'You must give a URL to a GitHub Gist or CSS file somewhere on the web.'
+      )
     }
-    sendCommandResponse(
-      command.response_url,
-      'You must give a URL to a GitHub Gist or CSS file somewhere on the web.'
-    )
   } else if (url.includes('gist.github.com')) {
     url = await fetch(url)
       .then(r => r.text())
