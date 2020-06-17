@@ -47,9 +47,12 @@ export default async (req, res) => {
   console.log(attachments)
   console.log(userRecord)
 
+  const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
+  const convertedDate = new Date(date).toISOString()
+
   await updatesTable.create({
     'Slack Account': [userRecord.id],
-    'Post Time': new Date().toUTCString(),
+    'Post Time': convertedDate,
     'Message Timestamp': ts,
     Text: text,
     Attachments: attachments,
