@@ -44,7 +44,7 @@ export default async (req, res) => {
           },
           body: JSON.stringify({
             channel: U4QAK9SRW, //userId
-            text: `It's been 48 hours since you last posted a Scrapbook update, so I've reset your streak. No worries, though—post something else to start another streak! And the rest of your updates are still available at https://scrapbook.hackclub.com/${username} :)`
+            text: `<@${userId}> It's been 48 hours since you last posted a Scrapbook update, so I've reset your streak. No worries, though—post something else to start another streak! And the rest of your updates are still available at https://scrapbook.hackclub.com/${username} :)`
           })
         })
         //console.log(username, latestUpdate[0].fields['Post Time'], new Date(Date.now()).toUTCString(), Date.now() - createdTime)
