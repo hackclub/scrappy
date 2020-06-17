@@ -12,7 +12,7 @@ export default async (req, res) => {
   let url = command.text
 
   if (url === '') {
-    const userRecord = await getUserRecord()
+    const userRecord = await getUserRecord(command.user_id)
     if (userRecord.fields['CSS URL'] !== '') {
       updatesTable.update(userRecord.id, {
         'CSS URL': ''
