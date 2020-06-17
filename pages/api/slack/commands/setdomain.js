@@ -8,7 +8,7 @@ import {
 export default async (req, res) => {
   const command = req.body
   const arg = command.text.split(' ')[1]
-  if (arg === '') {
+  if (!arg) {
     sendCommandResponse(
       command.response_url,
       t('messages.domain.noargs')
