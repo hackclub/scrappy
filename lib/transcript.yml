@@ -34,4 +34,4 @@ messages:
         ${this.scrapbookLink}
         :congaparrot::congaparrot::congaparrot::congaparrot:
     'nostreak':
-      - 'You've already posted today, so I didn't increment your streak. But your update is live on your scrapbook! ${this.scrapbookLink}'
+      - 'You\'ve already posted today, so I didn't increment your streak. But your update is live on your scrapbook! ${this.scrapbookLink}'
