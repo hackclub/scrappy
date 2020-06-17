@@ -1,5 +1,9 @@
 ping: pong
 messages:
+  forget: |
+    Forgetting about all recorded scraps from....
+    uhhhh....
+    who are you?
   join: |
     Hey there <@${this.user}>! I hope you brought your gluestix and silly-scissors!
 

@@ -26,6 +26,8 @@ export default async (req, res) => {
     method = 'created'
   } else if (event.subtype === 'message_changed') {
     method = 'updated'
+  } else if (event?.message?.text === 'forget scrapbook') {
+    method = 'forgotten'
   } else {
     return
   }
