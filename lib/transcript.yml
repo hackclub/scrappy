@@ -5,8 +5,8 @@ messages:
     uhhhh....
     who are you?
   join: |
-    hey heeEEEey there @zrl, I hope you brought your gluestix and silly-scissors cuz this is the summer of SCRAPBOOKS! To begin a magical journey,
-    :star: POST A PHOTO TO THIS CHANNEL :camera_with_flash:>:slack:>:mindblown:
+    hey heeEEEey there <@${this.user}>, I hope you brought your gluestix and silly-scissors cuz this is the summer of SCRAPBOOKS! To begin a magical journey,
+    > :star: POST A PHOTO TO THIS CHANNEL :camera_with_flash:>:slack:>:mindblown:
     (It could be anything. Your shoes. Your projects. See what others are sharing!) 
   streak:
     1: |
