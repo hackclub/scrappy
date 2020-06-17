@@ -12,10 +12,8 @@ export default async (req, res) => {
     const localTime = tzOffset + Date.now()
     const timeString = new Date(localTime).toUTCString()
 
-    if (user.fields['Streak Count'] === 0) return
-
     //console.log(username, timeString)
-    if (timeString.split(' ')[4].includes('00:')) {
+    if (timeString.split(' ')[4].includes('00:') && user.fields['Streak Count'] != 0) {
       const latestUpdate = await updatesTable.read({
         maxRecords: 1,
         sort: [{ field: 'Post Time', direction: 'desc' }],
