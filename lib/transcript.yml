@@ -20,7 +20,7 @@ messages:
     4: Ding dong! That's day 4!!!
     5: 5 whole days of streaks! You're doing amazing sweaty!!!
     6: 6 days! You've almost made it to a week!!! Don't stop now!
-    7: A WHOLE WEEK OF STREAKS?!?! https://www.youtube.com/watch?v=i0dmSIAzWeQ
+    7: A WHOLE WEEK OF STREAKS?!?! /n /n https://www.youtube.com/watch?v=i0dmSIAzWeQ /n /n <${`https://twitter.com/intent/tweet?text=This%20summer%20I%20am%20making%20loads%20of%20things.%20Track%20my%20progress%20at%20${scrapbookLink}`}|Why not share your amazing work on Twitter?>
     '7+':
       - Yahoo! ${this.scrapbookLink}
       - ':yay: ${this.scrapbookLink}'
