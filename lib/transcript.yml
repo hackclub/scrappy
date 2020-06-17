@@ -7,7 +7,7 @@ messages:
   join: |
     hey heeEEEey there <@${this.user}>, I hope you brought your gluestix and silly-scissors cuz this is the summer of SCRAPBOOKS! To begin a magical journey,
     > :star: POST A PHOTO TO THIS CHANNEL :camera_with_flash:>:slack:>:mindblown:
-    (It could be anything. Your shoes. Your projects. See what others are sharing!) 
+    (It could be anything. Your shoes. Your projects. <https://scrapbook.hackclub.com|See what others are sharing!>) 
   streak:
     1: |
       Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is generating and going live at ${this.scrapbookLink}.

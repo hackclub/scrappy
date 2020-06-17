@@ -14,7 +14,7 @@ export default async (req, res) => {
     const timeString = new Date(localTime).toUTCString()
 
     console.log(username, timeString)
-    if (timeString.split(' ')[4].includes('00:') && user.fields['Streak Count'] != 0) {
+    if (timeString.split(' ')[4].split(':')[0] === '00' && user.fields['Streak Count'] != 0) {
       const latestUpdate = await updatesTable.read({
         maxRecords: 1,
         sort: [{ field: 'Post Time', direction: 'desc' }],
