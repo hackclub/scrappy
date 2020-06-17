@@ -43,7 +43,7 @@ export default async (req, res) => {
           })
           sendCommandResponse(
             command.response_url,
-            `Your CSS file, ${githubUrl} has been linked to your profile!`
+            `Your CSS file, ${githubUrl} has been linked to your profile! Check it out: \`https://scrapbook.hackclub.com/${user.fields['Username']}\``
           )
         } else {
           sendCommandResponse(
