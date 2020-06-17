@@ -14,7 +14,7 @@ export default async (req, res) => {
   let url = command.text.split(' ')[1]
   console.log('url', url)
 
-  if (url === '') {
+  if (!url) {
     const userRecord = await getUserRecord(command.user_id)
     if (userRecord.fields['CSS URL'] != null) {
       updatesTable.update(userRecord.id, {
