@@ -1,6 +1,7 @@
 import { getUserRecord, setStatus } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
+  console.log(req.body)
   const user = req.body.user
   const statusEmoji = user.profile.status_emoji
 
