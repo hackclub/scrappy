@@ -7,7 +7,8 @@ import {
 
 export default async (req, res) => {
   const command = req.body
-  if (command.text === '') {
+  const arg = command.text.split(' ')[1]
+  if (arg === '') {
     sendCommandResponse(
       command.response_url,
       t('messages.domain.noargs')
@@ -15,7 +16,7 @@ export default async (req, res) => {
   } else {
     const user = await getUserRecord(command.user_id)
     await accountsTable.update(user.id, {
-      'Custom Domain': command.text
+      'Custom Domain': arg
     })
 
     const updates = await accountsTable.read({
@@ -39,27 +40,26 @@ export default async (req, res) => {
             Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
           },
           body: JSON.stringify({
-            domain: command.text
+            domain: arg
           })
         }
       )
         .then(r => r.json())
         .catch(err => {
-          console.log(`Error while setting custom domain ${command.text}: ${err}`)
+          console.log(`Error while setting custom domain ${arg}: ${err}`)
         })
       console.log(vercelFetch)
       if (vercelFetch.error) {
-        const text = command.text
         sendCommandResponse(
           command.response_url,
-          t('messages.domain.domainexists', { text })
+          t('messages.domain.domainexists', { text: arg })
         )
       }
       else {
         const domainsLeft = 50 - domainCount
         sendCommandResponse(
           command.response_url,
-          t('messages.domain.domainset', { text: command.text, domainsLeft })
+          t('messages.domain.domainset', { text: arg, domainsLeft })
         )
       }
     }

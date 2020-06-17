@@ -1,5 +1,11 @@
 ping: pong
 messages:
+  help: |
+    Welcome to the Summer of Making! I'm a bot that helps you build your summer scrapbook. Here are all the commands you can run:
+
+    - \`/scrappy displaystreaks\`: toggles your streak count on/off in your status
+    - \`/scrappy setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
+    - \`/scrappy setdomain\`: links a custom domain to your scrapbook profile, e.g. https://scrapbook.zachlatta.com
   forget: |
     Forgetting about all recorded scraps from....
     uhhhh....

@@ -2,23 +2,23 @@ export default async (req, res) => {
   // Slack has strict requirements on response time, so let's set them back a success ASAP
   res.status(200).end()
 
-  const { command } = req.body
+  const { text } = req.body
 
   let method
-  switch(command) {
-    case '/devcss':
-    case '/setcss':
-      // call the setcss command async here...
+  switch (text) {
+    case 'setcss':
       method = 'setcss'
       break
-    case '/streaksdev':
-    case '/summerstreaks':
-      // call the streaksdev command async here...
-      method = 'summerstreaks'
+    case 'streaksdev':
+    case 'displaystreaks':
+      method = 'displaystreaks'
       break
-    case '/setdomain':
-      // call the setdomain command async here...
+    case 'setdomain':
       method = 'setdomain'
+      break
+    case 'help':
+    case '':
+      method = 'help'
       break
   }
 
