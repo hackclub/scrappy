@@ -37,13 +37,13 @@ messages:
         ${this.scrapbookLink}
         :congaparrot::congaparrot::congaparrot::congaparrot:
     'nostreak':
-      - You already posted today, so I didn't increment your streak. But your update is live on your scrapbook! ${this.scrapbookLink}
+      - ':yay::yay::yay: Your update is live on your scrapbook! :yay::yay::yay: ${this.scrapbookLink}'
     'newstreak':
       - |
-        'You just started a streak! Keep posting every day to continue your streak. For now, a few commands to remember:'
-        '- \`/summerstreaks\`: toggles your streak count on/off in your status'
-        '- \`/setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>'
-        '- \`/setdomain\`: links a custom domain to your scrapbook profile, e.g. https://scrapbook.zachlatta.com'
+        You just started a streak! Keep posting every day to continue your streak. For now, a few commands to remember:
+        - \`/summerstreaks\`: toggles your streak count on/off in your status
+        - \`/setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
+        - \`/setdomain\`: links a custom domain to your scrapbook profile, e.g. https://scrapbook.zachlatta.com
 
   css:
     'noargs': To link a custom CSS file, type \`/setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
