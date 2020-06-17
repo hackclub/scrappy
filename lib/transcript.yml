@@ -49,8 +49,8 @@ messages:
     'domainexists': Couldn't set your domain \`${this.text}\`. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.
     'domainset':
       - |
-        Custom domain \`${text}\` set!
+        Custom domain \`${this.text}\` set!
         
         *Your next steps*: create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
 
-        You're one of 50 people who can add a custom domain during the Summer of Making. There are *${domainsLeft}* domains spots left.
+        You're one of 50 people who can add a custom domain during the Summer of Making. There are *${this.domainsLeft}* domains spots left.

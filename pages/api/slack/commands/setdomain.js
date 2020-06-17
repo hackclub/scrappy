@@ -56,11 +56,10 @@ export default async (req, res) => {
         )
       }
       else {
-        const text = command.text
         const domainsLeft = 50 - domainCount
         sendCommandResponse(
           command.response_url,
-          t('messages.domain.domainset', { text, domainsLeft })
+          t('messages.domain.domainset', { text: command.text, domainsLeft })
         )
       }
     }
