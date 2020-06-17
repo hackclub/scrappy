@@ -20,6 +20,8 @@ export default async (req, res) => {
   let method
   if (event.type === 'member_joined_channel') {
     method = 'joined'
+  } else if (event.type === 'user_change') {
+    console.log(event)
   } else if (event?.message?.subtype === 'tombstone') {
     method = 'deleted'
   } else if (event.subtype === 'file_share') {
