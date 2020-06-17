@@ -2,7 +2,7 @@ export default async (req, res) => {
   // Slack has strict requirements on response time, so let's set them back a success ASAP
   res.status(200).end()
 
-  const { text } = req.body
+  let { text } = req.body
 
   text = text.split(' ')[1] ? text.split(' ')[0] : text
 
