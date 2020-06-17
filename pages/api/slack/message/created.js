@@ -49,6 +49,7 @@ export default async (req, res) => {
 
   const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
   const convertedDate = new Date(date).toISOString()
+  console.log(convertedDate)
 
   await updatesTable.create({
     'Slack Account': [userRecord.id],
