@@ -16,6 +16,7 @@ export default async (req, res) => {
     // console.log('Ignoring event in', event.channel, 'because I only listen in on', process.env.CHANNEL)
     return
   }
+  console.log(event)
 
   let method
   if (event.type === 'member_joined_channel') {
