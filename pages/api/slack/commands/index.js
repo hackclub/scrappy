@@ -4,6 +4,8 @@ export default async (req, res) => {
 
   const { text } = req.body
 
+  text = text.split(' ')[1] ? text.split(' ')[0] : text
+
   let method
   switch (text) {
     case 'setcss':
