@@ -6,18 +6,23 @@ messages:
     who are you?
   join: |
     hey heeEEEey there <@${this.user}>, I hope you brought your gluestix and silly-scissors cuz this is the summer of *SCRAPBOOKS*! To begin a magical journey,
-    > :star: *POST A PHOTO TO THIS CHANNEL*& :camera_with_flash:>:slack:>:mindblown:
-    (It could be anything. Your shoes. Your projects. <https://scrapbook.hackclub.com|See what others are sharing!>) 
+    > :star: *POST A PHOTO TO THIS CHANNEL* :camera_with_flash: > :slack: > :mindblown:
+    (It could be anything. A project you're starting. An art project you made. Something you're reading. <https://scrapbook.hackclub.com|See what others are sharing!>)
+
   streak:
     1: |
-      Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at ${this.scrapbookLink}.
-      If you want to link a custom CSS file to your page, type \`/setcss <link to css file>\`
+      Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at ${this.scrapbookLink}!
       You just started a streak! Keep posting every day to add to your streak. Type \`/summerstreaks\` to display your streak in your status.
-    2: Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
-    3: I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
+    2: |
+      Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
+      If you want to see custom CSS on your scrapbook, you can link a custom CSS file! Get started: \`/setcss\`
+    3: |
+      I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
+      Did you know you can add a custom domain to your scrapbook? Check out <@U0266FRGP>\'s: https://scrapbook.zachlatta.com
+      Add your own domain by typing \`/setdomain\`.
     4: Ding dong! That's day 4!!!
     5: 5 whole days of streaks! You're doing amazing sweaty!!!
-    6: 6 days! You've almost made it to a week!!! Don't stop now!
+    6: 6 days! You've almost made it to a week!!! Don't stop now!!!!
     7: A WHOLE WEEK OF STREAKS?!?! https://www.youtube.com/watch?v=i0dmSIAzWeQ
     '7+':
       - Yahoo! ${this.scrapbookLink}
