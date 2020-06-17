@@ -3,7 +3,8 @@ import cheerio from 'cheerio'
 import {
   sendCommandResponse,
   accountsTable,
-  getUserRecord
+  getUserRecord,
+  updatesTable
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
@@ -11,6 +12,14 @@ export default async (req, res) => {
   let url = command.text
 
   if (url === '') {
+    const userRecord = await getUserRecord()
+    if (userRecord.fields['CSS URL'] !== '') {
+      updatesTable.update(userRecord.id, {
+        'CSS URL': ''
+      })
+      sendCommandResponse(command.response_url, `Your CSS file has been removed from your profile.
+      If you would like to re-add it, type \`/setcss <link to css file>\`.`)
+    }
     sendCommandResponse(
       command.response_url,
       'You must give a URL to a GitHub Gist or CSS file somewhere on the web.'
