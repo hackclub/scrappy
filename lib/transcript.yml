@@ -54,7 +54,7 @@ messages:
     'set': 'Your CSS file, ${this.githubUrl} has been linked to your profile! Check it out: \`https://scrapbook.hackclub.com/${this.username}\`'
     'nocss': You linked a Gist, but there isn’t a .css file on your Gist. Try again with the raw URL to the CSS.
   domain:
-    'noargs': To link a custom domain to your scrapbook, type \`/setdomain\` followed by the domain or subdomain you want to link. e.g. \`/setdomain scrapbook.zachlatta.com\`
+    'noargs': To link a custom domain to your scrapbook, type \`/scrappy setdomain\` followed by the domain or subdomain you want to link. e.g. \`/scrappy setdomain scrapbook.zachlatta.com\`
     'overlimit': Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains.
     'domainexists': Couldn't set your domain \`${this.text}\`. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.
     'domainset':
