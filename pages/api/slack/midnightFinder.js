@@ -19,8 +19,10 @@ export default async (req, res) => {
         sort: [{ field: 'Post Time', direction: 'desc' }],
         filterByFormula: `FIND('${username}', {ID}) > 0`
       })
-      //console.log(username, latestUpdate)
+      console.log(username, latestUpdate)
       const createdTime = Date.parse(latestUpdate[0]?.fields['Post Time'])
+      console.log(createdTime)
+      console.log(Date.now() - createdTime)
       if (Date.now() - createdTime > 86400000) {
         console.log(`It's midnight for ${username} and it's been 48 hours since they last posted. Resetting their streak...`)
         accountsTable.update(user.id, {
