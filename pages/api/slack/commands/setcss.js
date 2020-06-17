@@ -10,7 +10,9 @@ import {
 
 export default async (req, res) => {
   const command = req.body
+  console.log(command)
   let url = command.text.split(' ')[1]
+  console.log('url', url)
 
   if (url === '') {
     const userRecord = await getUserRecord(command.user_id)
