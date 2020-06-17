@@ -23,7 +23,7 @@ export default async (req, res) => {
     const createdDate = new Date(createdTime).getDate()
     console.log(username, now.getDate(), new Date(createdTime).getDate())
 
-    if (now.getDate() - createdDate > 1) {
+    if (now.getDate() - createdDate > 1 && user.fields['Streak Count'] != 0) {
       console.log(`It's been more than a day since ${username} last posted. Resetting their streak...`)
       accountsTable.update(user.id, {
         'Streak Count': 0
