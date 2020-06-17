@@ -12,7 +12,7 @@ messages:
   streak:
     1: |
       Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at ${this.scrapbookLink}!
-      
+
       You just started a streak! Keep posting every day to add to your streak. Type \`/summerstreaks\` to display your streak in your status.
     2: |
       Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
@@ -38,3 +38,8 @@ messages:
         :congaparrot::congaparrot::congaparrot::congaparrot:
     'nostreak':
       - You already posted today, so I didn't increment your streak. But your update is live on your scrapbook! ${this.scrapbookLink}
+  css:
+    'noargs': To link a custom CSS file, type \`/setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
+    'removed': Your CSS file has been removed from your profile. If you would like to re-add it, type \`/setcss <link to css file>\`.
+    'set': 'Your CSS file, ${this.githubUrl} has been linked to your profile! Check it out: \`https://scrapbook.hackclub.com/${this.username}\`'
+    'nocss': You linked a Gist, but there isn’t a .css file on your Gist. Try again with the raw URL to the CSS.

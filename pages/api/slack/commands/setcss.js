@@ -4,7 +4,8 @@ import {
   sendCommandResponse,
   accountsTable,
   getUserRecord,
-  updatesTable
+  updatesTable,
+  t
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
@@ -17,13 +18,11 @@ export default async (req, res) => {
       updatesTable.update(userRecord.id, {
         'CSS URL': ''
       })
-      sendCommandResponse(command.response_url, `Your CSS file has been removed from your profile.
-      If you would like to re-add it, type \`/setcss <link to css file>\`.`)
+      sendCommandResponse(command.response_url, t('messages.css.removed'))
     } else {
       sendCommandResponse(
         command.response_url,
-        `You must give a URL to a GitHub Gist or CSS file somewhere on the web.
-        Try this one, which sets your background to hot pink! \`/setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\``
+        t('messages.css.noargs')
       )
     }
   } else if (url.includes('gist.github.com')) {
@@ -41,14 +40,16 @@ export default async (req, res) => {
           await accountsTable.update(user.id, {
             'CSS URL': githubUrl
           })
+          const username = user.fields['Username']
+          // githubUrl, user.fields['Username']
           sendCommandResponse(
             command.response_url,
-            `Your CSS file, ${githubUrl} has been linked to your profile! Check it out: \`https://scrapbook.hackclub.com/${user.fields['Username']}\``
+            t('messages.css.set', { githubUrl, username })
           )
         } else {
           sendCommandResponse(
             command.response_url,
-            'You linked a Gist, but there isn’t a .css file on your Gist. Try again with the raw URL to the CSS.'
+            t('messages.css.nocss')
           )
         }
       })
