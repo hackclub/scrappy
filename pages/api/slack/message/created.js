@@ -14,12 +14,17 @@ import {
   accountsTable,
   displayStreaks,
   getReplyMessage,
-  fetchProfile
+  fetchProfile,
+  formatText,
+  incrementStreakCount
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
   const { files = [], channel, ts, user, text } = req.body.event
   console.log(req.body.event)
+
+  //const formattedText = await formatText(text)
+  //console.log(formattedText)
 
   let attachments = []
   let videos = []
@@ -42,9 +47,13 @@ export default async (req, res) => {
   console.log(attachments)
   console.log(userRecord)
 
+  const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
+  const convertedDate = new Date(date).toISOString()
+  console.log(convertedDate)
+
   await updatesTable.create({
     'Slack Account': [userRecord.id],
-    'Post Time': new Date().toUTCString(),
+    'Post Time': convertedDate,
     'Message Timestamp': ts,
     Text: text,
     Attachments: attachments,
@@ -52,35 +61,7 @@ export default async (req, res) => {
     'Mux Playback IDs': videoPlaybackIds.toString()
   })
 
-  const updatedStreakCount = userRecord.fields['Streak Count'] + 1
-
-  if (userRecord.fields['New Member'] && updatedStreakCount > 1) {
-    accountsTable.update(userRecord.id, {
-      'New Member': false
-    })
-  }
-
-  await accountsTable.update(userRecord.id, {
-    'Streak Count': updatedStreakCount
-  })
-
-  await displayStreaks(user, updatedStreakCount)
-  fetchProfile(userRecord.fields['Username'])
-
-  const updatedUserRecord = await getUserRecord(user)
-  const replyMessage = getReplyMessage(
-    user,
-    userRecord.fields['Username'],
-    updatedStreakCount,
-    updatedUserRecord.fields['New Member']
-  )
-
-  // remove beachball react, add final summer-of-making react
-  await Promise.all([
-    react('remove', channel, ts, 'beachball'),
-    react('add', channel, ts, 'summer-of-making'),
-    reply(channel, ts, replyMessage)
-  ])
+  incrementStreakCount(user, channel, ts)
 
   return res.json({ ok: true })
 }

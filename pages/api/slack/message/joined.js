@@ -1,15 +1,12 @@
 /*
 This posts an introductory message to the #scrapbook channel when someone shows up
 */
-import { postEphemeral } from "../../../../lib/api-utils"
+import { postEphemeral, t } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
   const { user, channel } = req.body.event
 
-  await postEphemeral(channel, `Welcome to the Summer Scrapbook, <@${user}>!
-  To get started, post a photo or video of a project you're working on—it can be anything!
-  Your update will be added to your personal scrapbook, which I'll share with you after your
-  first post.`, user)
+  await postEphemeral(channel, t('messages.join', { user }), user)
 
   return res.json({ ok: true })
 }
