@@ -10,10 +10,7 @@ messages:
     (It could be anything. A project you're starting. An art project you made. Something you're reading. <https://scrapbook.hackclub.com|See what others are sharing!>)
 
   streak:
-    1: |
-      Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at ${this.scrapbookLink}!
-
-      You just started a streak! Keep posting every day to add to your streak. Type \`/summerstreaks\` to display your streak in your status.
+    1: Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at ${this.scrapbookLink}!
     2: |
       Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
 
