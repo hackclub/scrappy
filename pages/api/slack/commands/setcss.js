@@ -70,8 +70,7 @@ export default async (req, res) => {
         'CSS URL': url
       })
       await sendCommandResponse(
-        command.response_url,
-        `Your CSS file, ${url} has been linked to your profile!`
+        command.response_url, t('messages.css.set')
       )
     }
   }
