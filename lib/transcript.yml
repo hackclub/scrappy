@@ -21,7 +21,7 @@ messages:
       To add a custom style to your scrapbook, find a link to a CSS file and post it in this channel. Feel free to use any of the others posted in the channel, or you can create your own at <https://gist.github.com|gist.github.com> or <https://repl.it|Repl.it>.
   streak:
     1: |
-      Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at <${this.scrapbookLink}|${this.scrapbookLink}?welcome=true>!
+      Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at <${this.scrapbookLink}?welcome=true|${this.scrapbookLink}>!
 
       *Next step:* Type \`/scrappy displaystreaks\` to display your streak in your status!
     2: |
