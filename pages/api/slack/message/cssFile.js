@@ -50,7 +50,7 @@ export default async (req, res) => {
   console.log(userRecord)
 
   // I am assuming that this method will only ever be called when attachments has at least one file.
-  res.text = attachments[0]
+  res.text = attachments[0].url
 
   return await css(req, res)
 }
