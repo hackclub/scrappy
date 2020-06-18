@@ -6,7 +6,7 @@ export default async (req, res) => {
   const userId = data.user.id
   const responseUrl = data.response_url
 
-  const parentMessage = await fetch(`https://slack.com/api/conversations.history?token=${process.env.SLACK_BOT_TOKEN}&channel=${data.channel.id}&latest=${data.message.thread_ts}&limit=1`)
+  const parentMessage = await fetch(`https://slack.com/api/conversations.history?token=${process.env.SLACK_BOT_TOKEN}&channel=${data.channel.id}&latest=${data.message.thread_ts}&limit=1`).then(r => r.json())
   console.log('parentmessage', parentMessage)
   const text = parentMessage.messages[0].text
   console.log('text', text)
