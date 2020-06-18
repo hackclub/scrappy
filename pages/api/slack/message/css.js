@@ -26,7 +26,8 @@ export default async (req, res) => {
               'CSS URL': githubUrl
             })
             const username = userRecord.fields['Username']
-            await reply(channel, ts, t('messages.css.set', { url: githubUrl, username }))
+            sendCSSMessage(channel, ts)
+            //await reply(channel, ts, t('messages.css.set', { url: githubUrl, username }))
           } else {
             reply(channel, ts, t('messages.css.nocss'))
           }
@@ -36,40 +37,44 @@ export default async (req, res) => {
       await accountsTable.update(userRecord.id, {
         'CSS URL': url
       })
-      fetch('https://slack.com/api/chat.postMessage', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
-        },
-        body: JSON.stringify({
-          channel,
-          thread_ts: ts,
-          blocks: [
-            {
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": "That's a nice looking CSS file! Click the button below to add this style to your scrapbook."
-              }
-            },
-            {
-              "type": "actions",
-              "elements": [
-                {
-                  "type": "button",
-                  "text": {
-                    "type": "plain_text",
-                    "emoji": true,
-                    "text": "Set CSS"
-                  },
-                  "value": "css"
-                }
-              ]
-            }
-          ]
-        })
-      })
+      sendCSSMessage(channel, ts)
       //reply(channel, ts, t('messages.css.set', { url, username }))
     }
   }
+}
+
+const sendCSSMessage = (channel, ts) => {
+  fetch('https://slack.com/api/chat.postMessage', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
+    },
+    body: JSON.stringify({
+      channel,
+      thread_ts: ts,
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "That's a nice looking CSS file! Click the button below to add this style to your scrapbook."
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Set CSS"
+              },
+              "value": "css"
+            }
+          ]
+        }
+      ]
+    })
+  })
 }
