@@ -1,8 +1,8 @@
 export default async (req, res) => {
   await res.status(200).end()
-  console.log(JSON.parse(req.body.payload).actions)
-  console.log(req.body.payload.actions)
-  const actionValue = req.body.payload.actions[0].value
+  const data = JSON.parse(req.body.payload)
+  console.log(data.actions)
+  const actionValue = data.actions[0].value
 
   let method
   if (actionValue === 'css') {
