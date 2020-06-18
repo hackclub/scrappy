@@ -2,7 +2,7 @@ import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t,
 
 export default async (req, res) => {
   const data = JSON.parse(req.body.payload)
-  console.log(data)
+  //console.log(data)
   const userId = data.user.id
   const responseUrl = data.response_url
 
@@ -16,5 +16,5 @@ export default async (req, res) => {
   accountsTable.update(userRecord.id, {
     'CSS URL': url
   })
-  postEphemeral('C015M6U6JKU', t('messages.css.set', { url }), userId)
+  postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId)
 }

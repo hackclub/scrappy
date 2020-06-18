@@ -1,6 +1,7 @@
 export default async (req, res) => {
   await res.status(200).end()
   const data = JSON.parse(req.body.payload)
+  console.log(data)
   const actionValue = data.actions[0].value
 
   let method
