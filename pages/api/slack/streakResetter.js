@@ -1,3 +1,5 @@
+// This API route is pinged by a Zap every hour
+
 import { accountsTable, updatesTable, getNow, setStatus } from '../../../lib/api-utils'
 
 export default async (req, res) => {
