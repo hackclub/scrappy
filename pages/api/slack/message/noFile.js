@@ -9,8 +9,8 @@ export default async (req, res) => {
   ])
 }
 
-const deleteMessage = async (channel, ts) => {
-  const dl = await fetch('https://slack.com/api/chat.delete', {
+const deleteMessage = async (channel, ts) => (
+  fetch('https://slack.com/api/chat.delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -21,5 +21,4 @@ const deleteMessage = async (channel, ts) => {
       ts
     })
   }).then(r => r.json())
-  console.log(dl)
-}
+)
