@@ -53,7 +53,8 @@ messages:
         (PS: you've already posted today, so I didn't increment your streak. But great job!)
     'newstreak':
       - ':yay: You just started a streak! Keep posting every day to continue your streak. In the meantime, type \`/scrappy help\` to see what else you can do!'
-
+  delete:
+    - You can only share images or videos in <#${process.env.CHANNEL}>!
   css:
     'noargs': To link a custom CSS file, type \`/scrappy setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/scrappy setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
     'removed': Your CSS file has been removed from your profile. If you would like to re-add it, type \`/scrappy setcss <link to css file>\`.
