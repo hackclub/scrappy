@@ -44,9 +44,9 @@ messages:
     'newstreak':
       - |
         You just started a streak! Keep posting every day to continue your streak. For now, a few commands to remember:
-        - \`/summerstreaks\`: toggles your streak count on/off in your status
-        - \`/setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
-        - \`/setdomain\`: links a custom domain to your scrapbook profile, e.g. https://scrapbook.zachlatta.com
+        - \`/scrappy displaystreaks\`: toggles your streak count on/off in your status
+        - \`/scrappy setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
+        - \`/scrappy setdomain\`: links a custom domain to your scrapbook profile, e.g. https://scrapbook.zachlatta.com
 
   css:
     'noargs': To link a custom CSS file, type \`/scrappy setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/scrappy setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
