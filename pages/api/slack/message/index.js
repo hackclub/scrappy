@@ -18,7 +18,7 @@ export default async (req, res) => {
   // }
 
   let method
-  if (event.type === 'member_joined_channel' && event.channel == process.env.CHANNEL) {
+  if (event.type === 'member_joined_channel' && (event.channel == process.env.CHANNEL) || event.channel == 'C015M6U6JKU') {
     method = 'joined'
   } else if (event.type === 'user_change') {
     method = 'userChanged'

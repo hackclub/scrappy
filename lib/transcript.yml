@@ -10,11 +10,14 @@ messages:
     Forgetting about all recorded scraps from....
     uhhhh....
     who are you?
-  join: |
-    hey heeEEEey there <@${this.user}>, I hope you brought your gluestix and silly-scissors cuz this is the summer of *SCRAPBOOKS*! To begin a magical journey,
-    > :star: *POST A PHOTO TO THIS CHANNEL* :camera_with_flash: > :slack: > :mindblown:
-    (It could be anything. A project you're starting. An art project you made. Something you're reading. <https://scrapbook.hackclub.com?welcome=true|See what others are sharing!>)
-
+  join:
+    scrapbook: |
+      hey heeEEEey there <@${this.user}>, I hope you brought your gluestix and silly-scissors cuz this is the summer of *SCRAPBOOKS*! To begin a magical journey,
+      > :star: *POST A PHOTO TO THIS CHANNEL* :camera_with_flash: > :slack: > :mindblown:
+      (It could be anything. A project you're starting. An art project you made. Something you're reading. <https://scrapbook.hackclub.com?welcome=true|See what others are sharing!>)
+    css: |
+      WooOOAAah hey! Welcome to <#C015M6U6JKU>! This is the place where people go to make their profiles look cool!!!
+      To add a custom style to your scrapbook, find a link to a CSS file and post it in this channel. Feel free to use any of the others posted in the channel, or you can create your own at <https://gist.github.com|gist.github.com> or <https://repl.it|Repl.it>.
   streak:
     1: |
       Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at <${this.scrapbookLink}|${this.scrapbookLink}?welcome=true>!
