@@ -1,4 +1,4 @@
-import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t } from "../../../../lib/api-utils"
+import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t, postEphemeral } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
   const data = JSON.parse(req.body.payload)
@@ -16,5 +16,5 @@ export default async (req, res) => {
   accountsTable.update(userRecord.id, {
     'CSS URL': url
   })
-  sendCommandResponse(responseUrl, t('messages.css.set', { url }))
+  postEphemeral('C015M6U6JKU', t('messages.css.set', { url }))
 }

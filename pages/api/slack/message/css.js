@@ -55,7 +55,7 @@ const sendCSSMessage = (channel, ts) => {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "That's a nice looking CSS file! Click the button below to add this style to your scrapbook."
+            "text": "Click the button below to add this style to your scrapbook."
           }
         },
         {
