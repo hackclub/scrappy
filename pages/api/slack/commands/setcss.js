@@ -57,6 +57,12 @@ export default async (req, res) => {
       })
   } else {
     const user = await getUserRecord(command.user_id)
+    if (url === 'delete' || url === 'remove') {
+      accountsTable.update(user.id, {
+        'CSS URL': ''
+      })
+      sendCommandResponse(command.response_url, t('messages.css.removed'))
+    }
     if (!url.includes('http')) {
       url = 'https://' + url
     }
