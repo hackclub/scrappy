@@ -4,7 +4,7 @@ export default async (req, res) => {
   const user = req.body.event.user
   const statusEmoji = user.profile.status_emoji
 
-  if (statusEmoji.includes('ghost-')) {
+  if (statusEmoji.includes('som-')) {
     const statusEmojiCount = statusEmoji.split('-')[1].split(':')[0]
     console.log('count', statusEmojiCount)
     const userRecord = await getUserRecord(user.id)
