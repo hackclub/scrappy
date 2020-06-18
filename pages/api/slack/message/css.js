@@ -2,7 +2,6 @@ import cheerio from 'cheerio'
 import { getUserRecord, accountsTable, reply, t } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
-  console.log(req.body.event)
   const { user, text, ts, channel } = req.body.event
   const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
 
@@ -18,18 +17,15 @@ export default async (req, res) => {
       url = await fetch(url)
         .then(r => r.text())
         .then(async html => {
-          //console.log(html)
           const $ = cheerio.load(html)
           let raw = $('.file .file-actions a').attr('href')
           if (Array.isArray(raw)) raw = raw[0]
-          //console.log(raw)
           if (raw.endsWith('.css')) {
             const githubUrl = 'https://gist.githubusercontent.com' + raw
             await accountsTable.update(userRecord.id, {
               'CSS URL': githubUrl
             })
             const username = userRecord.fields['Username']
-            console.log(githubUrl, username)
             await reply(channel, ts, t('messages.css.set', { url: githubUrl, username }))
           } else {
             reply(channel, ts, t('messages.css.nocss'))
