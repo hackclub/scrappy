@@ -16,5 +16,5 @@ export default async (req, res) => {
   accountsTable.update(userRecord.id, {
     'CSS URL': url
   })
-  postEphemeral('C015M6U6JKU', t('messages.css.set', { url }))
+  postEphemeral('C015M6U6JKU', t('messages.css.set', { url }), userId)
 }
