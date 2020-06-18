@@ -40,7 +40,10 @@ messages:
         ${this.scrapbookLink}
         :congaparrot::congaparrot::congaparrot::congaparrot:
     'nostreak':
-      - ':yay::yay::yay: Your update is live on your scrapbook! :yay::yay::yay: ${this.scrapbookLink}'
+      - |
+        :yay::yay::yay: Your update is live on your scrapbook! :yay::yay::yay: ${this.scrapbookLink}
+
+        (PS: this is your second post in the same day, so I didn't increment your streak)
     'newstreak':
       - |
         You just started a streak! Keep posting every day to continue your streak. For now, a few commands to remember:
