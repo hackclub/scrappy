@@ -14,6 +14,7 @@ export default async (req, res) => {
   console.log(url)
   if (url.includes('gist.github.com')) {
     url = await processGist(url)
+    console.log('processed', url)
   }
   console.log(url)
 
