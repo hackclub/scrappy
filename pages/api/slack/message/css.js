@@ -45,6 +45,7 @@ export default async (req, res) => {
 
 const sendCSSMessage = (channel, ts) => {
   fetch('https://slack.com/api/chat.postMessage', {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
