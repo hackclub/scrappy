@@ -4,6 +4,7 @@
 // the data sent to us to another serverless function for longer processing.
 export default async (req, res) => {
   const { challenge, event } = req.body
+  console.log(req.body)
 
   // pass URL setup challenge Slack sends us
   if (challenge) {
@@ -16,6 +17,7 @@ export default async (req, res) => {
     // console.log('Ignoring event in', event.channel, 'because I only listen in on', process.env.CHANNEL)
     return
   }
+  console.log(req.body)
 
   let method
   if (event.type === 'member_joined_channel' && event.channel == process.env.CHANNEL) {
