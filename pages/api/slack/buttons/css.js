@@ -13,8 +13,8 @@ export default async (req, res) => {
   const url = getUrlFromString(text)
 
   const userRecord = await getUserRecord(userId)
-  accountsTable.update(userRecord.id, {
+  await accountsTable.update(userRecord.id, {
     'CSS URL': url
   })
-  postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId)
+  await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId)
 }
