@@ -30,7 +30,7 @@ export default async (req, res) => {
             })
             const username = userRecord.fields['Username']
             console.log(githubUrl, username)
-            reply(channel, ts, t('messages.css.set'), { url: githubUrl, username })
+            await reply(channel, ts, t('messages.css.set', { url: githubUrl, username }))
           } else {
             reply(channel, ts, t('messages.css.nocss'))
           }
@@ -40,7 +40,7 @@ export default async (req, res) => {
       await accountsTable.update(userRecord.id, {
         'CSS URL': url
       })
-      reply(channel, ts, t('messages.css.set'), { url, username })
+      reply(channel, ts, t('messages.css.set', { url, username }))
     }
   }
 }
