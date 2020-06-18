@@ -7,6 +7,8 @@ export default async (req, res) => {
   const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
 
   const userRecord = await getUserRecord(user)
+  console.log('record', userRecord)
+  console.log('user', user)
 
   let url = text.match(urlRegex)[0]
   console.log(url)
@@ -20,7 +22,7 @@ export default async (req, res) => {
           const $ = cheerio.load(html)
           let raw = $('.file .file-actions a').attr('href')
           if (Array.isArray(raw)) raw = raw[0]
-          console.log(raw)
+          //console.log(raw)
           if (raw.endsWith('.css')) {
             const githubUrl = 'https://gist.githubusercontent.com' + raw
             await accountsTable.update(userRecord.id, {
