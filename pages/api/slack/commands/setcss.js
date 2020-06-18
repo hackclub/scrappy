@@ -46,7 +46,7 @@ export default async (req, res) => {
           // githubUrl, user.fields['Username']
           sendCommandResponse(
             command.response_url,
-            t('messages.css.set', { githubUrl, username })
+            t('messages.css.set', { url: githubUrl, username })
           )
         } else {
           sendCommandResponse(
@@ -70,7 +70,7 @@ export default async (req, res) => {
         'CSS URL': url
       })
       await sendCommandResponse(
-        command.response_url, t('messages.css.set')
+        command.response_url, t('messages.css.set', { url, username })
       )
     }
   }

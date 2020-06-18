@@ -51,7 +51,7 @@ messages:
   css:
     'noargs': To link a custom CSS file, type \`/scrappy setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/scrappy setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
     'removed': Your CSS file has been removed from your profile. If you would like to re-add it, type \`/scrappy setcss <link to css file>\`.
-    'set': '<${this.githubUrl}|Your CSS file> has been linked to your profile! Check it out: \`https://scrapbook.hackclub.com/${this.username}\`'
+    'set': '<${this.url}|Your CSS file> has been linked to your profile! Check it out: \`https://scrapbook.hackclub.com/${this.username}\`'
     'nocss': You linked a Gist, but there isn’t a .css file on your Gist. Try again with the raw URL to the CSS.
   domain:
     'noargs': To link a custom domain to your scrapbook, type \`/scrappy setdomain\` followed by the domain or subdomain you want to link. e.g. \`/scrappy setdomain scrapbook.zachlatta.com\`. Then, create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
