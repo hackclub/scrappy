@@ -16,7 +16,9 @@ import {
   getReplyMessage,
   fetchProfile,
   formatText,
-  incrementStreakCount
+  incrementStreakCount,
+  postEphemeral,
+  t
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
@@ -33,6 +35,12 @@ export default async (req, res) => {
     react('add', channel, ts, 'beachball'),
     ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(file.url_private)
+      if (!publicUrl) {
+        postEphemeral(channel, t('messages.errors.filetype'), user)
+      }
+      else if (publicUrl === 'heic') {
+        postEphemeral(channel, t('messages.errors.heic'), user)
+      }
       console.log('public url', publicUrl)
       attachments.push({ url: publicUrl.url })
       if (publicUrl.muxId) {
