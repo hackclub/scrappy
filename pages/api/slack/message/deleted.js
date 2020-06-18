@@ -31,7 +31,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
     })
   )
   const userRecord = await getUserRecord(user)
-  const shouldUpdate = await shouldUpdateStreak(user)
+  const shouldUpdate = await shouldUpdateStreak(user, false)
   if (shouldUpdate) {
     const updatedStreakCount = userRecord.fields['Streak Count'] - 1
     accountsTable.update(userRecord.id, {
