@@ -1,4 +1,4 @@
-import { react, deleteScrap, postEphemeral, getUserRecord, fetchProfile, setStatus, accountsTable, displayStreaks } from '../../../../lib/api-utils'
+import { react, deleteScrap, postEphemeral, getUserRecord, fetchProfile, setStatus, accountsTable, displayStreaks, shouldUpdateStreak } from '../../../../lib/api-utils'
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   const result = await fetch(
@@ -31,11 +31,14 @@ const deleteThreadedMessages = async (ts, channel, user) => {
     })
   )
   const userRecord = await getUserRecord(user)
-  const updatedStreakCount = userRecord.fields['Streak Count'] - 1
-  accountsTable.update(userRecord.id, {
-    'Streak Count': updatedStreakCount
-  })
-  displayStreaks(user, updatedStreakCount)
+  const shouldUpdate = await shouldUpdateStreak(user)
+  if (shouldUpdate) {
+    const updatedStreakCount = userRecord.fields['Streak Count'] - 1
+    accountsTable.update(userRecord.id, {
+      'Streak Count': updatedStreakCount
+    })
+    displayStreaks(user, updatedStreakCount)
+  }
   fetchProfile(userRecord.fields['Username'])
   postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user)
 }
