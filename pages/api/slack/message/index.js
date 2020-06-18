@@ -17,6 +17,10 @@ export default async (req, res) => {
   //   return
   // }
 
+  console.log(event)
+
+  if (event.subtype === 'message_changed') console.log('CHANGED', event)
+
   let method
   if (event.type === 'member_joined_channel' && (event.channel == process.env.CHANNEL || event.channel == 'C015M6U6JKU')) {
     method = 'joined'

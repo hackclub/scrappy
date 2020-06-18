@@ -4,6 +4,7 @@ This message is called when a poster updates their previous post
 const { react, postEphemeral, updatesTable, getUserRecord, fetchProfile } = require("../../../../lib/api-utils")
 
 export default async (req, res) => {
+  console.log(req.body.event)
   const newMessage = req.body.event.message.text
   const prevTs = req.body.event.previous_message.ts
 
