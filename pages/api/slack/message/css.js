@@ -29,13 +29,14 @@ export default async (req, res) => {
               'CSS URL': githubUrl
             })
             const username = userRecord.fields['Username']
+            console.log(githubUrl, username)
             reply(channel, ts, t('messages.css.set'), { url: githubUrl, username })
           } else {
             reply(channel, ts, t('messages.css.nocss'))
           }
         })
     } else {
-      const username = user.fields['Username']
+      const username = userRecord.fields['Username']
       await accountsTable.update(userRecord.id, {
         'CSS URL': url
       })
