@@ -18,6 +18,6 @@ export default async (req, res) => {
       'Content-Type': 'application/json',
       'X-Passthrough': 'TRUE - Working around slack, see message.js for source'
     },
-    body: req.body.payload
+    body: JSON.stringify(req.body)
   })
 }
