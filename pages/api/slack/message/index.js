@@ -24,9 +24,9 @@ export default async (req, res) => {
     method = 'joined'
   } else if (event.type === 'user_change') {
     method = 'userChanged'
-  } else if (event?.message?.subtype === 'tombstone' && event.channel == process.env.channel) {
+  } else if (event?.message?.subtype === 'tombstone' && event.channel == process.env.CHANNEL) {
     method = 'deleted'
-  } else if (event.subtype === 'file_share' && !event.thread_ts && event.channel == process.env.channel) {
+  } else if (event.subtype === 'file_share' && !event.thread_ts && event.channel == process.env.CHANNEL) {
     method = 'created'
   } else if (event.type === 'message' && !event.subtype && !event.thread_ts && event.channel == process.env.CHANNEL) {
     method = 'noFile'
