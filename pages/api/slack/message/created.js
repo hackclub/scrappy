@@ -36,16 +36,16 @@ export default async (req, res) => {
     ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(file.url_private)
       if (!publicUrl) {
-        postEphemeral(channel, t('messages.errors.filetype'), user)
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
+          reply(channel, ts, t('messages.errors.filetype')),
           react('add', channel, ts, 'x')
         ])
       }
       else if (publicUrl === 'heic') {
-        postEphemeral(channel, t('messages.errors.heic'), user)
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
+          reply(channel, ts, t('messages.errors.heic')),
           react('add', channel, ts, 'x')
         ])
       }
