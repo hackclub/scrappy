@@ -65,5 +65,5 @@ messages:
 
         You're one of 50 people who can add a custom domain during the Summer of Making. There are *${this.domainsLeft}* domains spots left.
   errors:
-    'filetype': Your filetype ${this.filetype} isn't supported. Make sure you\'re uploading a video and try again.
+    'filetype': Your filetype isn't supported. Make sure you\'re uploading a video and try again.
     'heic': The HEIC filetype isn't supported. I recommend <https://heictojpg.com|converting your image to jpg> and reuploading.

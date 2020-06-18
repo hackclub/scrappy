@@ -37,9 +37,13 @@ export default async (req, res) => {
       const publicUrl = await getPublicFileUrl(file.url_private)
       if (!publicUrl) {
         postEphemeral(channel, t('messages.errors.filetype'), user)
+        react('remove', channel, ts, 'beachball')
+        react('add', channel, ts, 'x')
       }
       else if (publicUrl === 'heic') {
         postEphemeral(channel, t('messages.errors.heic'), user)
+        react('remove', channel, ts, 'beachball')
+        react('add', channel, ts, 'x')
       }
       console.log('public url', publicUrl)
       attachments.push({ url: publicUrl.url })
