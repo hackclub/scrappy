@@ -13,10 +13,10 @@ export default async (req, res) => {
 
   res.status(200).json({ ok: true })
 
-  if ((event.channel != process.env.CHANNEL || event.channel != 'C015M6U6JKU')) {
-    // console.log('Ignoring event in', event.channel, 'because I only listen in on', process.env.CHANNEL)
-    return
-  }
+  // if ((event.channel != process.env.CHANNEL || event.channel !== 'C015M6U6JKU')) {
+  //   // console.log('Ignoring event in', event.channel, 'because I only listen in on', process.env.CHANNEL)
+  //   return
+  // }
   console.log(req.body)
 
   let method
@@ -32,7 +32,7 @@ export default async (req, res) => {
     method = 'updated'
   } else if (event.type === 'message' && event.channel === 'C015M6U6JKU') {
     method = 'css'
-  } else if (event?.message?.text === 'forget scrapbook') {
+  } else if (event?.message?.text === 'forget scrapbook' && event.channel == process.env.CHANNEL) {
     method = 'forgotten'
   } else {
     return
