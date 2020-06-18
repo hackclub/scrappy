@@ -12,22 +12,24 @@ export default async (req, res) => {
 
   res.status(200).json({ ok: true })
 
-  if (event.channel != process.env.CHANNEL && event.type !== 'user_change') {
+  if ((event.channel != process.env.CHANNEL || event.channel != 'C015M6U6JKU') && event.type !== 'user_change') {
     // console.log('Ignoring event in', event.channel, 'because I only listen in on', process.env.CHANNEL)
     return
   }
 
   let method
-  if (event.type === 'member_joined_channel') {
+  if (event.type === 'member_joined_channel' && event.channel == process.env.CHANNEL) {
     method = 'joined'
   } else if (event.type === 'user_change') {
     method = 'userChanged'
-  } else if (event?.message?.subtype === 'tombstone') {
+  } else if (event?.message?.subtype === 'tombstone' && event.channel == process.env.CHANNEL) {
     method = 'deleted'
-  } else if (event.subtype === 'file_share') {
+  } else if (event.subtype === 'file_share' && event.channel == process.env.CHANNEL) {
     method = 'created'
-  } else if (event.subtype === 'message_changed') {
+  } else if (event.subtype === 'message_changed' && event.channel == process.env.CHANNEL) {
     method = 'updated'
+  } else if (event.type === 'message' && event.channel == 'C015M6U6JKU') {
+    method = 'css'
   } else if (event?.message?.text === 'forget scrapbook') {
     method = 'forgotten'
   } else {
