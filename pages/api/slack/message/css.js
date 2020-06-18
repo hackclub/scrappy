@@ -52,6 +52,7 @@ const sendCSSMessage = (channel, ts) => {
     body: JSON.stringify({
       channel,
       thread_ts: ts,
+      reply_broadcast: true,
       blocks: [
         {
           "type": "section",
