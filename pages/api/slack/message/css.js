@@ -1,5 +1,5 @@
 import cheerio from 'cheerio'
-import { getUserRecord, accountsTable, reply, t, getUrlFromString } from "../../../../lib/api-utils"
+import { getUserRecord, accountsTable, reply, t, getUrlFromString, postEphemeral } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
   const { user, text, ts, channel } = req.body.event
