@@ -1,4 +1,4 @@
-import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t, postEphemeral } from "../../../../lib/api-utils"
+import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t, postEphemeral, processGist } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
   const data = JSON.parse(req.body.payload)
@@ -10,7 +10,8 @@ export default async (req, res) => {
   console.log('parentmessage', parentMessage)
   const text = parentMessage.messages[0].text
   console.log('text', text)
-  const url = getUrlFromString(text)
+  let url = getUrlFromString(text)
+  url = await processGist(url)
 
   const userRecord = await getUserRecord(userId)
   await accountsTable.update(userRecord.id, {
