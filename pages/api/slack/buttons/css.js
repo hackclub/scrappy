@@ -11,7 +11,10 @@ export default async (req, res) => {
   const text = parentMessage.messages[0].text
   console.log('text', text)
   let url = getUrlFromString(text)
-  url = await processGist(url)
+  console.log(url)
+  if (url.includes('gist.github.com')) {
+    url = await processGist(url)
+  }
   console.log(url)
 
   const userRecord = await getUserRecord(userId)
