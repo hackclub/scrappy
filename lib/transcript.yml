@@ -43,7 +43,7 @@ messages:
       - |
         :yay::yay::yay: Your update is live on your scrapbook! :yay::yay::yay: ${this.scrapbookLink}
 
-        (PS: this is your second post in the same day, so I didn't increment your streak)
+        (PS: you've already posted today, so I didn't increment your streak. But great job!)
     'newstreak':
       - |
         You just started a streak! Keep posting every day to continue your streak. For now, a few commands to remember:
