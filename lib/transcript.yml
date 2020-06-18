@@ -16,7 +16,10 @@ messages:
     (It could be anything. A project you're starting. An art project you made. Something you're reading. <https://scrapbook.hackclub.com?welcome=true|See what others are sharing!>)
 
   streak:
-    1: Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at <${this.scrapbookLink}|${this.scrapbookLink}?welcome=true>!
+    1: |
+      Groovy! Congratulations <@${this.user}> on your first post in <#${process.env.CHANNEL}>. Your scrapbook is live at <${this.scrapbookLink}|${this.scrapbookLink}?welcome=true>!
+
+      *Next step:* Type \`/scrappy displaystreaks\` to display your streak in your status!
     2: |
       Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
 
@@ -45,11 +48,7 @@ messages:
 
         (PS: you've already posted today, so I didn't increment your streak. But great job!)
     'newstreak':
-      - |
-        You just started a streak! Keep posting every day to continue your streak. For now, a few commands to remember:
-        - \`/scrappy displaystreaks\`: toggles your streak count on/off in your status
-        - \`/scrappy setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
-        - \`/scrappy setdomain\`: links a custom domain to your scrapbook profile, e.g. https://scrapbook.zachlatta.com
+      - ':yay: You just started a streak! Keep posting every day to continue your streak. In the meantime, type \`/scrappy help\` to see what else you can do!'
 
   css:
     'noargs': To link a custom CSS file, type \`/scrappy setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/scrappy setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
