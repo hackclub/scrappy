@@ -1,3 +1,4 @@
 export default async (req, res) => {
-  console.log('pinged css!', req.body)
+  const data = JSON.parse(req.body)
+  console.log(data)
 }
