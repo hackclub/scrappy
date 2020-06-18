@@ -14,7 +14,7 @@ const deleteMessage = async (channel, ts) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
+      'Authorization': `Bearer ${process.env.SLACK_USER_TOKEN}`
     },
     body: JSON.stringify({
       channel,
