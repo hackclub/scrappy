@@ -12,10 +12,11 @@ export default async (req, res) => {
   console.log('text', text)
   let url = getUrlFromString(text)
   url = await processGist(url)
+  console.log(url)
 
   const userRecord = await getUserRecord(userId)
   await accountsTable.update(userRecord.id, {
     'CSS URL': url
   })
-  await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId)
+  await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId, data.message.thread_ts)
 }
