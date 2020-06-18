@@ -62,17 +62,18 @@ export default async (req, res) => {
         'CSS URL': ''
       })
       sendCommandResponse(command.response_url, t('messages.css.removed'))
+    } else {
+      if (!url.includes('http')) {
+        url = 'https://' + url
+      }
+      await accountsTable.update(user.id, {
+        'CSS URL': url
+      })
+      await sendCommandResponse(
+        command.response_url,
+        `Your CSS file, ${url} has been linked to your profile!`
+      )
     }
-    if (!url.includes('http')) {
-      url = 'https://' + url
-    }
-    await accountsTable.update(user.id, {
-      'CSS URL': url
-    })
-    await sendCommandResponse(
-      command.response_url,
-      `Your CSS file, ${url} has been linked to your profile!`
-    )
   }
   res.status(200).end()
 }
