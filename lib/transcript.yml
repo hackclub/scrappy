@@ -27,16 +27,16 @@ messages:
     2: |
       Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
 
-      If you want to see custom CSS on your scrapbook, you can link a custom CSS file! Get started: \`/setcss\`
+      Did you know you can add custom CSS to your scrapbook? Join <#C015M6U6JKU> to learn how!
     3: |
       I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
 
       Did you know you can add a custom domain to your scrapbook? Check out <@U0266FRGP>\'s: https://scrapbook.zachlatta.com
       Add your own domain by typing \`/setdomain\`.
-    4: Ding dong! That's day 4!!!
-    5: 5 whole days of streaks! You're doing amazing sweaty!!!
-    6: 6 days! You've almost made it to a week!!! Don't stop now!!!!
-    7: A WHOLE WEEK OF STREAKS?!?! https://www.youtube.com/watch?v=i0dmSIAzWeQ
+    4: Ding dong! That's day 4!!! ${this.scrapbookLink}
+    5: 5 whole days of streaks! You're doing amazing sweaty!!! ${this.scrapbookLink}
+    6: 6 days! You've almost made it to a week!!! Don't stop now!!!! ${this.scrapbookLink}
+    7: A WHOLE WEEK OF STREAKS?!?! https://www.youtube.com/watch?v=i0dmSIAzWeQ ${this.scrapbookLink}
     '7+':
       - Yahoo! ${this.scrapbookLink}
       - ':yay: ${this.scrapbookLink}'
