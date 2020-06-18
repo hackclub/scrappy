@@ -57,6 +57,7 @@ export default async (req, res) => {
       })
   } else {
     const user = await getUserRecord(command.user_id)
+    const username = user.fields['Username']
     if (url === 'delete' || url === 'remove') {
       accountsTable.update(user.id, {
         'CSS URL': ''
