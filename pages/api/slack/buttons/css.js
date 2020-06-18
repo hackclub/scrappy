@@ -2,9 +2,7 @@ import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t,
 
 export default async (req, res) => {
   const data = JSON.parse(req.body.payload)
-  //console.log(data)
   const userId = data.user.id
-  const responseUrl = data.response_url
 
   const parentMessage = await fetch(`https://slack.com/api/conversations.history?token=${process.env.SLACK_BOT_TOKEN}&channel=${data.channel.id}&latest=${data.message.thread_ts}&limit=1&inclusive=true`).then(r => r.json())
   const text = parentMessage.messages[0].text
@@ -17,5 +15,5 @@ export default async (req, res) => {
   await accountsTable.update(userRecord.id, {
     'CSS URL': url
   })
-  await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId)
+  await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId, data.message.thread_ts)
 }

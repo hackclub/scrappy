@@ -24,6 +24,7 @@ export default async (req, res) => {
             })
             const username = userRecord.fields['Username']
             sendCSSMessage(channel, ts)
+            await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId)
             //await reply(channel, ts, t('messages.css.set', { url: githubUrl, username }))
           } else {
             reply(channel, ts, t('messages.css.nocss'))
@@ -35,6 +36,7 @@ export default async (req, res) => {
         'CSS URL': url
       })
       sendCSSMessage(channel, ts)
+      await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId)
       //reply(channel, ts, t('messages.css.set', { url, username }))
     }
   }
