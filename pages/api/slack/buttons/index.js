@@ -10,7 +10,7 @@ export default async (req, res) => {
   }
 
   const protocol = (req.headers['x-forwarded-proto'] || 'http') + '://'
-  const backendUrl = protocol + req.headers.host + '/api/slack/message/' + method
+  const backendUrl = protocol + req.headers.host + '/api/slack/buttons/' + method
 
   await fetch(backendUrl, {
     method: 'POST',
@@ -18,6 +18,6 @@ export default async (req, res) => {
       'Content-Type': 'application/json',
       'X-Passthrough': 'TRUE - Working around slack, see message.js for source'
     },
-    body: JSON.stringify(req.body.payload)
+    body: req.body.payload
   })
 }
