@@ -24,9 +24,9 @@ export default async (req, res) => {
     method = 'joined'
   } else if (event.type === 'user_change') {
     method = 'userChanged'
-  } else if (event?.message?.subtype === 'tombstone' && event.channel == process.env.CHANNEL) {
+  } else if (event?.message?.subtype === 'tombstone' && event.channel == process.env.channel) {
     method = 'deleted'
-  } else if (event.subtype === 'file_share' && !event.thread_ts && event.channel == process.env.CHANNEL) {
+  } else if (event.subtype === 'file_share' && !event.thread_ts && event.channel == process.env.channel) {
     method = 'created'
   } else if (event.type === 'message' && !event.subtype && !event.thread_ts && event.channel == process.env.CHANNEL) {
     method = 'noFile'
@@ -34,6 +34,8 @@ export default async (req, res) => {
     method = 'updated'
   } else if (event.type === 'message' && !event.thread_ts && event.channel === 'C015M6U6JKU') {
     method = 'css'
+  } else if (event.subtype === 'file_share' && !event.thread_ts && event.channel == 'C015M6U6JKU') {
+    method = 'cssFile'
   } else if (event?.message?.text === 'forget scrapbook' && event.channel == process.env.CHANNEL) {
     method = 'forgotten'
   } else {
