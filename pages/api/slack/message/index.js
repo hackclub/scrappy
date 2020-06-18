@@ -26,7 +26,7 @@ export default async (req, res) => {
     method = 'deleted'
   } else if (event.subtype === 'file_share' && event.channel == process.env.CHANNEL) {
     method = 'created'
-  } else if (event.type === 'message' && event.subtype !== 'file_share' && event.channel == process.env.CHANNEL) {
+  } else if (event.type === 'message' && event.subtype !== 'file_share' && !event.thread_ts && event.channel == process.env.CHANNEL) {
     method = 'noFile'
   } else if (event.subtype === 'message_changed' && event.channel == process.env.CHANNEL) {
     method = 'updated'
