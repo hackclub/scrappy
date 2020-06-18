@@ -28,7 +28,7 @@ export default async (req, res) => {
     method = 'created'
   } else if (event.subtype === 'message_changed' && event.channel == process.env.CHANNEL) {
     method = 'updated'
-  } else if (event.type === 'message' && event.channel == 'C015M6U6JKU') {
+  } else if (event.type === 'message' && event.channel === 'C015M6U6JKU') {
     method = 'css'
   } else if (event?.message?.text === 'forget scrapbook') {
     method = 'forgotten'
