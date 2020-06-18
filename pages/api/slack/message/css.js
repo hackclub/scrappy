@@ -8,7 +8,7 @@ export default async (req, res) => {
 
   const userRecord = await getUserRecord(user)
 
-  const url = text.match(urlRegex)[0]
+  let url = text.match(urlRegex)[0]
   console.log(url)
 
   if (url) {
