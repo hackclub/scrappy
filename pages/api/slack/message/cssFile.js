@@ -22,8 +22,7 @@ import {
   t
 } from '../../../../lib/api-utils'
 
-// How do I do this? Am I in webpack? Is this kansas? Where's toto? Auntie Em!
-import defaultExport as css from './css'
+import css from './css'
 
 export default async (req, res) => {
   const { files = [], channel, ts, user, text } = req.body.event
