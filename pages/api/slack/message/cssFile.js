@@ -34,8 +34,8 @@ export default async (req, res) => {
   // Straight outta created.js
   await Promise.all([
     react('add', channel, ts, 'beachball'),
-    ...files.map(async (file) => {
-      console.log(`Private url: ${file.private_url}`) 
+    ...files.map(async (file, i) => {
+      console.log(`FILE ${i}:`, file) 
       const publicUrl = await getPublicFileUrl(file.url_private)
       if (!publicUrl) {
         await Promise.all([
