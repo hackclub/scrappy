@@ -51,8 +51,8 @@ export default async (req, res) => {
 
   // I am assuming that this method will only ever be called when attachments has at least one file.
   const url = attachments[0].url
-  res.text = url
-  res.raw = url
+  req.text = url
+  req.raw = url
 
   return await css(req, res)
 }
