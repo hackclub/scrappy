@@ -28,11 +28,14 @@ export default async (req, res) => {
   const { files = [], channel, ts, user, text } = req.body.event
 
   let attachments = []
+  
+  console.log(`Receiving file from ${user}`)
 
   // Straight outta created.js
   await Promise.all([
     react('add', channel, ts, 'beachball'),
     ...files.map(async (file) => {
+      console.log(`Private url: ${file.private_url}`) 
       const publicUrl = await getPublicFileUrl(file.url_private)
       if (!publicUrl) {
         await Promise.all([
