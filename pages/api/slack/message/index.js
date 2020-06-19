@@ -41,7 +41,8 @@ export default async (req, res) => {
   } else {
     return
   }
-
+  
+  console.log(`Routing to method ${method}`)
   //                v- should be http or https, fallback to http just in case
   const protocol = (req.headers['x-forwarded-proto'] || 'http') + '://'
   const backendUrl = protocol + req.headers.host + '/api/slack/message/' + method
