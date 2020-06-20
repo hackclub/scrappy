@@ -8,6 +8,7 @@ import {
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  else res.status(200).end()
   const command = req.body
   const arg = command.text.split(' ')[1]
   if (!arg) {

@@ -27,6 +27,8 @@ import css from './css'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  else res.status(200).end()
+
   const { files = [], channel, ts, user, text } = req.body.event
 
   let attachments = []

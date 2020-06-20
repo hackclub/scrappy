@@ -5,6 +5,8 @@ const { react, postEphemeral, updatesTable, getUserRecord, fetchProfile, unverif
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  else res.status(200).end()
+
   const newMessage = req.body.event.message.text
   const prevTs = req.body.event.previous_message.ts
 

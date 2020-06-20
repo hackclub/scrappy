@@ -2,6 +2,7 @@ import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t,
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  else res.status(200).end()
   const data = JSON.parse(req.body.payload)
   const userId = data.user.id
 

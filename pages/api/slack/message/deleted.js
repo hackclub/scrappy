@@ -45,6 +45,8 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  else res.status(200).end()
+
   const { channel, message, previous_message, thread_ts } = req.body.event
 
   const ts = thread_ts || message.thread_ts
