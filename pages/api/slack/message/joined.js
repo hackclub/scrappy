@@ -1,9 +1,10 @@
 /*
 This posts an introductory message to the #scrapbook channel when someone shows up
 */
-import { postEphemeral, t, timeout } from '../../../../lib/api-utils'
+import { postEphemeral, t, timeout, unverifiedRequest } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const { user, channel } = req.body.event
 
   await timeout(1000)

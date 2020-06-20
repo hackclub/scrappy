@@ -19,23 +19,25 @@ import {
   formatText,
   incrementStreakCount,
   postEphemeral,
-  t
+  t,
+  unverifiedRequest
 } from '../../../../lib/api-utils'
 
 import css from './css'
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const { files = [], channel, ts, user, text } = req.body.event
 
   let attachments = []
-  
+
   console.log(`Receiving file from ${user}`)
 
   // Straight outta created.js
   await Promise.all([
     react('add', channel, ts, 'beachball'),
     ...files.map(async (file, i) => {
-      console.log(`FILE ${i}:`, file) 
+      console.log(`FILE ${i}:`, file)
       const publicUrl = await getPublicFileUrl(file.url_private)
       if (!publicUrl) {
         await Promise.all([

@@ -1,6 +1,7 @@
-import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t, postEphemeral, processGist } from "../../../../lib/api-utils"
+import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t, postEphemeral, processGist, unverifiedRequest } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const data = JSON.parse(req.body.payload)
   const userId = data.user.id
 

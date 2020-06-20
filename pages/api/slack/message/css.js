@@ -1,7 +1,8 @@
 import cheerio from 'cheerio'
-import { getUserRecord, accountsTable, reply, t, getUrlFromString, postEphemeral } from "../../../../lib/api-utils"
+import { getUserRecord, accountsTable, reply, t, getUrlFromString, postEphemeral, unverifiedRequest } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const { user, text, ts, channel } = req.body.event
 
   const userRecord = await getUserRecord(user)

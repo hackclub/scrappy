@@ -1,6 +1,7 @@
-import { postEphemeral, forgetUser, react, t } from "../../../../lib/api-utils"
+import { postEphemeral, forgetUser, react, t, unverifiedRequest } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const { user, channel } = req.body.event
 
   await Promise.all([

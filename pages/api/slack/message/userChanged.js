@@ -1,6 +1,7 @@
-import { getUserRecord, setStatus } from '../../../../lib/api-utils'
+import { getUserRecord, setStatus, unverifiedRequest } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const user = req.body.event.user
   const statusEmoji = user.profile.status_emoji
 

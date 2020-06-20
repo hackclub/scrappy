@@ -1,4 +1,4 @@
-import { react, deleteScrap, postEphemeral, getUserRecord, fetchProfile, setStatus, accountsTable, displayStreaks, shouldUpdateStreak } from '../../../../lib/api-utils'
+import { react, deleteScrap, postEphemeral, getUserRecord, fetchProfile, setStatus, accountsTable, displayStreaks, shouldUpdateStreak, unverifiedRequest } from '../../../../lib/api-utils'
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   const result = await fetch(
@@ -44,6 +44,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 }
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const { channel, message, previous_message, thread_ts } = req.body.event
 
   const ts = thread_ts || message.thread_ts

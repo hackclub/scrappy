@@ -1,9 +1,9 @@
+import { unverifiedRequest } from "../../../../lib/api-utils"
+
 export default async (req, res) => {
-  // Slack has strict requirements on response time, so let's set them back a success ASAP
-  res.status(200).end()
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
 
   let { text } = req.body
-
   text = text.split(' ')[1] ? text.split(' ')[0] : text
 
   let method

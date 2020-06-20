@@ -1,9 +1,10 @@
 /*
 This message is called when a poster updates their previous post
 */
-const { react, postEphemeral, updatesTable, getUserRecord, fetchProfile } = require("../../../../lib/api-utils")
+const { react, postEphemeral, updatesTable, getUserRecord, fetchProfile, unverifiedRequest } = require("../../../../lib/api-utils")
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const newMessage = req.body.event.message.text
   const prevTs = req.body.event.previous_message.ts
 

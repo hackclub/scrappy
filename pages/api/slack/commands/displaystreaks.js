@@ -2,10 +2,12 @@ import {
   accountsTable,
   displayStreaks,
   getUserRecord,
-  sendCommandResponse
+  sendCommandResponse,
+  unverifiedRequest
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   try {
     console.log('Running summerstreaks.js')
     const userId = req.body.user_id

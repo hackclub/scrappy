@@ -1,9 +1,9 @@
 // This API route is pinged by a Zap every hour
 
-import { accountsTable, updatesTable, getNow, setStatus } from '../../../lib/api-utils'
+import { accountsTable, updatesTable, getNow, setStatus, unverifiedRequest } from '../../../lib/api-utils'
 
 export default async (req, res) => {
-  res.status(200).end()
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
 
   const users = await accountsTable.read()
   users.forEach(async (user) => {

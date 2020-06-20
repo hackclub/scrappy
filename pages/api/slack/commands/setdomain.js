@@ -2,10 +2,12 @@ import {
   sendCommandResponse,
   accountsTable,
   getUserRecord,
-  t
+  t,
+  unverifiedRequest
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const command = req.body
   const arg = command.text.split(' ')[1]
   if (!arg) {

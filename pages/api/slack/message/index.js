@@ -1,5 +1,6 @@
-// Slack expects a very quick response to all webhooks it sends out. This
-// function returns quickly back to Slack with status OK and then passes off
+const validateSlackRequest = require('validate-slack-request')
+
+import { unverifiedRequest } from "../../../../lib/api-utils"
 
 // the data sent to us to another serverless function for longer processing.
 export default async (req, res) => {
@@ -10,14 +11,7 @@ export default async (req, res) => {
     return await res.json({ challenge })
   }
 
-  res.status(200).json({ ok: true })
-
-  // if ((event.channel != process.env.CHANNEL || event.channel !== 'C015M6U6JKU')) {
-  //   // console.log('Ignoring event in', event.channel, 'because I only listen in on', process.env.CHANNEL)
-  //   return
-  // }
-
-  //if (event.subtype === 'message_changed') console.log('CHANGED', event)
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
 
   let method
   if (event.type === 'member_joined_channel' && (event.channel == process.env.CHANNEL || event.channel == 'C015M6U6JKU')) {
@@ -41,7 +35,7 @@ export default async (req, res) => {
   } else {
     return
   }
-  
+
   console.log(`Routing to method ${method}`)
   //                v- should be http or https, fallback to http just in case
   const protocol = (req.headers['x-forwarded-proto'] || 'http') + '://'
@@ -51,7 +45,9 @@ export default async (req, res) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Passthrough': 'TRUE - Working around slack, see message.js for source'
+      'X-Passthrough': 'TRUE - Working around slack, see message.js for source',
+      'x-slack-signature': req.headers['x-slack-signature'],
+      'x-slack-request-timestamp': req.headers['x-slack-request-timestamp']
     },
     body: JSON.stringify(req.body)
   })

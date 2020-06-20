@@ -18,10 +18,12 @@ import {
   formatText,
   incrementStreakCount,
   postEphemeral,
-  t
+  t,
+  unverifiedRequest
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const { files = [], channel, ts, user, text } = req.body.event
 
   let attachments = []
