@@ -3,7 +3,6 @@ import { getUserRecord, accountsTable, getUrlFromString, sendCommandResponse, t,
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   res.status(200).end()
-  console.log('bUTTON')
   const data = JSON.parse(req.body.payload)
   const userId = data.user.id
 
@@ -18,5 +17,5 @@ export default async (req, res) => {
   await accountsTable.update(userRecord.id, {
     'CSS URL': url
   })
-  await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId, data.message.thread_ts)
+  await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), userId)
 }
