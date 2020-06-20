@@ -1,6 +1,7 @@
 import { unverifiedRequest } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
+  console.log(req.body)
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   const data = JSON.parse(req.body.payload)
   console.log(data)
