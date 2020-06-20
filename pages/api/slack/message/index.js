@@ -10,6 +10,7 @@ export default async (req, res) => {
   }
 
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  res.status(200).end()
 
   let method
   if (event.type === 'member_joined_channel' && (event.channel == process.env.CHANNEL || event.channel == 'C015M6U6JKU')) {
