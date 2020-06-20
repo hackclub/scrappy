@@ -1,5 +1,3 @@
-const validateSlackRequest = require('validate-slack-request')
-
 import { unverifiedRequest } from "../../../../lib/api-utils"
 
 // the data sent to us to another serverless function for longer processing.
