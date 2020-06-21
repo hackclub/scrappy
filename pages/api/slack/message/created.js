@@ -10,6 +10,7 @@ import {
   getUserRecord,
   reply,
   react,
+  replaceEmoji,
   updatesTable,
   accountsTable,
   displayStreaks,
@@ -21,8 +22,6 @@ import {
   t,
   unverifiedRequest
 } from '../../../../lib/api-utils'
-
-var emoji = require('node-emoji')
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
@@ -66,7 +65,7 @@ export default async (req, res) => {
 
   const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
   const convertedDate = new Date(date).toISOString()
-  const message = emoji.emojify(text)
+  const message = replaceEmoji(text)
   console.log(convertedDate)
 
   await updatesTable.create({
