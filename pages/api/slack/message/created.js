@@ -22,6 +22,8 @@ import {
   unverifiedRequest
 } from '../../../../lib/api-utils'
 
+var emoji = require('node-emoji')
+
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
@@ -64,13 +66,14 @@ export default async (req, res) => {
 
   const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
   const convertedDate = new Date(date).toISOString()
+  const message = emoji.emojify(text)
   console.log(convertedDate)
 
   await updatesTable.create({
     'Slack Account': [userRecord.id],
     'Post Time': convertedDate,
     'Message Timestamp': ts,
-    Text: text,
+    Text: message,
     Attachments: attachments,
     'Mux Asset IDs': videos.toString(),
     'Mux Playback IDs': videoPlaybackIds.toString()
