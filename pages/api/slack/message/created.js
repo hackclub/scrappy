@@ -10,6 +10,7 @@ import {
   getUserRecord,
   reply,
   react,
+  replaceEmoji,
   updatesTable,
   accountsTable,
   displayStreaks,
@@ -64,13 +65,14 @@ export default async (req, res) => {
 
   const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
   const convertedDate = new Date(date).toISOString()
+  const message = replaceEmoji(text)
   console.log(convertedDate)
 
   await updatesTable.create({
     'Slack Account': [userRecord.id],
     'Post Time': convertedDate,
     'Message Timestamp': ts,
-    Text: text,
+    Text: message,
     Attachments: attachments,
     'Mux Asset IDs': videos.toString(),
     'Mux Playback IDs': videoPlaybackIds.toString()
