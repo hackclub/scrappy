@@ -3,9 +3,6 @@
 import { accountsTable, updatesTable, getNow, setStatus, unverifiedRequest } from '../../../lib/api-utils'
 
 export default async (req, res) => {
-  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
-  else res.status(200).end()
-
   const users = await accountsTable.read()
   users.forEach(async (user) => {
     const userId = user.fields['ID']
