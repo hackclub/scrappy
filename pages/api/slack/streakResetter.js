@@ -32,7 +32,7 @@ export default async (req, res) => {
           'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
         },
         body: JSON.stringify({
-          channel: 'U4QAK9SRW', //userId
+          channel: userId, //userId
           text: `<@${userId}> It's been more than 24 hours since you last posted a Scrapbook update, so I've reset your streak. No worries, though—post something else to start another streak! And the rest of your updates are still available at https://scrapbook.hackclub.com/${username} :)`
         })
       })
