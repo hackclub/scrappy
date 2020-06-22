@@ -10,7 +10,7 @@ import {
   getUserRecord,
   reply,
   react,
-  replaceEmoji,
+  formatInHTMLWithEmoji,
   updatesTable,
   accountsTable,
   displayStreaks,
@@ -65,7 +65,7 @@ export default async (req, res) => {
 
   const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
   const convertedDate = new Date(date).toISOString()
-  const message = replaceEmoji(text)
+  const message = formatInHTMLWithEmoji(text)
   console.log(convertedDate)
 
   await updatesTable.create({
