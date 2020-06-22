@@ -24,18 +24,20 @@ export default async (req, res) => {
       accountsTable.update(user.id, {
         'Streak Count': 0
       })
-      setStatus(userId, '', '')
-      fetch('https://slack.com/api/chat.postMessage', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
-        },
-        body: JSON.stringify({
-          channel: userId, //userId
-          text: `<@${userId}> It's been more than 24 hours since you last posted a Scrapbook update, so I've reset your streak. No worries, though—post something else to start another streak! And the rest of your updates are still available at https://scrapbook.hackclub.com/${username} :)`
+      if (user.fields['Display Streaks']) {
+        setStatus(userId, '', '')
+        fetch('https://slack.com/api/chat.postMessage', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
+          },
+          body: JSON.stringify({
+            channel: userId, //userId
+            text: `<@${userId}> It's been more than 24 hours since you last posted a Scrapbook update, so I've reset your streak. No worries, though—post something else to start another streak! And the rest of your updates are still available at https://scrapbook.hackclub.com/${username} :)`
+          })
         })
-      })
+      }
     }
   })
 }
