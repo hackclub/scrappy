@@ -65,7 +65,7 @@ export default async (req, res) => {
 
   const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
   const convertedDate = new Date(date).toISOString()
-  const message = formatText(text)
+  const message = await formatText(text)
   console.log(convertedDate)
 
   await updatesTable.create({
