@@ -7,7 +7,7 @@ export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
-  const newMessage = replaceEmoji(req.body.event.message.text)
+  const newMessage = await replaceEmoji(req.body.event.message.text)
   const prevTs = req.body.event.previous_message.ts
 
   await react('add', req.body.event.channel, prevTs, 'beachball')
@@ -23,7 +23,7 @@ export default async (req, res) => {
     react('remove', req.body.event.channel, prevTs, 'beachball'),
     postEphemeral(req.body.event.channel, `Your update has been edited! You should see it update on the website in a few seconds.`, req.body.event.message.user)
   ])
-  const userRecord = await getUserRecord(req.body.user)
+  const userRecord = await getUserRecord(req.body.event.user)
   fetchProfile(userRecord.fields['Username'])
 
   res.status(200).json({ ok: true })
