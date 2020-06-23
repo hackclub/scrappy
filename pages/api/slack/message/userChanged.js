@@ -13,7 +13,7 @@ export default async (req, res) => {
     const userRecord = await getUserRecord(user.id)
     const streakCount = userRecord.fields['Streak Count']
     console.log('user record count', streakCount)
-    if ((streakCount != statusEmojiCount) && (streakCount <= 7)) { 
+    if ((streakCount != statusEmojiCount) && (streakCount <= 7) || ('7+' != statusEmojiCount) && (streakCount >= 8)) { 
       setStatus(user.id, `I tried to cheat in Summer of Making because I’mm a clown`, ':clown_face:')
     }
   }
