@@ -20,8 +20,5 @@ export default async (req, res) => {
         setStatus(user.id, `I tried to cheat in Summer of Making because I'm a clown`, ':clown_face:')
       }  
     }
-    if (userRecord.fields['Streak Count'] != statusEmojiCount) {
-      setStatus(user.id, `I tried to cheat in Summer of Making because I'm a clown`, ':clown_face:')
-    }
   }
 }
