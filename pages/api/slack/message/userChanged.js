@@ -13,6 +13,14 @@ export default async (req, res) => {
     const userRecord = await getUserRecord(user.id)
     console.log('user record count', userRecord.fields['Streak Count'])
     if (userRecord.fields['Streak Count'] != statusEmojiCount) {
+      if ('7+' == statusEmojiCount && userRecord.fields['Streak Count'] >= 8) {
+        
+      }  
+      else{
+        setStatus(user.id, `I tried to cheat in Summer of Making because I'm a clown`, ':clown_face:')
+      }  
+    }
+    if (userRecord.fields['Streak Count'] != statusEmojiCount) {
       setStatus(user.id, `I tried to cheat in Summer of Making because I'm a clown`, ':clown_face:')
     }
   }
