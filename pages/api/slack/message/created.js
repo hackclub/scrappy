@@ -26,7 +26,9 @@ import {
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
-  const { files = [], channel, ts, user, text } = req.body.event
+  const { files = [], channel, ts, user, text, thread_ts } = req.body.event
+
+  if (thread_ts) return res.json({ ok: true })
 
   let attachments = []
   let videos = []
