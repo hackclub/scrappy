@@ -5,7 +5,7 @@ messages:
 
     - \`/scrappy displaystreaks\`: toggles your streak count on/off in your status
     - \`/scrappy setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
-    - \`/scrappy setdomain\`: links a custom domain to your scrapbook profile, e.g. https://scrapbook.zachlatta.com
+    - \`/scrappy setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
   forget: |
     Forgetting about all recorded scraps from....
     uhhhh....
@@ -31,7 +31,7 @@ messages:
     3: |
       I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
 
-      Did you know you can add a custom domain to your scrapbook? Check out <@U0266FRGP>\'s: https://scrapbook.zachlatta.com
+      Did you know you can add a custom domain to your scrapbook? Check out <@U0266FRGP>\'s: https://zachlatta.com
       Add your own domain by typing \`/scrappy setdomain\`.
     4: Ding dong! That's day 4!!! ${this.scrapbookLink}
     5: 5 whole days of streaks! You're doing amazing sweaty!!! ${this.scrapbookLink}
@@ -61,7 +61,7 @@ messages:
     'set': '<${this.url}|Your CSS file> has been linked to your profile! Check it out: \`https://scrapbook.hackclub.com/${this.username}\`'
     'nocss': You linked a Gist, but there isn’t a .css file on your Gist. Try again with the raw URL to the CSS.
   domain:
-    'noargs': To link a custom domain to your scrapbook, type \`/scrappy setdomain\` followed by the domain or subdomain you want to link. e.g. \`/scrappy setdomain scrapbook.zachlatta.com\`. Then, create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
+    'noargs': To link a custom domain to your scrapbook, type \`/scrappy setdomain\` followed by the domain or subdomain you want to link. e.g. \`/scrappy setdomain zachlatta.com\`. Then, create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
     'overlimit': Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains.
     'domainexists': Couldn't set your domain \`${this.text}\`. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.
     'domainset':
