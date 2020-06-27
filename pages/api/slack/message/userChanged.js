@@ -60,4 +60,12 @@ export default async (req, res) => {
       Website: website
     })
   }
+
+  accountsTable.update(userRecord.id, {
+    Avatar: [
+      {
+        url: avatar
+      }
+    ]
+  }
 }
