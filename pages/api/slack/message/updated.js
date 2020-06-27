@@ -15,7 +15,7 @@ export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
-  const newMessage = formatText(req.body.event.message.text)
+  const newMessage = await formatText(req.body.event.message.text)
   const prevTs = req.body.event.previous_message.ts
 
   await react('add', req.body.event.channel, prevTs, 'beachball')
