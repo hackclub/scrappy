@@ -4,6 +4,8 @@ export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
+  console.log(req.body)
+
   const user = req.body.event.user
   const statusEmoji = user.profile.status_emoji
 
@@ -13,7 +15,7 @@ export default async (req, res) => {
     const userRecord = await getUserRecord(user.id)
     const streakCount = userRecord.fields['Streak Count']
     console.log('user record count', streakCount)
-    if (((streakCount != statusEmojiCount) && (streakCount <= 7)) || (('7+' != statusEmojiCount) && (streakCount >= 8))) { 
+    if (((streakCount != statusEmojiCount) && (streakCount <= 7)) || (('7+' != statusEmojiCount) && (streakCount >= 8))) {
       setStatus(user.id, `I tried to cheat in Summer of Making because I’m a clown`, ':clown_face:')
     }
   }
