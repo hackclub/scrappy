@@ -15,7 +15,7 @@ export default async (req, res) => {
   const tzOffset = user.user.tz_offset
   const tz = user.user.tz.replace(`\\`, '')
   const profile = await fetch(
-    `https://slack.com/api/users.profile.get?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
+    `https://slack.com/api/users.profile.get?token=${process.env.SLACK_BOT_TOKEN}&user=${user_id}`
   ).then((r) => r.json())
   const avatar = profile.profile.image_192
   const github = profile.profile.fields['Xf0DMHFDQA']?.value
