@@ -1,4 +1,4 @@
-import { getUserRecord, sendCommandResponse, accountsTable, t } from "../../../../lib/api-utils"
+import { unverifiedRequest, getUserRecord, sendCommandResponse, accountsTable, t } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
