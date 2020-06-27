@@ -19,6 +19,9 @@ export default async (req, res) => {
     case 'setdomain':
       method = 'setdomain'
       break
+    case 'updateprofile':
+      method = 'updateprofile'
+      break
     case 'help':
     case '':
       method = 'help'

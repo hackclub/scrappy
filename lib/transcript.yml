@@ -6,6 +6,7 @@ messages:
     - \`/scrappy displaystreaks\`: toggles your streak count on/off in your status
     - \`/scrappy setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
     - \`/scrappy setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
+    - \`/scrappy updateprofile\`: Updates your Slack profile fields (avatar, timezone, etc) on your scrapbook profile
   forget: |
     Forgetting about all recorded scraps from....
     uhhhh....
@@ -71,6 +72,7 @@ messages:
         *Your next steps*: create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
 
         You're one of 50 people who can add a custom domain during the Summer of Making. There are *${this.domainsLeft}* domains spots left.
+  profileUpdate: Your profile details have been updated! ${this.scrapbookLink}
   errors:
     'filetype': Your filetype isn't supported. Make sure you\'re uploading a photo or video and try again.
     'heic': The HEIC filetype isn't supported. I recommend <https://heictojpg.com|converting your image to jpg> and reuploading.
