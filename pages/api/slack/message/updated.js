@@ -33,7 +33,7 @@ export default async (req, res) => {
       req.body.event.message.user
     )
   ])
-  const userRecord = await getUserRecord(req.body.event.user)
+  const userRecord = await getUserRecord(req.body.event.message.user)
   fetchProfile(userRecord.fields['Username'])
 
   res.status(200).json({ ok: true })
