@@ -14,8 +14,8 @@ export default async (req, res) => {
   const tzOffset = profile.user.tz_offset
   const tz = profile.user.tz.replace(`\\`, '')
   const avatar = profile.user.profile.image_192
-  const github = user.profile.fields['Xf0DMHFDQA']?.value
-  const website = user.profile.fields['Xf5LNGS86L']?.value
+  const github = profile.user.profile.fields['Xf0DMHFDQA']?.value
+  const website = profile.user.profile.fields['Xf5LNGS86L']?.value
 
   accountsTable.update(userRecord.id, {
     Website: website,
