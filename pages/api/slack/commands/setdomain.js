@@ -32,22 +32,10 @@ export default async (req, res) => {
       const user = await getUserRecord(command.user_id)
       if (user.fields['Custom Domain'] != null) {
         console.log('DOMAIN ALREADY SET')
-        const alias = await fetch(`https://api.vercel.com/v2/now/aliases/${user.fields['Custom Domain']}?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`, {
-          headers: {
-            Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
-          }
-        })
-        await fetch(`https://api.vercel.com/v2/now/aliases/${alias.uid}?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`, {
+        const prevDomain = user.fields['Custom Domain']
+        await fetch(`https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?domain=${prevDomain}&teamId=team_gUyibHqOWrQfv3PDfEUpB45J`, {
           method: 'DELETE',
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
-          }
-        }).catch(err => console.log('error while deleting alias', err))
-        await fetch(`https://api.vercel.com/v4/domains/${user.fields['Custom Domain']}?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
           }
         })
