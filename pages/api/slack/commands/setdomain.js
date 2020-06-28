@@ -17,11 +17,6 @@ export default async (req, res) => {
       t('messages.domain.noargs')
     )
   } else {
-    const user = await getUserRecord(command.user_id)
-    await accountsTable.update(user.id, {
-      'Custom Domain': arg
-    })
-
     const updates = await accountsTable.read({
       filterByFormula: `{Custom Domain} != ''`
     })
@@ -34,6 +29,20 @@ export default async (req, res) => {
       )
     }
     else {
+      const user = await getUserRecord(command.user_id)
+      if (user.fields['Custom Domain'] != '') {
+        await fetch(`https://api.vercel.com/v4/domains/${user.fields['Custom Domain']}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
+          }
+        }).catch(err => console.log('Error while deleting existing domain', err))
+      }
+      await accountsTable.update(user.id, {
+        'Custom Domain': arg
+      })
+
       const vercelFetch = await fetch(
         `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
         {
