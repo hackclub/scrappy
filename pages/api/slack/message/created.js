@@ -45,14 +45,14 @@ export default async (req, res) => {
           react('add', channel, ts, 'x')
         ])
       }
-      else if (publicUrl === 'heic') {
+      else if (publicUrl.url === 'heic') {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
           reply(channel, ts, t('messages.errors.heic')),
           react('add', channel, ts, 'x')
         ])
       }
-      else if (publicUrl === 'big boy') {
+      else if (publicUrl.url === 'big boy') {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
           reply(channel, ts, t('messages.errors.bigimage')),
