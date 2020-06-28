@@ -30,7 +30,8 @@ export default async (req, res) => {
     }
     else {
       const user = await getUserRecord(command.user_id)
-      if (user.fields['Custom Domain'] != '') {
+      if (user.fields['Custom Domain'] != null) {
+        console.log('DOMAIN ALREADY SET')
         await fetch(`https://api.vercel.com/v4/domains/${user.fields['Custom Domain']}`, {
           method: 'DELETE',
           headers: {
