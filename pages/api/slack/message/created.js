@@ -59,8 +59,10 @@ export default async (req, res) => {
           react('add', channel, ts, 'x')
         ])
       }
-      console.log('public url', publicUrl)
-      attachments.push({ url: publicUrl.url })
+      console.log('public url', publicUrl.url)
+      if (publicUrl.url !== 'big video') {
+        attachments.push({ url: publicUrl.url })
+      }
       if (publicUrl.muxId) {
         videos.push(publicUrl.muxId)
         videoPlaybackIds.push(publicUrl.muxPlaybackId)
