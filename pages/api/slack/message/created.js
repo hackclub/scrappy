@@ -60,9 +60,7 @@ export default async (req, res) => {
         ])
       }
       console.log('public url', publicUrl.url)
-      if (publicUrl.url !== 'big video') {
-        attachments.push({ url: publicUrl.url })
-      }
+      attachments.push({ url: publicUrl.url })
       if (publicUrl.muxId) {
         videos.push(publicUrl.muxId)
         videoPlaybackIds.push(publicUrl.muxPlaybackId)
