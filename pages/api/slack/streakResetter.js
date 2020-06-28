@@ -3,6 +3,7 @@
 import { accountsTable, updatesTable, getNow, setStatus, unverifiedRequest } from '../../../lib/api-utils'
 
 export default async (req, res) => {
+  res.status(200).end()
   const users = await accountsTable.read()
   users.forEach(async (user) => {
     const userId = user.fields['ID']
@@ -40,5 +41,4 @@ export default async (req, res) => {
       }
     }
   })
-  return res.status(200).end()
 }
