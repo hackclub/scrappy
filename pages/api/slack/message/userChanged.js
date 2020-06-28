@@ -30,7 +30,7 @@ export default async (req, res) => {
       ('7+' != statusEmojiCount && streakCount >= 8)
     ) {
       setStatus(
-        user.id,
+        user_id,
         `I tried to cheat in Summer of Making because I’m a clown`,
         ':clown_face:'
       )
