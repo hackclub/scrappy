@@ -4,11 +4,11 @@ export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
-  const { channel, ts, user } = req.body.event
+  const { channel, ts, user, text } = req.body.event
 
   await Promise.all([
     deleteMessage(channel, ts),
-    postEphemeral(channel, t('messages.delete'), user)
+    postEphemeral(channel, t('messages.delete', { text }), user)
   ])
 }
 
