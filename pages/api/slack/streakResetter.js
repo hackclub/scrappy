@@ -5,6 +5,7 @@ import { accountsTable, updatesTable, getNow, setStatus, unverifiedRequest } fro
 export default async (req, res) => {
   res.status(200).end()
   const users = await accountsTable.read()
+  console.log('users length', users.length)
   users.forEach(async (user) => {
     const userId = user.fields['ID']
     const timezone = user.fields['Timezone']
