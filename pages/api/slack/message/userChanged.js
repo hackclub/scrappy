@@ -12,10 +12,8 @@ export default async (req, res) => {
 
   console.log(req.body)
 
-  const user = req.body.event.user
-  const statusEmoji = user.profile.status_emoji
-
   const { user } = req.body.event
+  const statusEmoji = user.profile.status_emoji
 
   const userRecord = await getUserRecord(user.id)
 
