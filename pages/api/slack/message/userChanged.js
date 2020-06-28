@@ -15,14 +15,14 @@ export default async (req, res) => {
   const user = req.body.event.user
   const statusEmoji = user.profile.status_emoji
 
-  const { user_id, response_url } = req.body
+  const { user } = req.body.event
 
-  const userRecord = await getUserRecord(user_id)
+  const userRecord = await getUserRecord(user.id)
 
   if (statusEmoji.includes('som-')) {
     const statusEmojiCount = statusEmoji.split('-')[1].split(':')[0]
     console.log('count', statusEmojiCount)
-    const userRecord = await getUserRecord(user_id)
+    const userRecord = await getUserRecord(user.id)
     const streakCount = userRecord.fields['Streak Count']
     console.log('user record count', streakCount)
     if (
@@ -30,7 +30,7 @@ export default async (req, res) => {
       ('7+' != statusEmojiCount && streakCount >= 8)
     ) {
       setStatus(
-        user_id,
+        user.id,
         `I tried to cheat in Summer of Making because I’m a clown`,
         ':clown_face:'
       )
@@ -40,7 +40,7 @@ export default async (req, res) => {
   // While we're here, check if any of the user's profile fields have been changed & update them in Airtable
 
   const info = await fetch(
-    `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${user_id}`
+    `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${user.id}`
   ).then(r => r.json())
   const tzOffset = info.user.tz_offset
   const tz = info.user.tz.replace(`\\`, '')
