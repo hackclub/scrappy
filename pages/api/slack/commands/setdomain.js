@@ -32,13 +32,25 @@ export default async (req, res) => {
       const user = await getUserRecord(command.user_id)
       if (user.fields['Custom Domain'] != null) {
         console.log('DOMAIN ALREADY SET')
-        await fetch(`https://api.vercel.com/v4/domains/${user.fields['Custom Domain']}`, {
+        const alias = await fetch(`https://api.vercel.com/v2/now/aliases/${user.fields['Custom Domain']}?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`, {
+          headers: {
+            Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
+          }
+        })
+        await fetch(`https://api.vercel.com/v2/now/aliases/${alias.uid}?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
           }
-        }).catch(err => console.log('Error while deleting existing domain', err))
+        }).catch(err => console.log('error while deleting alias', err))
+        await fetch(`https://api.vercel.com/v4/domains/${user.fields['Custom Domain']}?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
+          }
+        })
       }
       await accountsTable.update(user.id, {
         'Custom Domain': arg
