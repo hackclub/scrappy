@@ -25,7 +25,7 @@ export default async (req, res) => {
               'CSS URL': githubUrl
             })
             const username = userRecord.fields['Username']
-            sendCSSMessage(channel, ts)
+            sendCSSMessage(channel, ts, `https://scrapbook.hackclub.com/${username}`)
             await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), user)
             //await reply(channel, ts, t('messages.css.set', { url: githubUrl, username }))
           } else {
@@ -37,14 +37,14 @@ export default async (req, res) => {
       await accountsTable.update(userRecord.id, {
         'CSS URL': url
       })
-      sendCSSMessage(channel, ts)
-      await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), user)
+      sendCSSMessage(channel, ts, `https://scrapbook.hackclub.com/${username}`)
+      await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username }), user)
       //reply(channel, ts, t('messages.css.set', { url, username }))
     }
   }
 }
 
-const sendCSSMessage = (channel, ts) => {
+const sendCSSMessage = (channel, ts, scrapbookLink) => {
   fetch('https://slack.com/api/chat.postMessage', {
     method: 'POST',
     headers: {
@@ -60,7 +60,7 @@ const sendCSSMessage = (channel, ts) => {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Anyone can now click the button below to add this CSS style to their scrapbook!"
+            "text": t('messages.css.broadcast', { scrapbookLink })
           }
         },
         {
