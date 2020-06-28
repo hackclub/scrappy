@@ -82,3 +82,9 @@ messages:
   errors:
     'filetype': Your filetype isn't supported. Make sure you\'re uploading a photo or video and try again.
     'heic': The HEIC filetype isn't supported. I recommend <https://heictojpg.com|converting your image to jpg> and reuploading.
+    'bigvideo':
+      - |
+        Woweee!!! What's that??? That file is so big...I don't have enough memory for it...
+
+        Since I can't download this file, I'm going to make it "public" via Slack's API and upload it to your scrapbook that way. You may receive a notification from Slackbot, but go ahead and ignore it.
+    'bigimage': What are you trying to do with that massive image—kill me?

@@ -37,7 +37,7 @@ export default async (req, res) => {
   await Promise.all([
     react('add', channel, ts, 'beachball'),
     ...files.map(async (file) => {
-      const publicUrl = await getPublicFileUrl(file.url_private)
+      const publicUrl = await getPublicFileUrl(file.url_private, channel, user)
       if (!publicUrl) {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
@@ -49,6 +49,13 @@ export default async (req, res) => {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
           reply(channel, ts, t('messages.errors.heic')),
+          react('add', channel, ts, 'x')
+        ])
+      }
+      else if (publicUrl === 'big boy') {
+        await Promise.all([
+          react('remove', channel, ts, 'beachball'),
+          reply(channel, ts, t('messages.errors.bigimage')),
           react('add', channel, ts, 'x')
         ])
       }
