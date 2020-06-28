@@ -5,7 +5,6 @@ import { accountsTable, updatesTable, getNow, setStatus, unverifiedRequest } fro
 export default async (req, res) => {
   res.status(200).end()
   const users = await accountsTable.read()
-  console.log('users length', users.length)
   users.forEach(async (user) => {
     const userId = user.fields['ID']
     const timezone = user.fields['Timezone']
@@ -27,8 +26,8 @@ export default async (req, res) => {
         'Streak Count': 0
       })
       if (user.fields['Display Streaks']) {
-        setStatus(userId, '', '')
-        fetch('https://slack.com/api/chat.postMessage', {
+        await setStatus(userId, '', '')
+        await fetch('https://slack.com/api/chat.postMessage', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
