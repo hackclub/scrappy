@@ -79,6 +79,7 @@ messages:
 
         You're one of 50 people who can add a custom domain during the Summer of Making. There are *${this.domainsLeft}* domains spots left.
   profileUpdate: Your profile details have been updated! ${this.scrapbookLink}
+  assetReady: <@${this.user}> Your video has been processed and is live on your scrapbook!
   errors:
     'filetype': Your filetype isn't supported. Make sure you\'re uploading a photo or video and try again.
     'heic': The HEIC filetype isn't supported. I recommend <https://heictojpg.com|converting your image to jpg> and reuploading.
@@ -86,7 +87,7 @@ messages:
       - |
         Woweee!!! What's that??? That file is so big...I don't have enough memory for it...
 
-        Since I can't download this file, I'm going to make it "public" via Slack's API and upload it to your scrapbook that way. The update will be live on your scrapbook in 30 seconds, but it'll take anywhere between 30 seconds and a few minutes for it to be viewable.
+        Since I can't download this file, I'm going to make it "public" via Slack's API and upload it to your scrapbook that way. The update will be live on your scrapbook in 30 seconds, but it'll take anywhere between 30 seconds and a few minutes for it to be viewable. I'll notify you when it's ready.
         
         (PS: You may receive a notification from Slackbot—go ahead and ignore it.)
     'bigimage': What are you trying to do with that massive image—kill me?
