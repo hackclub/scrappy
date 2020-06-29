@@ -85,7 +85,7 @@ export default async (req, res) => {
     Attachments: attachments,
     'Mux Asset IDs': videos.toString(),
     'Mux Playback IDs': videoPlaybackIds.toString(),
-    'Is Large Video': attachments.includes('https://i.imgur.com/UkXMexG.mp4')
+    'Is Large Video': attachments.some(attachment => attachment.url === 'https://i.imgur.com/UkXMexG.mp4')
   })
 
   incrementStreakCount(user, channel, ts)
