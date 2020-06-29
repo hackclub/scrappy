@@ -86,7 +86,7 @@ messages:
       - |
         Woweee!!! What's that??? That file is so big...I don't have enough memory for it...
 
-        Since I can't download this file, I'm going to make it "public" via Slack's API and upload it to your scrapbook that way. This will take anywhere between 30 seconds and a few minutes.
+        Since I can't download this file, I'm going to make it "public" via Slack's API and upload it to your scrapbook that way. The update will be live on your scrapbook in 30 seconds, but it'll take anywhere between 30 seconds and a few minutes for it to be viewable.
         
         (PS: You may receive a notification from Slackbot—go ahead and ignore it.)
     'bigimage': What are you trying to do with that massive image—kill me?
