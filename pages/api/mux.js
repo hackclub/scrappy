@@ -7,7 +7,7 @@ export default async (req, res) => {
     const assetId = req.body.object.id
     const videoUpdate = (await updatesTable.read({
       maxRecords: 1,
-      filterByFormula: `FIND('${assetId}', {Mux Asset IDs}) != 0`
+      filterByFormula: `FIND('${assetId}', {Mux Asset IDs}) > 0`
     }))[0]
     const largeVideo = videoUpdate.fields['Is Large Video']
     if (largeVideo) {
