@@ -16,4 +16,5 @@ export default async (req, res) => {
       reply(process.env.CHANNEL, ts, t('messages.assetReady', { user }))
     }
   }
+  res.status(200).end()
 }
