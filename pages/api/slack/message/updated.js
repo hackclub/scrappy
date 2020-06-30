@@ -17,23 +17,19 @@ export default async (req, res) => {
 
   const newMessage = await formatText(req.body.event.message.text)
   const prevTs = req.body.event.previous_message.ts
-  
+
   const updateRecord = (await updatesTable.read({
     maxRecords: 1,
     filterByFormula: `{Message Timestamp} = '${prevTs}'`
   }))[0]
-  if (!updateRecord) return
-
-  await react('add', req.body.event.channel, prevTs, 'beachball')
-  await updatesTable.update(updateRecord.id, { Text: newMessage })
-  await Promise.all([
-    react('remove', req.body.event.channel, prevTs, 'beachball'),
-    postEphemeral(
+  if (updateRecord) {
+    await updatesTable.update(updateRecord.id, { Text: newMessage })
+    await postEphemeral(
       req.body.event.channel,
       `Your post has been edited! You should see it update on the website in a few seconds.`,
       req.body.event.message.user
     )
-  ])
-  const userRecord = await getUserRecord(req.body.event.message.user)
-  fetchProfile(userRecord.fields['Username'])
+    const userRecord = await getUserRecord(req.body.event.message.user)
+    fetchProfile(userRecord.fields['Username'])
+  }
 }
