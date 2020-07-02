@@ -89,9 +89,10 @@ messages:
 
         You're one of 50 people who can add a custom domain during the Summer of Making. There are *${this.domainsLeft}* domains spots left.
   webrings:
-    'set': <@${this.webringUser}> has been added to your webrings!
-    'removed': <@${this.webringUser}> has been removed from your webrings.
-    'noargs': Webrings are a way to link to your friends' scrapbooks in your scrapbook, and to receive scrapbook updates from your friends when you post. To add someone to your webring, type \`/scrappy webrings @username\`
+    'add': <@${this.webringUser}> has been added to your webrings!
+    'remove': <@${this.webringUser}> has been removed from your webrings.
+    'noargs': Webrings are a way to link to your friends' scrapbooks in your scrapbook, and to receive scrapbook updates from your friends when you post. To add someone to your webring, type \`/scrappy webring add/remove @username\`
+    'invalidaction': You must specify whether to add or remove a webring. e.g. \`/scrappy webring add @user\` or \`/scrappy webring remove @user\`
     'invaliduser':
       - |
         I couldn't find that user :thunj: Make sure you're tagging the user, and make sure they're a Scrapbook user.

@@ -6,8 +6,10 @@ export default async (req, res) => {
 
   const { user_id, response_url, text } = req.body
   console.log('webring text', text)
-  const webringUser = text.split(' ')[1].split('@')[1].split('|')[0]
+  const action = text.split(' ')[1]
+  const webringUser = text.split(' ')[2].split('@')[1].split('|')[0]
   console.log('webring user', webringUser)
+
   if (!webringUser) {
     return sendCommandResponse(response_url, t('messages.webrings.noargs'))
   }
@@ -24,11 +26,17 @@ export default async (req, res) => {
   if (!currentWebrings) {
     currentWebrings = [webringUserRecord.id]
   } else {
-    currentWebrings.push(webringUserRecord.id)
+    if (action === 'add') {
+      currentWebrings.push(webringUserRecord.id)
+    } else if (action === 'remove') {
+      currentWebrings = currentWebrings.filter(rec => rec != webringUserRecord.id)
+    } else {
+      return sendCommandResponse(response_url, t('messages.webrings.invalidaction'))
+    }
     console.log('new webrings', currentWebrings)
   }
   await Promise.all([
     accountsTable.update(userRecord.id, { 'Webring': currentWebrings }),
-    sendCommandResponse(response_url, t('messages.webrings.set'), { webringUser })
+    sendCommandResponse(response_url, t(`messages.webrings.${action}`), { webringUser })
   ])
 }
