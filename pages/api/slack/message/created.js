@@ -72,7 +72,6 @@ export default async (req, res) => {
   const fullSlackMember = userRecord.fields['Full Slack Member?']
   if (!fullSlackMember) {
     const fullMember = await isFullMember(user)
-    console.log('is full member', fullMember)
     if (fullMember) {
       accountsTable.update(userRecord.id, { 'Full Slack Member?': true })
     }
