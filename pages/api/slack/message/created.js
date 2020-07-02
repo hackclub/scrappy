@@ -68,9 +68,13 @@ export default async (req, res) => {
     })
   ])
   let userRecord = await getUserRecord(user)
-  console.log(videos)
-  console.log(attachments)
-  console.log(userRecord)
+  const fullSlackMember = userRecord.fields['Full Slack Member?']
+  if (!fullSlackMember) {
+    const fullMember = await isFullMember(user)
+    if (fullMember) {
+      accountsTable.update(userRecord.id, { 'Full Slack Member?': true })
+    }
+  }
 
   const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
   const convertedDate = new Date(date).toISOString()
