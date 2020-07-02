@@ -5,7 +5,9 @@ export default async (req, res) => {
   else res.status(200).end()
 
   const { user_id, response_url, text } = req.body
-  const webringUser = text.split(' ')[1]
+  console.log('webring text', text)
+  const webringUser = text.split(' ')[1].split('@')[1].split('|')[0]
+  console.log('webring user', webringUser)
   if (!webringUser) {
     return sendCommandResponse(response_url, t('messages.webrings.noargs'))
   }
