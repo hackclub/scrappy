@@ -57,7 +57,7 @@ messages:
     'oldmember':
       1:
       - | 
-        'Far out! You've started a new streak! Welcome back to Scrapbook :yay:'
+        Far out! You've started a new streak! Welcome back to Scrapbook :yay:
 
         ${this.scrapbookLink}
       2: Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
