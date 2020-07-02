@@ -19,15 +19,16 @@ export default async (req, res) => {
     return sendCommandResponse(response_url, t('messages.webrings.invaliduser'))
   }
   const webringUserRecord = await getUserRecord(webringUser)
-  let currentWebrings = userRecord.fields['Webrings']
+  let currentWebrings = userRecord.fields['Webring']
   console.log('current webrings', currentWebrings)
   if (!currentWebrings) {
     currentWebrings = [webringUserRecord.id]
   } else {
     currentWebrings = currentWebrings.push(webringUserRecord.id)
+    console.log('new webrings', currentWebrings)
   }
   await Promise.all([
-    accountsTable.update(userRecord.id, { 'Webrings': currentWebrings }),
+    accountsTable.update(userRecord.id, { 'Webring': currentWebrings }),
     sendCommandResponse(response_url, t('messages.webrings.set'), { webringUser })
   ])
 }
