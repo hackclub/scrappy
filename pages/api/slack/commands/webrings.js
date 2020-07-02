@@ -7,10 +7,10 @@ export default async (req, res) => {
   const { user_id, response_url, text } = req.body
   console.log('webring text', text)
   const action = text.split(' ')[1]
-  const webringUser = text.split(' ')[2].split('@')[1].split('|')[0]
+  const webringUser = text.split(' ')[2]?.split('@')[1].split('|')[0]
   console.log('webring user', webringUser)
 
-  if (!webringUser) {
+  if (!action || !webringUser) {
     return sendCommandResponse(response_url, t('messages.webrings.noargs'))
   }
 

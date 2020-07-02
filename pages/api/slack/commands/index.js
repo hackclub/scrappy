@@ -22,6 +22,7 @@ export default async (req, res) => {
     case 'updateprofile':
       method = 'updateprofile'
       break
+    case 'webring':
     case 'webrings':
       method = 'webrings'
       break
