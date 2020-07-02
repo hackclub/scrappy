@@ -20,7 +20,8 @@ import {
   incrementStreakCount,
   postEphemeral,
   t,
-  unverifiedRequest
+  unverifiedRequest,
+  isFullMember
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
