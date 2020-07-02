@@ -24,7 +24,7 @@ export default async (req, res) => {
   if (!currentWebrings) {
     currentWebrings = [webringUserRecord.id]
   } else {
-    currentWebrings = currentWebrings.push(webringUserRecord.id)
+    currentWebrings.push(webringUserRecord.id)
     console.log('new webrings', currentWebrings)
   }
   await Promise.all([
