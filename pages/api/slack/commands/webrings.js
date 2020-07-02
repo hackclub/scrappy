@@ -27,9 +27,15 @@ export default async (req, res) => {
     currentWebrings = [webringUserRecord.id]
   } else {
     if (action === 'add') {
+      if (currentWebrings.includes(webringUserRecord.id)) {
+        return sendCommandResponse(response_url, t('messages.webrings.alreadyadded', { webringUser }))
+      }
       currentWebrings.push(webringUserRecord.id)
     } else if (action === 'remove') {
-      currentWebrings = currentWebrings.filter(rec => rec != webringUserRecord.id)
+      const newWebrings = currentWebrings.filter(rec => rec != webringUserRecord.id)
+      if (newWebrings == currentWebrings) {
+        return sendCommandResponse(response_url, t('messages.webrings.alreadyremoved', { webringUser }))
+      }
     } else {
       return sendCommandResponse(response_url, t('messages.webrings.invalidaction'))
     }
@@ -37,6 +43,6 @@ export default async (req, res) => {
   }
   await Promise.all([
     accountsTable.update(userRecord.id, { 'Webring': currentWebrings }),
-    sendCommandResponse(response_url, t(`messages.webrings.${action}`), { webringUser })
+    sendCommandResponse(response_url, t(`messages.webrings.${action}`, { webringUser }))
   ])
 }
