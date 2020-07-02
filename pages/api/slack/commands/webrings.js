@@ -36,6 +36,7 @@ export default async (req, res) => {
       if (newWebrings == currentWebrings) {
         return sendCommandResponse(response_url, t('messages.webrings.alreadyremoved', { webringUser }))
       }
+      else currentWebrings = newWebrings
     } else {
       return sendCommandResponse(response_url, t('messages.webrings.invalidaction'))
     }
