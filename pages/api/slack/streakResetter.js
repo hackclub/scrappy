@@ -10,6 +10,7 @@ export default async (req, res) => {
     const timezone = user.fields['Timezone']
     const username = user.fields['Username']
     let now = new Date(getNow(timezone))
+    now.setHours(now.getHours() - 4)
 
     const latestUpdate = await updatesTable.read({
       maxRecords: 1,
