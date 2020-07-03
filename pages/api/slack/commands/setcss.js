@@ -15,7 +15,7 @@ export default async (req, res) => {
   const command = req.body
   console.log(command)
   let url = command.text.split(' ')[1]
-  url = url.substring(1, url.length - 1)
+  url = url?.substring(1, url.length - 1)
   console.log('url', url)
 
   if (!url) {
