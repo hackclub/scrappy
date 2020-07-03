@@ -26,7 +26,7 @@ export default async (req, res) => {
       accountsTable.update(user.id, {
         'Streak Count': 0
       })
-      if (user.fields['Display Streaks']) {
+      if (user.fields['Display Streak']) {
         await setStatus(userId, '', '')
         await fetch('https://slack.com/api/chat.postMessage', {
           method: 'POST',
