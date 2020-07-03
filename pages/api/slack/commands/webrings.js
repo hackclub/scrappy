@@ -33,7 +33,7 @@ export default async (req, res) => {
       currentWebrings.push(webringUserRecord.id)
     } else if (action === 'remove') {
       const newWebrings = currentWebrings.filter(rec => rec != webringUserRecord.id)
-      if (newWebrings === currentWebrings) {
+      if (JSON.stringify(newWebrings) === JSON.stringify(currentWebrings)) {
         return sendCommandResponse(response_url, t('messages.webrings.alreadyremoved', { webringUser }))
       }
       else currentWebrings = newWebrings
