@@ -44,6 +44,7 @@ export default async (req, res) => {
   const tz = info.user.tz.replace(`\\`, '')
 
   const avatar = user.profile.image_192 // user from the event
+  if (!user.profile.fields) return
   const github = user.profile.fields['Xf0DMHFDQA']?.value
   const website = user.profile.fields['Xf5LNGS86L']?.value
 
