@@ -21,29 +21,29 @@ export default async (req, res) => {
     return sendCommandResponse(response_url, t('messages.webrings.invaliduser'))
   }
   const webringUserRecord = await getUserRecord(webringUser)
-  let currentWebrings = userRecord.fields['Webring']
-  console.log('current webrings', currentWebrings)
-  if (!currentWebrings) {
-    currentWebrings = [webringUserRecord.id]
+  let currentWebring = userRecord.fields['Webring']
+  console.log('current webrings', currentWebring)
+  if (!currentWebring) {
+    currentWebring = [webringUserRecord.id]
   } else {
     if (action === 'add') {
-      if (currentWebrings.includes(webringUserRecord.id)) {
+      if (currentWebring.includes(webringUserRecord.id)) {
         return sendCommandResponse(response_url, t('messages.webrings.alreadyadded', { webringUser }))
       }
-      currentWebrings.push(webringUserRecord.id)
+      currentWebring.push(webringUserRecord.id)
     } else if (action === 'remove') {
-      const newWebrings = currentWebrings.filter(rec => rec != webringUserRecord.id)
-      if (JSON.stringify(newWebrings) === JSON.stringify(currentWebrings)) {
+      const newWebring = currentWebring.filter(rec => rec != webringUserRecord.id)
+      if (JSON.stringify(newWebring) === JSON.stringify(currentWebring)) {
         return sendCommandResponse(response_url, t('messages.webrings.alreadyremoved', { webringUser }))
       }
-      else currentWebrings = newWebrings
+      else currentWebring = newWebring
     } else {
       return sendCommandResponse(response_url, t('messages.webrings.invalidaction'))
     }
-    console.log('new webrings', currentWebrings)
+    console.log('new webrings', currentWebring)
   }
   await Promise.all([
-    accountsTable.update(userRecord.id, { 'Webring': currentWebrings }),
+    accountsTable.update(userRecord.id, { 'Webring': currentWebring }),
     sendCommandResponse(response_url, t(`messages.webrings.${action}`, { webringUser }))
   ])
 }
