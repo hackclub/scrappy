@@ -46,6 +46,9 @@ messages:
       - ':dance::dance1::dance2: ${this.scrapbookLink}'
       - ':parrotwave1::parrotwave2::parrotwave3::parrotwave4::parrotwave5::parrotwave6::parrotwave7: ${this.scrapbookLink}'
       - |
+        Thanks for the memory on ${this.scrapbookLink}!
+        —Your future self
+      - |
         :congaparrot::congaparrot::congaparrot::congaparrot:
         ${this.scrapbookLink}
         :congaparrot::congaparrot::congaparrot::congaparrot:
