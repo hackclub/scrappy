@@ -31,6 +31,8 @@ export default async (req, res) => {
     method = 'updated'
   } else if (event?.message?.text === 'forget scrapbook' && event.channel == process.env.CHANNEL) {
     method = 'forgotten'
+  } else if (event.type === 'reaction_added' && event.item.channel == process.env.CHANNEL) {
+    method = 'reactionAdded'
   } else {
     return
   }
