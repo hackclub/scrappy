@@ -13,11 +13,9 @@ export default async (req, res) => {
   }))[0]
   //console.log('reaction_removed: update record', update)
   const reactionRecord = await getReactionRecord(reaction, update.fields['ID'])
-  console.log('reaction_removed: reaction record', reactionRecord)
 
   let usersReacted = reactionRecord.fields['Users Reacted']
   const updatedUsersReacted = usersReacted.filter(userReacted => userReacted != userRecord.id)
-  console.log('reaction_removed updated users reacted', updatedUsersReacted)
 
   await reactionsTable.update(reactionRecord.id, {
     'Users Reacted': updatedUsersReacted
