@@ -26,6 +26,9 @@ export default async (req, res) => {
     case 'webrings':
       method = 'webrings'
       break
+    case 'setaudio':
+      method = 'setaudio'
+      break
     case 'help':
     case '':
       method = 'help'
