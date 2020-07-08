@@ -23,7 +23,7 @@ export default async (req, res) => {
     // update the account with the new audio
     await accountsTable.update(userRecord.id, {
       'Custom Audio URL': url,
-      'Attachments': [
+      'Audio File': [
         {
           'url': ''
         }

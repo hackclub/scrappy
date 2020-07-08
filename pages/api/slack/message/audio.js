@@ -13,7 +13,7 @@ export default async (req, res) => {
 
   await Promise.all([
     accountsTable.update(userRecord.id, {
-      'Attachments': [
+      'Audio File': [
         {
           'url': publicUrl.url
         }
