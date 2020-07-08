@@ -74,6 +74,8 @@ messages:
       ${this.text}
 
       But feel free to repost it with an image or video and I'll let it be :eye::lips::eye:
+  webring:
+    random: Also check out the latest post from someone in your webring! ${this.randomWebringPost}
   css:
     'noargs': To link a custom CSS file, type \`/scrappy setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/scrappy setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
     'removed': Your CSS file has been removed from your profile. If you would like to re-add it, type \`/scrappy setcss <link to css file>\`.
