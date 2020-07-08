@@ -2,6 +2,7 @@ import { unverifiedRequest, getEmojiRecord, updatesTable, reactionsTable, getUse
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  console.log(req.body)
   const { item, user, reaction } = req.body
 
   const emojiRecord = await getEmojiRecord(reaction)
