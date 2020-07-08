@@ -12,6 +12,10 @@ export default async (req, res) => {
     case 'setcss':
       method = 'setcss'
       break
+    case 'setaudio':
+    case 'setsound':
+      method = 'setaudio'
+      break
     case 'streaksdev':
     case 'displaystreaks':
       method = 'displaystreaks'
