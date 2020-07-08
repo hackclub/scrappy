@@ -18,17 +18,17 @@ export default async (req, res) => {
     return
   }
 
-  const updateExists = await updateExists(update.fields['ID'])
-  const emojiExists = await emojiExists(reaction, update.fields['ID'])
+  const postExists = await updateExists(update.fields['ID'])
+  const reactionExists = await emojiExists(reaction, update.fields['ID'])
 
-  if (!emojiExists) {
+  if (!reactionExists) {
     // Post hasn't been reacted to yet at all, or it has been reacted to, but not with this emoji
     await reactionsTable.create({
       'Update': [update.id],
       'Emoji': [emojiRecord.id],
       'Users Reacted': [userRecord.id]
     })
-  } else if (updateExists && emojiExists) {
+  } else if (postExists && reactionExists) {
     // Post has been reacted to with this emoji
     const reactionRecord = await getReactionRecord(reaction, update.fields['ID'])
     let usersReacted = reactionRecord.fields['Users Reacted']
