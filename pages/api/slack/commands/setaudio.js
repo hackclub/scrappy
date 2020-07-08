@@ -21,7 +21,14 @@ export default async (req, res) => {
     }
 
     // update the account with the new audio
-    await accountsTable.update(userRecord.id, { 'Audio URL': url })
+    await accountsTable.update(userRecord.id, {
+      'Custom Audio URL': url,
+      'Attachments': [
+        {
+          'url': ''
+        }
+      ]
+    })
 
     // force a rebuild of their site
     await rebuildScrapbookFor(userRecord)

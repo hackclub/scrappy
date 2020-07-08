@@ -1,4 +1,4 @@
-import { unverifiedRequest, getPublicFileUrl, setAudio, getUserRecord, reply, t, rebuildScrapbookFor } from "../../../../lib/api-utils"
+import { unverifiedRequest, getPublicFileUrl, setAudio, getUserRecord, reply, t, rebuildScrapbookFor, accountsTable } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
@@ -10,8 +10,16 @@ export default async (req, res) => {
   const userRecord = await getUserRecord(user)
 
   const publicUrl = await getPublicFileUrl(files[0].url_private, channel, user)
+
   await Promise.all([
-    setAudio(user, publicUrl),
+    accountsTable.update(userRecord.id, {
+      'Attachments': [
+        {
+          'url': publicUrl.url
+        }
+      ],
+      'Custom Audio URL': ''
+    }),
     reply(channel, ts, t('messages.audio.set', { url: `https://scrapbook.hackclub.com/${userRecord.fields['Username']}` })),
     rebuildScrapbookFor(user)
   ])
