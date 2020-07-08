@@ -84,6 +84,7 @@ messages:
     noargs: To link a custom sound file to your scrapbook, type \`scrappy setsound\` followed by a sound file url.
     removed: I've wiped your previous audio file. You can re-add it with "/scrappy setsound ${this.previous}"
     set: Woohoo! Check out your new tunes at ${this.url}.
+    notaccepted: Your file doesn't contain an accepted audio filetype. Try reuploading a file that ends in mp3, aiff, wav, or m4a.
   domain:
     'noargs': To link a custom domain to your scrapbook, type \`/scrappy setdomain\` followed by the domain or subdomain you want to link. e.g. \`/scrappy setdomain zachlatta.com\`. Then, create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
     'overlimit': Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains.
