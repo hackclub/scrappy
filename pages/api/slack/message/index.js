@@ -33,6 +33,8 @@ export default async (req, res) => {
     method = 'forgotten'
   } else if (event.type === 'reaction_added' && event.item.channel == process.env.CHANNEL) {
     method = 'reactionAdded'
+  } else if (event.type === 'reaction_removed' && event.item.channel == process.env.CHANNEL) {
+    method = 'reactionRemoved'
   } else {
     return
   }
