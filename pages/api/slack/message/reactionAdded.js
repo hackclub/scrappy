@@ -5,7 +5,7 @@ export default async (req, res) => {
   //console.log(req.body)
   const { item, user, reaction } = req.body.event
 
-  const blacklist = ['rocket', 'clap', 'fire', 'party-dinosaur', 'sparkles', 'parrot', 'yay', 'exploding_head', 'sauropod', 'tada', 'zap', 'summer-of-making']
+  const blacklist = ['rocket', 'clap', 'fire', 'party-dinosaur', 'sparkles', 'parrot', 'yay', 'exploding_head', 'sauropod', 'tada', 'zap', 'summer-of-making', 'beachball']
   if (blacklist.includes(reaction)) {
     console.log('not including default emoji')
     return
