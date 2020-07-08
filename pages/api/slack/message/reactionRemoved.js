@@ -10,7 +10,9 @@ export default async (req, res) => {
     maxRecords: 1,
     filterByFormula: `{Message Timestamp} = '${ts}'`
   }))[0]
+  console.log('reaction_removed: update record', update)
   const reactionRecord = await getReactionRecord(reaction, update.id)
+  console.log('reaction_removed: reaction record', reactionRecord)
 
   let usersReacted = reactionRecord.fields['Users Reacted']
   const updatedUsersReacted = usersReacted.filter(userReacted => userReacted != user)
