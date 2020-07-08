@@ -1,4 +1,4 @@
-import { unverifiedRequest, getEmojiRecord, updatesTable, reactionsTable, getUserRecord, getReactionRecord } from "../../../../lib/api-utils"
+import { unverifiedRequest, getEmojiRecord, updatesTable, reactionsTable, getUserRecord, getReactionRecord, updateExists, emojiExists } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
