@@ -4,17 +4,16 @@ export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
-  const { command } = req.body
-  const { text } = req.body
+  const { text, user_id, response_url } = req.body
   let url = text.split(' ')[1]
   url = url?.substring(1, url.length - 1)
 
-  const userRecord = await getUserRecord(command.user_id)
+  const userRecord = await getUserRecord(user_id)
   if (!url) {
     if (userRecord.fields['CSS URL'] != null) {
-      sendCommandResponse(command.response_url, t('messages.audio.removed', { previous: userRecord.fields['CSS URL'] }))
+      sendCommandResponse(response_url, t('messages.audio.removed', { previous: userRecord.fields['CSS URL'] }))
     } else {
-      sendCommandResponse(command.response_url, t('messages.audio.noargs'))
+      sendCommandResponse(response_url, t('messages.audio.noargs'))
     }
   } else {
     if (!url.includes('http')) {
@@ -29,7 +28,7 @@ export default async (req, res) => {
 
     // hang tight while the rebuild happens before giving out the new link
     await sendCommandResponse(
-      command.response_url, t('messages.audio.set', { url: userRecord.field['Scrapbook URL'] })
+      response_url, t('messages.audio.set', { url: userRecord.fields['Scrapbook URL'] })
     )
   }
   res.status(200).end()
