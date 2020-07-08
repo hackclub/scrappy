@@ -2,6 +2,7 @@ import { unverifiedRequest, getReactionRecord, reactionsTable, updatesTable, get
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  else res.status(200).end()
 
   const { item, user, reaction } = req.body.event
   const ts = item.ts
