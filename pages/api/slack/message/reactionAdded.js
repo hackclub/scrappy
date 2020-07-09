@@ -12,11 +12,11 @@ export default async (req, res) => {
   const { item, user, reaction } = req.body.event
   console.log(item, user, reaction)
 
-  const blacklist = ['rocket', 'clap', 'fire', 'party-dinosaur', 'sparkles', 'parrot', 'yay', 'exploding_head', 'sauropod', 'tada', 'zap', 'summer-of-making', 'beachball']
+  /*const blacklist = ['rocket', 'clap', 'fire', 'party-dinosaur', 'sparkles', 'parrot', 'yay', 'exploding_head', 'sauropod', 'tada', 'zap', 'summer-of-making', 'beachball']
   if (blacklist.includes(reaction)) {
     console.log('not including default emoji')
     return
-  }
+  }*/
   const startTS = Date.now()
   limiter.schedule(async () => {
     console.log(startTS, 'Starting a reaction update')
