@@ -1,6 +1,5 @@
 const next = require('next')
 const express = require('express')
-const { startupMessage } = require('./lib/api-utils')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -15,7 +14,5 @@ app.prepare().then(() => {
   server.listen(port, err => {
     if (err) throw err
     console.log('> Ready on http://localhost:' + port)
-
-    startupMessage()
   })
 })
