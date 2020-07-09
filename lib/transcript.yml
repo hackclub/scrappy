@@ -121,3 +121,49 @@ messages:
         
         (PS: You may receive a notification from Slackbot—go ahead and ignore it.)
     'bigimage': What are you trying to do with that massive image—kill me?
+startup:
+  trashType:
+    - type ${1 + Math.floor(Math.random() * 7)} recyclables
+    - polyethylene terephthalate
+    - high-density polyethylene
+    - polyvinyl chloride
+    - low-density polyethylene
+    - polypropylene 
+    - polystyrene
+    - the scraps left on your plate
+  eats:
+    - eats
+    - consumes
+    - devours
+    - wolfs down
+    - swallows
+    - gobbles
+    - gulps down
+  improvements:
+    - Bug fixes and improvements
+    - Bug fixes + improvements
+    - More bug fixes and improvements
+    - More bugs & improvements
+    - More bugs & less fixes
+    - Bug fixes and imps
+    - Bugs and imps
+  randomChange:
+    - ${1 + Math.ceil(Math.random() * 5)}x as many beatles
+    - ${1 + Math.ceil(Math.random() * 5)}x as many gears
+    - ${1 + Math.ceil(Math.random() * 5)}x as many levers
+    - ${1 + Math.ceil(Math.random() * 5)}x more flavors available
+    - Increased scrappy's self esteem by ${1 + Math.ceil(Math.random() * 5)}x
+    - Decreased scrappy's self esteem by ${1 + Math.ceil(Math.random() * 5)}x
+    - converted all bits -> bytes
+    - converted all bytes -> bits
+    - converted all 1s -> 0s
+    - A startup message!
+  scrappyChange:
+    - now scrappy ${t('startup.update.eats')} trash
+    - scrappy can now digest ${t('startup.update.trashType')}
+  message: |
+    We continuously update our app to improve your experience. This update includes:
+      - ${this.t('t.startup.improvements')}
+      - ${this.t('t.startup.randomChange')}
+      - ${this.t('startup.scrappyChange')}
+      - ${this.latestCommitMsg}
