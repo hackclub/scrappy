@@ -159,11 +159,11 @@ startup:
     - converted all 1s -> 0s
     - A startup message!
   scrappyChange:
-    - now scrappy ${t('startup.update.eats')} trash
-    - scrappy can now digest ${t('startup.update.trashType')}
+    - now scrappy ${this.t('startup.eats')} trash
+    - scrappy can now digest ${this.t('startup.trashType')}
   message: |
     We continuously update our app to improve your experience. This update includes:
-      - ${this.t('t.startup.improvements')}
-      - ${this.t('t.startup.randomChange')}
+      - ${this.t('startup.improvements')}
+      - ${this.t('startup.randomChange')}
       - ${this.t('startup.scrappyChange')}
       - ${this.latestCommitMsg}
