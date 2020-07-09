@@ -51,7 +51,7 @@ export default async (req, res) => {
       ],
       'Custom Audio URL': ''
     })
-  await rebuildScrapbookFor(user)
+  await rebuildScrapbookFor(userRecord)
 
   await Promise.all([
     react('remove', channel, ts, 'beachball'),
