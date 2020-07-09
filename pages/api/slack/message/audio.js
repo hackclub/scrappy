@@ -43,17 +43,15 @@ export default async (req, res) => {
   const userRecord = await getUserRecord(user)
   const publicUrl = await getPublicFileUrl(urlPrivate, channel, user)
 
-  await Promise.all([
-    accountsTable.update(userRecord.id, {
+  await accountsTable.update(userRecord.id, {
       'Audio File': [
         {
           url: publicUrl.url
         }
       ],
       'Custom Audio URL': ''
-    }),
-    rebuildScrapbookFor(user)
-  ])
+    })
+  await rebuildScrapbookFor(user)
 
   await Promise.all([
     react('remove', channel, ts, 'beachball'),
