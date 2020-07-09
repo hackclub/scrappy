@@ -12,7 +12,7 @@ export default async (req, res) => {
   const { item, user, reaction } = req.body.event
   const ts = item.ts
 
-  limiter.schedule(() => {
+  limiter.schedule(async () => {
     const userRecord = await getUserRecord(user)
     const update = (await updatesTable.read({
       maxRecords: 1,

@@ -17,7 +17,7 @@ export default async (req, res) => {
     console.log('not including default emoji')
     return
   }
-  limiter.schedule(() => {
+  limiter.schedule(async () => {
     const emojiRecord = await getEmojiRecord(reaction)
     const userRecord = await getUserRecord(user)
 
