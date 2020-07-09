@@ -5,6 +5,7 @@ export default async (req, res) => {
   else res.status(200).end()
   //console.log(req.body)
   const { item, user, reaction } = req.body.event
+  console.log(item, user, reaction)
 
   const blacklist = ['rocket', 'clap', 'fire', 'party-dinosaur', 'sparkles', 'parrot', 'yay', 'exploding_head', 'sauropod', 'tada', 'zap', 'summer-of-making', 'beachball']
   if (blacklist.includes(reaction)) {
@@ -25,8 +26,16 @@ export default async (req, res) => {
     return
   }
 
-  const postExists = await updateExists(update.fields['ID'])
-  const reactionExists = await emojiExists(reaction, update.fields['ID'])
+  let postExists
+  let reactionExists
+  await Promise.all([
+    (async () => {
+      postExists = await updateExists(update.fields['ID'])
+    }),
+    (async () => {
+      reactionExists = await emojiExists(reaction, update.fields['ID'])
+    })
+  ])
 
   if (!reactionExists) {
     // Post hasn't been reacted to yet at all, or it has been reacted to, but not with this emoji
