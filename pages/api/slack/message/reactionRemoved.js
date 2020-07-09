@@ -18,7 +18,11 @@ export default async (req, res) => {
   let usersReacted = reactionRecord.fields['Users Reacted']
   const updatedUsersReacted = usersReacted.filter(userReacted => userReacted != userRecord.id)
 
-  await reactionsTable.update(reactionRecord.id, {
-    'Users Reacted': updatedUsersReacted
-  })
+  if (updatedUsersReacted.length === 0) {
+    await reactionsTable.delete(reactionRecord.id)
+  } else {
+    await reactionsTable.update(reactionRecord.id, {
+      'Users Reacted': updatedUsersReacted
+    })
+  }
 }
