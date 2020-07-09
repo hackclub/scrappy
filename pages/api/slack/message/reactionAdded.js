@@ -33,16 +33,8 @@ export default async (req, res) => {
       return
     }
 
-    let postExists
-    let reactionExists
-    await Promise.all([
-      (async () => {
-        postExists = await updateExists(update.fields['ID'])
-      }),
-      (async () => {
-        reactionExists = await emojiExists(reaction, update.fields['ID'])
-      })
-    ])
+    const postExists = await updateExists(update.fields['ID'])
+    const reactionExists = await emojiExists(reaction, update.fields['ID'])
 
     if (!reactionExists) {
       // Post hasn't been reacted to yet at all, or it has been reacted to, but not with this emoji
