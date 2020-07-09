@@ -17,7 +17,9 @@ export default async (req, res) => {
     console.log('not including default emoji')
     return
   }
+  const startTS = Date.now()
   limiter.schedule(async () => {
+    console.log(startTS, 'Starting a reaction update')
     const emojiRecord = await getEmojiRecord(reaction)
     const userRecord = await getUserRecord(user)
 
@@ -27,7 +29,7 @@ export default async (req, res) => {
       filterByFormula: `{Message Timestamp} = '${ts}'`
     }))[0]
     if (!update) {
-      console.log('reaction was added to a message in a thread. skipping...')
+      console.log(startTS, 'reaction was added to a message in a thread. skipping...')
       return
     }
 
@@ -44,7 +46,7 @@ export default async (req, res) => {
 
     if (!reactionExists) {
       // Post hasn't been reacted to yet at all, or it has been reacted to, but not with this emoji
-      console.log(`Post hasn't been reacted to at all, or it has been reacted to, but not with this emoji`)
+      console.log(startTS, `Post hasn't been reacted to at all, or it has been reacted to, but not with this emoji`)
       await reactionsTable.create({
         'Update': [update.id],
         'Emoji': [emojiRecord.id],
@@ -52,15 +54,16 @@ export default async (req, res) => {
       })
     } else if (postExists && reactionExists) {
       // Post has been reacted to with this emoji
-      console.log('Post has been reacted to with this emoji')
+      console.log(startTS, 'Post has been reacted to with this emoji')
       const reactionRecord = await getReactionRecord(reaction, update.fields['ID'])
       let usersReacted = reactionRecord.fields['Users Reacted']
-      console.log('adding reaction')
+      console.log(startTS, 'adding reaction')
       await usersReacted.push(userRecord.id)
       await reactionsTable.update(reactionRecord.id, {
         'Users Reacted': usersReacted
       })
-      console.log('added reaction!')
+      console.log(startTS, 'added reaction!')
     }
+    console.log(startTS, 'Finished update that took', Date.now() - startTS, 'ms')
   })
 }
