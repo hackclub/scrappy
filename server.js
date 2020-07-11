@@ -15,6 +15,18 @@ app.prepare().then(() => {
     if (err) throw err
     console.log('> Ready on http://localhost:' + port)
 
+
+    // if (dev) {
+    //   fetch(`http://localhost:${port}/api/regenerate-all`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       token: process.env.SLACK_VERIFICATION_TOKEN
+    //     })
+    //   })
+    // }
     // trigger own startup message in production
     if (!dev) {
       fetch(`http://localhost:${port}/api/startup`, {
