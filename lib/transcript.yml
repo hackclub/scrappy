@@ -6,7 +6,9 @@ messages:
     - \`/scrappy displaystreaks\`: toggles your streak count on/off in your status
     - \`/scrappy setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
     - \`/scrappy setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
+    - \`/scrappy setsound\`: Links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
     - \`/scrappy updateprofile\`: Updates your Slack profile fields (avatar, timezone, etc) on your scrapbook profile
+    - \`/scrappy webring\`: Adds or removes someone to your webring
     
     Learn all about Scrapbook at https://scrapbook.hackclub.com/about
   forget: |
