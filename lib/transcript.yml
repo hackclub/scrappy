@@ -127,7 +127,7 @@ messages:
         
         (PS: You may receive a notification from Slackbot—go ahead and ignore it.)
     'bigimage': What are you trying to do with that massive image—kill me?
-    'zach': '*gobbles some trash* Zaaaaaaaaaaaaaaaaaaaach!!!!!!!!!!!!!!! I just tried to update your streak, but <@U4QAK9SRW> reinstalled me with his Slack tokens at some point, so it didn\'t work. When you get a chance, reinstall me with your tokens and update the env variables in the Heroku deployment. Then toggle \`/scrappy displaystreaks\` off and on again. *devours some trash*'
+    'zach': '\*gobbles some trash\* Zaaaaaaaaaaaaaaaaaaaach!!!!!!!!!!!!!!! I just tried to update your streak, but <@U4QAK9SRW> reinstalled me with his Slack tokens at some point, so it didn\'t work. When you get a chance, reinstall me with your tokens and update the env variables in the Heroku deployment. Then toggle \`/scrappy displaystreaks\` off and on again. \*devours some trash\*'
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
