@@ -1,4 +1,4 @@
-import { unverifiedRequest, getUserRecord, accountsTable, sendCommandResponse, t } from "../../../../lib/api-utils"
+import { unverifiedRequest, getUserRecord, accountsTable, sendCommandResponse, t, fetchProfile } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
@@ -46,4 +46,5 @@ export default async (req, res) => {
     accountsTable.update(userRecord.id, { 'Webring': currentWebring }),
     sendCommandResponse(response_url, t(`messages.webrings.${action}`, { webringUser }))
   ])
+  await fetchProfile(userRecord.fields['Username'])
 }
