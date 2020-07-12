@@ -22,8 +22,8 @@ export default async (req, res) => {
     case 'update-profile':
       method = 'updateprofile'
       break
-    case 'web-ring':
-    case 'web-rings':
+    case 'webring':
+    case 'webrings':
       method = 'webrings'
       break
     case 'set-audio':
