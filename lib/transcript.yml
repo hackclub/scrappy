@@ -3,11 +3,11 @@ messages:
   help: |
     Welcome to the Summer of Making! I'm a bot that helps you build your summer scrapbook. Here are all the commands you can run:
 
-    - \`/scrappy displaystreaks\`: toggles your streak count on/off in your status
-    - \`/scrappy setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
-    - \`/scrappy setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
-    - \`/scrappy setsound\`: Links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
-    - \`/scrappy updateprofile\`: Updates your Slack profile fields (avatar, timezone, etc) on your scrapbook profile
+    - \`/scrappy display-streaks\`: toggles your streak count on/off in your status
+    - \`/scrappy set-css\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
+    - \`/scrappy set-domain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
+    - \`/scrappy set-sound\`: Links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
+    - \`/scrappy update-profile\`: Updates your Slack profile fields (avatar, timezone, etc) on your scrapbook profile
     - \`/scrappy webring\`: Adds or removes someone to your webring
     
     Learn all about Scrapbook at https://scrapbook.hackclub.com/about
