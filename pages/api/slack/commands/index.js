@@ -9,25 +9,25 @@ export default async (req, res) => {
 
   let method
   switch (text) {
-    case 'setcss':
+    case 'set-css':
       method = 'setcss'
       break
-    case 'streaksdev':
-    case 'displaystreaks':
+    case 'streaks-dev':
+    case 'display-streaks':
       method = 'displaystreaks'
       break
-    case 'setdomain':
+    case 'set-domain':
       method = 'setdomain'
       break
-    case 'updateprofile':
+    case 'update-profile':
       method = 'updateprofile'
       break
-    case 'webring':
-    case 'webrings':
+    case 'web-ring':
+    case 'web-rings':
       method = 'webrings'
       break
-    case 'setaudio':
-    case 'setsound':
+    case 'set-audio':
+    case 'set-sound':
       method = 'setaudio'
       break
     case 'help':
