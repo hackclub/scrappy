@@ -43,7 +43,6 @@ export default async (req, res) => {
       console.log(startTS, `Post hasn't been reacted to at all, or it has been reacted to, but not with this emoji`)
       await reactionsTable.create({
         'Update': [update.id],
-        'Updates': [update.id],
         'Emoji': [emojiRecord.id],
         'Users Reacted': [userRecord.id]
       })
