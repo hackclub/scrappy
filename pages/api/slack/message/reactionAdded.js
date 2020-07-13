@@ -23,13 +23,13 @@ export default async (req, res) => {
   limiter.schedule(async () => {
     console.log(startTS, 'Starting a reaction update')
     const emojiRecord = await getEmojiRecord(reaction)
-    const userRecord = await getUserRecord(user)
+    const userRecord = await getUserRecord(user).catch(err => console.log('Cannot get user record', err))
 
     const ts = item.ts
     const update = (await updatesTable.read({
       maxRecords: 1,
       filterByFormula: `{Message Timestamp} = '${ts}'`
-    }))[0]
+    }).catch(err => console.log('Cannot get update', err)))[0]
     if (!update) {
       console.log(startTS, 'reaction was added to a message in a thread. skipping...')
       return
