@@ -49,7 +49,7 @@ export default async (req, res) => {
     } else if (postExists && reactionExists) {
       // Post has been reacted to with this emoji
       console.log(startTS, 'Post has been reacted to with this emoji')
-      const reactionRecord = await getReactionRecord(reaction, update.fields['ID'])
+      const reactionRecord = await getReactionRecord(reaction, update.fields['ID']).catch(err => console.log('Cannot get reaction record', err))
       let usersReacted = reactionRecord.fields['Users Reacted']
       console.log(startTS, 'adding reaction')
       await usersReacted.push(userRecord.id)
