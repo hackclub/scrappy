@@ -11,14 +11,14 @@ export default async (req, res) => {
   console.log('webring user', webringUser)
 
   if (!action || !webringUser) {
-    return sendCommandResponse(response_url, t('messages.webrings.noargs'))
+    return sendCommandResponse(response_url, t('messages.webring.noargs'))
   }
 
   let userRecord
   try {
     userRecord = await getUserRecord(user_id)
   } catch {
-    return sendCommandResponse(response_url, t('messages.webrings.invaliduser'))
+    return sendCommandResponse(response_url, t('messages.webring.invaliduser'))
   }
   const webringUserRecord = await getUserRecord(webringUser)
   let currentWebring = userRecord.fields['Webring']
@@ -28,23 +28,23 @@ export default async (req, res) => {
   } else {
     if (action === 'add') {
       if (currentWebring.includes(webringUserRecord.id)) {
-        return sendCommandResponse(response_url, t('messages.webrings.alreadyadded', { webringUser }))
+        return sendCommandResponse(response_url, t('messages.webring.alreadyadded', { webringUser }))
       }
       currentWebring.push(webringUserRecord.id)
     } else if (action === 'remove') {
       const newWebring = currentWebring.filter(rec => rec != webringUserRecord.id)
       if (JSON.stringify(newWebring) === JSON.stringify(currentWebring)) {
-        return sendCommandResponse(response_url, t('messages.webrings.alreadyremoved', { webringUser }))
+        return sendCommandResponse(response_url, t('messages.webring.alreadyremoved', { webringUser }))
       }
       else currentWebring = newWebring
     } else {
-      return sendCommandResponse(response_url, t('messages.webrings.invalidaction'))
+      return sendCommandResponse(response_url, t('messages.webring.invalidaction'))
     }
     console.log('new webrings', currentWebring)
   }
   await Promise.all([
     accountsTable.update(userRecord.id, { 'Webring': currentWebring }),
-    sendCommandResponse(response_url, t(`messages.webrings.${action}`, { webringUser }))
+    sendCommandResponse(response_url, t(`messages.webring.${action}`, { webringUser }))
   ])
   await fetchProfile(userRecord.fields['Username'])
 }
