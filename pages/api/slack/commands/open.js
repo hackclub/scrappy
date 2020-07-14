@@ -11,6 +11,7 @@ export default async (req, res) => {
   if (userArg && !user.includes('<@')) {
     return sendCommandResponse(response_url, t('messages.open.invaliduser'))
   }
+  console.log('user arg', userArg)
   const userRecord = await getUserRecord(userArg || user_id)
   const scrapbookLink = userRecord.fields['Scrapbook Link']
   if (userArg) {
