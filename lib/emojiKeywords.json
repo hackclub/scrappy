@@ -32,5 +32,16 @@
   "car": "car",
   "driving": "car",
   "bank": "bank-hackclub",
-  "shopping list": "hardware-2"
+  "shopping list": "hardware",
+  "github": "github",
+  "pr": "github",
+  "twitter": "twitter",
+  "bot": "robot_face",
+  "robot": "robot_face",
+  "minecraft": "minecraft",
+  "game": "video_game",
+  "npm": "npm",
+  "solder": "hardware",
+  "soldering": "hardware",
+  "arduino": "hardware"
 }
