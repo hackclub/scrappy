@@ -13,8 +13,8 @@ export default async (req, res) => {
     return sendCommandResponse(response_url, t('messages.open.invaliduser'))
   }
   const userRecord = await getUserRecord(userArg || user_id)
-  console.log('user record', userRecord)
-  const scrapbookLink = userRecord.fields['Scrapbook Link']
+  console.log('found user record for ', userArg || user_id, userRecord.fields['Scrapbook URL'])
+  const scrapbookLink = userRecord.fields['Scrapbook URL']
   if (userArg) {
     sendCommandResponse(response_url, t('messages.open.userArg', { scrapbookLink, userArg }))
   } else {
