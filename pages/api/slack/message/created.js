@@ -93,7 +93,7 @@ export default async (req, res) => {
     'Is Large Video': attachments.some(attachment => attachment.url === 'https://i.imgur.com/UkXMexG.mp4')
   })
 
-  incrementStreakCount(user, channel, ts)
+  incrementStreakCount(user, channel, message, ts)
 
   return res.json({ ok: true })
 }
