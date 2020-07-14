@@ -7,7 +7,7 @@ export default async (req, res) => {
   const { text, user_id, response_url } = req.body
   console.log('Scrapbook open:', text)
   const args = text.split(' ')
-  const userArg = text.split(' ')[args[0] === 'open' ? 2 : 1]?.split('@')[1].split('|')[0]
+  const userArg = text.split(' ')[args[0] === 'open' ? 1 : 0]?.split('@')[1].split('|')[0]
   if (userArg && !user.includes('<@')) {
     return sendCommandResponse(response_url, t('messages.open.invaliduser'))
   }
