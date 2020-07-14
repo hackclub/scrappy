@@ -27,6 +27,9 @@ export default async (req, res) => {
     case 'setsound':
       method = 'setaudio'
       break
+    case 'open':
+      method = 'open'
+      break
     case 'help':
     case '':
       method = 'help'
