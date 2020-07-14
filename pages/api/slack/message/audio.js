@@ -44,18 +44,18 @@ export default async (req, res) => {
   const publicUrl = await getPublicFileUrl(urlPrivate, channel, user)
 
   await accountsTable.update(userRecord.id, {
-      'Audio File': [
-        {
-          url: publicUrl.url
-        }
-      ],
-      'Custom Audio URL': ''
-    })
+    'Audio File': [
+      {
+        url: publicUrl.url
+      }
+    ],
+    'Custom Audio URL': ''
+  })
   await rebuildScrapbookFor(userRecord)
 
   await Promise.all([
     react('remove', channel, ts, 'beachball'),
-    react('add', channel, ts, 'white_check_mark'),
+    react('add', channel, ts, t('messages.audio.emoji.accepted')),
     reply(
       channel,
       ts,
