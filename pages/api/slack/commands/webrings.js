@@ -6,20 +6,17 @@ export default async (req, res) => {
 
   const { user_id, response_url, text } = req.body
   const args = text.split(' ')
-  const action = args[0] === 'webring' ? args[1] : args[0]
-  const webringUser = text.split(' ')[args[0] === 'webring' ? 2 : 1]?.split('@')[1].split('|')[0]
+  const webringUser = args[args[0] === 'webring' ? 1 : 0]?.split('@')[1]?.split('|')[0]
   console.log('webring user', webringUser)
 
-  if (!action || !webringUser) {
+  if (!webringUser) {
     return sendCommandResponse(response_url, t('messages.webring.noargs'))
   }
-
-  let userRecord
-  try {
-    userRecord = await getUserRecord(user_id)
-  } catch {
-    return sendCommandResponse(response_url, t('messages.webring.invaliduser'))
+  if (webringUser && !text.includes('<@')) {
+    return sendCommandResponse(response_url, t('messages.open.invaliduser'))
   }
+
+  const userRecord = await getUserRecord(user_id)
   const webringUserRecord = await getUserRecord(webringUser)
   const scrapbookLink = userRecord.fields['Scrapbook URL']
   let currentWebring = userRecord.fields['Webring']
@@ -27,25 +24,15 @@ export default async (req, res) => {
   if (!currentWebring) {
     currentWebring = [webringUserRecord.id]
   } else {
-    if (action === 'add') {
-      if (currentWebring.includes(webringUserRecord.id)) {
-        return sendCommandResponse(response_url, t('messages.webring.alreadyadded', { webringUser }))
-      }
+    if (!currentWebring.includes(webringUserRecord.id)) {
       currentWebring.push(webringUserRecord.id)
-    } else if (action === 'remove') {
-      const newWebring = currentWebring.filter(rec => rec != webringUserRecord.id)
-      if (JSON.stringify(newWebring) === JSON.stringify(currentWebring)) {
-        return sendCommandResponse(response_url, t('messages.webring.alreadyremoved', { webringUser }))
-      }
-      else currentWebring = newWebring
+      sendCommandResponse(response_url, t(`messages.webring.add`, { webringUser, scrapbookLink }))
     } else {
-      return sendCommandResponse(response_url, t('messages.webring.invalidaction'))
+      currentWebring = currentWebring.filter(rec => rec != webringUserRecord.id)
     }
-    console.log('new webrings', currentWebring)
+    //console.log('new webrings', currentWebring)
+    sendCommandResponse(response_url, t(`messages.webring.remove`, { webringUser, scrapbookLink }))
   }
-  await Promise.all([
-    accountsTable.update(userRecord.id, { 'Webring': currentWebring }),
-    sendCommandResponse(response_url, t(`messages.webring.${action}`, { webringUser, scrapbookLink }))
-  ])
+  await accountsTable.update(userRecord.id, { 'Webring': currentWebring })
   await fetchProfile(userRecord.fields['Username'])
 }
