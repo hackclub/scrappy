@@ -72,7 +72,7 @@ messages:
       3: I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
   delete:
     - |
-      WoooOOOAAAh there! You can only share images or videos in <#${process.env.CHANNEL}>! I've deleted your message:
+      WoooOOOAAAh there! You can only share images, audio files or videos in <#${process.env.CHANNEL}>! I've deleted your message:
 
       ${this.text}
 
