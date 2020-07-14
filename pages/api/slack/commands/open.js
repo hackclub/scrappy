@@ -13,7 +13,7 @@ export default async (req, res) => {
   const userRecord = await getUserRecord(userArg || user_id)
   const scrapbookLink = userRecord.fields['Scrapbook Link']
   if (userArg) {
-    sendCommandResponse(response_url, t('messages.open.otheruser', { scrapbookLink, userArg }))
+    sendCommandResponse(response_url, t('messages.open.userArg', { scrapbookLink, userArg }))
   } else {
     sendCommandResponse(response_url, t('messages.open.self', { scrapbookLink }))
   }

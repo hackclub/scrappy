@@ -118,7 +118,7 @@ messages:
         You're one of 50 people who can add a custom domain during the Summer of Making. There are *${this.domainsLeft}* domains spots left.
   open:
     invaliduser: 'Hmmmmmmmm THAT'S NOT A REAL USER!!!! What are you trying to pull here????'
-    otheruser: <@${this.userArg}>s scrapbook profile is ${this.scrapbookLink}
+    userArg: <@${this.userArg}>'s scrapbook profile is ${this.scrapbookLink}
     self: Your scrapbook profile is ${this.scrapbookLink}
   profileUpdate: Your profile details have been updated! ${this.scrapbookLink}
   assetReady: <@${this.user}> Your video has been processed and is live on your scrapbook!
