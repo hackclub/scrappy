@@ -4,6 +4,7 @@ messages:
     Welcome to the Summer of Making! I'm a bot that helps you build your <https://scrapbook.hackclub.com/|Summer Scrapbook>. Here are all the commands you can run:
 
     - \`/scrappy displaystreaks\`: toggles your streak count on/off in your status
+    - \`/scrappy open\`: opens your scrapbook (or another user's if you specify a username)
     - \`/scrappy setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
     - \`/scrappy setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
     - \`/scrappy setsound\`: links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
