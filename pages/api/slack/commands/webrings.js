@@ -21,6 +21,7 @@ export default async (req, res) => {
     return sendCommandResponse(response_url, t('messages.webring.invaliduser'))
   }
   const webringUserRecord = await getUserRecord(webringUser)
+  const scrapbookLink = userRecord.fields['Scrapbook URL']
   let currentWebring = userRecord.fields['Webring']
   console.log('current webrings', currentWebring)
   if (!currentWebring) {
@@ -44,7 +45,7 @@ export default async (req, res) => {
   }
   await Promise.all([
     accountsTable.update(userRecord.id, { 'Webring': currentWebring }),
-    sendCommandResponse(response_url, t(`messages.webring.${action}`, { webringUser }))
+    sendCommandResponse(response_url, t(`messages.webring.${action}`, { webringUser, scrapbookLink }))
   ])
   await fetchProfile(userRecord.fields['Username'])
 }
