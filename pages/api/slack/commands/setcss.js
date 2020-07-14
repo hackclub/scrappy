@@ -12,9 +12,11 @@ import {
 export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
+
   const command = req.body
   console.log(command)
-  let url = command.text.split(' ')[1]
+  const args = command.text.split(' ')
+  let url = args[0] === 'setcss' ? args[1] : args[0]
   url = url?.substring(1, url.length - 1)
   console.log('url', url)
 

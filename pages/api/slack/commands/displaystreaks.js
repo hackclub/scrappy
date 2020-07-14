@@ -10,7 +10,7 @@ export default async (req, res) => {
   if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
   try {
-    console.log('Running summerstreaks.js')
+    console.log('Running displaystreaks.js')
     const userId = req.body.user_id
     const record = await getUserRecord(userId)
     const display = record.fields['Display Streak']
@@ -21,7 +21,6 @@ export default async (req, res) => {
         ? `Your streak count is now invisible.`
         : `Your streak count is now visible!`
     )
-    res.status(200).end()
     const streakCount = record.fields['Streak Count']
     await displayStreaks(userId, streakCount)
   } catch (e) {

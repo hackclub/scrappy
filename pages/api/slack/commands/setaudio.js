@@ -5,7 +5,8 @@ export default async (req, res) => {
   else res.status(200).end()
 
   const { text, user_id, response_url } = req.body
-  let url = text.split(' ')[1]
+  const args = text.split(' ')
+  let url = args[0] === 'setaudio' ? args[1] : args[0]
   url = url?.substring(1, url.length - 1)
 
   const userRecord = await getUserRecord(user_id)

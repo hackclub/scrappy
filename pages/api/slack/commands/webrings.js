@@ -5,8 +5,8 @@ export default async (req, res) => {
   else res.status(200).end()
 
   const { user_id, response_url, text } = req.body
-  console.log('webring text', text)
-  const action = text.split(' ')[1]
+  const args = text.split(' ')
+  const action = args[0] === 'webring' ? args[1] : args[0]
   const webringUser = text.split(' ')[2]?.split('@')[1].split('|')[0]
   console.log('webring user', webringUser)
 
