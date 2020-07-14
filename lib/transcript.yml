@@ -78,15 +78,15 @@ messages:
 
       But feel free to repost it with an image or video and I'll let it be :eye::lips::eye:
   webring:
-    'add': <@${this.webringUser}> has been added to your webring! Now their latest post will occasionally appear under your scrapbook updates. See them live on <${this.scrapbookLink}|your scrapbook>!
-    'remove': <@${this.webringUser}> has been removed from your webring.
-    'noargs': Webrings are a way to link to your friends' scrapbooks in your scrapbook, and to receive scrapbook updates from your friends when you post. To add someone to your webring, type \`/scrappy webring add/remove @username\`
-    'invalidaction': You must specify whether to add or remove a webring. e.g. \`/scrappy webring add @user\` or \`/scrappy webring remove @user\`
-    'invaliduser':
+    add: <@${this.webringUser}> has been added to your webring! Now their latest post will occasionally appear under your scrapbook updates. See them live on <${this.scrapbookLink}|your scrapbook>!
+    remove: <@${this.webringUser}> has been removed from <${this.scrapbookLink}|your webring>.
+    noargs: Webrings are a way to link to your friends' scrapbooks in your scrapbook, and to receive scrapbook updates from your friends when you post. To add or remove someone to/from your webring, type \`/scrappy webring @username\`
+    invalidaction: You must specify whether to add or remove a webring. e.g. \`/scrappy webring add @user\` or \`/scrappy webring remove @user\`
+    invaliduser:
       - |
         I couldn't find that user :thunj: Make sure you're tagging the user, and make sure they're a Scrapbook user.
-    'alreadyadded': <@${this.webringUser}> has already been added to your webring.
-    'alreadyremoved': <@${this.webringUser}> isn't in your webring.
+    alreadyadded: <@${this.webringUser}> has already been added to your webring.
+    alreadyremoved: <@${this.webringUser}> isn't in your webring.
     random: Also check out the latest post from someone in your webring! ${this.randomWebringPost}
   css:
     'noargs': To link a custom CSS file, type \`/scrappy setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/scrappy setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
