@@ -8,7 +8,7 @@
   "wrote": "lower_left_fountain_pen",
   "slack": "slack",
   "figma": "figma",
-  "3d print": "3d-printer",
+  "3d": "3d-printer",
   "covid": "coronavirus",
   "singapore": "singaporeparrot",
   "canada": "canadaparrot",
@@ -18,7 +18,6 @@
   "hardware": "hardware",
   "ungnm3h9a": "roshan",
   "usnpnjxnx": "sam-1",
-  "vs code": "vsc",
   "vscode": "vsc",
   "woo hoo": "tada",
   "celebrate": "tada",
@@ -31,6 +30,5 @@
   "football": "soccer",
   "car": "car",
   "driving": "car",
-  "bank": "bank-hackclub",
-  "shopping list": "hardware-2"
+  "bank": "bank-hackclub"
 }
