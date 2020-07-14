@@ -9,7 +9,7 @@ export default async (req, res) => {
   const args = text?.split(' ')
   const userArg = args[args[0] === 'open' ? 1 : 0]?.split('@')[1]?.split('|')[0]
   console.log('user arg', userArg)
-  if (userArg && !userArg.includes('<@')) {
+  if (userArg && !text.includes('<@')) {
     return sendCommandResponse(response_url, t('messages.open.invaliduser'))
   }
   const userRecord = await getUserRecord(userArg || user_id)
