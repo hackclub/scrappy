@@ -43,5 +43,6 @@
   "npm": "npm",
   "solder": "hardware",
   "soldering": "hardware",
-  "arduino": "hardware"
+  "arduino": "hardware",
+  "instagram": "instagram"
 }
