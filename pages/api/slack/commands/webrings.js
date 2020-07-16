@@ -34,6 +34,9 @@ export default async (req, res) => {
       }
     }  
   }
+  else{
+    return sendCommandResponse(response_url, t('messages.webrings.yourself', { webringUser }))
+  }
   await accountsTable.update(userRecord.id, { 'Webring': currentWebring })
   await fetchProfile(userRecord.fields['Username'])
 }
