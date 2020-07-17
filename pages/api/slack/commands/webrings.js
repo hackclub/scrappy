@@ -23,14 +23,17 @@ export default async (req, res) => {
   console.log('current webrings', currentWebring)
   if (!currentWebring) {
     currentWebring = [webringUserRecord.id]
-  }  else {
-    if (!currentWebring.includes(webringUserRecord.id)) {
+  }  
+  else if(currentWebring.length >= 8){
+      sendCommandResponse(response_url, t(`messages.webring.toolong`))
+  }
+  else if (!currentWebring.includes(webringUserRecord.id))  {
       currentWebring.push(webringUserRecord.id)
       sendCommandResponse(response_url, t(`messages.webring.add`, { webringUser, scrapbookLink }))
-    } else {
-      currentWebring = currentWebring.filter(rec => rec != webringUserRecord.id)
-      sendCommandResponse(response_url, t(`messages.webring.remove`, { webringUser, scrapbookLink }))
-    }
+  }
+  else {
+    currentWebring = currentWebring.filter(rec => rec != webringUserRecord.id)
+    sendCommandResponse(response_url, t(`messages.webring.remove`, { webringUser, scrapbookLink }))
   }
   await accountsTable.update(userRecord.id, { 'Webring': currentWebring })
   await fetchProfile(userRecord.fields['Username'])
