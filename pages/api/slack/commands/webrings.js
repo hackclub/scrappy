@@ -23,7 +23,7 @@ export default async (req, res) => {
   console.log('current webrings', currentWebring)
   if (!currentWebring) {
     currentWebring = [webringUserRecord.id]
-  } else {
+  }  else {
     if (!currentWebring.includes(webringUserRecord.id)) {
       currentWebring.push(webringUserRecord.id)
       sendCommandResponse(response_url, t(`messages.webring.add`, { webringUser, scrapbookLink }))
