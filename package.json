@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "format": "prettier --write .",
+    "checkFormat": "prettier --check ."
   },
   "dependencies": {
     "@mux/mux-node": "^2.8.0",
@@ -24,7 +26,8 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "prettier": "2.0.5"
   },
   "cacheDirectories": [
     ".next/cache"

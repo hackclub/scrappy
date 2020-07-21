@@ -9,9 +9,9 @@ messages:
     - \`/scrappy-setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
     - \`/scrappy-setsound\`: links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
     - \`/scrappy-webring\`: adds or removes someone to your webring
-    
+
     BTW if you want to delete or update a post you can do so by simply editing or deleting your Slack message.
-    
+
     Learn all about Scrapbook at https://scrapbook.hackclub.com/about
   forget: |
     Forgetting about all recorded scraps from....
@@ -24,7 +24,7 @@ messages:
       (It could be anything. A project you're starting. An art project you made. Something you're reading. <https://scrapbook.hackclub.com/about|Learn all about how cool I am!>)
     css: |
       WooOOAAah hey! Welcome to <#C015M6U6JKU>! This is the place where people go to make their profiles look cool!!!
-      
+
       To add a custom style to your scrapbook, find a link to a CSS file and post it in this channel. Feel free to use any of the others posted in the channel, or you can create your own at <https://gist.github.com|gist.github.com> or <https://repl.it|Repl.it>.
   streak:
     1: |
@@ -65,10 +65,10 @@ messages:
       - ':yay: You just started a streak! Keep posting every day to continue your streak. In the meantime, type \`/scrappy help\` to see what else you can do!'
     'oldmember':
       1:
-      - | 
-        Far out! You've started a new streak! Welcome back to Scrapbook :yay:
+        - |
+          Far out! You've started a new streak! Welcome back to Scrapbook :yay:
 
-        ${this.scrapbookLink}
+          ${this.scrapbookLink}
       2: Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
       3: I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
   delete:
@@ -115,7 +115,7 @@ messages:
     'domainset':
       - |
         Custom domain \`${this.text}\` set!
-        
+
         *Your next steps*: create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
 
         You're one of 50 people who can add a custom domain during the Summer of Making. There are *${this.domainsLeft}* domains spots left.
@@ -133,7 +133,7 @@ messages:
         Woweee!!! What's that??? That file is so big...I don't have enough memory for it...
 
         Since I can't download this file, I'm going to make it "public" via Slack's API and upload it to your scrapbook that way. The update will be live on your scrapbook in 30 seconds, but it'll take anywhere between 30 seconds and a few minutes for it to be viewable. I'll notify you when it's ready.
-        
+
         (PS: You may receive a notification from Slackbot—go ahead and ignore it.)
     'bigimage': What are you trying to do with that massive image—kill me?
     'zach': Zaaaaaaaaaaaaaaaaaaaach!!!!!!!!!!!!!!! I just tried to update your streak, but <@U4QAK9SRW> reinstalled me with his Slack tokens at some point, so it didn\'t work. When you get a chance, reinstall me with your tokens and update the env variables in the Heroku deployment. Then toggle \`/scrappy displaystreaks\` off and on again.
@@ -144,7 +144,7 @@ startup:
     - high-density polyethylene
     - polyvinyl chloride
     - low-density polyethylene
-    - polypropylene 
+    - polypropylene
     - polystyrene
     - the scraps left on your plate
   eats:

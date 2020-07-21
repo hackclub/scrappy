@@ -11,10 +11,9 @@ app.prepare().then(() => {
   server.all('*', (req, res) => handle(req, res))
 
   const port = process.env.PORT || 3000
-  server.listen(port, err => {
+  server.listen(port, (err) => {
     if (err) throw err
     console.log('> Ready on http://localhost:' + port)
-
 
     // if (dev) {
     //   fetch(`http://localhost:${port}/api/regenerate-all`, {
