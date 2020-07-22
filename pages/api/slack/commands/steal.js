@@ -18,7 +18,7 @@ export default async (req, res) => {
   console.log('victim user', victimUser)
 
   if (!action || !victimUser) {
-    return sendCommandResponse(response_url, t('messages.steal.noargs')) 
+    return sendCommandResponse(response_url, t('messages.steal.noargs'))
   }
 
   let userRecord
