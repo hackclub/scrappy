@@ -124,6 +124,7 @@ messages:
     userArg: <@${this.userArg}>'s scrapbook is ${this.scrapbookLink}
     self: Your scrapbook profile is ${this.scrapbookLink}
   steal:
+    'invaliduser': Hmmmmmmmm THAT'S NOT A REAL USER!!!! What are you trying to pull here????
     'done': <@${this.victimUser}>'s CSS is now live on your profile!
     'noargs':
       - |

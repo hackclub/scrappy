@@ -18,14 +18,14 @@ export default async (req, res) => {
   console.log('victim user', victimUser)
 
   if (!action || !victimUser) {
-    return sendCommandResponse(response_url, t('messages.webrings.noargs')) //NEEDS CHANGING
+    return sendCommandResponse(response_url, t('messages.steal.noargs')) 
   }
 
   let userRecord
   try {
     userRecord = await getUserRecord(user_id)
   } catch {
-    return sendCommandResponse(response_url, t('messages.webrings.invaliduser'))
+    return sendCommandResponse(response_url, t('messages.steal.invaliduser'))
   }
   const victimUserRecord = await getUserRecord(victimUser)
   const newCSS = victimUserRecord.fields['CSS URL']
