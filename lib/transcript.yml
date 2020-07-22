@@ -123,6 +123,22 @@ messages:
     invaliduser: Hmmmmmmmm THAT'S NOT A REAL USER!!!! What are you trying to pull here????
     userArg: <@${this.userArg}>'s scrapbook is ${this.scrapbookLink}
     self: Your scrapbook profile is ${this.scrapbookLink}
+  webrings:
+    'add': <@${this.webringUser}> has been added to your webring!
+    'remove': <@${this.webringUser}> has been removed from your webring.
+    'noargs': Webrings are a way to link to your friends' scrapbooks in your scrapbook, and to receive scrapbook updates from your friends when you post. To add someone to your webring, type \`/scrappy webring add/remove @username\`
+    'invalidaction': You must specify whether to add or remove a webring. e.g. \`/scrappy webring add @user\` or \`/scrappy webring remove @user\`
+    'invaliduser':
+      - |
+        I couldn't find that user :thunj: Make sure you're tagging the user, and make sure they're a Scrapbook user.
+    'alreadyadded': <@${this.webringUser}> has already been added to your webring.
+    'alreadyremoved': <@${this.webringUser}> isn't in your webring.
+  steal:
+    'done': <@${this.victimUser}>'s CSS is now live on your profile!
+    'noargs': 
+    - |
+      You can't steal CSS from no one :facepalm: Make sure to mention someone after the command.
+    'empty': <@${this.victimUser}>'s custom CSS is empty, try another person.
   profileUpdate: Your profile details have been updated! ${this.scrapbookLink}
   assetReady: <@${this.user}> Your video has been processed and is live on your scrapbook!
   errors:
