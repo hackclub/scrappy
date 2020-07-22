@@ -1,7 +1,14 @@
-import { unverifiedRequest, getUserRecord, accountsTable, sendCommandResponse, t } from "../../../../lib/api-utils"
+import {
+  unverifiedRequest,
+  getUserRecord,
+  accountsTable,
+  sendCommandResponse,
+  t
+} from '../../../../lib/api-utils'
 
 export default async (req, res) => {
-  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req))
+    return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
   const { user_id, response_url, text } = req.body
@@ -23,7 +30,7 @@ export default async (req, res) => {
   const victimUserRecord = await getUserRecord(victimUser)
   const newCSS = victimUserRecord.fields['CSS URL']
 
-  if (newCSS=''){
+  if ((newCSS = '')) {
     sendCommandResponse(response_url, t(`messages.steal.empty`, { victimUser }))
   }
 
