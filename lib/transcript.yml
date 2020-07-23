@@ -82,6 +82,9 @@ messages:
     add: <@${this.webringUser}> has been added to your webring! Now their latest post will occasionally appear under your scrapbook updates. See them live on <${this.scrapbookLink}|your scrapbook>!
     remove: <@${this.webringUser}> has been removed from <${this.scrapbookLink}|your webring>.
     noargs: Webrings are a way to link to your friends' scrapbooks in your scrapbook, and to receive scrapbook updates from your friends when you post. To add or remove someone to/from your webring, type \`/scrappy webring @username\`
+    yourself:
+      - |
+        Hey! :watchingyou:  Add other people to your webring, not yourself!!!!
     invaliduser:
       - |
         I couldn't find that user :thunj: Make sure you're tagging the user, and make sure they're a Scrapbook user.

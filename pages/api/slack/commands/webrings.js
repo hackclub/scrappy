@@ -31,24 +31,31 @@ export default async (req, res) => {
   const scrapbookLink = userRecord.fields['Scrapbook URL']
   let currentWebring = userRecord.fields['Webring']
   console.log('current webrings', currentWebring)
-  if (!currentWebring) {
-    currentWebring = [webringUserRecord.id]
-  } else {
-    if (!currentWebring.includes(webringUserRecord.id)) {
-      currentWebring.push(webringUserRecord.id)
-      sendCommandResponse(
-        response_url,
-        t(`messages.webring.add`, { webringUser, scrapbookLink })
-      )
+  if (userRecord != webringUserRecord) {
+    if (!currentWebring) {
+      currentWebring = [webringUserRecord.id]
     } else {
-      currentWebring = currentWebring.filter(
-        (rec) => rec != webringUserRecord.id
-      )
-      sendCommandResponse(
-        response_url,
-        t(`messages.webring.remove`, { webringUser, scrapbookLink })
-      )
+      if (!currentWebring.includes(webringUserRecord.id)) {
+        currentWebring.push(webringUserRecord.id)
+        sendCommandResponse(
+          response_url,
+          t(`messages.webring.add`, { webringUser, scrapbookLink })
+        )
+      } else {
+        currentWebring = currentWebring.filter(
+          (rec) => rec != webringUserRecord.id
+        )
+        sendCommandResponse(
+          response_url,
+          t(`messages.webring.remove`, { webringUser, scrapbookLink })
+        )
+      }
     }
+  } else {
+    return sendCommandResponse(
+      response_url,
+      t('messages.webrings.yourself', { webringUser })
+    )
   }
   await accountsTable.update(userRecord.id, { Webring: currentWebring })
   await fetchProfile(userRecord.fields['Username'])
