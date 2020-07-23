@@ -1,13 +1,11 @@
-import { unverifiedRequest, t } from '../../lib/api-utils'
+import { unverifiedRequest, t } from "../../lib/api-utils"
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+
 
   let latestCommitMsg = 'misc...'
-  await fetch('https://api.github.com/repos/hackclub/scrappy/commits/main')
-    .then((r) => r.json())
-    .then((d) => (latestCommitMsg = d.commit.message))
+  await fetch('https://api.github.com/repos/hackclub/scrappy/commits/main').then(r => r.json()).then(d => latestCommitMsg = d.commit.message)
   await fetch('https://slack.com/api/chat.postMessage', {
     method: 'POST',
     headers: {
@@ -16,7 +14,7 @@ export default async (req, res) => {
     },
     body: JSON.stringify({
       channel: 'C0P5NE354',
-      text: t('startup.message', { latestCommitMsg }),
+      text: t('startup.message', {latestCommitMsg}),
       parse: 'mrkdwn',
       unfurl_links: false,
       unfurl_media: false

@@ -8,23 +8,20 @@ const {
   getUserRecord,
   formatText,
   fetchProfile,
-  unverifiedRequest
+  unverifiedRequest,
 } = require('../../../../lib/api-utils')
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).json({ ok: true })
 
   const newMessage = await formatText(req.body.event.message.text)
   const prevTs = req.body.event.previous_message.ts
 
-  const updateRecord = (
-    await updatesTable.read({
-      maxRecords: 1,
-      filterByFormula: `{Message Timestamp} = '${prevTs}'`
-    })
-  )[0]
+  const updateRecord = (await updatesTable.read({
+    maxRecords: 1,
+    filterByFormula: `{Message Timestamp} = '${prevTs}'`
+  }))[0]
   if (updateRecord) {
     await updatesTable.update(updateRecord.id, { Text: newMessage })
     await postEphemeral(

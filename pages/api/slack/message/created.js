@@ -25,8 +25,7 @@ import {
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
   const { files = [], channel, ts, user, text, thread_ts } = req.body.event
 
@@ -46,13 +45,15 @@ export default async (req, res) => {
           reply(channel, ts, t('messages.errors.filetype')),
           react('add', channel, ts, 'x')
         ])
-      } else if (publicUrl.url === 'heic') {
+      }
+      else if (publicUrl.url === 'heic') {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
           reply(channel, ts, t('messages.errors.heic')),
           react('add', channel, ts, 'x')
         ])
-      } else if (publicUrl.url === 'big boy') {
+      }
+      else if (publicUrl.url === 'big boy') {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
           reply(channel, ts, t('messages.errors.bigimage')),
@@ -76,9 +77,7 @@ export default async (req, res) => {
     }
   }
 
-  const date = new Date().toLocaleString('en-US', {
-    timeZone: userRecord.fields['Timezone']
-  })
+  const date = new Date().toLocaleString("en-US", { timeZone: userRecord.fields['Timezone'] })
   const convertedDate = new Date(date).toISOString()
   const message = await formatText(text)
   console.log(convertedDate)
@@ -91,9 +90,7 @@ export default async (req, res) => {
     Attachments: attachments,
     'Mux Asset IDs': videos.toString(),
     'Mux Playback IDs': videoPlaybackIds.toString(),
-    'Is Large Video': attachments.some(
-      (attachment) => attachment.url === 'https://i.imgur.com/UkXMexG.mp4'
-    )
+    'Is Large Video': attachments.some(attachment => attachment.url === 'https://i.imgur.com/UkXMexG.mp4')
   })
 
   incrementStreakCount(user, channel, message, ts)

@@ -1,17 +1,8 @@
 import cheerio from 'cheerio'
-import {
-  getUserRecord,
-  accountsTable,
-  reply,
-  t,
-  getUrlFromString,
-  postEphemeral,
-  unverifiedRequest
-} from '../../../../lib/api-utils'
+import { getUserRecord, accountsTable, reply, t, getUrlFromString, postEphemeral, unverifiedRequest } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
   const { user, text, ts, channel } = req.body.event
 
@@ -23,8 +14,8 @@ export default async (req, res) => {
   if (url) {
     if (url.includes('gist.github.com')) {
       url = await fetch(url)
-        .then((r) => r.text())
-        .then(async (html) => {
+        .then(r => r.text())
+        .then(async html => {
           const $ = cheerio.load(html)
           let raw = $('.file .file-actions a').attr('href')
           if (Array.isArray(raw)) raw = raw[0]
@@ -34,19 +25,8 @@ export default async (req, res) => {
               'CSS URL': githubUrl
             })
             const username = userRecord.fields['Username']
-            sendCSSMessage(
-              channel,
-              ts,
-              `https://scrapbook.hackclub.com/${username}`
-            )
-            await postEphemeral(
-              'C015M6U6JKU',
-              t('messages.css.set', {
-                url,
-                username: userRecord.fields['Username']
-              }),
-              user
-            )
+            sendCSSMessage(channel, ts, `https://scrapbook.hackclub.com/${username}`)
+            await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username: userRecord.fields['Username'] }), user)
             //await reply(channel, ts, t('messages.css.set', { url: githubUrl, username }))
           } else {
             reply(channel, ts, t('messages.css.nocss'))
@@ -58,11 +38,7 @@ export default async (req, res) => {
         'CSS URL': url
       })
       sendCSSMessage(channel, ts, `https://scrapbook.hackclub.com/${username}`)
-      await postEphemeral(
-        'C015M6U6JKU',
-        t('messages.css.set', { url, username }),
-        user
-      )
+      await postEphemeral('C015M6U6JKU', t('messages.css.set', { url, username }), user)
       //reply(channel, ts, t('messages.css.set', { url, username }))
     }
   }
@@ -73,7 +49,7 @@ const sendCSSMessage = (channel, ts, scrapbookLink) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+      'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
     },
     body: JSON.stringify({
       channel,
@@ -81,23 +57,23 @@ const sendCSSMessage = (channel, ts, scrapbookLink) => {
       reply_broadcast: true,
       blocks: [
         {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: t('messages.css.broadcast', { scrapbookLink })
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": t('messages.css.broadcast', { scrapbookLink })
           }
         },
         {
-          type: 'actions',
-          elements: [
+          "type": "actions",
+          "elements": [
             {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                emoji: true,
-                text: 'Set CSS'
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Set CSS"
               },
-              value: 'css'
+              "value": "css"
             }
           ]
         }
