@@ -51,6 +51,6 @@ export default async (req, res) => {
       t(`messages.webring.remove`, { webringUser, scrapbookLink })
     )
   }
+  await accountsTable.update(userRecord.id, { Webring: currentWebring })
+  await fetchProfile(userRecord.fields['Username'])
 }
-await accountsTable.update(userRecord.id, { Webring: currentWebring })
-await fetchProfile(userRecord.fields['Username'])
