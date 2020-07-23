@@ -13,11 +13,13 @@ export default async (req, res) => {
 
   const { user_id, response_url, text } = req.body
   console.log('victim text', text)
-  const action = text.split(' ')[1]
-  const victimUser = text.split(' ')[2]?.split('@')[1].split('|')[0]
+  const args = text.split(' ')
+  const victimUser = args[args[0] === 'webring' ? 1 : 0]
+    ?.split('@')[1]
+    ?.split('|')[0]
   console.log('victim user', victimUser)
 
-  if (!action || !victimUser) {
+  if (!victimUser) {
     return sendCommandResponse(response_url, t('messages.steal.noargs'))
   }
 
@@ -30,9 +32,7 @@ export default async (req, res) => {
   const victimUserRecord = await getUserRecord(victimUser)
   const newCSS = victimUserRecord.fields['CSS URL']
 
-  if ((newCSS = '')) {
-    sendCommandResponse(response_url, t(`messages.steal.empty`, { victimUser }))
-  }
+  if ((newCSS === '')) return sendCommandResponse(response_url, t(`messages.steal.empty`, { victimUser }))
 
   await Promise.all([
     accountsTable.update(userRecord.id, { 'CSS URL': newCSS }),
