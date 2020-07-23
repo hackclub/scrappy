@@ -7,7 +7,8 @@ import {
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
-  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req))
+    return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
   try {
     console.log('Running displaystreaks.js')

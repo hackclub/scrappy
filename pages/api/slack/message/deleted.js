@@ -1,4 +1,15 @@
-import { react, deleteScrap, postEphemeral, getUserRecord, fetchProfile, setStatus, accountsTable, displayStreaks, shouldUpdateStreak, unverifiedRequest } from '../../../../lib/api-utils'
+import {
+  react,
+  deleteScrap,
+  postEphemeral,
+  getUserRecord,
+  fetchProfile,
+  setStatus,
+  accountsTable,
+  displayStreaks,
+  shouldUpdateStreak,
+  unverifiedRequest
+} from '../../../../lib/api-utils'
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   const result = await fetch(
@@ -17,17 +28,14 @@ const deleteThreadedMessages = async (ts, channel, user) => {
         return null
       }
       console.log('trying to delete', msg)
-      return await fetch(
-        `https://slack.com/api/chat.delete`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ channel, ts: msg.ts })
-        }
-      ).then((r) => r.json())
+      return await fetch(`https://slack.com/api/chat.delete`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ channel, ts: msg.ts })
+      }).then((r) => r.json())
     })
   )
   const userRecord = await getUserRecord(user)
@@ -44,7 +52,8 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 }
 
 export default async (req, res) => {
-  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req))
+    return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
   const { channel, message, previous_message, thread_ts } = req.body.event
