@@ -5,13 +5,17 @@ import {
   updatesTable,
   getNow,
   setStatus,
-  unverifiedRequest
+  unverifiedRequest,
+  timeout
 } from '../../../lib/api-utils'
 
 export default async (req, res) => {
   res.status(200).end()
-  const users = await accountsTable.read()
+  const users = await accountsTable.read({
+    filterByFormula: `{Updates} != ''`
+  })
   users.forEach(async (user) => {
+    await timeout(500)
     const userId = user.fields['ID']
     const timezone = user.fields['Timezone']
     const username = user.fields['Username']
