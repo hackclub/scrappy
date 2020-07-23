@@ -39,7 +39,7 @@ export default async (req, res) => {
 
   const info = await fetch(
     `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${user.id}`
-  ).then(r => r.json())
+  ).then((r) => r.json())
   const tzOffset = info.user.tz_offset
   const tz = info.user.tz.replace(`\\`, '')
 

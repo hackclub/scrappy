@@ -62,7 +62,7 @@ export default async (req, res) => {
       t('messages.audio.set', {
         url: `https://scrapbook.hackclub.com/${userRecord.fields['Username']}`
       })
-    ),
+    )
   ])
   await react('add', channel, ts, t('audio.emoji.success'))
 }
