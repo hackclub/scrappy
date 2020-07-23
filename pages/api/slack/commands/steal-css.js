@@ -3,7 +3,8 @@ import {
   getUserRecord,
   accountsTable,
   sendCommandResponse,
-  t
+  t,
+  fetchProfile
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
@@ -22,20 +23,21 @@ export default async (req, res) => {
   if (!victimUser) {
     return sendCommandResponse(response_url, t('messages.steal.noargs'))
   }
-
-  let userRecord
+  const userRecord = await getUserRecord(user_id)
+  const scrapbookLink = userRecord.fields['Scrapbook URL']
+  let victimUserRecord
   try {
-    userRecord = await getUserRecord(user_id)
+    victimUserRecord = await getUserRecord(user_id)
   } catch {
     return sendCommandResponse(response_url, t('messages.steal.invaliduser'))
   }
-  const victimUserRecord = await getUserRecord(victimUser)
-  const newCSS = victimUserRecord.fields['CSS URL']
 
-  if ((newCSS === '')) return sendCommandResponse(response_url, t(`messages.steal.empty`, { victimUser }))
+  const newCSS = victimUserRecord.fields['CSS URL']
+  if (!newCSS) return sendCommandResponse(response_url, t(`messages.steal.empty`, { victimUser }))
 
   await Promise.all([
     accountsTable.update(userRecord.id, { 'CSS URL': newCSS }),
-    sendCommandResponse(response_url, t(`messages.steal.done`, { victimUser }))
+    sendCommandResponse(response_url, t(`messages.steal.done`, { victimUser, scrapbookLink }))
   ])
+  await fetchProfile(userRecord.fields['Username'])
 }

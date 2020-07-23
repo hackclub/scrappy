@@ -129,10 +129,8 @@ messages:
     self: Your scrapbook profile is ${this.scrapbookLink}
   steal:
     'invaliduser': Hmmmmmmmm THAT'S NOT A REAL USER!!!! What are you trying to pull here???? I don't like it :(
-    'done': <@${this.victimUser}>'s CSS is now live on your profile!
-    'noargs':
-      - |
-        You can't steal CSS from no one :facepalm: Make sure to mention someone after the command.
+    'done': <@${this.victimUser}>'s CSS is now live on <${this.scrapbookLink}|your profile>!
+    'noargs': This command sets someone's CSS file to your Scrapbook profile. To use it, type \`/scrappy-stealcss @user\`
     'empty': <@${this.victimUser}>'s custom CSS is empty, try another person.
   profileUpdate: Your profile details have been updated! ${this.scrapbookLink}
   assetReady: <@${this.user}> Your video has been processed and is live on your scrapbook!
