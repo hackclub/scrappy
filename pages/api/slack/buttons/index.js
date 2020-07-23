@@ -1,8 +1,9 @@
-import { unverifiedRequest } from "../../../../lib/api-utils"
+import { unverifiedRequest } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
   console.log(req.body)
-  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req))
+    return res.status(400).send('Unverified Slack request!')
   const data = JSON.parse(req.body.payload)
   console.log(data)
   const actionValue = data.actions[0].value
@@ -13,7 +14,8 @@ export default async (req, res) => {
   }
 
   const protocol = (req.headers['x-forwarded-proto'] || 'http') + '://'
-  const backendUrl = protocol + req.headers.host + '/api/slack/buttons/' + method
+  const backendUrl =
+    protocol + req.headers.host + '/api/slack/buttons/' + method
 
   await fetch(backendUrl, {
     method: 'POST',
