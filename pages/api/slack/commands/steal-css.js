@@ -27,7 +27,7 @@ export default async (req, res) => {
   const scrapbookLink = userRecord.fields['Scrapbook URL']
   let victimUserRecord
   try {
-    victimUserRecord = await getUserRecord(user_id)
+    victimUserRecord = await getUserRecord(victimUser)
   } catch {
     return sendCommandResponse(response_url, t('messages.steal.invaliduser'))
   }
