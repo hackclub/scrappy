@@ -33,11 +33,18 @@ export default async (req, res) => {
   }
 
   const newCSS = victimUserRecord.fields['CSS URL']
-  if (!newCSS) return sendCommandResponse(response_url, t(`messages.steal.empty`, { victimUser }))
+  if (!newCSS)
+    return sendCommandResponse(
+      response_url,
+      t(`messages.steal.empty`, { victimUser })
+    )
 
   await Promise.all([
     accountsTable.update(userRecord.id, { 'CSS URL': newCSS }),
-    sendCommandResponse(response_url, t(`messages.steal.done`, { victimUser, scrapbookLink }))
+    sendCommandResponse(
+      response_url,
+      t(`messages.steal.done`, { victimUser, scrapbookLink })
+    )
   ])
   await fetchProfile(userRecord.fields['Username'])
 }
