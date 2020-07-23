@@ -14,7 +14,7 @@ export default async (req, res) => {
   const { user_id, response_url, text } = req.body
   console.log('victim text', text)
   const args = text.split(' ')
-  const victimUser = args[args[0] === 'webring' ? 1 : 0]
+  const victimUser = args[args[0] === 'stealcss' ? 1 : 0]
     ?.split('@')[1]
     ?.split('|')[0]
   console.log('victim user', victimUser)

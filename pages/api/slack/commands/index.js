@@ -31,8 +31,8 @@ export default async (req, res) => {
     case 'open':
       method = 'open'
       break
-    case 'steal-css':
-      method = 'steal'
+    case 'stealcss':
+      method = 'steal-css'
       break
     case 'help':
     case '':
