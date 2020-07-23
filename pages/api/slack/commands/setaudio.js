@@ -1,15 +1,7 @@
-import {
-  unverifiedRequest,
-  getUserRecord,
-  t,
-  accountsTable,
-  sendCommandResponse,
-  rebuildScrapbookFor
-} from '../../../../lib/api-utils'
+import { unverifiedRequest, getUserRecord, t, accountsTable, sendCommandResponse, rebuildScrapbookFor } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
   const { text, user_id, response_url } = req.body
@@ -20,10 +12,7 @@ export default async (req, res) => {
   const userRecord = await getUserRecord(user_id)
   if (!url) {
     if (userRecord.fields['CSS URL'] != null) {
-      sendCommandResponse(
-        response_url,
-        t('messages.audio.removed', { previous: userRecord.fields['CSS URL'] })
-      )
+      sendCommandResponse(response_url, t('messages.audio.removed', { previous: userRecord.fields['CSS URL'] }))
     } else {
       sendCommandResponse(response_url, t('messages.audio.noargs'))
     }
@@ -37,7 +26,7 @@ export default async (req, res) => {
       'Custom Audio URL': url,
       'Audio File': [
         {
-          url: ''
+          'url': ''
         }
       ]
     })
@@ -47,8 +36,7 @@ export default async (req, res) => {
 
     // hang tight while the rebuild happens before giving out the new link
     await sendCommandResponse(
-      response_url,
-      t('messages.audio.set', { url: userRecord.fields['Scrapbook URL'] })
+      response_url, t('messages.audio.set', { url: userRecord.fields['Scrapbook URL'] })
     )
   }
   res.status(200).end()

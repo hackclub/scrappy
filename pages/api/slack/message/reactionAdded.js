@@ -1,13 +1,4 @@
-import {
-  unverifiedRequest,
-  getEmojiRecord,
-  updatesTable,
-  reactionsTable,
-  getUserRecord,
-  getReactionRecord,
-  updateExists,
-  emojiExists
-} from '../../../../lib/api-utils'
+import { unverifiedRequest, getEmojiRecord, updatesTable, reactionsTable, getUserRecord, getReactionRecord, updateExists, emojiExists } from "../../../../lib/api-utils"
 import Bottleneck from 'bottleneck'
 
 const limiter = new Bottleneck({
@@ -15,8 +6,7 @@ const limiter = new Bottleneck({
 })
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
   //console.log(req.body)
   const { item, user, reaction } = req.body.event
@@ -33,24 +23,15 @@ export default async (req, res) => {
   limiter.schedule(async () => {
     console.log(startTS, 'Starting a reaction update')
     const emojiRecord = await getEmojiRecord(reaction)
-    const userRecord = await getUserRecord(user).catch((err) =>
-      console.log('Cannot get user record', err)
-    )
+    const userRecord = await getUserRecord(user).catch(err => console.log('Cannot get user record', err))
 
     const ts = item.ts
-    const update = (
-      await updatesTable
-        .read({
-          maxRecords: 1,
-          filterByFormula: `{Message Timestamp} = '${ts}'`
-        })
-        .catch((err) => console.log('Cannot get update', err))
-    )[0]
+    const update = (await updatesTable.read({
+      maxRecords: 1,
+      filterByFormula: `{Message Timestamp} = '${ts}'`
+    }).catch(err => console.log('Cannot get update', err)))[0]
     if (!update) {
-      console.log(
-        startTS,
-        'reaction was added to a message in a thread. skipping...'
-      )
+      console.log(startTS, 'reaction was added to a message in a thread. skipping...')
       return
     }
 
@@ -59,22 +40,16 @@ export default async (req, res) => {
 
     if (!reactionExists) {
       // Post hasn't been reacted to yet at all, or it has been reacted to, but not with this emoji
-      console.log(
-        startTS,
-        `Post hasn't been reacted to at all, or it has been reacted to, but not with this emoji`
-      )
+      console.log(startTS, `Post hasn't been reacted to at all, or it has been reacted to, but not with this emoji`)
       await reactionsTable.create({
-        Update: [update.id],
-        Emoji: [emojiRecord.id],
+        'Update': [update.id],
+        'Emoji': [emojiRecord.id],
         'Users Reacted': [userRecord.id]
       })
     } else if (postExists && reactionExists) {
       // Post has been reacted to with this emoji
       console.log(startTS, 'Post has been reacted to with this emoji')
-      const reactionRecord = await getReactionRecord(
-        reaction,
-        update.fields['ID']
-      ).catch((err) => console.log('Cannot get reaction record', err))
+      const reactionRecord = await getReactionRecord(reaction, update.fields['ID']).catch(err => console.log('Cannot get reaction record', err))
       let usersReacted = reactionRecord.fields['Users Reacted']
       console.log(startTS, 'adding reaction')
       await usersReacted.push(userRecord.id)
@@ -83,11 +58,6 @@ export default async (req, res) => {
       })
       console.log(startTS, 'added reaction!')
     }
-    console.log(
-      startTS,
-      'Finished update that took',
-      Date.now() - startTS,
-      'ms'
-    )
+    console.log(startTS, 'Finished update that took', Date.now() - startTS, 'ms')
   })
 }

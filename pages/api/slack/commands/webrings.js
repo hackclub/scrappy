@@ -1,22 +1,12 @@
-import {
-  unverifiedRequest,
-  getUserRecord,
-  accountsTable,
-  sendCommandResponse,
-  t,
-  fetchProfile
-} from '../../../../lib/api-utils'
+import { unverifiedRequest, getUserRecord, accountsTable, sendCommandResponse, t, fetchProfile } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
   const { user_id, response_url, text } = req.body
   const args = text.split(' ')
-  const webringUser = args[args[0] === 'webring' ? 1 : 0]
-    ?.split('@')[1]
-    ?.split('|')[0]
+  const webringUser = args[args[0] === 'webring' ? 1 : 0]?.split('@')[1]?.split('|')[0]
   console.log('webring user', webringUser)
 
   if (!webringUser) {
@@ -31,32 +21,22 @@ export default async (req, res) => {
   const scrapbookLink = userRecord.fields['Scrapbook URL']
   let currentWebring = userRecord.fields['Webring']
   console.log('current webrings', currentWebring)
-  if (userRecord != webringUserRecord) {
+  if (userRecord != webringUserRecord){
     if (!currentWebring) {
       currentWebring = [webringUserRecord.id]
     } else {
       if (!currentWebring.includes(webringUserRecord.id)) {
         currentWebring.push(webringUserRecord.id)
-        sendCommandResponse(
-          response_url,
-          t(`messages.webring.add`, { webringUser, scrapbookLink })
-        )
+        sendCommandResponse(response_url, t(`messages.webring.add`, { webringUser, scrapbookLink }))
       } else {
-        currentWebring = currentWebring.filter(
-          (rec) => rec != webringUserRecord.id
-        )
-        sendCommandResponse(
-          response_url,
-          t(`messages.webring.remove`, { webringUser, scrapbookLink })
-        )
+        currentWebring = currentWebring.filter(rec => rec != webringUserRecord.id)
+        sendCommandResponse(response_url, t(`messages.webring.remove`, { webringUser, scrapbookLink }))
       }
-    }
-  } else {
-    return sendCommandResponse(
-      response_url,
-      t('messages.webrings.yourself', { webringUser })
-    )
+    }  
   }
-  await accountsTable.update(userRecord.id, { Webring: currentWebring })
+  else{
+    return sendCommandResponse(response_url, t('messages.webrings.yourself', { webringUser }))
+  }
+  await accountsTable.update(userRecord.id, { 'Webring': currentWebring })
   await fetchProfile(userRecord.fields['Username'])
 }

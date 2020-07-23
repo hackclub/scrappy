@@ -1,13 +1,7 @@
-import {
-  unverifiedRequest,
-  sendCommandResponse,
-  getUserRecord,
-  t
-} from '../../../../lib/api-utils'
+import { unverifiedRequest, sendCommandResponse, getUserRecord, t } from "../../../../lib/api-utils"
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
   const { text, user_id, response_url } = req.body
@@ -19,21 +13,11 @@ export default async (req, res) => {
     return sendCommandResponse(response_url, t('messages.open.invaliduser'))
   }
   const userRecord = await getUserRecord(userArg || user_id)
-  console.log(
-    'found user record for ',
-    userArg || user_id,
-    userRecord.fields['Scrapbook URL']
-  )
+  console.log('found user record for ', userArg || user_id, userRecord.fields['Scrapbook URL'])
   const scrapbookLink = userRecord.fields['Scrapbook URL']
   if (userArg) {
-    sendCommandResponse(
-      response_url,
-      t('messages.open.userArg', { scrapbookLink, userArg })
-    )
+    sendCommandResponse(response_url, t('messages.open.userArg', { scrapbookLink, userArg }))
   } else {
-    sendCommandResponse(
-      response_url,
-      t('messages.open.self', { scrapbookLink })
-    )
+    sendCommandResponse(response_url, t('messages.open.self', { scrapbookLink }))
   }
 }

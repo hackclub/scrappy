@@ -10,8 +10,7 @@ import {
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  if (unverifiedRequest(req)) return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
   const command = req.body
@@ -29,12 +28,15 @@ export default async (req, res) => {
       })
       sendCommandResponse(command.response_url, t('messages.css.removed'))
     } else {
-      sendCommandResponse(command.response_url, t('messages.css.noargs'))
+      sendCommandResponse(
+        command.response_url,
+        t('messages.css.noargs')
+      )
     }
   } else if (url.includes('gist.github.com')) {
     url = await fetch(url)
-      .then((r) => r.text())
-      .then(async (html) => {
+      .then(r => r.text())
+      .then(async html => {
         console.log(html)
         const $ = cheerio.load(html)
         let raw = $('.file .file-actions a').attr('href')
@@ -53,7 +55,10 @@ export default async (req, res) => {
             t('messages.css.set', { url: githubUrl, username })
           )
         } else {
-          sendCommandResponse(command.response_url, t('messages.css.nocss'))
+          sendCommandResponse(
+            command.response_url,
+            t('messages.css.nocss')
+          )
         }
       })
   } else {
@@ -72,8 +77,7 @@ export default async (req, res) => {
         'CSS URL': url
       })
       await sendCommandResponse(
-        command.response_url,
-        t('messages.css.set', { url, username })
+        command.response_url, t('messages.css.set', { url, username })
       )
     }
   }
