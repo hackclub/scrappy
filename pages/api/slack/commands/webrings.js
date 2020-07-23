@@ -37,13 +37,13 @@ export default async (req, res) => {
   if (!currentWebring) {
     currentWebring = [webringUserRecord.id]
   } else if (!currentWebring.includes(webringUserRecord.id)) {
+    if (currentWebring.length >= 8) return sendCommandResponse(response_url, t('messages.webring.toolong'))
     currentWebring.push(webringUserRecord.id)
     sendCommandResponse(
       response_url,
       t(`messages.webring.add`, { webringUser, scrapbookLink })
     )
   } else {
-    if (currentWebring.length >= 8) return sendCommandResponse(response_url, t('messages.webring.toolong'))
     currentWebring = currentWebring.filter((rec) => rec != webringUserRecord.id)
     sendCommandResponse(
       response_url,
