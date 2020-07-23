@@ -44,5 +44,15 @@
   "solder": "hardware",
   "soldering": "hardware",
   "arduino": "hardware",
-  "instagram": "instagram"
+  "instagram": "instagram",
+  "js": "js",
+  "javascript": "js",
+  "reactjs": "react",
+  "swift": "swift",
+  "xcode": "swift",
+  "x code": "swift",
+  "swiftui": "swift",
+  "swift ui": "swift",
+  "golang": "gopher",
+  "rust": "rustlang"
 }
