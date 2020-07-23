@@ -84,7 +84,7 @@ messages:
     noargs: Webrings are a way to link to your friends' scrapbooks in your scrapbook, and to receive scrapbook updates from your friends when you post. To add or remove someone to/from your webring, type \`/scrappy webring @username\`
     yourself:
       - |
-        Hey! Add other people to your webring, not yourself :watchingyou:
+        Hey! :watchingyou:  Add other people to your webring, not yourself!!!!
     invaliduser:
       - |
         I couldn't find that user :thunj: Make sure you're tagging the user, and make sure they're a Scrapbook user.
