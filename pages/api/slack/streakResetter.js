@@ -1,6 +1,12 @@
 // This API route is pinged by a Zap every hour
 
-import { accountsTable, updatesTable, getNow, setStatus, unverifiedRequest } from '../../../lib/api-utils'
+import {
+  accountsTable,
+  updatesTable,
+  getNow,
+  setStatus,
+  unverifiedRequest
+} from '../../../lib/api-utils'
 
 export default async (req, res) => {
   res.status(200).end()
@@ -22,7 +28,9 @@ export default async (req, res) => {
     console.log(username, now.getDate(), new Date(createdTime).getDate())
 
     if (shouldReset(now, createdDate) && user.fields['Streak Count'] != 0) {
-      console.log(`It's been more than a day since ${username} last posted. Resetting their streak...`)
+      console.log(
+        `It's been more than a day since ${username} last posted. Resetting their streak...`
+      )
       accountsTable.update(user.id, {
         'Streak Count': 0
       })
@@ -32,7 +40,7 @@ export default async (req, res) => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
+            Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
           },
           body: JSON.stringify({
             channel: userId, //userId
