@@ -22,15 +22,16 @@ export default async (req, res) => {
   const toggleAllStreaks = all && all === 'all'
   const record = await getUserRecord(user_id)
   const display = record.fields['Display Streak']
+  const streaksToggledOff = record.fields['Streaks Toggled Off']
 
   await accountsTable.update(record.id, {
     'Display Streak': !display,
-    'Streaks Toggled Off': !toggleAllStreaks
+    'Streaks Toggled Off': !streaksToggledOff
   })
   if (all) {
     await sendCommandResponse(
       response_url,
-      toggleAllStreaks
+      streaksToggledOff
         ? t('messages.streak.toggle.all.optout')
         : t('messages.streak.toggle.all.optin')
     )
