@@ -56,14 +56,14 @@ messages:
         :congaparrot::congaparrot::congaparrot::congaparrot:
         ${this.scrapbookLink}
         :congaparrot::congaparrot::congaparrot::congaparrot:
-    'nostreak':
+    nostreak:
       - |
         :yay::yay::yay: Your update is live on your scrapbook! :yay::yay::yay: ${this.scrapbookLink}
 
         (PS: you've already posted today, so I didn't increment your streak. But great job!)
-    'newstreak':
+    newstreak:
       - ':yay: You just started a streak! Keep posting every day to continue your streak. In the meantime, type \`/scrappy help\` to see what else you can do!'
-    'oldmember':
+    oldmember:
       1:
         - |
           Far out! You've started a new streak! Welcome back to Scrapbook :yay:
@@ -71,6 +71,13 @@ messages:
           ${this.scrapbookLink}
       2: Right on for day two! I'll add that to your scrapbook on ${this.scrapbookLink}.
       3: I'll scarf that down and add it to your scrapbook for day 3. You're getting up there! ${this.scrapbookLink}
+    toggle:
+      status:
+        visible: Your streak count is now visible.
+        invisible: Your streak count is now invisible.
+      all:
+        optin: Nice! I\'ll will start counting your streaks. From now on, they\'ll be in your status and on your scrapbook.
+        optout: Cool beans, I\'ll stop counting your streaks.
   delete:
     - |
       WoooOOOAAAh there! You can only share images, audio files, or videos in <#${process.env.CHANNEL}>! I've deleted your message:
