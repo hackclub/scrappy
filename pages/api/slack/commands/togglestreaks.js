@@ -13,8 +13,8 @@ export default async (req, res) => {
   else res.status(200).end()
   console.log('Running togglestreaks.js')
 
-  // Usage: /scrappy-togglestreaks to toggle status,
-  // /scrappy-togglestreaks all to opt out of streaks completely
+  // /scrappy-togglestreaks: toggle status
+  // /scrappy-togglestreaks all: opt out of streaks completely
 
   const { user_id, response_url, text } = req.body
   const args = text?.split(' ')
@@ -28,7 +28,7 @@ export default async (req, res) => {
     'Display Streak': !display,
     'Streaks Toggled Off': !streaksToggledOff
   })
-  if (all) {
+  if (toggleAllStreaks) {
     await sendCommandResponse(
       response_url,
       streaksToggledOff
