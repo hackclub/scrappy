@@ -18,8 +18,8 @@ export default async (req, res) => {
 
   const { user_id, response_url, text } = req.body
   const args = text?.split(' ')
-  const all = args[args[0] === 'togglestreaks' ? 1 : 0]
-  const toggleAllStreaks = all && all === 'all'
+  const allArg = args[args[0] === 'togglestreaks' ? 1 : 0]
+  const toggleAllStreaks = allArg && allArg === 'all'
   const record = await getUserRecord(user_id)
   const display = record.fields['Display Streak']
   const streaksToggledOff = record.fields['Streaks Toggled Off']
