@@ -57,9 +57,9 @@ export default async (req, res) => {
 }
 
 const shouldReset = (now, createdDate) => {
-  if (createdDate == 30) {
+  if (createdDate == 30 && (now.getDate() === 1 || now.getDate() === 2)) {
     return now.getDate() - createdDate > -29
-  } else if (createdDate == 31) {
+  } else if (createdDate == 31 && (now.getDate() === 1 || now.getDate() === 2)) {
     return now.getDate() - createdDate > -30
   } else {
     return now.getDate() - createdDate > 1
