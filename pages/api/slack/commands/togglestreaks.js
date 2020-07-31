@@ -39,8 +39,8 @@ export default async (req, res) => {
     await sendCommandResponse(
       response_url,
       display
-        ? t('messages.streak.toggle.status.invisible')
-        : t('messages.streak.toggle.status.visible')
+        ? t('messages.streak.toggle.status.visible')
+        : t('messages.streak.toggle.status.invisible')
     )
   }
   await displayStreaks(user_id, record.fields['Streak Count'])
