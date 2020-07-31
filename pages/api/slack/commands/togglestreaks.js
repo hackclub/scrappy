@@ -31,7 +31,7 @@ export default async (req, res) => {
   if (toggleAllStreaks) {
     await Promise.all([
       accountsTable.update(record.id, {
-        'Display Streak': streaksToggledOff ? false : !display,
+        'Display Streak': streaksToggledOff ? false : display,
         'Streaks Toggled Off': !streaksToggledOff
       }),
       sendCommandResponse(
