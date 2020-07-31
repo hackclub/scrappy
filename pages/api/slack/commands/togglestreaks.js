@@ -32,15 +32,15 @@ export default async (req, res) => {
     await sendCommandResponse(
       response_url,
       streaksToggledOff
-        ? t('messages.streak.toggle.all.optout')
-        : t('messages.streak.toggle.all.optin')
+        ? t('messages.streak.toggle.all.optin')
+        : t('messages.streak.toggle.all.optout')
     )
   } else {
     await sendCommandResponse(
       response_url,
       display
-        ? t('messages.streak.toggle.status.visible')
-        : t('messages.streak.toggle.status.invisible')
+        ? t('messages.streak.toggle.status.invisible')
+        : t('messages.streak.toggle.status.visible')
     )
   }
   await displayStreaks(user_id, record.fields['Streak Count'])
