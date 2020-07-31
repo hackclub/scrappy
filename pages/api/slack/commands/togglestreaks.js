@@ -24,14 +24,10 @@ export default async (req, res) => {
   const display = record.fields['Display Streak']
   const streaksToggledOff = record.fields['Streaks Toggled Off']
 
-  await accountsTable.update(record.id, {
-    'Display Streak': toggleAllStreaks ? display : !display,
-    'Streaks Toggled Off': toggleAllStreaks ? !streaksToggledOff : streaksToggledOff
-  })
   if (toggleAllStreaks) {
     await Promise.all([
       accountsTable.update(record.id, {
-        'Display Streak': streaksToggledOff ? false : display,
+        'Display Streak': !streaksToggledOff,
         'Streaks Toggled Off': !streaksToggledOff
       }),
       sendCommandResponse(
