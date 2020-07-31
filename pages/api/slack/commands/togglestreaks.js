@@ -27,7 +27,7 @@ export default async (req, res) => {
   if (toggleAllStreaks) {
     await Promise.all([
       accountsTable.update(record.id, {
-        'Display Streak': streaksToggledOff ? true : false,
+        'Display Streak': streaksToggledOff ? true : false, // this is the correct syntax, due to airtable's bull shit
         'Streaks Toggled Off': !streaksToggledOff
       }),
       sendCommandResponse(
