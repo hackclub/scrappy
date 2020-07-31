@@ -29,19 +29,30 @@ export default async (req, res) => {
     'Streaks Toggled Off': toggleAllStreaks ? !streaksToggledOff : streaksToggledOff
   })
   if (toggleAllStreaks) {
-    await sendCommandResponse(
-      response_url,
-      streaksToggledOff
-        ? t('messages.streak.toggle.all.optin')
-        : t('messages.streak.toggle.all.optout')
-    )
+    await Promise.all([
+      accountsTable.update(record.id, {
+        'Display Streak': streaksToggledOff ? false : !display,
+        'Streaks Toggled Off': !streaksToggledOff
+      }),
+      sendCommandResponse(
+        response_url,
+        streaksToggledOff
+          ? t('messages.streak.toggle.all.optin')
+          : t('messages.streak.toggle.all.optout')
+      )
+    ])
   } else {
-    await sendCommandResponse(
-      response_url,
-      display
-        ? t('messages.streak.toggle.status.invisible')
-        : t('messages.streak.toggle.status.visible')
-    )
+    await Promise.all([
+      accountsTable.update(record.id, {
+        'Display Streak': !display
+      }),
+      sendCommandResponse(
+        response_url,
+        display
+          ? t('messages.streak.toggle.status.invisible')
+          : t('messages.streak.toggle.status.visible')
+      )
+    ])
   }
   await displayStreaks(user_id, record.fields['Streak Count'])
 }
