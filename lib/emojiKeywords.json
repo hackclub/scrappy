@@ -55,5 +55,13 @@
   "swiftui": "swift",
   "swift ui": "swift",
   "golang": "gopher",
-  "rust": "rustlang"
+  "rust": "rustlang",
+  "deno": "deno",
+  "blender": "blender",
+  "salad": "green_salad",
+  "adobe": "adobe",
+  "photoshop": "photoshop",
+  "storm": "thunder_cloud_and_rain",
+  "rain": "rain_cloud",
+  "linux": "linux"
 }
