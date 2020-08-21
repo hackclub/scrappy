@@ -155,6 +155,12 @@ messages:
       - |
         Hmmmmm :thonkspin: I couldn't fetch your image for some reason. I'm going to try to upload your image another way. You may receive a DM from Slackbot—go ahead and ignore it. If you don't see your image live on your Scrapbook, please let <@U4QAK9SRW> know.
     'zach': Zaaaaaaaaaaaaaaaaaaaach!!!!!!!!!!!!!!! I just tried to update your streak, but <@U4QAK9SRW> reinstalled me with his Slack tokens at some point, so it didn\'t work. When you get a chance, reinstall me with your tokens and update the env variables in the Heroku deployment. Then toggle \`/scrappy displaystreaks\` off and on again.
+    promise:
+      - |
+        NOOOOOOOOOOOOOOOOO something went wrong!!!! <@U4QAK9SRW> fix it please
+        ```
+        ${this.err}
+        ```
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
