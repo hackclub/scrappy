@@ -10,25 +10,19 @@ import {
 } from '../../../../lib/api-utils'
 import Bottleneck from 'bottleneck'
 
-const limiter = new Bottleneck({
-  maxConcurrent: 1
-})
+const limiter = new Bottleneck({ maxConcurrent: 1 })
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
+  if (unverifiedRequest(req)) {
     return res.status(400).send('Unverified Slack request!')
-  else res.status(200).end()
-  //console.log(req.body)
+  } else {
+    res.status(200).end()
+  }
   const { item, user, reaction } = req.body.event
   console.log(item, user, reaction)
 
   if (reaction !== 'summer-of-making' && user === 'U015D6A36AG') return
 
-  /*const blacklist = ['rocket', 'clap', 'fire', 'party-dinosaur', 'sparkles', 'parrot', 'yay', 'exploding_head', 'sauropod', 'tada', 'zap', 'summer-of-making', 'beachball']
-  if (blacklist.includes(reaction)) {
-    console.log('not including default emoji')
-    return
-  }*/
   const startTS = Date.now()
   limiter.schedule(async () => {
     console.log(startTS, 'Starting a reaction update')
@@ -37,7 +31,7 @@ export default async (req, res) => {
       console.log('Cannot get user record', err)
     )
 
-    const ts = item.ts
+    const { ts } = item
     const update = (
       await updatesTable
         .read({
