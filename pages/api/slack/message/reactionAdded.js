@@ -6,9 +6,14 @@ import {
   getUserRecord,
   getReactionRecord,
   updateExists,
-  emojiExists
+  emojiExists,
+  react,
+  getMessage
 } from '../../../../lib/api-utils'
 import Bottleneck from 'bottleneck'
+import { WebClient } from '@slack/web-api'
+
+const slack = new WebClient(process.env.SLACK_BOT_TOKEN)
 
 const limiter = new Bottleneck({ maxConcurrent: 1 })
 
@@ -18,10 +23,121 @@ export default async (req, res) => {
   } else {
     res.status(200).end()
   }
-  const { item, user, reaction } = req.body.event
+  const { item, user, reaction, item_user } = req.body.event
   console.log(item, user, reaction)
 
+  const { channel, ts } = item
+
   if (reaction !== 'summer-of-making' && user === 'U015D6A36AG') return
+
+  // If someone reacted with a Scrappy emoji in a non-#scrapbook channel, then maybe upload it.
+  if (
+    (reaction === 'scrappy' || reaction === 'scrappyparrot') &&
+    channel !== process.env.CHANNEL
+  ) {
+    if (item_user != user) {
+      // If the reacter didn't post the original message, then show them a friendly message
+      slack.chat.postEphemeral({
+        channel,
+        user,
+        text: `Sorry, but only the original message poster can react with :${reaction}: to upload to Scrapbook.`
+      })
+    } else {
+      const message = await getMessage(ts, channel)
+
+      if (!message) return
+
+      if (!message.files || message.files.length == 0) {
+        slack.chat.postEphemeral({
+          channel,
+          user,
+          text: `Hmm... :thinking_face: I don't detect any files in this message.`
+        })
+        return
+      }
+
+      let attachments = []
+      let videos = []
+      let videoPlaybackIds = []
+
+      await Promise.all([
+        react('add', channel, ts, 'beachball'),
+        ...message.files.map(async (file) => {
+          const publicUrl = await getPublicFileUrl(
+            file.url_private,
+            channel,
+            user
+          )
+          if (!publicUrl) {
+            await Promise.all([
+              react('remove', channel, ts, 'beachball'),
+              slack.chat.postEphemeral({
+                channel,
+                user,
+                text: t('messages.errors.filetype')
+              })
+            ])
+          } else if (publicUrl.url === 'heic') {
+            await Promise.all([
+              react('remove', channel, ts, 'beachball'),
+              slack.chat.postEphemeral({
+                channel,
+                user,
+                text: t('messages.errors.heic')
+              })
+            ])
+          } else if (publicUrl.url === 'big boy') {
+            await Promise.all([
+              react('remove', channel, ts, 'beachball'),
+              reply(channel, ts, t('messages.errors.bigimage')),
+              slack.chat.postEphemeral({
+                channel,
+                user,
+                text: t('messages.errors.bigimage')
+              })
+            ])
+          }
+          console.log('public url', publicUrl.url)
+          attachments.push({ url: publicUrl.url })
+          if (publicUrl.muxId) {
+            videos.push(publicUrl.muxId)
+            videoPlaybackIds.push(publicUrl.muxPlaybackId)
+          }
+        })
+      ])
+      let userRecord = await getUserRecord(user)
+      const fullSlackMember = userRecord.fields['Full Slack Member?']
+      if (!fullSlackMember) {
+        const fullMember = await isFullMember(user)
+        if (fullMember) {
+          accountsTable.update(userRecord.id, { 'Full Slack Member?': true })
+        }
+      }
+
+      const date = new Date().toLocaleString('en-US', {
+        timeZone: userRecord.fields['Timezone']
+      })
+      const convertedDate = new Date(date).toISOString()
+      const messageText = await formatText(message.text)
+      console.log(convertedDate)
+
+      await updatesTable.create({
+        'Slack Account': [userRecord.id],
+        'Post Time': convertedDate,
+        'Message Timestamp': ts,
+        Text: messageText,
+        Attachments: attachments,
+        'Mux Asset IDs': videos.toString(),
+        'Mux Playback IDs': videoPlaybackIds.toString(),
+        'Is Large Video': attachments.some(
+          (attachment) => attachment.url === 'https://i.imgur.com/UkXMexG.mp4'
+        )
+      })
+
+      incrementStreakCount(user, channel, messageText, ts)
+    }
+    return
+  }
 
   const startTS = Date.now()
   limiter.schedule(async () => {
