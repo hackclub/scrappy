@@ -12,7 +12,8 @@ import {
   t,
   getPublicFileUrl,
   incrementStreakCount,
-  formatText
+  formatText,
+  isFullMember
 } from '../../../../lib/api-utils'
 import Bottleneck from 'bottleneck'
 import { WebClient } from '@slack/web-api'
@@ -70,7 +71,7 @@ export default async (req, res) => {
           const publicUrl = await getPublicFileUrl(
             file.url_private,
             channel,
-            item_user
+            user
           )
           if (!publicUrl) {
             await Promise.all([
