@@ -34,8 +34,7 @@ export default async (req, res) => {
   ) {
     method = 'css'
   } else if (
-    event?.message?.subtype === 'tombstone' &&
-    event.channel == process.env.CHANNEL
+    event?.message?.subtype === 'tombstone'
   ) {
     method = 'deleted'
   } else if (

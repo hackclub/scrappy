@@ -8,7 +8,8 @@ import {
   accountsTable,
   displayStreaks,
   shouldUpdateStreak,
-  unverifiedRequest
+  unverifiedRequest,
+  tsHasScrap
 } from '../../../../lib/api-utils'
 
 const deleteThreadedMessages = async (ts, channel, user) => {
@@ -59,7 +60,7 @@ export default async (req, res) => {
   const { channel, message, previous_message, thread_ts } = req.body.event
 
   const ts = thread_ts || message.thread_ts
-  if (ts) {
+  if (ts && tsHasScrap(ts)) {
     await Promise.all([
       react('add', channel, ts, 'beachball'),
       deleteScrap(ts),
