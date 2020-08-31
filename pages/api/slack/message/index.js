@@ -57,8 +57,7 @@ export default async (req, res) => {
   ) {
     method = 'noFile'
   } else if (
-    event.subtype === 'message_changed' &&
-    event.channel == process.env.CHANNEL
+    event.subtype === 'message_changed'
   ) {
     method = 'updated'
   } else if (
