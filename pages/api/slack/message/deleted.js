@@ -60,7 +60,8 @@ export default async (req, res) => {
   const { channel, message, previous_message, thread_ts } = req.body.event
 
   const ts = thread_ts || message.thread_ts
-  if (ts && tsHasScrap(ts)) {
+  const hasScrap = await tsHasScrap(ts)
+  if (ts && hasScrap) {
     await Promise.all([
       react('add', channel, ts, 'beachball'),
       deleteScrap(ts),
