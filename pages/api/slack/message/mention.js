@@ -3,6 +3,7 @@ import { reply, t, unverifiedRequest } from "../../../../lib/api-utils"
 const wordList = [
   'fuck',
   'dumb',
+  'suck',
   'stupid',
   'crap',
   'crappy'
