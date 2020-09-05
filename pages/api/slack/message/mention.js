@@ -6,7 +6,9 @@ const wordList = [
   'suck',
   'stupid',
   'crap',
-  'crappy'
+  'crappy',
+  'trash',
+  'trashy'
 ]
 
 const messageContainsWord = (msg) => (
