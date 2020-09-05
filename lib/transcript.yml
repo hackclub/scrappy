@@ -174,7 +174,7 @@ messages:
     - asdfl kshfd kjs aighsdu AIU SYDGIUAYSD Y76R42 DS 723R DSFJKS 287RI7SD
     - cGxlYXNlIGhlbHAgbWU=
     - you mentioned me but i dropped out of elementary school because i wanted to eat trash so i can't read your message
-      - hiiiiiiiiiii hELLLOOOOOOOOOOOO
+    - hiiiiiiiiiii hELLLOOOOOOOOOOOO
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
