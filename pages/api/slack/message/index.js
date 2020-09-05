@@ -72,6 +72,8 @@ export default async (req, res) => {
     event.item.channel == process.env.CHANNEL
   ) {
     method = 'reactionRemoved'
+  } else if (event?.message?.text.includes('<@U015D6A36AG>')) {
+    method = 'mention'
   } else {
     return
   }
