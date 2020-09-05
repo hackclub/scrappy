@@ -72,7 +72,7 @@ export default async (req, res) => {
     event.item.channel == process.env.CHANNEL
   ) {
     method = 'reactionRemoved'
-  } else if (event?.message?.text.includes('<@U015D6A36AG>')) {
+  } else if (event?.message?.text.includes('<@U015D6A36AG>') || event?.message?.text.includes('scrappy')) {
     method = 'mention'
   } else {
     return
