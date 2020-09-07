@@ -162,17 +162,26 @@ messages:
         ${this.err}
         ```
   mentionKeyword:
-    - no u
-    - :()
-    - aosidjghlkj;LKasASDLKGJ AASDFLKJ LAKJSHDF ;OIHA GKLJRWHG AJSDGH
-    - no u !!!!!!!!!!
-    - you are SO MEAN OMG. i am going to delete your account in airtable
-    - take it back or i will ping staff and ask them to ban you from the slack
-    - oh yeah?? actually i think the same abotu you're mom. pwned
-    - Why did you do this to me! You traitor :(
-    - Gimme your address, i wanna ship you some trash
+    - <@${this.user}> no u 
+    - <@${this.user}> :()
+    - <@${this.user}> aosidjghlkj;LKasASDLKGJ AASDFLKJ LAKJSHDF ;OIHA GKLJRWHG AJSDGH
+    - <@${this.user}> no u ${'!'.repeat(Math.floor(Math.random() * 7))}
+    - <@${this.user}> you are SO MEAN OMG. i am going to delete your account in airtable
+    - take it back <@${this.user}>, or i will ping staff and ask them to ban you from the slack
+    - oh yeah <@${this.user}>?? actually i think the same abotu you're mom. pwned
+    - <@${this.user}> BULLLYYY :((((
+    - <@${this.user}> u hurt me. Go to your room and think about what you've done >:((
+    - <@${this.user}> https://cloud-r8zkxq6k0.vercel.app/image.png
+    - <@${this.user}> 01110011 01100011 01110010 01100101 01110111 00100000 01111001 01101111 01110101
+    - here <@${this.user}>, eat some dog food and rethink your actions
+    - <@${this.user}> i don't think thats very nice!!!!!!!!!!!!!!!
+    - <@${this.user}> OMG SHUT YOUR MOUTH I DO SO MUCH FOR YOU AND THIS HOW YOU TREAT MEJKMMEMEEEEE?????!!!?!?
+    - <@${this.user}> should i go tell mummy about that time?
+    - <@${this.user}> Why did you do this to me! You traitor :(
+    - <@${this.user}> Gimme your address, i wanna ship you some trash
   mention:
     - this message can't stop me because i can't read!
+    - you forgot the magical word....
     - WEEEEEEEEEEEEEEEEEEE
     - (gobbling down trash) what???????????????? i am busy
     - asdfl kshfd kjs aighsdu AIU SYDGIUAYSD Y76R42 DS 723R DSFJKS 287RI7SD
@@ -181,6 +190,9 @@ messages:
     - hiiiiiiiiiii hELLLOOOOOOOOOOOO
     - I love you 3<
     - You are the best
+    - no. 3>
+    - 01100111 01101111 00100000 01100001 01110111 01100001 01111001
+    - leave me alone I'm trying to finish eating the rest of my trash.
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
