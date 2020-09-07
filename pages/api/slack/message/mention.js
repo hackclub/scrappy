@@ -26,7 +26,7 @@ export default async (req, res) => {
 
   const containsWord = await messageContainsWord(text)
   if (containsWord) {
-    reply(channel, thread_ts || ts, `<@${user}> ${t('messages.mentionKeyword')}`)
+    reply(channel, thread_ts || ts, t('messages.mentionKeyword', {user}))
   } else {
     reply(channel, thread_ts || ts, t('messages.mention'))
   }
