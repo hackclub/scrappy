@@ -169,20 +169,18 @@ messages:
     - you are SO MEAN OMG. i am going to delete your account in airtable
     - take it back or i will ping staff and ask them to ban you from the slack
     - oh yeah?? actually i think the same abotu you're mom. pwned
+    - Why did you do this to me! You traitor :(
+    - Gimme your address, i wanna ship you some trash
   mention:
     - this message can't stop me because i can't read!
-    - Why did you do this to me! You traitor :(
-    - Thank You Very Much
-    - I love you :heart:
-    - You are the best
-    - Gimme your address, i wanna ship you some trash
-    - Did you know? Me neither...
     - WEEEEEEEEEEEEEEEEEEE
     - (gobbling down trash) what???????????????? i am busy
     - asdfl kshfd kjs aighsdu AIU SYDGIUAYSD Y76R42 DS 723R DSFJKS 287RI7SD
     - cGxlYXNlIGhlbHAgbWU=
     - you mentioned me but i dropped out of elementary school because i wanted to eat trash so i can't read your message
     - hiiiiiiiiiii hELLLOOOOOOOOOOOO
+    - I love you 3<
+    - You are the best
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
