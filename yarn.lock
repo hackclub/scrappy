@@ -3523,6 +3523,22 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
+heic-convert@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/heic-convert/-/heic-convert-1.2.3.tgz#ae34ae2a962c64f6be53bb0ef0ab6124e1ec87c3"
+  integrity sha512-wzt0jCoD0d5Ek/cwU65pqRcP25ZKiBlcZ3LCa0USpbtrrfsnsVFLXzrWcHZLnINoVYXRvoIiGjVw6aKvSKaWCQ==
+  dependencies:
+    heic-decode "^1.1.0"
+    jpeg-js "^0.4.1"
+    pngjs "^3.4.0"
+
+heic-decode@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/heic-decode/-/heic-decode-1.1.1.tgz#7b8c2e5a4b7a7bc1c8eb754ac35ed77be44c5a20"
+  integrity sha512-0KKYaXk2QSZrQIp4UKaNt/tyK8UGZkdfTzZRzny+cyYbNPJXRicaLCphMOuaBxHpHvCBTqnl0rM0qQ+rN98gJg==
+  dependencies:
+    libheif-js "^1.6.1"
+
 hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
@@ -4010,6 +4026,11 @@ jest-worker@24.9.0:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
 
+jpeg-js@^0.4.1:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.4.2.tgz#8b345b1ae4abde64c2da2fe67ea216a114ac279d"
+  integrity sha512-+az2gi/hvex7eLTMTlbRLOhH6P6WFdk2ITI8HJsaH2VqYO0I594zXSYEP+tf4FW+8Cy68ScDXoAsQdyQanv3sw==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -4183,6 +4204,11 @@ levenary@^1.1.1:
   integrity sha512-mkAdOIt79FD6irqjYSs4rdbnlT5vRonMEvBVPVb3XmevfS8kgRXwfes0dhPdEtzTWD/1eNE/Bm/G1iRt6DcnQQ==
   dependencies:
     leven "^3.1.0"
+
+libheif-js@^1.6.1:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/libheif-js/-/libheif-js-1.8.0.tgz#e3b069dda9b8110786a9057b05cc976103d74f33"
+  integrity sha512-t22rKr3DzJnqB5IimfzSOFeeyeBP/CKR0O5SRG/9noaTIKYDJ1ROEV3OzOHcN3MZImx8Z1Kz4D5u6p0I3qz8vQ==
 
 loader-runner@^2.4.0:
   version "2.4.0"
@@ -5144,6 +5170,11 @@ platform@1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.3.tgz#646c77011899870b6a0903e75e997e8e51da7461"
   integrity sha1-ZGx3ARiZhwtqCQPnXpl+jlHadGE=
+
+pngjs@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.4.0.tgz#99ca7d725965fb655814eaf65f38f12bbdbf555f"
+  integrity sha512-NCrCHhWmnQklfH4MtJMRjZ2a8c80qXeMlQMv2uVp9ISJMTt562SbGd6n2oq0PaPgKm7Z6pL9E2UlLIhC+SHL3w==
 
 pnp-webpack-plugin@1.6.4:
   version "1.6.4"
