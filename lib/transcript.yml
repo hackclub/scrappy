@@ -162,12 +162,10 @@ messages:
         ${this.err}
         ```
     anywhere:
-      op:
-        - |
-          Sorry, but only the original message poster can react with ${reaction} to upload to Scrapbook.
-      files:
-        - |
-          Hmm... :thonk: I don't detect any files in this message.
+      op: |
+        Sorry, but only the original message poster can react with :${this.reaction}: to upload to Scrapbook.
+      files: |
+        Hmm... :thonk: I don't detect any files in this message.
   mentionKeyword:
     - <@${this.user}> no u 
     - <@${this.user}> :()
