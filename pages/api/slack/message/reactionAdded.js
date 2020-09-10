@@ -13,7 +13,8 @@ import {
   getPublicFileUrl,
   incrementStreakCount,
   formatText,
-  isFullMember
+  isFullMember,
+  createPost
 } from '../../../../lib/api-utils'
 import Bottleneck from 'bottleneck'
 import { WebClient } from '@slack/web-api'
@@ -60,87 +61,7 @@ export default async (req, res) => {
         })
         return
       }
-
-      let attachments = []
-      let videos = []
-      let videoPlaybackIds = []
-
-      await Promise.all([
-        react('add', channel, ts, 'beachball'),
-        ...message.files.map(async (file) => {
-          const publicUrl = await getPublicFileUrl(
-            file.url_private,
-            channel,
-            user
-          )
-          if (!publicUrl) {
-            await Promise.all([
-              react('remove', channel, ts, 'beachball'),
-              slack.chat.postEphemeral({
-                channel,
-                user,
-                text: t('messages.errors.filetype')
-              })
-            ])
-          } else if (publicUrl.url === 'heic') {
-            await Promise.all([
-              react('remove', channel, ts, 'beachball'),
-              slack.chat.postEphemeral({
-                channel,
-                user,
-                text: t('messages.errors.heic')
-              })
-            ])
-          } else if (publicUrl.url === 'big boy') {
-            await Promise.all([
-              react('remove', channel, ts, 'beachball'),
-              reply(channel, ts, t('messages.errors.bigimage')),
-              slack.chat.postEphemeral({
-                channel,
-                user,
-                text: t('messages.errors.bigimage')
-              })
-            ])
-          }
-          console.log('public url', publicUrl.url)
-          attachments.push({ url: publicUrl.url })
-          if (publicUrl.muxId) {
-            videos.push(publicUrl.muxId)
-            videoPlaybackIds.push(publicUrl.muxPlaybackId)
-          }
-        })
-      ])
-      let userRecord = await getUserRecord(user)
-      const fullSlackMember = userRecord.fields['Full Slack Member?']
-      if (!fullSlackMember) {
-        const fullMember = await isFullMember(user)
-        if (fullMember) {
-          accountsTable.update(userRecord.id, { 'Full Slack Member?': true })
-        }
-      }
-
-      const date = new Date().toLocaleString('en-US', {
-        timeZone: userRecord.fields['Timezone']
-      })
-      const convertedDate = new Date(date).toISOString()
-      const messageText = await formatText(message.text)
-      console.log(convertedDate)
-
-      await updatesTable.create({
-        'Slack Account': [userRecord.id],
-        'Post Time': convertedDate,
-        'Message Timestamp': ts,
-        Text: messageText,
-        Attachments: attachments,
-        'Mux Asset IDs': videos.toString(),
-        'Mux Playback IDs': videoPlaybackIds.toString(),
-        'Is Large Video': attachments.some(
-          (attachment) => attachment.url === 'https://i.imgur.com/UkXMexG.mp4'
-        ),
-        'Channel': channel
-      })
-
-      incrementStreakCount(user, channel, messageText, ts)
+      await createPost(message.files, channel, ts, user, message.text)
     }
     return
   }
