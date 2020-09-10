@@ -21,7 +21,8 @@ import {
   postEphemeral,
   t,
   unverifiedRequest,
-  isFullMember
+  isFullMember,
+  createPost
 } from '../../../../lib/api-utils'
 
 export default async (req, res) => {
@@ -32,72 +33,7 @@ export default async (req, res) => {
 
   if (thread_ts) return res.json({ ok: true })
 
-  let attachments = []
-  let videos = []
-  let videoPlaybackIds = []
-
-  await Promise.all([
-    react('add', channel, ts, 'beachball'),
-    ...files.map(async (file) => {
-      const publicUrl = await getPublicFileUrl(file.url_private, channel, user)
-      if (!publicUrl) {
-        await Promise.all([
-          react('remove', channel, ts, 'beachball'),
-          reply(channel, ts, t('messages.errors.filetype')),
-          react('add', channel, ts, 'x')
-        ])
-      } else if (publicUrl.url === 'heic') {
-        await Promise.all([
-          react('remove', channel, ts, 'beachball'),
-          reply(channel, ts, t('messages.errors.heic')),
-          react('add', channel, ts, 'x')
-        ])
-      } else if (publicUrl.url === 'big boy') {
-        await Promise.all([
-          react('remove', channel, ts, 'beachball'),
-          reply(channel, ts, t('messages.errors.bigimage')),
-          react('add', channel, ts, 'x')
-        ])
-      }
-      console.log('public url', publicUrl.url)
-      attachments.push({ url: publicUrl.url })
-      if (publicUrl.muxId) {
-        videos.push(publicUrl.muxId)
-        videoPlaybackIds.push(publicUrl.muxPlaybackId)
-      }
-    })
-  ])
-  let userRecord = await getUserRecord(user)
-  const fullSlackMember = userRecord.fields['Full Slack Member?']
-  if (!fullSlackMember) {
-    const fullMember = await isFullMember(user)
-    if (fullMember) {
-      accountsTable.update(userRecord.id, { 'Full Slack Member?': true })
-    }
-  }
-
-  const date = new Date().toLocaleString('en-US', {
-    timeZone: userRecord.fields['Timezone']
-  })
-  const convertedDate = new Date(date).toISOString()
-  const message = await formatText(text)
-  console.log(convertedDate)
-
-  await updatesTable.create({
-    'Slack Account': [userRecord.id],
-    'Post Time': convertedDate,
-    'Message Timestamp': ts,
-    Text: message,
-    Attachments: attachments,
-    'Mux Asset IDs': videos.toString(),
-    'Mux Playback IDs': videoPlaybackIds.toString(),
-    'Is Large Video': attachments.some(
-      (attachment) => attachment.url === 'https://i.imgur.com/UkXMexG.mp4'
-    ),
-    'Channel': channel
-  })
-
-  incrementStreakCount(user, channel, message, ts)
+  await createPost(files, channel, ts, user, text)
 
   return res.json({ ok: true })
 }

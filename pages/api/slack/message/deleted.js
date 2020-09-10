@@ -48,8 +48,8 @@ const deleteThreadedMessages = async (ts, channel, user) => {
     })
     displayStreaks(user, updatedStreakCount)
   }
-  fetchProfile(userRecord.fields['Username'])
   postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user)
+  await fetchProfile(userRecord.fields['Username'])
 }
 
 export default async (req, res) => {
@@ -63,13 +63,13 @@ export default async (req, res) => {
   const hasScrap = await tsHasScrap(ts)
   if (ts && hasScrap) {
     await Promise.all([
+      await react('remove', channel, ts, 'beachball'),
+      await react('add', channel, ts, 'boom')
+    ])
+    await Promise.all([
       react('add', channel, ts, 'beachball'),
       deleteScrap(ts),
       deleteThreadedMessages(ts, channel, previous_message.user)
-    ])
-    await Promise.all([
-      await react('remove', channel, ts, 'beachball'),
-      await react('add', channel, ts, 'boom')
     ])
   } else {
     console.log('SHIT')
