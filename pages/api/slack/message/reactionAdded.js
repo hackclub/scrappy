@@ -14,12 +14,10 @@ import {
   incrementStreakCount,
   formatText,
   isFullMember,
-  createPost
+  createPost,
+  postEphemeral
 } from '../../../../lib/api-utils'
 import Bottleneck from 'bottleneck'
-import { WebClient } from '@slack/web-api'
-
-const slack = new WebClient(process.env.SLACK_BOT_TOKEN)
 
 const limiter = new Bottleneck({ maxConcurrent: 1 })
 
@@ -43,22 +41,14 @@ export default async (req, res) => {
   ) {
     if (item_user != user) {
       // If the reacter didn't post the original message, then show them a friendly message
-      slack.chat.postEphemeral({
-        channel,
-        user,
-        text: `Sorry, but only the original message poster can react with :${reaction}: to upload to Scrapbook.`
-      })
+      postEphemeral(channel, t('messages.errors.anywhere.op', { reaction }), user)
     } else {
       const message = await getMessage(ts, channel)
 
       if (!message) return
 
       if (!message.files || message.files.length == 0) {
-        slack.chat.postEphemeral({
-          channel,
-          user,
-          text: `Hmm... :thinking_face: I don't detect any files in this message.`
-        })
+        postEphemeral(channel, t('messages.errors.anywhere.files'), user)
         return
       }
       await createPost(message.files, channel, ts, user, message.text)
