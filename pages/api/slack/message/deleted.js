@@ -43,10 +43,12 @@ const deleteThreadedMessages = async (ts, channel, user) => {
   const shouldUpdate = await shouldUpdateStreak(user, false)
   if (shouldUpdate) {
     const updatedStreakCount = userRecord.fields['Streak Count'] - 1
-    accountsTable.update(userRecord.id, {
-      'Streak Count': updatedStreakCount
-    })
-    displayStreaks(user, updatedStreakCount)
+    if (updatedStreakCount >= 0) {
+      accountsTable.update(userRecord.id, {
+        'Streak Count': updatedStreakCount
+      })
+      displayStreaks(user, updatedStreakCount)
+    }
   }
   postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user)
   await fetchProfile(userRecord.fields['Username'])
