@@ -12,7 +12,7 @@ import {
 export default async (req, res) => {
   res.status(200).end()
   const users = await accountsTable.read({
-    filterByFormula: `{Updates} != ''`
+    filterByFormula: `{Streak Count} != 0`
   })
   users.forEach(async (user) => {
     await timeout(500)
