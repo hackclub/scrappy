@@ -8,6 +8,7 @@ messages:
     - \`/scrappy-open\`: opens your scrapbook (or another user's if you specify a username)
     - \`/scrappy-setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
     - \`/scrappy-setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
+    - \`/scrappy-setusername\`: change your profile username
     - \`/scrappy-setsound\`: links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
     - \`/scrappy-webring\`: adds or removes someone to your webring
 
