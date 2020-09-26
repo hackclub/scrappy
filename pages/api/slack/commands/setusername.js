@@ -15,15 +15,21 @@ export default async (req, res) => {
   const { text, user_id, response_url } = req.body
   const args = text.split(' ')
   let username = args[0] === 'setusername' ? args[1] : args[0]
-  username = username?.substring(1, username.length - 1).replace(" ", "_")
+  username = username?.substring(1, username.length - 1).replace(' ', '_')
 
   const userRecord = await getUserRecord(user_id)
-  if (!username) {
+
+  if (
+    userRecord.fields['Last Username Updated Time'] >
+    new Date(Date.now() - 86400 * 1000).toISOString()
+  ) {
+    sendCommandResponse(response_url, t('messages.username.time'))
+  } else if (!username) {
     sendCommandResponse(response_url, t('messages.username.noargs'))
   } else {
     // update the account with the new audio
     await accountsTable.update(userRecord.id, {
-      'Username': username,
+      Username: username
     })
 
     // force a rebuild of their site
