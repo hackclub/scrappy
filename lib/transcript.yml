@@ -8,6 +8,7 @@ messages:
     - \`/scrappy-open\`: opens your scrapbook (or another user's if you specify a username)
     - \`/scrappy-setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
     - \`/scrappy-setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
+    - \`/scrappy-setusername\`: change your profile username
     - \`/scrappy-setsound\`: links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
     - \`/scrappy-webring\`: adds or removes someone to your webring
 
@@ -118,6 +119,10 @@ messages:
         - musical_score
         - guitar
         - musical_keyboard
+  username:
+    noargs: To change your scrapbook username, type \`/scrappy-setusername\` followed by your desired username.
+    set: Woohoo! Check out your new username at ${this.url}.
+    time: Sorry, but you can only update your username every 24 hours.
   domain:
     noargs: To link a custom domain to your scrapbook, type \`/scrappy setdomain\` followed by the domain or subdomain you want to link. e.g. \`/scrappy setdomain zachlatta.com\`. Then, create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
     overlimit: Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains.
