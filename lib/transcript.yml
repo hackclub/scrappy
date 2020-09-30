@@ -177,6 +177,8 @@ messages:
     - <@${this.user}> i don't think thats very nice!!!!!!!!!!!!!!!
     - <@${this.user}> OMG SHUT YOUR MOUTH I DO SO MUCH FOR YOU AND THIS HOW YOU TREAT MEJKMMEMEEEEE?????!!!?!?
     - <@${this.user}> should i go tell mummy about that time?
+    - <@${this.user}> OMG Lemme tell zach to ban you.
+    - <@${this.user}> Get lost or I will reset your streak...
     - <@${this.user}> Why did you do this to me! You traitor :(
     - <@${this.user}> Gimme your address, i wanna ship you some trash
   mention:
@@ -190,6 +192,7 @@ messages:
     - hiiiiiiiiiii hELLLOOOOOOOOOOOO
     - I love you 3<
     - You are the best
+    - brr brr brr scrappy is down rn. try again later
     - no. 3>
     - 01100111 01101111 00100000 01100001 01110111 01100001 01111001
     - leave me alone I'm trying to finish eating the rest of my trash.
@@ -199,6 +202,7 @@ startup:
     - polyethylene terephthalate
     - high-density polyethylene
     - polyvinyl chloride
+    - poop
     - low-density polyethylene
     - polypropylene
     - polystyrene
