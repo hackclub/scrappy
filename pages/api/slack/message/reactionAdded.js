@@ -32,7 +32,7 @@ export default async (req, res) => {
 
   const { channel, ts } = item
 
-  if (reaction !== 'summer-of-making' && user === 'U015D6A36AG') return
+  if (reaction !== 'aom' && user === 'U015D6A36AG') return
 
   // If someone reacted with a Scrappy emoji in a non-#scrapbook channel, then maybe upload it.
   if (
