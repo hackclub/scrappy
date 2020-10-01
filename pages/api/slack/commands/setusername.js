@@ -29,7 +29,8 @@ export default async (req, res) => {
   } else {
     // update the account with the new audio
     await accountsTable.update(userRecord.id, {
-      Username: username
+      Username: username,
+      Last Username Updated Time: Date.now()
     })
 
     // force a rebuild of their site
