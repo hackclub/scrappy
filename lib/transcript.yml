@@ -186,6 +186,12 @@ messages:
     - <@${this.user}> Get lost or I will reset your streak...
     - <@${this.user}> Why did you do this to me! You traitor :(
     - <@${this.user}> Gimme your address, i wanna ship you some trash
+    - <@${this.user}> imma tell my creator, they're an adminnnnn
+    - <@${this.user}> y u do this to me?
+    - <@${this.user}> this is bullyism, no u
+    - <@${this.user}> haha todays opposite day MWHAHAHAHAHAH
+    - <@${this.user}> u wanna go? right here rn
+    - <@${this.user}> help.\n<@${this.user}> i'm stuck.\n<@${this.user}> let me out.\n<@${this.user}> i'm alive.
   mention:
     - this message can't stop me because i can't read!
     - you forgot the magical word....
@@ -201,6 +207,11 @@ messages:
     - no. 3>
     - 01100111 01101111 00100000 01100001 01110111 01100001 01111001
     - leave me alone I'm trying to finish eating the rest of my trash.
+    - i'm buzzy trying to keep track of all these scrapbooksasdjlasaaousao
+    - 3 looks like a sideways butt haha
+    - garbador i chooooseeee youuuuuuuuuu
+    - cAn yOu lEt mE eAt mY tRaSh iN pEaCe?!÷™¡™¡˙ø∆b
+    - ļ̴̹̪̳͍̦̹̣̖̺̺͔͖̽̒̄̏̀e̴̢̯̗̱̳͇̦̩̤͚̟̎́̇͋̉̔͆͌͐̒̅̀̌̏ẗ̴̛̩̎͂̾̒̓̏͂̾̒ ̷̧̛͎̞̮͍̫͛̍̐̒̾̈́̿ṃ̸̓̋̐̍̍͠ȩ̴̙̼͓̺̌͐̔͊̓̆͆̀͝͝ ̶͙̟͎͛̀͑͂̕̚͘͜ỡ̵̗͚͍̞͇̲̟̭̬͉͉̌̒̆̊͑̋͛̕̕͜ͅṷ̴̧̡͎̬̈́̆͗̑̀͒̑͐͒̎̐̈́͝͝ṭ̷̢̙̮̭͎̘̥̩̳̟̖̞͆̈̇͑̇̂͛͛̆́͜͜
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
