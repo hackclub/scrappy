@@ -15,7 +15,7 @@ export default async (req, res) => {
   const { text, user_id, response_url } = req.body
   const args = text.split(' ')
   let username = args[0] === 'setusername' ? args[1] : args[0]
-  username = username?.substring(1, username.length - 1).replace(' ', '_')
+  username = username?.replace(' ', '_')
 
   const userRecord = await getUserRecord(user_id)
 
@@ -29,7 +29,8 @@ export default async (req, res) => {
   } else {
     // update the account with the new audio
     await accountsTable.update(userRecord.id, {
-      Username: username
+      Username: username,
+      'Last Username Updated Time': Date.now()
     })
 
     // force a rebuild of their site
