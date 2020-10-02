@@ -209,7 +209,7 @@ messages:
     - Hiya, I hope you're having a great day so far, <@${this.user}>! I need to go back to eating trash, but here's a virtual hug.
     - I love you, You love me, We're best friends like friends should be, With a great big hug, And a kiss from me to you, Won't you say you love me too.
     - System.out.println("Go away");
-  startup:
+startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
     - polyethylene terephthalate
