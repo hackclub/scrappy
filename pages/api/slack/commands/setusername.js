@@ -39,7 +39,7 @@ export default async (req, res) => {
     // hang tight while the rebuild happens before giving out the new link
     await sendCommandResponse(
       response_url,
-      t('messages.username.set', { url: 'https://scrapbook.hackclub.com/'+username })
+      t('messages.username.set', { url: `https://scrapbook.hackclub.com/${username}` })
     )
   }
   res.status(200).end()
