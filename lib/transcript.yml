@@ -192,6 +192,9 @@ messages:
     - <@${this.user}> haha todays opposite day MWHAHAHAHAHAH
     - <@${this.user}> u wanna go? right here rn
     - <@${this.user}> help.\n<@${this.user}> i'm stuck.\n<@${this.user}> let me out.\n<@${this.user}> i'm alive.
+    - Salutations <@${this.user}>, banker just transferred all of your GP to me! I'll be enjoying my new Hack Club sticker box, thank you very much.
+    - DAD! <@${this.user}> IS BEING MEAN TO ME AGAIN! CAN YOU BAN THEM?
+    - You think you can hurt me, <@${this.user}>? You can't <3.
   mention:
     - this message can't stop me because i can't read!
     - you forgot the magical word....
@@ -211,7 +214,12 @@ messages:
     - 3 looks like a sideways butt haha
     - garbador i chooooseeee youuuuuuuuuu
     - cAn yOu lEt mE eAt mY tRaSh iN pEaCe?!÷™¡™¡˙ø∆b
-    - ļ̴̹̪̳͍̦̹̣̖̺̺͔͖̽̒̄̏̀e̴̢̯̗̱̳͇̦̩̤͚̟̎́̇͋̉̔͆͌͐̒̅̀̌̏ẗ̴̛̩̎͂̾̒̓̏͂̾̒ ̷̧̛͎̞̮͍̫͛̍̐̒̾̈́̿ṃ̸̓̋̐̍̍͠ȩ̴̙̼͓̺̌͐̔͊̓̆͆̀͝͝ ̶͙̟͎͛̀͑͂̕̚͘͜ỡ̵̗͚͍̞͇̲̟̭̬͉͉̌̒̆̊͑̋͛̕̕͜ͅṷ̴̧̡͎̬̈́̆͗̑̀͒̑͐͒̎̐̈́͝͝ṭ̷̢̙̮̭͎̘̥̩̳̟̖̞͆̈̇͑̇̂͛͛̆́͜͜
+    - ļ̴̹̪̳͍̦̹̣̖̺̺͔͖̽̒̄̏̀e̴̢̯̗̱̳͇̦̩̤͚̟̎́̇͋̉̔͆͌͐̒̅̀̌̏ẗ̴̛̩̎͂̾̒̓̏͂̾̒ ̷̧̛͎̞̮͍̫͛̍̐̒̾̈́̿ṃ̸̓̋̐̍̍͠ȩ̴̙̼͓̺̌͐̔͊̓̆͆̀͝͝ ̶͙̟͎͛̀͑͂̕̚͘͜ỡ̵̗͚͍̞͇̲̟̭̬͉͉̌̒̆̊͑̋͛̕̕͜ͅṷ̴̧̡͎̬̈́̆͗̑̀͒̑͐͒̎̐̈́͝͝ṭ̷̢̙̮̭͎̘̥̩̳̟̖̞͆̈̇͑̇̂͛͛̆́͜͜
+    - So guys, in a way, people are like trash cans. When you stomp on them, their mouth opens up. *stomp*
+    - sus. very sus...
+    - Hiya, I hope you're having a great day so far, <@${this.user}>! I need to go back to eating trash, but here's a virtual hug.
+    - I love you, You love me, We're best friends like friends should be, With a great big hug, And a kiss from me to you, Won't you say you love me too.
+    - System.out.println("Go away");
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
