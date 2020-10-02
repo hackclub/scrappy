@@ -186,6 +186,9 @@ messages:
     - <@${this.user}> Get lost or I will reset your streak...
     - <@${this.user}> Why did you do this to me! You traitor :(
     - <@${this.user}> Gimme your address, i wanna ship you some trash
+    - Salutations <@${this.user}>, banker just transferred all of your GP to me! I'll be enjoying my new Hack Club sticker box, thank you very much.
+    - DAD! <@${this.user}> IS BEING MEAN TO ME AGAIN! CAN YOU BAN THEM?
+    - You think you can hurt me, <@${this.user}>? You can't <3.
   mention:
     - this message can't stop me because i can't read!
     - you forgot the magical word....
@@ -200,8 +203,13 @@ messages:
     - brr brr brr scrappy is down rn. try again later
     - no. 3>
     - 01100111 01101111 00100000 01100001 01110111 01100001 01111001
-    - leave me alone I'm trying to finish eating the rest of my trash.
-startup:
+    - leave me alone I'm trying to finish eating the rest of my trash. 
+    - So guys, in a way, people are like trash cans. When you stomp on them, their mouth opens up. *stomp*
+    - sus. very sus...
+    - Hiya, I hope you're having a great day so far, <@${this.user}>! I need to go back to eating trash, but here's a virtual hug.
+    - I love you, You love me, We're best friends like friends should be, With a great big hug, And a kiss from me to you, Won't you say you love me too.
+    - System.out.println("Go away");
+  startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
     - polyethylene terephthalate
