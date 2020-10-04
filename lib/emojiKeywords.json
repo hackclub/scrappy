@@ -65,5 +65,10 @@
   "rain": "rain_cloud",
   "linux": "linux",
   "hacktober": "hacktoberfest",
-  "hacktoberfest": "hacktoberfest"
+  "hacktoberfest": "hacktoberfest",
+  "exams": "books",
+  "exam": "books",
+  "studying": "books",
+  "studied": "books",
+  "study": "books"
 }
