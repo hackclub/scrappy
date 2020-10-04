@@ -67,5 +67,8 @@
   "hacktober": "hacktoberfest",
   "hacktoberfest": "hacktoberfest",
   "exams": "books",
-  "studying": "orange_book"
+  "exam": "books",
+  "studying": "books",
+  "studied": "books",
+  "study": "books"
 }
