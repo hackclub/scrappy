@@ -63,5 +63,7 @@
   "photoshop": "photoshop",
   "storm": "thunder_cloud_and_rain",
   "rain": "rain_cloud",
-  "linux": "linux"
+  "linux": "linux",
+  "hacktober": "hacktoberfest",
+  "hacktoberfest": "hacktoberfest"
 }
