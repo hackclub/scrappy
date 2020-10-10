@@ -17,8 +17,8 @@
   "space": "rocket",
   "sleep": "zzz",
   "hardware": "hardware",
-  "ungnm3h9a": "roshan",
-  "usnpnjxnx": "sam-1",
+  "roshan": "roshan",
+  "sampoder": "sam-1",
   "vs code": "vsc",
   "vscode": "vsc",
   "woo hoo": "tada",
@@ -79,5 +79,6 @@
   "exam": "books",
   "studying": "books",
   "studied": "books",
-  "study": "books"
+  "study": "books",
+  "react": "react"
 }
