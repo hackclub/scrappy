@@ -34,7 +34,7 @@ export default async (req, res) => {
     })
 
     // force a rebuild of their site
-    await rebuildScrapbookFor(userRecord)
+    await rebuildScrapbookFor(user_id)
 
     // hang tight while the rebuild happens before giving out the new link
     await sendCommandResponse(
