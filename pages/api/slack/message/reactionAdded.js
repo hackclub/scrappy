@@ -10,6 +10,7 @@ import {
   react,
   getMessage,
   t,
+  updateExistsTS,
   getPublicFileUrl,
   incrementStreakCount,
   formatText,
@@ -33,6 +34,9 @@ export default async (req, res) => {
   const { channel, ts } = item
 
   if (reaction !== 'aom' && user === 'U015D6A36AG') return
+  
+  if (await updateExistsTS(ts) && (reaction === 'scrappy' || reaction === 'scrappyparrot') &&
+    channel !== process.env.CHANNEL) return
 
   // If someone reacted with a Scrappy emoji in a non-#scrapbook channel, then maybe upload it.
   if (
