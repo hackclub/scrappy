@@ -19,6 +19,14 @@ export default async (req, res) => {
 
   const userRecord = await getUserRecord(user_id)
 
+  console.log(await fetch(
+    `https://airbridge.hackclub.com/v0.1/Summer%20of%20Making%20Streaks/Slack%20Accounts?select=${JSON.stringify(
+      {
+        maxRecords: 1,
+        filterByFormula: `{Username} = "${username}"`
+      }
+    )}`))
+
   if (
     userRecord.fields['Last Username Updated Time'] >
     new Date(Date.now() - 86400 * 1000).toISOString()
