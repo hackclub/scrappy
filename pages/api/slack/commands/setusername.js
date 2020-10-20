@@ -19,13 +19,16 @@ export default async (req, res) => {
 
   const userRecord = await getUserRecord(user_id)
 
-  console.log(await fetch(
+  const exists = await fetch(
     `https://airbridge.hackclub.com/v0.1/Summer%20of%20Making%20Streaks/Slack%20Accounts?select=${JSON.stringify(
       {
         maxRecords: 1,
         filterByFormula: `{Username} = "${username}"`
       }
-    )}`))
+    )}`
+  ).then((r) => r.json())
+
+  console.log(exists.length)
 
   if (
     userRecord.fields['Last Username Updated Time'] >
@@ -34,16 +37,7 @@ export default async (req, res) => {
     sendCommandResponse(response_url, t('messages.username.time'))
   } else if (!username) {
     sendCommandResponse(response_url, t('messages.username.noargs'))
-  } else if (
-    await fetch(
-      `https://airbridge.hackclub.com/v0.1/Summer%20of%20Making%20Streaks/Slack%20Accounts?select=${JSON.stringify(
-        {
-          maxRecords: 1,
-          filterByFormula: `{Username} = "${username}"`
-        }
-      )}`
-    ).then((r) => r.json()).length > 0
-  ) {
+  } else if (exists.length > 0) {
     sendCommandResponse(response_url, t('messages.username.exists'))
   } else {
     // update the account with the new username
