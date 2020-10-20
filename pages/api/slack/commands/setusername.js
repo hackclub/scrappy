@@ -16,8 +16,6 @@ export default async (req, res) => {
   const args = text.split(' ')
   let username = args[0] === 'setusername' ? args[1] : args[0]
   username = username?.replace(' ', '_')
-  
-  console.log(user_id)
 
   const userRecord = await getUserRecord(user_id)
 
@@ -34,8 +32,6 @@ export default async (req, res) => {
       Username: username,
       'Last Username Updated Time': Date.now()
     })
-
-    console.log(user_id)
 
     // force a rebuild of their site
     await rebuildScrapbookFor(user_id)
