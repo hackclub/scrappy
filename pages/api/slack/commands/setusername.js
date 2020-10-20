@@ -26,8 +26,19 @@ export default async (req, res) => {
     sendCommandResponse(response_url, t('messages.username.time'))
   } else if (!username) {
     sendCommandResponse(response_url, t('messages.username.noargs'))
+  } else if (
+    await fetch(
+      `https://airbridge.hackclub.com/v0.1/Summer%20of%20Making%20Streaks/Slack%20Accounts?select=${JSON.stringify(
+        {
+          maxRecords: 1,
+          filterByFormula: `{Username} = "${username}"`
+        }
+      )}`
+    ).then((r) => r.json()).length > 0
+  ) {
+    sendCommandResponse(response_url, t('messages.username.exists'))
   } else {
-    // update the account with the new audio
+    // update the account with the new username
     await accountsTable.update(userRecord.id, {
       Username: username,
       'Last Username Updated Time': Date.now()
@@ -39,7 +50,9 @@ export default async (req, res) => {
     // hang tight while the rebuild happens before giving out the new link
     await sendCommandResponse(
       response_url,
-      t('messages.username.set', { url: `https://scrapbook.hackclub.com/${username}` })
+      t('messages.username.set', {
+        url: `https://scrapbook.hackclub.com/${username}`
+      })
     )
   }
   res.status(200).end()
