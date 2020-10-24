@@ -37,7 +37,7 @@ export default async (req, res) => {
     sendCommandResponse(response_url, t('messages.username.time'))
   } else if (!username) {
     sendCommandResponse(response_url, t('messages.username.noargs'))
-  } else if (username.length < 3) {
+  } else if (username.length < 2) {
     sendCommandResponse(response_url, t('messages.username.short'))
   } else if (exists.length > 0) {
     sendCommandResponse(response_url, t('messages.username.exists'))
