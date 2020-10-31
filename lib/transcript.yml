@@ -44,7 +44,7 @@ messages:
       Add your own domain by typing \`/scrappy setdomain\`.
     4: Hello, hello? Uh, I wanted to let you know that that's day 4 completed!!! ${this.scrapbookLink}
     5: 5 whole days of streaks! That's like one more than yesterday!!! ${this.scrapbookLink}
-    6: 6 days! You've almost made it to a week!!! Don't stop now!!!! PS: A week is 7 days ${this.scrapbookLink}
+    6: 6 days! You've almost made it to a week!!! Don't stop now!!!! PS/: A week is 7 days ${this.scrapbookLink}
     7: |
       A WHOLE WEEK OF STREAKS?!?! YOU MADMAN!!! https://www.youtube.com/watch?v=i0dmSIAzWeQ
       
