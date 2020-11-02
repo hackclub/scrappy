@@ -46,7 +46,7 @@ messages:
     5: 5 whole days of streaks! That's like one more than yesterday!!! ${this.scrapbookLink}
     6: 6 days! You've almost made it to a week!!! Don't stop now!!!! A week is 7 days by the way. ${this.scrapbookLink}
     7: |
-      A WHOLE WEEK OF STREAKS?!?! YOU MADMAN!!! https://www.youtube.com/watch?v=i0dmSIAzWeQ
+      A WHOLE WEEK OF STREAKS?!?! https://www.youtube.com/watch?v=i0dmSIAzWeQ
       
       ${this.scrapbookLink}
     '7+':
