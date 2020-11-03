@@ -105,5 +105,6 @@
   "next.js" : "nextjs",
   "nextjs" : "nextjs",
   "movie": "film_projector",
-  "halloween": "jack_o_lantern"
+  "halloween": "jack_o_lantern",
+  "pizza": "pizza"
 }
