@@ -28,6 +28,6 @@ export default async (req, res) => {
   if (containsWord) {
     reply(channel, thread_ts || ts, t('messages.mentionKeyword', {user}))
   } else {
-    reply(channel, thread_ts || ts, t('messages.mention'))
+    reply(channel, thread_ts || ts, t('messages.mention', {user}))
   }
 }
