@@ -29,7 +29,7 @@ export default async (req, res) => {
     ) {
       setStatus(
         user.id,
-        `I tried to cheat in Summer of Making because I’m a clown`,
+        `I tried to cheat Scrappy because I’m a clown`,
         ':clown_face:'
       )
     }
