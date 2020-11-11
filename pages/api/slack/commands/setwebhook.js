@@ -15,6 +15,7 @@ export default async (req, res) => {
   const { text, user_id, response_url } = req.body
   const args = text.split(' ')
   let webhook = args[0] === 'setwebhook' ? args[1] : args[0]
+  webhook = webhook?.substring(1, url.length - 1)
 
   if (!webhook) {
     sendCommandResponse(response_url, t('messages.webhook.noargs'))
