@@ -19,7 +19,7 @@ export default async (req, res) => {
   const userRecord = await getUserRecord(user_id)
 
     await accountsTable.update(userRecord.id, {
-      webhook: webhook,
+      'Webhook URL': webhook,
     })
 
     // hang tight while the rebuild happens before giving out the new link
