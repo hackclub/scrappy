@@ -10,6 +10,7 @@ messages:
     - \`/scrappy-setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
     - \`/scrappy-setusername\`: change your profile username
     - \`/scrappy-setsound\`: links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
+    - \`/scrappy-setwebhook\`: create a Scrappy Webhook we will make a blank fetch request to this URL every time you post
     - \`/scrappy-webring\`: adds or removes someone to your webring
 
     BTW if you want to delete or update a post you can do so by simply editing or deleting your Slack message.
