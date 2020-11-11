@@ -16,17 +16,17 @@ export default async (req, res) => {
   const args = text.split(' ')
   let webhook = args[0] === 'setwebhook' ? args[1] : args[0]
 
-  const userRecord = await getUserRecord(user_id)
+  if (!webhook) {
+    sendCommandResponse(response_url, t('messages.webhook.noargs'))
+  } else {
+    const userRecord = await getUserRecord(user_id)
 
     await accountsTable.update(userRecord.id, {
-      'Webhook URL': webhook,
+      'Webhook URL': webhook
     })
 
     // hang tight while the rebuild happens before giving out the new link
-    await sendCommandResponse(
-      response_url,
-      t('messages.webhook.set')
-    )
-  
+    await sendCommandResponse(response_url, t('messages.webhook.set'))
+  }
   res.status(200).end()
 }
