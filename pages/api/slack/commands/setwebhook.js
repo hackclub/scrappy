@@ -27,6 +27,6 @@ export default async (req, res) => {
       response_url,
       t('messages.webhook.set')
     )
-  }
+  
   res.status(200).end()
 }
