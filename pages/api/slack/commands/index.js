@@ -34,6 +34,9 @@ export default async (req, res) => {
     case 'stealcss':
       method = 'steal-css'
       break
+    case 'setwebhook':
+      method = 'setwebhook'
+      break
     case 'help':
     case '':
       method = 'help'
