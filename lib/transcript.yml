@@ -132,8 +132,8 @@ messages:
       Ping pong! We're on the road to automation, now when ever you feed me a post I'll ping that URL :sparkles:
   domain:
     noargs: To link a custom domain to your scrapbook, type \`/scrappy setdomain\` followed by the domain or subdomain you want to link. e.g. \`/scrappy setdomain zachlatta.com\`. Then, create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
-    overlimit: Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains.
-    domainexists: Couldn't set your domain \`${this.text}\`. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.
+    overlimit: Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains. <https://hackclub.slack.com/archives/C0M8PUPU6/p1602535670075000|Here's an alternative>.
+    domainexists: Couldn't set your domain \`${this.text}\`. You can't add a domain if it's already set to another Vercel project. Try again with a different domain. <https://hackclub.slack.com/archives/C0M8PUPU6/p1602535670075000|Here's an alternative>.
     domainset: |
       Custom domain \`${this.text}\` set!
 
