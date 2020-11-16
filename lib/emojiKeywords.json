@@ -106,5 +106,7 @@
   "movie": "film_projector",
   "halloween": "jack_o_lantern",
   "pizza": "pizza",
-  "scrappy": "scrappy"
+  "scrappy": "scrappy",
+  "cycle": "bike",
+  "bike": "bike"
 }
