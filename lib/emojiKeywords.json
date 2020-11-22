@@ -109,6 +109,11 @@
   "scrappy": "scrappy",
   "cycle": "bike",
   "bike": "bike",
-  "Big Sur": "appleinc",
-  "zoom": "zoom"
+  "Big Sur": "bs",
+  "zoom": "zoom",
+  "ship": "ship",
+  "macbook": "macbook-air-space-gray-screen",
+  "guitar": "guitar",
+  "complain": "old-man-yells-at-cloud",
+  "fight": "old-man-yells-at-cloud"
 }
