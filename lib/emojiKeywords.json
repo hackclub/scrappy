@@ -117,5 +117,6 @@
   "complain": "old-man-yells-at-cloud",
   "fight": "old-man-yells-at-cloud",
   "cricket": "cricket_bat_and_ball",
-  "vim": "vim"
+  "vim": "vim",
+  "docker": "docker"
 }
