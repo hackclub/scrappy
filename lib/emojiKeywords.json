@@ -28,6 +28,7 @@
   "cooked": "pan_with_egg",
   "cook": "pan_with_egg",
   "birthday": "birthday",
+  "bday": "birthday",
   "halloween": "jack_o_lantern",
   "pumpkin": "jack_o_lantern",
   "fall": "fallen_leaf",
@@ -118,5 +119,6 @@
   "fight": "old-man-yells-at-cloud",
   "cricket": "cricket_bat_and_ball",
   "vim": "vim",
-  "docker": "docker"
+  "docker": "docker",
+  "cake": "cake"
 }
