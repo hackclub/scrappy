@@ -122,5 +122,7 @@
   "docker": "docker",
   "cake": "cake",
   "notion": "notion",
-  "fedora": "fedoralinux"
+  "fedora": "fedoralinux",
+  "replit": "replit",
+  "repl.it": "repl.it"
 }
