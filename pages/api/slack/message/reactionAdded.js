@@ -33,8 +33,8 @@ export default async (req, res) => {
 
   const { channel, ts } = item
 
-  if (reaction !== 'aom' && user === 'U015D6A36AG') return
-  
+  if (reaction !== 'wom' && user === 'U015D6A36AG') return
+
   if (await updateExistsTS(ts) && (reaction === 'scrappy' || reaction === 'scrappyparrot') &&
     channel !== process.env.CHANNEL) return
 
