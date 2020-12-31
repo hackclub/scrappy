@@ -29,7 +29,7 @@ export default async (req, res) => {
     else if (userRecord.fields['Audio File'] != null) {
       sendCommandResponse(
         response_url,
-        t('messages.audio.removed', { previous: userRecord.fields['Custom Audio URL'] })
+        t('messages.audio.removed', { previous: userRecord.fields['Audio URL'] })
       )
     }
     else {
