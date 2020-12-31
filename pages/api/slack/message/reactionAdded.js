@@ -59,6 +59,23 @@ export default async (req, res) => {
     }
     return
   }
+  
+  if (
+    (reaction === 'scrappy-retry') &&
+    channel == process.env.CHANNEL
+  ) {
+    const message = await getMessage(ts, channel)
+
+    if (!message) return
+
+    if (!message.files || message.files.length == 0) {
+      postEphemeral(channel, t('messages.errors.anywhere.files'), user)
+      return
+    }
+    await createPost(message.files, channel, ts, user, message.text)
+
+    return
+  }
 
   const startTS = Date.now()
   limiter.schedule(async () => {
