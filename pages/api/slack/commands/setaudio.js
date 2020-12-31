@@ -19,10 +19,10 @@ export default async (req, res) => {
 
   const userRecord = await getUserRecord(user_id)
   if (!url) {
-    if (userRecord.fields['CSS URL'] != null) {
+    if (userRecord.fields['Custom Audio URL'] != null) {
       sendCommandResponse(
         response_url,
-        t('messages.audio.removed', { previous: userRecord.fields['CSS URL'] })
+        t('messages.audio.removed', { previous: userRecord.fields['Custom Audio URL'] })
       )
     } else {
       sendCommandResponse(response_url, t('messages.audio.noargs'))
