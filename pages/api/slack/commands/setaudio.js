@@ -24,6 +24,11 @@ export default async (req, res) => {
         response_url,
         t('messages.audio.removed', { previous: userRecord.fields['Custom Audio URL'] })
       )
+      // update the account with the new audioless 
+      await accountsTable.update(userRecord.id, {
+        'Custom Audio URL': null,
+        'Audio File': null
+      })
     } 
     
     else if (userRecord.fields['Audio File'] != null) {
@@ -31,6 +36,11 @@ export default async (req, res) => {
         response_url,
         t('messages.audio.removed', { previous: userRecord.fields['Audio URL'] })
       )
+      // update the account with the new audioless 
+      await accountsTable.update(userRecord.id, {
+        'Custom Audio URL': null,
+        'Audio File': null
+      })
     }
     else {
       sendCommandResponse(response_url, t('messages.audio.noargs'))
