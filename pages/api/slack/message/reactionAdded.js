@@ -75,7 +75,7 @@ export default async (req, res) => {
       postEphemeral(channel, t('messages.errors.anywhere.files'), user)
       return
     }
-    await createPost(message.files, channel, ts, user, message.text)
+    await createPost(message.files, channel, ts, item_user, message.text)
 
     return
   }
