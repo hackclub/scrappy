@@ -24,7 +24,15 @@ export default async (req, res) => {
         response_url,
         t('messages.audio.removed', { previous: userRecord.fields['Custom Audio URL'] })
       )
-    } else {
+    } 
+    
+    else if (userRecord.fields['Audio File'] != null) {
+      sendCommandResponse(
+        response_url,
+        t('messages.audio.removed', { previous: userRecord.fields['Custom Audio URL'] })
+      )
+    }
+    else {
       sendCommandResponse(response_url, t('messages.audio.noargs'))
     }
   } else {
