@@ -18,7 +18,7 @@ export default async (req, res) => {
   console.log(command)
   const args = command.text.split(' ')
   let url = args[0] === 'setcss' ? args[1] : args[0]
-  url = url?.substring(1, url.length - 1)
+  url = url?.substring(0, url.length)
   console.log('url', url)
 
   if (!url) {
@@ -66,7 +66,7 @@ export default async (req, res) => {
       sendCommandResponse(command.response_url, t('messages.css.removed'))
     } else {
       if (!url.includes('http')) {
-        url = 'https://' + url
+        url = url
       }
       await accountsTable.update(user.id, {
         'CSS URL': url
