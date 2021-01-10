@@ -31,7 +31,7 @@ export default async (req, res) => {
   const { item, user, reaction, item_user } = req.body.event
   console.log(item, user, reaction)
 
-  const { channel, ts } = item
+  const { channel, ts, message } = item
 
   if (reaction !== 'wom' && user === 'U015D6A36AG') return
 
@@ -39,6 +39,22 @@ export default async (req, res) => {
     channel !== process.env.CHANNEL) return
   
   if (await updateExistsTS(ts) && (reaction === 'scrappy-retry')){
+    try { fetch(userRecord.fields['Webhook URL']) }
+    catch (err) { }
+
+    const channelKeywords = require('../../../../lib/channelKeywords.json')
+    if (typeof channelKeywords[channel] !== 'undefined') await react('add', channel, ts, channelKeywords[channel])
+    const emojiKeywords = require('../../../../emojiKeywords.json')
+    console.log('emoji keywords', emojiKeywords)
+    Object.keys(emojiKeywords).forEach(async (keyword) => {
+      if (
+        message
+          .toLowerCase()
+          .search(new RegExp('\\b' + keyword + '\\b', 'gi')) !== -1
+      ) {
+        await react('add', channel, ts, emojiKeywords[keyword])
+      }
+    })
     await react('remove', channel, ts, 'beachball')
     await react('add', channel, ts, 'wom')
     return
