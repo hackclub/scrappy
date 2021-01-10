@@ -38,8 +38,11 @@ export default async (req, res) => {
   if (await updateExistsTS(ts) && (reaction === 'scrappy' || reaction === 'scrappyparrot') &&
     channel !== process.env.CHANNEL) return
   
-  if (await updateExistsTS(ts) && (reaction === 'scrappy-retry') &&
-    channel == process.env.CHANNEL) return
+  if (await updateExistsTS(ts) && (reaction === 'scrappy-retry')){
+    await react('remove', channel, ts, 'beachball')
+    await react('add', channel, ts, 'wom')
+    return
+  }
 
   // If someone reacted with a Scrappy emoji in a non-#scrapbook channel, then maybe upload it.
   if (
