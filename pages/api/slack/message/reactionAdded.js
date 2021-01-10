@@ -78,7 +78,7 @@ export default async (req, res) => {
 
       const channelKeywords = require('../../../../lib/channelKeywords.json')
       if (typeof channelKeywords[channel] !== 'undefined') await react('add', channel, ts, channelKeywords[channel])
-      const emojiKeywords = require('../../../../lib/emojiKeywords.json')
+      const emojiKeywords = require('./emojiKeywords.json')
       console.log('emoji keywords', emojiKeywords)
       Object.keys(emojiKeywords).forEach(async (keyword) => {
         if (
