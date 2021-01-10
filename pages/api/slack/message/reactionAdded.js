@@ -48,7 +48,8 @@ export default async (req, res) => {
     console.log('emoji keywords', emojiKeywords)
     Object.keys(emojiKeywords).forEach(async (keyword) => {
       if (
-        message.text.
+        message
+          .text
           .toLowerCase()
           .search(new RegExp('\\b' + keyword + '\\b', 'gi')) !== -1
       ) {
