@@ -69,8 +69,28 @@ export default async (req, res) => {
   ) {
     const message = await getMessage(ts, channel)
 
-    if (!message) return
+    if (!message){
+      await react('remove', channel, ts, 'beachball')
+      await react('add', channel, ts, 'wom')
 
+      try { fetch(userRecord.fields['Webhook URL']) }
+      catch (err) { }
+
+      const channelKeywords = require('../../../../lib/channelKeywords.json')
+      if (typeof channelKeywords[channel] !== 'undefined') await react('add', channel, ts, channelKeywords[channel])
+      const emojiKeywords = require('./emojiKeywords.json')
+      console.log('emoji keywords', emojiKeywords)
+      Object.keys(emojiKeywords).forEach(async (keyword) => {
+        if (
+          message.text
+            .toLowerCase()
+            .search(new RegExp('\\b' + keyword + '\\b', 'gi')) !== -1
+        ) {
+          await react('add', channel, ts, emojiKeywords[keyword])
+        }
+      })
+      return
+    }
     if (!message.files || message.files.length == 0) {
       postEphemeral(channel, t('messages.errors.anywhere.files'), user)
       return
