@@ -25,6 +25,8 @@ const limiter = new Bottleneck({ maxConcurrent: 1 })
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
     return res.status(400).send('Unverified Slack request!')
+  } else {
+    res.status(200).end() 
   }
   
   const { item, user, reaction, item_user } = req.body.event
@@ -33,8 +35,6 @@ export default async (req, res) => {
   const { channel, ts } = item
 
   if (reaction !== 'wom' && user === 'U015D6A36AG') return
-  
-  res.status(200).end()
 
   if (await updateExistsTS(ts) && (reaction === 'scrappy' || reaction === 'scrappyparrot') &&
     channel !== process.env.CHANNEL) return
