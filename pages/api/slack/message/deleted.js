@@ -77,5 +77,5 @@ export default async (req, res) => {
     console.log('SHIT')
   }
 
-  return res.json({ ok: true })
+  // return res.json({ ok: true })
 }
