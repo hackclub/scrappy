@@ -12,7 +12,6 @@ import {
 export default async (req, res) => {
   if (unverifiedRequest(req))
     return res.status(400).send('Unverified Slack request!')
-  else res.status(200).end()
   const { user, text, ts, channel } = req.body.event
 
   const userRecord = await getUserRecord(user)
@@ -66,6 +65,7 @@ export default async (req, res) => {
       //reply(channel, ts, t('messages.css.set', { url, username }))
     }
   }
+  else res.status(200).end()
 }
 
 const sendCSSMessage = (channel, ts, scrapbookLink) => {
