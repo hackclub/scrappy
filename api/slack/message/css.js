@@ -7,7 +7,7 @@ const {
   getUrlFromString,
   postEphemeral,
   unverifiedRequest
-} = require('../../../../lib/api-utils')
+} = require('../../../lib/api-utils')
 const fetch = require('node-fetch')
 
 module.exports = async (req, res) => {

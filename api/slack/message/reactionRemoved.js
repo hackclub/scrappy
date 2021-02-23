@@ -4,8 +4,8 @@ const {
   reactionsTable,
   updatesTable,
   getUserRecord
-} = require('../../../../lib/api-utils'
-const Bottleneck = require('bottleneck'
+} = require('../../../lib/api-utils')
+const Bottleneck = require('bottleneck')
 
 const limiter = new Bottleneck({
   maxConcurrent: 1

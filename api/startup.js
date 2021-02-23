@@ -1,4 +1,4 @@
-const { unverifiedRequest, t } = require('../../lib/api-utils')
+const { unverifiedRequest, t } = require('../lib/api-utils')
 const fetch = require('node-fetch')
 
 module.exports = async (req, res) => {

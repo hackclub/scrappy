@@ -1,4 +1,4 @@
-const { unverifiedRequest } = require('../../../../lib/api-utils')
+const { unverifiedRequest } = require('../../../lib/api-utils')
 const fetch = require('node-fetch')
 
 // the data sent to us to another serverless function for longer processing.

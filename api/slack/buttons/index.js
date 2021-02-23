@@ -1,4 +1,4 @@
-const { unverifiedRequest } = require('../../../../lib/api-utils'
+const { unverifiedRequest } = require('../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   console.log(req.body)
