@@ -23,8 +23,7 @@
     "node-emoji": "^1.10.0",
     "node-fetch": "^2.6.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "rimraf": "^3.0.2"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.0",
@@ -33,11 +32,16 @@
     "@babel/preset-env": "^7.13.5",
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.4",
-    "prettier": "2.0.5"
+    "prettier": "2.0.5",
+    "rimraf": "^3.0.2"
   },
   "babel": {
-    "presets": ["@babel/preset-env"],
-    "plugins": ["@babel/plugin-proposal-optional-chaining"]
+    "presets": [
+      "-env"
+    ],
+    "plugins": [
+      "plugin-proposal-optional-chaining"
+    ]
   },
   "cacheDirectories": [
     ".next/cache"
