@@ -37,7 +37,7 @@
   },
   "babel": {
     "presets": [
-      "env"
+      "@babel/preset-env"
     ],
     "plugins": [
       "@babel/plugin-proposal-optional-chaining"
