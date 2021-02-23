@@ -5,7 +5,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 const dev = process.env.NODE_ENV !== 'production'
-const handle = app.getRequestHandler()
 
 app.get('/ping', (req, res) => {
   res.send('pong!')
