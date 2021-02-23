@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "node server.js",
-    "start": "NODE_ENV=production yarn run build && node dist/bin/www",
+    "start": "NODE_ENV=production node dist/bin/www",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "format": "prettier --write .",
     "checkFormat": "prettier --check ."
