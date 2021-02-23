@@ -42,3 +42,5 @@ const listener = app.listen(port, (err) => {
       })
     }
 })
+
+module.exports = app
