@@ -13,7 +13,7 @@ app.get('/ping', (req, res) => {
 require('./router')(app)
 
 const port = process.env.PORT || 3000
-app.listen(port, (err) => {
+const listener = app.listen(port, (err) => {
   if (err) throw err
   console.log(`> Listening on port ${listener.address().port}`)
 
