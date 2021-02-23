@@ -1,11 +1,11 @@
-const {
+import {
   unverifiedRequest,
   getUserRecord,
   t,
   accountsTable,
   sendCommandResponse,
   rebuildScrapbookFor
-} = require('../../../lib/api-utils')
+} from '../../../lib/api-utils'
 const fetch = require('node-fetch')
 
 module.exports = async (req, res) => {

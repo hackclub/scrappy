@@ -1,11 +1,11 @@
-const {
+import {
   unverifiedRequest,
   getReactionRecord,
   reactionsTable,
   updatesTable,
   getUserRecord
-} = require('../../../lib/api-utils')
-const Bottleneck = require('bottleneck')
+} from '../../../lib/api-utils'
+import Bottleneck from 'bottleneck'
 
 const limiter = new Bottleneck({
   maxConcurrent: 1

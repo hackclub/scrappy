@@ -1,5 +1,5 @@
-const { unverifiedRequest } = require('../../../lib/api-utils')
-const fetch = require('node-fetch')
+import { unverifiedRequest } from '../../../lib/api-utils'
+import fetch from 'node-fetch'
 
 // the data sent to us to another serverless function for longer processing.
 module.exports = async (req, res) => {

@@ -1,4 +1,4 @@
-const {
+import {
   react,
   deleteScrap,
   postEphemeral,
@@ -10,8 +10,8 @@ const {
   shouldUpdateStreak,
   unverifiedRequest,
   tsHasScrap
-} = require('../../../lib/api-utils')
-const fetch = require('node-fetch')
+} from '../../../lib/api-utils'
+import fetch from 'node-fetch'
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   const result = await fetch(

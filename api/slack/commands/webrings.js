@@ -1,11 +1,11 @@
-const {
+import {
   unverifiedRequest,
   getUserRecord,
   accountsTable,
   sendCommandResponse,
   t,
   fetchProfile
-} = require('../../../lib/api-utils')
+} from '../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))

@@ -1,14 +1,14 @@
 // This API route is pinged by a Zap every hour
 
-const {
+import {
   accountsTable,
   updatesTable,
   getNow,
   setStatus,
   unverifiedRequest,
   timeout
-} = require('../../lib/api-utils')
-const fetch = require('node-fetch')
+} from '../../lib/api-utils'
+import fetch from 'node-fetch'
 
 module.exports = async (req, res) => {
   res.status(200).end()

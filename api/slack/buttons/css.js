@@ -1,4 +1,4 @@
-const {
+import {
   getUserRecord,
   accountsTable,
   getUrlFromString,
@@ -7,7 +7,7 @@ const {
   postEphemeral,
   processGist,
   unverifiedRequest
-} = require('../../../lib/api-utils'
+} from '../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))

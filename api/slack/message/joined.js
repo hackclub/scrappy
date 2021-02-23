@@ -1,12 +1,12 @@
 /*
 This posts an introductory message to the #scrapbook channel when someone shows up
 */
-const {
+import {
   postEphemeral,
   t,
   timeout,
   unverifiedRequest
-} = require('../../../lib/api-utils')
+} from '../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))

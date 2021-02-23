@@ -1,10 +1,10 @@
-const {
+import {
   postEphemeral,
   forgetUser,
   react,
   t,
   unverifiedRequest
-} = require('../../../lib/api-utils')
+} from '../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))
