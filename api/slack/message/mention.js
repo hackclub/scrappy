@@ -1,4 +1,4 @@
-const { reply, t, unverifiedRequest } = require("../../../../lib/api-utils"
+const { reply, t, unverifiedRequest } = require("../../../lib/api-utils")
 
 const wordList = [
   'fuck',

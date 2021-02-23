@@ -1,4 +1,4 @@
-const { updatesTable, reply, t } = require('../../lib/api-utils'
+const { updatesTable, reply, t } = require('../lib/api-utils')
 
 // Only runs when a user uploads a large video, to notify them when Mux processes the video
 module.exports = async (req, res) => {

@@ -17,7 +17,7 @@ const {
   isFullMember,
   createPost,
   postEphemeral
-} = require('../../../../lib/api-utils')
+} = require('../../../lib/api-utils')
 const Bottleneck = require('bottleneck')
 const fetch = require('node-fetch')
 

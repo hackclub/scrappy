@@ -10,7 +10,7 @@ const {
   shouldUpdateStreak,
   unverifiedRequest,
   tsHasScrap
-} = require('../../../../lib/api-utils')
+} = require('../../../lib/api-utils')
 const fetch = require('node-fetch')
 
 const deleteThreadedMessages = async (ts, channel, user) => {

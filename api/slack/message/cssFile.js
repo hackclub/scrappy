@@ -21,9 +21,9 @@ const {
   postEphemeral,
   t,
   unverifiedRequest
-} = require('../../../../lib/api-utils'
+} = require('../../../lib/api-utils')
 
-const css = require('./css'
+const css = require('./css')
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))

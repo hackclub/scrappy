@@ -1,4 +1,4 @@
-const { postEphemeral, t, unverifiedRequest } = require('../../../../lib/api-utils')
+const { postEphemeral, t, unverifiedRequest } = require('../../../lib/api-utils')
 const fetch = require('node-fetch')
 
 module.exports = async (req, res) => {

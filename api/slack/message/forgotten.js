@@ -4,7 +4,7 @@ const {
   react,
   t,
   unverifiedRequest
-} = require('../../../../lib/api-utils'
+} = require('../../../lib/api-utils')
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))
