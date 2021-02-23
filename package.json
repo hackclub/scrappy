@@ -5,13 +5,16 @@
   "private": true,
   "scripts": {
     "dev": "node server.js",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production yarn run build && node dist/bin/www",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "format": "prettier --write .",
     "checkFormat": "prettier --check ."
   },
   "dependencies": {
     "@mux/mux-node": "^2.8.0",
     "airtable-plus": "^1.0.4",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
@@ -22,7 +25,8 @@
     "node-emoji": "^1.10.0",
     "node-fetch": "^2.6.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
