@@ -1,14 +1,14 @@
-const cheerio = require('cheerio')
-const fetch = require('node-fetch')
+import cheerio from 'cheerio'
+import fetch from 'node-fetch'
 
-const {
+import {
   sendCommandResponse,
   accountsTable,
   getUserRecord,
   updatesTable,
   t,
   unverifiedRequest
-} = require('../../../lib/api-utils')
+}  from '../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req)) {

@@ -6,7 +6,7 @@ If not, can we somehow fix that on the frontend?
 Max and Matthew plz halp
 */
 
-const {
+import {
   getPublicFileUrl,
   getUserRecord,
   reply,
@@ -21,9 +21,9 @@ const {
   postEphemeral,
   t,
   unverifiedRequest
-} = require('../../../lib/api-utils')
+} from '../../../lib/api-utils'
 
-const css = require('./css')
+import css from './css'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))

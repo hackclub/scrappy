@@ -1,4 +1,4 @@
-const { sendCommandResponse, t } = require('../../../lib/api-utils')
+import { sendCommandResponse, t } from '../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   const command = req.body

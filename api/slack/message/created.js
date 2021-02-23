@@ -5,7 +5,7 @@ This is triggered when a new post shows up in the #scrapbook channel
 - posts with attachments should be added to the scrapbook & replied to with a threaded message
 */
 
-const {
+import {
   getPublicFileUrl,
   getUserRecord,
   reply,
@@ -23,7 +23,7 @@ const {
   unverifiedRequest,
   isFullMember,
   createPost
-} = require('../../../lib/api-utils')
+} from '../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))

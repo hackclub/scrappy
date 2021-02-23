@@ -1,4 +1,4 @@
-const {
+import {
   unverifiedRequest,
   getEmojiRecord,
   updatesTable,
@@ -17,9 +17,9 @@ const {
   isFullMember,
   createPost,
   postEphemeral
-} = require('../../../lib/api-utils')
-const Bottleneck = require('bottleneck')
-const fetch = require('node-fetch')
+} from '../../../lib/api-utils'
+import Bottleneck from 'bottleneck'
+import fetch from 'node-fetch'
 
 const limiter = new Bottleneck({ maxConcurrent: 1 })
 

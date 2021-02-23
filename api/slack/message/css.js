@@ -1,5 +1,5 @@
-const cheerio = require('cheerio')
-const {
+import cheerio from 'cheerio'
+import {
   getUserRecord,
   accountsTable,
   reply,
@@ -7,8 +7,8 @@ const {
   getUrlFromString,
   postEphemeral,
   unverifiedRequest
-} = require('../../../lib/api-utils')
-const fetch = require('node-fetch')
+} from '../../../lib/api-utils'
+import fetch from 'node-fetch'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))

@@ -2,7 +2,7 @@
   This is triggered when a new post shows up in the #scrapbook-sounds channel
 */
 
-const {
+import {
   unverifiedRequest,
   getPublicFileUrl,
   getUserRecord,
@@ -11,7 +11,7 @@ const {
   rebuildScrapbookFor,
   accountsTable,
   react
-} = require('../../../lib/api-utils')
+} from '../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))

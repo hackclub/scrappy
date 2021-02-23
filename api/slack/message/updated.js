@@ -1,7 +1,7 @@
 /*
 This message is called when a poster updates their previous post
 */
-const {
+import {
   react,
   postEphemeral,
   updatesTable,
@@ -9,7 +9,7 @@ const {
   formatText,
   fetchProfile,
   unverifiedRequest
-} = require('../../../lib/api-utils')
+} from '../../../lib/api-utils'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))
