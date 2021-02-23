@@ -65,7 +65,7 @@ export default async (req, res) => {
       //reply(channel, ts, t('messages.css.set', { url, username }))
     }
   }
-  else res.status(200).end()
+  return res.status(200).end()
 }
 
 const sendCSSMessage = (channel, ts, scrapbookLink) => {
