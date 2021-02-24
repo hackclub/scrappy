@@ -12,23 +12,28 @@ async function getFiles(dir) {
 
 module.exports = async (app) => {
   const startTS = Date.now()
-  await getFiles('./api').then(files => files.forEach(file => {
+  await getFiles('./dist/api').then(files => files.forEach(file => {
     if (extname(file) != '.js') {
       // skip loading non-js files
       return
     }
+    console.log('file', file)
 
     let routePath = relative(__dirname, dirname(file)).substr(3)
-    console.log(routePath)
     if (basename(file, extname(file)) != 'index') {
       routePath = `${routePath}/${basename(file, extname(file))}`
-      console.log('loading file', routePath)
     }
+    console.log('loading file', routePath)
 
-    app.all('./' + routePath, async (req, res) => {
+    let route = require(file)
+    app.use('/' + routePath, route)
+
+    app.all('/' + routePath, async (req, res) => {
+      console.log('hey')
       try {
         let route = require(file)
-        await route(req, res).then(r => console.log(r))
+        await route(req, res)
+        console.log('routed', route)
       } catch (err) {
         console.error(err)
       }
