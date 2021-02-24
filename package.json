@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "node server.js",
-    "start": "node dist/bin/www",
-    "build": "rm -rf dist && mkdir dist && babel ./ -d dist --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,/tmp -s --copy-files",
+    "start": "node babelbuild/bin/www",
+    "build": "rm -rf babelbuild && mkdir babelbuild && babel ./ -d babelbuild --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,/tmp -s --copy-files",
     "format": "prettier --write .",
     "checkFormat": "prettier --check ."
   },

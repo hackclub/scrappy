@@ -12,7 +12,7 @@ async function getFiles(dir) {
 
 module.exports = async (app) => {
   const startTS = Date.now()
-  await getFiles('./dist/api').then(files => files.forEach(file => {
+  await getFiles('./babelbuild/api').then(files => files.forEach(file => {
     if (extname(file) != '.js') {
       // skip loading non-js files
       return
