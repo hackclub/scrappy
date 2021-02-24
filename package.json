@@ -19,7 +19,6 @@
     "form-data": "^3.0.0",
     "heic-convert": "^1.2.3",
     "lodash": "^4.17.19",
-    "next-yaml": "^1.0.1",
     "node-emoji": "^1.10.0",
     "node-fetch": "^2.6.1"
   },
