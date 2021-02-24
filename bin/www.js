@@ -19,13 +19,13 @@ var http = require('http');
  * Create HTTP server.
  */
 
-// var server = http.createServer(app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+// server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
