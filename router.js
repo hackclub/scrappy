@@ -18,17 +18,17 @@ module.exports = async (app) => {
       return
     }
 
-    let routePath = relative(__dirname, dirname(file)).substr(1)
+    let routePath = relative(__dirname, dirname(file)).substr(3)
     console.log(routePath)
     if (basename(file, extname(file)) != 'index') {
       routePath = `${routePath}/${basename(file, extname(file))}`
       console.log('loading file', routePath)
     }
 
-    app.all(routePath, async (req, res) => {
+    app.all('./' + routePath, async (req, res) => {
       try {
         let route = require(file)
-        await route(req, res)
+        await route(req, res).then(r => console.log(r))
       } catch (err) {
         console.error(err)
       }
