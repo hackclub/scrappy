@@ -7,18 +7,13 @@
     "node": ">=14.x"
   },
   "scripts": {
-    "dev": "node -r dotenv/config server.js",
-    "start": "ts-node -r dotenv/config server.ts",
+    "dev": "node -r dotenv/config build/server.js",
+    "start": "ts-node -r dotenv/config src/server.ts",
     "build": "tsc",
     "format": "prettier --write .",
     "checkFormat": "prettier --check ."
   },
   "dependencies": {
-    "@babel/cli": "^7.13.0",
-    "@babel/core": "^7.13.1",
-    "@babel/plugin-proposal-optional-chaining": "^7.13.0",
-    "@babel/plugin-transform-runtime": "^7.13.6",
-    "@babel/preset-env": "^7.13.5",
     "@mux/mux-node": "^2.8.0",
     "@slack/bolt": "^3.2.0",
     "bottleneck": "^2.19.5",
