@@ -1,5 +1,5 @@
 import { unverifiedRequest } from '../../../lib/api-utils'
-import fetch from 'node-fetch'
+import fetch from '../../../src/lib/node_modules/node-fetch'
 
 // the data sent to us to another serverless function for longer processing.
 module.exports = async (req, res) => {

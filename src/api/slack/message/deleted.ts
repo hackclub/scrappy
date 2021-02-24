@@ -11,7 +11,7 @@ import {
   unverifiedRequest,
   tsHasScrap
 } from '../../../lib/api-utils'
-import fetch from 'node-fetch'
+import fetch from '../../../src/lib/node_modules/node-fetch'
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   const result = await fetch(

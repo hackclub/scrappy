@@ -8,7 +8,7 @@ import {
   unverifiedRequest,
   timeout
 } from '../../lib/api-utils'
-import fetch from 'node-fetch'
+import fetch from '../../src/lib/node_modules/node-fetch'
 
 module.exports = async (req, res) => {
   res.status(200).end()

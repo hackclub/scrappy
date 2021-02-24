@@ -1,5 +1,5 @@
-const { resolve, relative, extname, basename, dirname } = require('path')
-const fs = require('fs')
+import { resolve, relative, extname, basename, dirname } from 'path'
+import fs from 'fs'
 const { readdir } = require('fs').promises
 
 async function getFiles(dir) {

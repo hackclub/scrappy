@@ -1,5 +1,5 @@
 import { postEphemeral, t, unverifiedRequest } from '../../../lib/api-utils'
-import fetch from 'node-fetch'
+import fetch from '../../../src/lib/node_modules/node-fetch'
 
 module.exports = async (req, res) => {
   if (unverifiedRequest(req))

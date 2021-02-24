@@ -1,5 +1,5 @@
 import cheerio from 'cheerio'
-import fetch from 'node-fetch'
+import fetch from '../../../src/lib/node_modules/node-fetch'
 
 import {
   sendCommandResponse,

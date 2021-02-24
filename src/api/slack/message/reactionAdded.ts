@@ -19,7 +19,7 @@ import {
   postEphemeral
 } from '../../../lib/api-utils'
 import Bottleneck from 'bottleneck'
-import fetch from 'node-fetch'
+import fetch from '../../../src/lib/node_modules/node-fetch'
 
 const limiter = new Bottleneck({ maxConcurrent: 1 })
 

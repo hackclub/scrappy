@@ -1,5 +1,4 @@
 import cheerio from 'cheerio'
-import AirtablePlus from 'airtable-plus'
 import FormData from 'form-data'
 import Mux from '@mux/mux-node'
 import emoji from 'node-emoji'
@@ -30,6 +29,7 @@ const reactionsTable = new AirtablePlus({
   baseID: 'appRxhF9qVMLbxAXR',
   tableName: 'Emoji Reactions'
 })
+
 exports.accountsTable = accountsTable
 exports.updatesTable = updatesTable
 exports.emojiTypeTable = emojiTypeTable
@@ -42,6 +42,7 @@ const timeout = (ms) => {
     }, ms)
   })
 }
+
 exports.timeout = timeout
 
 const sample = (arr) => arr[Math.floor(Math.random() * arr.length)]
