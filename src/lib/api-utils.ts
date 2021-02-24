@@ -9,33 +9,28 @@ const { Video } = new Mux(
   process.env.MUX_TOKEN_SECRET
 )
 
-const accountsTable = new AirtablePlus({
+export const accountsTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
   baseID: 'appRxhF9qVMLbxAXR',
   tableName: 'Slack Accounts'
 })
-const updatesTable = new AirtablePlus({
+export const updatesTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
   baseID: 'appRxhF9qVMLbxAXR',
   tableName: 'Updates'
 })
-const emojiTypeTable = new AirtablePlus({
+export const emojiTypeTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
   baseID: 'appRxhF9qVMLbxAXR',
   tableName: 'Emoji Type'
 })
-const reactionsTable = new AirtablePlus({
+export const reactionsTable = new AirtablePlus({
   apiKey: process.env.AIRTABLE_API_KEY,
   baseID: 'appRxhF9qVMLbxAXR',
   tableName: 'Emoji Reactions'
 })
 
-exports.accountsTable = accountsTable
-exports.updatesTable = updatesTable
-exports.emojiTypeTable = emojiTypeTable
-exports.reactionsTable = reactionsTable
-
-const timeout = (ms) => {
+export const timeout = (ms) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve()
@@ -43,11 +38,9 @@ const timeout = (ms) => {
   })
 }
 
-exports.timeout = timeout
-
 const sample = (arr) => arr[Math.floor(Math.random() * arr.length)]
 
-const unverifiedRequest = (req) => {
+export const unverifiedRequest = (req) => {
   if (req.body.payload) {
     const payload = JSON.parse(req.body.payload)
     return (
@@ -59,9 +52,8 @@ const unverifiedRequest = (req) => {
     )
   }
 }
-exports.unverifiedRequest = unverifiedRequest
 
-const setStatus = async (user, statusText, statusEmoji) => {
+export const setStatus = async (user, statusText, statusEmoji) => {
   const setProfile = await fetch('https://slack.com/api/users.profile.set', {
     method: 'POST',
     headers: {
@@ -91,15 +83,13 @@ const setStatus = async (user, statusText, statusEmoji) => {
     })
   }
 }
-exports.setStatus = setStatus
 
-const getNow = (tz) => {
+export const getNow = (tz) => {
   const date = new Date().toLocaleString('en-US', { timeZone: tz })
   return new Date(date).toISOString()
 }
-exports.getNow = getNow
 
-const getDayFromISOString = (ISOString) => {
+export const getDayFromISOString = (ISOString) => {
   const date = new Date(ISOString)
   try {
     date.setHours(date.getHours() - 4)
@@ -115,9 +105,8 @@ const getDayFromISOString = (ISOString) => {
     console.log(`This is the user's first post!`)
   }
 }
-exports.getDayFromISOString = getDayFromISOString
 
-const forgetUser = async (user) => {
+export const forgetUser = async (user) => {
   // get the user's info
   const userRecord = await getUserRecord(user)
 
@@ -129,10 +118,9 @@ const forgetUser = async (user) => {
   ])
   await rebuildScrapbookFor(userRecord)
 }
-exports.forgetUser = forgetUser
 
 // accepts either a user record, or a user ID = require(slack
-const rebuildScrapbookFor = async (user) => {
+export const rebuildScrapbookFor = async (user) => {
   try {
     let userScrapbookURL = ''
     if (typeof user == 'string') {
@@ -152,9 +140,8 @@ const rebuildScrapbookFor = async (user) => {
     return false
   }
 }
-exports.rebuildScrapbookFor = rebuildScrapbookFor
 
-const displayStreaks = async (userId, streakCount) => {
+export const displayStreaks = async (userId, streakCount) => {
   const userRecord = await getUserRecord(userId)
   const user = await fetch(
     `https://slack.com/api/users.profile.get?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
@@ -170,15 +157,13 @@ const displayStreaks = async (userId, streakCount) => {
     }
   }
 }
-exports.displayStreaks = displayStreaks
 
-const canDisplayStreaks = async (userId) => {
+export const canDisplayStreaks = async (userId) => {
   let record = await getUserRecord(userId)
   return record.fields['Display Streak']
 }
-exports.canDisplayStreaks = canDisplayStreaks
 
-const getUserRecord = async (userId) => {
+export const getUserRecord = async (userId) => {
   const user = await fetch(
     `https://slack.com/api/users.profile.get?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
   ).then((r) => r.json())
@@ -254,32 +239,28 @@ const getUserRecord = async (userId) => {
   }
   return { ...record, slack: user }
 }
-exports.getUserRecord = getUserRecord
 
-const emojiExists = async (emoji, updateId) =>
+export const emojiExists = async (emoji, updateId) =>
   reactionsTable
     .read({
       filterByFormula: `AND({Emoji Name} = '${emoji}', {Update} = '${updateId}')`
     })
     .then((r) => r.length > 0)
     .catch((err) => console.log('Cannot check if emoji exists', err))
-exports.emojiExists = emojiExists
 
-const updateExists = async (updateId) =>
+export const updateExists = async (updateId) =>
   reactionsTable
     .read({ filterByFormula: `{Update} = '${updateId}'` })
     .then((r) => r.length > 0)
     .catch((err) => console.log('Cannot check if update exists', err))
-exports.updateExists = updateExists
 
-const updateExistsTS = async (TS) =>
+export const updateExistsTS = async (TS) =>
   updatesTable
     .read({ filterByFormula: `{Message Timestamp} = '${TS}'` })
     .then((r) => r.length > 0)
     .catch((err) => console.log('Cannot check if update exists', err))
-exports.updateExistsTS = updateExistsTS
 
-const getEmojiRecord = async (reaction) => {
+export const getEmojiRecord = async (reaction) => {
   if (reaction.includes('::')) {
     // This will only happen if a skin tone is applied. e.g :+1::skin-tone-5:. Remove the modifier.
     reaction = reaction.split('::')[0]
@@ -312,17 +293,15 @@ const getEmojiRecord = async (reaction) => {
     return newEmojiRecord
   }
 }
-exports.getEmojiRecord = getEmojiRecord
 
-const getReactionRecord = async (emoji, updateId) =>
+export const getReactionRecord = async (emoji, updateId) =>
   (
     await reactionsTable.read({
       filterByFormula: `AND({Emoji Name} = '${emoji}', {Update} = '${updateId}')`
     })
   )[0]
-exports.getReactionRecord = getReactionRecord
 
-const getRandomWebringPost = async (user) => {
+export const getRandomWebringPost = async (user) => {
   console.log('ok!! getting webring for user ' + user)
   const userRecord = await getUserRecord(user)
   const webring = userRecord.fields['Webring']
@@ -354,9 +333,8 @@ const getRandomWebringPost = async (user) => {
   console.log('webring channel', channel)
   return `https://hackclub.slack.com/archives/${channel}/p${messageTs}`
 }
-exports.getRandomWebringPost = getRandomWebringPost
 
-const isFullMember = async (userId) => {
+export const isFullMember = async (userId) => {
   const user = await fetch(
     `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
   ).then((r) => r.json())
@@ -364,15 +342,13 @@ const isFullMember = async (userId) => {
   console.log('the opposite of that', !user.user.is_restricted)
   return !user.user.is_restricted
 }
-exports.isFullMember = isFullMember
 
-const isNewMember = async (userId) => {
+export const isNewMember = async (userId) => {
   const userRecord = await getUserRecord(userId)
   return userRecord.fields['New Member']
 }
-exports.isNewMember = isNewMember
 
-const getPublicFileUrl = async (urlPrivate, channel, user) => {
+export const getPublicFileUrl = async (urlPrivate, channel, user) => {
   const fileName = urlPrivate.split('/').pop()
   const fileId = urlPrivate.split('-')[2].split('/')[0]
   console.log('file id', fileId)
@@ -479,9 +455,8 @@ const getPublicFileUrl = async (urlPrivate, channel, user) => {
     muxPlaybackId: null
   }
 }
-exports.getPublicFileUrl = getPublicFileUrl
 
-const createPost = async (files = [], channel, ts, user, text) => {
+export const createPost = async (files = [], channel, ts, user, text) => {
   let attachments = []
   let videos = []
   let videoPlaybackIds = []
@@ -568,9 +543,8 @@ const createPost = async (files = [], channel, ts, user, text) => {
 
   await fetchProfile(userRecord.fields['Username'])
 }
-exports.createPost = createPost
 
-const postEphemeral = (channel, text, user, threadTs) =>
+export const postEphemeral = (channel, text, user, threadTs) =>
   fetch('https://slack.com/api/chat.postEphemeral', {
     method: 'POST',
     headers: {
@@ -585,9 +559,8 @@ const postEphemeral = (channel, text, user, threadTs) =>
       thread_ts: threadTs
     })
   })
-exports.postEphemeral = postEphemeral
 
-const sendCommandResponse = (responseUrl, text) => {
+export const sendCommandResponse = (responseUrl, text) => {
   fetch(responseUrl, {
     method: 'POST',
     headers: {
@@ -599,9 +572,8 @@ const sendCommandResponse = (responseUrl, text) => {
     })
   })
 }
-exports.sendCommandResponse = sendCommandResponse
 
-const getReplyMessage = async (user, username, day) => {
+export const getReplyMessage = async (user, username, day) => {
   const newMember = await isNewMember(user)
   const toggledOff = await streaksToggledOff(user)
   console.log('is new member', newMember)
@@ -618,18 +590,15 @@ const getReplyMessage = async (user, username, day) => {
   }
   return t('messages.streak.' + streakNumber, { scrapbookLink, user })
 }
-exports.getReplyMessage = getReplyMessage
 
-const streaksToggledOff = async (user) => {
+export const streaksToggledOff = async (user) => {
   const userRecord = await getUserRecord(user)
   return userRecord.fields['Streaks Toggled Off']
 }
-exports.streaksToggledOff = streaksToggledOff
 
-const replaceEmoji = (str) => emoji.emojify(str.replace(/::(.*):/, ':'))
-exports.replaceEmoji = replaceEmoji
+export const replaceEmoji = (str) => emoji.emojify(str.replace(/::(.*):/, ':'))
 
-const formatText = async (text) => {
+export const formatText = async (text) => {
   text = replaceEmoji(text).replace('&amp;', '&')
 
   const userRegex = /<@U\S+>/g
@@ -667,9 +636,8 @@ const formatText = async (text) => {
 
   return text
 }
-exports.formatText = formatText
 
-const shouldUpdateStreak = async (userId, increment) => {
+export const shouldUpdateStreak = async (userId, increment) => {
   const userRecord = await getUserRecord(userId)
   const now = getNow(userRecord.fields['Timezone'])
 
@@ -692,9 +660,8 @@ const shouldUpdateStreak = async (userId, increment) => {
     (increment ? !latestUpdates[1] : !latestUpdates[0])
   )
 }
-exports.shouldUpdateStreak = shouldUpdateStreak
 
-const incrementStreakCount = (userId, channel, message, ts) =>
+export const incrementStreakCount = (userId, channel, message, ts) =>
   new Promise(async (resolve, reject) => {
     console.log('increment streak count')
     const userRecord = await getUserRecord(userId)
@@ -776,17 +743,15 @@ const incrementStreakCount = (userId, channel, message, ts) =>
       )
     }
   }).catch((err) => reply(channel, ts, t('messages.errors.promise', { err })))
-exports.incrementStreakCount = incrementStreakCount
 
-const setAudio = async (user, url) => {
+export const setAudio = async (user, url) => {
   const userRecord = await getUserRecord(user)
   accountsTable.update(userRecord.id, {
     'Audio URL': url
   })
 }
-exports.setAudio = setAudio
 
-const tsHasScrap = async (ts) => {
+export const tsHasScrap = async (ts) => {
   const tsMessage = (await updatesTable.read({
     filterByFormula: `{Message Timestamp} = '${ts}'`
   }))[0]
@@ -795,27 +760,23 @@ const tsHasScrap = async (ts) => {
 
   return tsMessage !== undefined
 }
-exports.tsHasScrap = tsHasScrap
 
-const deleteScrap = async (ts) => {
+export const deleteScrap = async (ts) => {
   return await updatesTable.deleteWhere(`{Message Timestamp} = '${ts}'`)
 }
-exports.deleteScrap = deleteScrap
 
-const fetchProfile = (username) =>
+export const fetchProfile = (username) =>
   fetch(`https://scrapbook.hackclub.com/${username}`)
-exports.fetchProfile = fetchProfile
 
-const getUrlFromString = (str) => {
+export const getUrlFromString = (str) => {
   const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi
   let url = str.match(urlRegex)[0]
   if (url.includes('|')) url = url.split('|')[0]
   if (url.startsWith('<')) url = url.substring(1, url.length - 1)
   return url
 }
-exports.getUrlFromString = getUrlFromString
 
-const processGist = (url) =>
+export const processGist = (url) =>
   fetch(url)
     .then((r) => r.text())
     .then(async (html) => {
@@ -829,10 +790,9 @@ const processGist = (url) =>
         return url
       }
     })
-exports.processGist = processGist
 
 // ex. react('add', 'C248d81234', '12384391.12231', 'beachball')
-const react = async (addOrRemove, channel, ts, reaction) =>
+export const react = async (addOrRemove, channel, ts, reaction) =>
   await fetch('https://slack.com/api/reactions.' + addOrRemove, {
     method: 'POST',
     headers: {
@@ -843,12 +803,11 @@ const react = async (addOrRemove, channel, ts, reaction) =>
   })
     .then((r) => r.json())
     .catch((err) => console.error(err))
-exports.react = react
 
 // replies to a message in a thread
 //
 // ex. reply('C34234d934', '31482975923.12331', 'this is a threaded reply!')
-const reply = async (channel, parentTs, text, unfurl) =>
+export const reply = async (channel, parentTs, text, unfurl) =>
   await fetch('https://slack.com/api/chat.postMessage', {
     method: 'POST',
     headers: {
@@ -866,10 +825,9 @@ const reply = async (channel, parentTs, text, unfurl) =>
   })
     .then((r) => r.json())
     .then((json) => json.ts)
-exports.reply = reply
 
 // ex. t('greeting', { userID: 'UX12U391' })
-const t = (search, vars) => {
+export const t = (search, vars) => {
   if (vars) {
     console.log(
       `I'm searching for words in my yaml file under "${search}". These variables are set: ${JSON.stringify(
@@ -911,9 +869,8 @@ const evalTranscript = (target, vars = {}) => {
     return eval('`' + target + '`')
   }.call(context)
 }
-exports.t = t
 
-const getMessage = async (ts, channel) => {
+export const getMessage = async (ts, channel) => {
   try {
     const history = await fetch(
       `https://slack.com/api/conversations.history?token=${process.env.SLACK_BOT_TOKEN}&channel=${channel}&latest=${ts}&limit=1&inclusive=true`
@@ -927,4 +884,3 @@ const getMessage = async (ts, channel) => {
     return null
   }
 }
-exports.getMessage = getMessage
