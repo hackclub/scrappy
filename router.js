@@ -28,7 +28,7 @@ module.exports = async (app) => {
 
     fs.readFile(file, (err, data) => {
       if (err) console.log('error', error)
-      console.log('data', data)
+      console.log('data', data.toString('utf-8'))
     })
 
     let route = require(file)
