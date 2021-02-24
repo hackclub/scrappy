@@ -1,4 +1,5 @@
 const { resolve, relative, extname, basename, dirname } = require('path')
+const fs = require('fs')
 const { readdir } = require('fs').promises
 
 async function getFiles(dir) {
@@ -24,6 +25,11 @@ module.exports = async (app) => {
       routePath = `${routePath}/${basename(file, extname(file))}`
     }
     console.log('loading file', routePath)
+
+    fs.readFile(file, (err, data) => {
+      if (err) console.log('error', error)
+      console.log('data', data)
+    })
 
     let route = require(file)
     app.use('/api' + routePath, route)
