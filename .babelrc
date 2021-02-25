@@ -4,7 +4,9 @@
   ],
   "plugins": [
     "@babel/plugin-proposal-optional-chaining",
-    "@babel/plugin-transform-runtime"
-  ],
-  "sourceType": "module"
+    "@babel/plugin-transform-runtime",
+    ["module-resolver", {
+      "root": ["./"]
+    }]
+  ]
 }
