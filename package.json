@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "node server.js",
-    "start": "node babelbuild/bin/www",
-    "build": "rm -rf babelbuild && mkdir babelbuild && babel ./ -d babelbuild --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,/tmp -s --copy-files",
+    "start": "node build/server.js",
+    "build": "rm -rf build && mkdir build && babel ./ -d ./build --ignore ./node_modules,./package.json,./npm-debug.log,/tmp -s --copy-files",
     "heroku-prebuild": "rm -rf node_modules",
     "format": "prettier --write .",
     "checkFormat": "prettier --check ."
