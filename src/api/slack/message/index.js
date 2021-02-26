@@ -5,6 +5,8 @@ import fetch from 'node-fetch'
 module.exports = async (req, res) => {
   const { challenge, event } = req.body
 
+  console.log('event 1', event)
+
   // pass URL setup challenge Slack sends us
   if (challenge) {
     return await res.json({ challenge })
@@ -13,6 +15,8 @@ module.exports = async (req, res) => {
   if (unverifiedRequest(req))
     return res.status(400).send('Unverified Slack request!')
   res.status(200).end()
+
+  console.log('event 2', event)
 
   let method
   if (
@@ -73,7 +77,7 @@ module.exports = async (req, res) => {
     event.item.channel == process.env.CHANNEL
   ) {
     method = 'reactionRemoved'
-  } else if (event.text?.includes('<@U015D6N8X7C>')) {
+  } else if (event.text?.includes('<@U015D6A36AG>') && event.text?.includes('<@U015D6N8X7C>')) {
     console.log('scrappy has been mentioned!')
     method = 'mention'
   } else {
