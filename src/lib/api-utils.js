@@ -4,6 +4,7 @@ import FormData from 'form-data'
 import Mux from '@mux/mux-node'
 import emoji from 'node-emoji'
 import fetch from 'node-fetch'
+const yaml = require('js-yaml')
 
 const { Video } = new Mux(
   process.env.MUX_TOKEN_ID,
@@ -839,7 +840,7 @@ export const t = (search, vars) => {
     console.log(`I'm searching for words in my yaml file under "${search}"`)
   }
   const searchArr = search.split('.')
-  const transcriptObj = require('./transcript.yml')
+  const transcriptObj = yaml.load(fs.readFileSync('./transcript.yml'))
 
   return evalTranscript(recurseTranscript(searchArr, transcriptObj), vars)
 }
