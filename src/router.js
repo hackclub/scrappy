@@ -1,6 +1,6 @@
 import { resolve, relative, extname, basename, dirname }  from 'path'
 import fs from 'fs'
-import { readdir } from fs.promises
+const { readdir } = require('fs').promises
 
 async function getFiles(dir) {
   const dirents = await readdir(dir, { withFileTypes: true })
