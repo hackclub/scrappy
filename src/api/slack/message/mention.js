@@ -14,7 +14,7 @@ const wordList = [
 const messageContainsWord = (msg) => (
   wordList.some(word => msg.includes(word))
 )
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   if (unverifiedRequest(req)) {
     return res.status(400).send('Unverified Slack request!')
   } else {
