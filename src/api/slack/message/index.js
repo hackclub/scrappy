@@ -73,7 +73,7 @@ module.exports = async (req, res) => {
     event.item.channel == process.env.CHANNEL
   ) {
     method = 'reactionRemoved'
-  } else if (event.text?.includes('<@U015D6A36AG>')) {
+  } else if (event.text?.includes('<@U015D6N8X7C>')) {
     console.log('scrappy has been mentioned!')
     method = 'mention'
   } else {
