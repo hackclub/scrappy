@@ -35,11 +35,9 @@ module.exports = async (app) => {
     //app.use('/api' + routePath, route)
 
     app.all('/api' + routePath, async (req, res) => {
-      console.log('hey')
       try {
         let route = require(file)
         await route(req, res)
-        console.log('routed', route)
       } catch (err) {
         console.error(err)
       }
