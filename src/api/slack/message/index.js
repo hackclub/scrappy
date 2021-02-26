@@ -5,7 +5,7 @@ import fetch from 'node-fetch'
 module.exports = async (req, res) => {
   const { challenge, event } = req.body
 
-  console.log('event 1', event)
+  console.log('event 1', event.type)
 
   // pass URL setup challenge Slack sends us
   if (challenge) {
@@ -14,9 +14,9 @@ module.exports = async (req, res) => {
 
   if (unverifiedRequest(req))
     return res.status(400).send('Unverified Slack request!')
-  res.status(200).end()
+  res.sendStatus(200)
 
-  console.log('event 2', event)
+  console.log('event 2', event.type)
 
   let method
   if (
