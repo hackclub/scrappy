@@ -13,9 +13,6 @@
     "@babel/plugin-transform-runtime",
     ["module-resolver", {
       "root": ["./"]
-    }],
-    ["@babel/plugin-transform-modules-commonjs", {
-      "allowTopLevelThis": true
     }]
   ]
 }
