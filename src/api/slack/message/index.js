@@ -80,11 +80,13 @@ module.exports = async (req, res) => {
     return
   }
 
-  console.log(`Routing to method ${method}`)
+  // console.log(`Routing to method ${method}`)
   //                v- should be http or https, fallback to http just in case
   const protocol = (req.headers['x-forwarded-proto'] || 'http') + '://'
   const backendUrl =
     protocol + req.headers.host + '/api/slack/message/' + method
+
+  console.log(backendUrl)
 
   await fetch(backendUrl, {
     method: 'POST',
