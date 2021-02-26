@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node build/server.js",
-    "build": "rm -rf build && mkdir build && babel ./ -d ./build -s --copy-files",
+    "build": "rm -rf build && mkdir build && babel ./ -d ./build --ignore /tmp -s --copy-files",
     "heroku-prebuild": "rm -rf node_modules",
     "format": "prettier --write .",
     "checkFormat": "prettier --check ."
