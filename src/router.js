@@ -31,8 +31,8 @@ module.exports = async (app) => {
     //   console.log('data', data.toString('utf-8'))
     // })
 
-    let route = require(file)
-    app.use('/api' + routePath, route)
+    //let route = require(file)
+    //app.use('/api' + routePath, route)
 
     app.all('/api' + routePath, async (req, res) => {
       console.log('hey')
