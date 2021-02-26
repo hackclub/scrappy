@@ -4,6 +4,7 @@ import FormData from 'form-data'
 import Mux from '@mux/mux-node'
 import emoji from 'node-emoji'
 import fetch from 'node-fetch'
+import fs from 'fs'
 const yaml = require('js-yaml')
 
 const { Video } = new Mux(
