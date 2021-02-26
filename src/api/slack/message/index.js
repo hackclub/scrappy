@@ -14,9 +14,10 @@ module.exports = async (req, res) => {
 
   if (unverifiedRequest(req))
     return res.status(400).send('Unverified Slack request!')
+  console.log('event 2', event.type)
   res.sendStatus(200)
 
-  console.log('event 2', event.type)
+  console.log('event 3', event.type)
 
   let method
   if (
