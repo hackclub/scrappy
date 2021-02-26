@@ -47,7 +47,6 @@ const sample = (arr) => arr[Math.floor(Math.random() * arr.length)]
 export const unverifiedRequest = (req) => {
   if (req.body.payload) {
     const payload = JSON.parse(req.body.payload)
-    console.log(payload)
     return (
       !payload.token || payload.token != process.env.SLACK_VERIFICATION_TOKEN
     )
