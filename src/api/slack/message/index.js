@@ -73,7 +73,7 @@ module.exports = async (req, res) => {
     event.item.channel == process.env.CHANNEL
   ) {
     method = 'reactionRemoved'
-  } else if (event.text?.includes('<@U015D6A36AG>') && event.text?.includes('<@U015D6N8X7C>')) {
+  } else if (event.text?.includes('<@U015D6A36AG>') || event.text?.includes('<@U015D6N8X7C>')) {
     console.log('scrappy has been mentioned!')
     method = 'mention'
   } else {
@@ -85,8 +85,6 @@ module.exports = async (req, res) => {
   const protocol = (req.headers['x-forwarded-proto'] || 'http') + '://'
   const backendUrl =
     protocol + req.headers.host + '/api/slack/message/' + method
-
-  console.log(backendUrl)
 
   await fetch(backendUrl, {
     method: 'POST',
