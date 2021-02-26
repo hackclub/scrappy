@@ -12,8 +12,8 @@ module.exports = async (req, res) => {
     return await res.json({ challenge })
   }
 
-  if (unverifiedRequest(req))
-    return res.status(400).send('Unverified Slack request!')
+  // if (unverifiedRequest(req))
+  //   return res.status(400).send('Unverified Slack request!')
   console.log('event 2', event.type)
   res.sendStatus(200)
 
