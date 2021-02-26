@@ -36,15 +36,10 @@ module.exports = async (app) => {
 
     app.all('/api' + routePath, async (req, res) => {
       try {
-        let route = require(file)
+        let route = require(file).default
         await route(req, res)
       } catch (err) {
-        try {
-          let route = require(file).default
-          await route(req, res)
-        } catch {
-          console.error(err)
-        }
+        console.error(err)
       }
     })
   })).then(_ => {
