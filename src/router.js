@@ -39,7 +39,12 @@ module.exports = async (app) => {
         let route = require(file)
         await route(req, res)
       } catch (err) {
-        console.error(err)
+        try {
+          let route = require(file).default
+          await route(req, res)
+        } catch {
+          console.error(err)
+        }
       }
     })
   })).then(_ => {
