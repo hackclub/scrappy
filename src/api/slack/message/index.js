@@ -5,7 +5,7 @@ import fetch from 'node-fetch'
 module.exports = async (req, res) => {
   const { challenge, event } = req.body
 
-  console.log('event 1', event.type)
+  console.log('event 1', req.body.payload.token)
 
   // pass URL setup challenge Slack sends us
   if (challenge) {
