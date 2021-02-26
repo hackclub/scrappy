@@ -14,16 +14,12 @@ const wordList = [
 const messageContainsWord = (msg) => (
   wordList.some(word => msg.includes(word))
 )
-
-module.exports = async (req, res) => {
-  console.log('hello from mention')
+export default async (req, res) => {
   if (unverifiedRequest(req)) {
     return res.status(400).send('Unverified Slack request!')
   } else {
     res.sendStatus(200)
   }
-
-  console.log('hello 2')
 
   const { channel, ts, user, text, thread_ts } = req.body.event
 
