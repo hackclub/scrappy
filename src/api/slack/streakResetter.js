@@ -10,7 +10,7 @@ import {
 } from '../../lib/api-utils'
 import fetch from 'node-fetch'
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   res.status(200).end()
   const users = await accountsTable.read({
     filterByFormula: `{Streak Count} != 0`

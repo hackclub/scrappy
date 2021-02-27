@@ -1,7 +1,7 @@
 import { unverifiedRequest, t } from '../lib/api-utils'
 import fetch from 'node-fetch'
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   if (unverifiedRequest(req))
     return res.status(400).send('Unverified Slack request!')
 
