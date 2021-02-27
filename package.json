@@ -3,34 +3,39 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "dev": "node src/server.js",
+    "start": "node build/server.js",
+    "build": "rm -rf ./build && mkdir build && babel ./src -d ./build --ignore node_modules -s --copy-files",
+    "heroku-prebuild": "rm -rf node_modules",
     "format": "prettier --write .",
     "checkFormat": "prettier --check ."
   },
   "dependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.6",
+    "@babel/preset-env": "^7.13.5",
     "@mux/mux-node": "^2.8.0",
     "airtable-plus": "^1.0.4",
+    "babel-plugin-module-resolver": "^4.1.0",
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "form-data": "^3.0.0",
     "heic-convert": "^1.2.3",
+    "js-yaml": "^4.0.0",
     "lodash": "^4.17.19",
-    "next": "^9.4.4",
-    "next-yaml": "^1.0.1",
     "node-emoji": "^1.10.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.4",
     "prettier": "2.0.5"
-  },
-  "cacheDirectories": [
-    ".next/cache"
-  ]
+  }
 }
