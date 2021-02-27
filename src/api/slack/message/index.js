@@ -2,7 +2,7 @@ import { unverifiedRequest } from '../../../lib/api-utils'
 import fetch from 'node-fetch'
 
 // the data sent to us to another serverless function for longer processing.
-module.exports = async (req, res) => {
+export default async (req, res) => {
   const { challenge, event } = req.body
 
   // pass URL setup challenge Slack sends us

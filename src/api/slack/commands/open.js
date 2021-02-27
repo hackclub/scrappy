@@ -5,7 +5,7 @@ import {
   t
 } from '../../../lib/api-utils'
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   if (unverifiedRequest(req))
     return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
