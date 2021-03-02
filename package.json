@@ -17,8 +17,8 @@
   "dependencies": {
     "@babel/cli": "^7.13.0",
     "@babel/core": "^7.13.1",
-    "@babel/plugin-proposal-optional-chaining": "^7.13.0",
     "@babel/plugin-transform-runtime": "^7.13.9",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.8",
     "@babel/preset-env": "^7.13.5",
     "@mux/mux-node": "^2.8.0",
     "airtable-plus": "^1.0.4",
@@ -26,7 +26,7 @@
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
-    "form-data": "^3.0.0",
+    "form-data": "^4.0.0",
     "heic-convert": "^1.2.3",
     "js-yaml": "^4.0.0",
     "lodash": "^4.17.19",
@@ -36,6 +36,6 @@
   "devDependencies": {
     "dotenv": "^8.2.0",
     "nodemon": "^2.0.4",
-    "prettier": "2.0.5"
+    "prettier": "2.2.1"
   }
 }
