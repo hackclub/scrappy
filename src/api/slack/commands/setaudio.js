@@ -5,7 +5,7 @@ import {
   accountsTable,
   sendCommandResponse,
   rebuildScrapbookFor
-} from '../../../lib/api-utils'
+} from '@lib/api-utils'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
@@ -22,27 +22,28 @@ export default async (req, res) => {
     if (userRecord.fields['Custom Audio URL'] != null) {
       sendCommandResponse(
         response_url,
-        t('messages.audio.removed', { previous: userRecord.fields['Custom Audio URL'] })
+        t('messages.audio.removed', {
+          previous: userRecord.fields['Custom Audio URL']
+        })
       )
-      // update the account with the new audioless 
+      // update the account with the new audioless
       await accountsTable.update(userRecord.id, {
         'Custom Audio URL': null,
         'Audio File': null
       })
-    } 
-    
-    else if (userRecord.fields['Audio File'] != null) {
+    } else if (userRecord.fields['Audio File'] != null) {
       sendCommandResponse(
         response_url,
-        t('messages.audio.removed', { previous: userRecord.fields['Audio URL'] })
+        t('messages.audio.removed', {
+          previous: userRecord.fields['Audio URL']
+        })
       )
-      // update the account with the new audioless 
+      // update the account with the new audioless
       await accountsTable.update(userRecord.id, {
         'Custom Audio URL': null,
         'Audio File': null
       })
-    }
-    else {
+    } else {
       sendCommandResponse(response_url, t('messages.audio.noargs'))
     }
   } else {

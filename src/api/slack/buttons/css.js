@@ -7,7 +7,7 @@ import {
   postEphemeral,
   processGist,
   unverifiedRequest
-} from '../../../lib/api-utils'
+} from '@lib/api-utils'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))

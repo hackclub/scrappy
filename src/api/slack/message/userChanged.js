@@ -3,7 +3,7 @@ import {
   setStatus,
   unverifiedRequest,
   accountsTable
-} from '../../../lib/api-utils'
+} from '@lib/api-utils'
 import fetch from 'node-fetch'
 
 export default async (req, res) => {
