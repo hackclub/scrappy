@@ -128,5 +128,6 @@
   "mask": "mask",
   "leap": "leap",
   "discord": "discord",
-  "/z": "zoom"
+  "/z": "zoom",
+  "postgres": "postgres"
 }
