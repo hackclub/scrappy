@@ -31,11 +31,6 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.13.8.tgz#5b783b9808f15cef71547f1b691f34f8ff6003a6"
   integrity sha512-EaI33z19T4qN3xLXsGf48M2cDqa6ei9tPZlfLdb2HC+e/cFtREiRd8hdSqDbwdLB0/+gLwqJmCYASH0z2bUdog==
 
-"@babel/compat-data@^7.13.8":
-  version "7.13.8"
-  resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.13.8.tgz#5b783b9808f15cef71547f1b691f34f8ff6003a6"
-  integrity sha512-EaI33z19T4qN3xLXsGf48M2cDqa6ei9tPZlfLdb2HC+e/cFtREiRd8hdSqDbwdLB0/+gLwqJmCYASH0z2bUdog==
-
 "@babel/core@^7.13.8":
   version "7.13.8"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.13.8.tgz#c191d9c5871788a591d69ea1dc03e5843a3680fb"
@@ -858,10 +853,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@mux/mux-node@^3.1.3":
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-3.1.3.tgz#0aba1669286e7db1af57112dd7cf4751e90c7a70"
-  integrity sha512-71WUTmOSKggEeH1I2Sh/6TvSsC0uTY/MV3YY8HzhhTD8Y3AkLkOlAXR02DJejkzTaFm6L5WctNTYPfbVyS1EMQ==
+"@mux/mux-node@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-3.1.4.tgz#0360076bbb7b33ab7f5476951f356430d2e19b64"
+  integrity sha512-VCpckpYa+bgYDU+YjGE9YjySJl2zCmxgY4IjsHSKYnyInKRrcFA0VIQ6RKMyarJzCxvy4sjC64uBhhlqDLIpMw==
   dependencies:
     axios "^0.21.1"
     esdoc-ecmascript-proposal-plugin "^1.0.0"
