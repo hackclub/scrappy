@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@babel/cli@^7.13.0":
-  version "7.13.0"
-  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.13.0.tgz#48e77614e897615ca299bece587b68a70723ff4c"
-  integrity sha512-y5AohgeVhU+wO5kU1WGMLdocFj83xCxVjsVFa2ilII8NEwmBZvx7Ambq621FbFIK68loYJ9p43nfoi6es+rzSA==
+"@babel/cli@^7.13.10":
+  version "7.13.10"
+  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.13.10.tgz#3a9254cbe806639c8ca4ebd49ebe54b4267b88c9"
+  integrity sha512-lYSBC7B4B9hJ7sv0Ojx1BrGhuzCoOIYfLjd+Xpd4rOzdS+a47yi8voV8vFkfjlZR1N5qZO7ixOCbobUdT304PQ==
   dependencies:
     commander "^4.0.1"
     convert-source-map "^1.1.0"
@@ -665,10 +665,10 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.12.13"
 
-"@babel/plugin-transform-runtime@^7.13.9":
-  version "7.13.9"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-runtime/-/plugin-transform-runtime-7.13.9.tgz#744d3103338a0d6c90dee0497558150b490cee07"
-  integrity sha512-XCxkY/wBI6M6Jj2mlWxkmqbKPweRanszWbF3Tyut+hKh+PHcuIH/rSr/7lmmE7C3WW+HSIm2GT+d5jwmheuB0g==
+"@babel/plugin-transform-runtime@^7.13.10":
+  version "7.13.10"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-runtime/-/plugin-transform-runtime-7.13.10.tgz#a1e40d22e2bf570c591c9c7e5ab42d6bf1e419e1"
+  integrity sha512-Y5k8ipgfvz5d/76tx7JYbKQTcgFSU6VgJ3kKQv4zGTKr+a9T/KBvfRvGtSFgKDQGt/DBykQixV0vNWKIdzWErA==
   dependencies:
     "@babel/helper-module-imports" "^7.12.13"
     "@babel/helper-plugin-utils" "^7.13.0"
@@ -853,10 +853,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@mux/mux-node@^3.1.3":
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-3.1.3.tgz#0aba1669286e7db1af57112dd7cf4751e90c7a70"
-  integrity sha512-71WUTmOSKggEeH1I2Sh/6TvSsC0uTY/MV3YY8HzhhTD8Y3AkLkOlAXR02DJejkzTaFm6L5WctNTYPfbVyS1EMQ==
+"@mux/mux-node@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-3.1.4.tgz#0360076bbb7b33ab7f5476951f356430d2e19b64"
+  integrity sha512-VCpckpYa+bgYDU+YjGE9YjySJl2zCmxgY4IjsHSKYnyInKRrcFA0VIQ6RKMyarJzCxvy4sjC64uBhhlqDLIpMw==
   dependencies:
     axios "^0.21.1"
     esdoc-ecmascript-proposal-plugin "^1.0.0"
