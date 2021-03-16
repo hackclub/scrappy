@@ -233,6 +233,7 @@ startup:
     - polypropylene
     - polystyrene
     - the scraps left on your plate
+    - non fungible tokens
   eats:
     - eats
     - consumes
