@@ -221,7 +221,7 @@ messages:
     - So guys, in a way, people are like trash cans. When you stomp on them, their mouth opens up. *stomp*
     - Hiya, I hope you're having a great day so far, <@${this.user}>! I need to go back to eating trash, but here's a virtual hugQ34978UFAIHSAI;DFGHSLHAS ;LKSADFG ;LOKAOISGPHOIUASG IAYUWEYAFSZVAG;EOUROIU;AHSAUGPI;.
     - System.out.println("Go away");
-    - Ok fine I'll give you my Bitcoin wallet.\n\nThe public key is `1ATX8RXjVigphrYUxLJRziLstSdCan3Nig`\n\nThe private key is `L3wPf8yeQmrMSoVk1fY7w1qa5K79uaAxgGcB1keYyTYsn7TwiVi4`
+    - Ok fine I'll give you my Bitcoin wallet.\n\nThe public key is \`1ATX8RXjVigphrYUxLJRziLstSdCan3Nig\`\n\nThe private key is \`L3wPf8yeQmrMSoVk1fY7w1qa5K79uaAxgGcB1keYyTYsn7TwiVi4\`
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
