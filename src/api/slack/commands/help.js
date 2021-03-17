@@ -1,4 +1,4 @@
-import { sendCommandResponse, t } from '../../../lib/api-utils'
+import { sendCommandResponse, t } from '@lib/api-utils'
 
 export default async (req, res) => {
   const command = req.body

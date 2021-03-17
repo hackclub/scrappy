@@ -7,7 +7,7 @@ import {
   getUrlFromString,
   postEphemeral,
   unverifiedRequest
-} from '../../../lib/api-utils'
+} from '@lib/api-utils'
 import fetch from 'node-fetch'
 
 export default async (req, res) => {

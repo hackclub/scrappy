@@ -17,7 +17,7 @@ import {
   isFullMember,
   createPost,
   postEphemeral
-} from '../../../lib/api-utils'
+} from '@lib/api-utils'
 import Bottleneck from 'bottleneck'
 import fetch from 'node-fetch'
 
@@ -27,9 +27,9 @@ export default async (req, res) => {
   if (unverifiedRequest(req)) {
     return res.status(400).send('Unverified Slack request!')
   } else {
-    res.status(200).end() 
+    res.status(200).end()
   }
-  
+
   const { item, user, reaction, item_user } = req.body.event
   console.log(item, user, reaction)
 
@@ -37,21 +37,26 @@ export default async (req, res) => {
 
   if (reaction !== 'spring-of-making' && user === 'U015D6A36AG') return
 
-  if (await updateExistsTS(ts) && (reaction === 'scrappy' || reaction === 'scrappyparrot') &&
-    channel !== process.env.CHANNEL) return
-  
-  if (await updateExistsTS(ts) && (reaction === 'scrappy-retry')){
-    try { fetch(userRecord.fields['Webhook URL']) }
-    catch (err) { }
+  if (
+    (await updateExistsTS(ts)) &&
+    (reaction === 'scrappy' || reaction === 'scrappyparrot') &&
+    channel !== process.env.CHANNEL
+  )
+    return
+
+  if ((await updateExistsTS(ts)) && reaction === 'scrappy-retry') {
+    try {
+      fetch(userRecord.fields['Webhook URL'])
+    } catch (err) {}
     const message = await getMessage(ts, channel)
-    const channelKeywords = require('../../../lib/channelKeywords.json')
-    if (typeof channelKeywords[channel] !== 'undefined') await react('add', channel, ts, channelKeywords[channel])
-    const emojiKeywords = require('../../../lib/emojiKeywords.json')
+    const channelKeywords = require('@lib/channelKeywords.json')
+    if (typeof channelKeywords[channel] !== 'undefined')
+      await react('add', channel, ts, channelKeywords[channel])
+    const emojiKeywords = require('@lib/emojiKeywords.json')
     console.log('emoji keywords', emojiKeywords)
     Object.keys(emojiKeywords).forEach(async (keyword) => {
       if (
-        message
-          .text
+        message.text
           .toLowerCase()
           .search(new RegExp('\\b' + keyword + '\\b', 'gi')) !== -1
       ) {
@@ -70,7 +75,11 @@ export default async (req, res) => {
   ) {
     if (item_user != user) {
       // If the reacter didn't post the original message, then show them a friendly message
-      postEphemeral(channel, t('messages.errors.anywhere.op', { reaction }), user)
+      postEphemeral(
+        channel,
+        t('messages.errors.anywhere.op', { reaction }),
+        user
+      )
     } else {
       const message = await getMessage(ts, channel)
 
@@ -84,11 +93,8 @@ export default async (req, res) => {
     }
     return
   }
-  
-  if (
-    (reaction === 'scrappy-retry') &&
-    channel == process.env.CHANNEL
-  ) {
+
+  if (reaction === 'scrappy-retry' && channel == process.env.CHANNEL) {
     const message = await getMessage(ts, channel)
 
     if (!message) return

@@ -1,4 +1,4 @@
-import { unverifiedRequest } from '../../../lib/api-utils'
+import { unverifiedRequest } from '@lib/api-utils'
 
 export default async (req, res) => {
   console.log(req.body)

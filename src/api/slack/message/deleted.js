@@ -10,7 +10,7 @@ import {
   shouldUpdateStreak,
   unverifiedRequest,
   tsHasScrap
-} from '../../../lib/api-utils'
+} from '@lib/api-utils'
 import fetch from 'node-fetch'
 
 const deleteThreadedMessages = async (ts, channel, user) => {
