@@ -1,7 +1,12 @@
 /*
 This posts an introductory message to the #scrapbook channel when someone shows up
 */
-import { postEphemeral, t, timeout, unverifiedRequest } from '@lib/api-utils'
+import {
+  postEphemeral,
+  t,
+  timeout,
+  unverifiedRequest
+} from '../../../lib/api-utils'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))

@@ -1,4 +1,4 @@
-import { reply, t, unverifiedRequest } from '@lib/api-utils'
+import { reply, t, unverifiedRequest } from '../../../lib/api-utils'
 
 const wordList = [
   'fuck',
@@ -11,7 +11,9 @@ const wordList = [
   'trashy'
 ]
 
-const messageContainsWord = (msg) => wordList.some((word) => msg.includes(word))
+const messageContainsWord = (msg) => (
+  wordList.some(word => msg.includes(word))
+)
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
     return res.status(400).send('Unverified Slack request!')
@@ -23,8 +25,8 @@ export default async (req, res) => {
 
   const containsWord = await messageContainsWord(text)
   if (containsWord) {
-    reply(channel, thread_ts || ts, t('messages.mentionKeyword', { user }))
+    reply(channel, thread_ts || ts, t('messages.mentionKeyword', {user}))
   } else {
-    reply(channel, thread_ts || ts, t('messages.mention', { user }))
+    reply(channel, thread_ts || ts, t('messages.mention', {user}))
   }
 }

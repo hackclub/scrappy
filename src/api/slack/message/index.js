@@ -1,4 +1,4 @@
-import { unverifiedRequest } from '@lib/api-utils'
+import { unverifiedRequest } from '../../../lib/api-utils'
 import fetch from 'node-fetch'
 
 // the data sent to us to another serverless function for longer processing.
@@ -34,7 +34,9 @@ export default async (req, res) => {
     event.channel === 'C015M6U6JKU'
   ) {
     method = 'css'
-  } else if (event?.message?.subtype === 'tombstone') {
+  } else if (
+    event?.message?.subtype === 'tombstone'
+  ) {
     method = 'deleted'
   } else if (
     event.subtype === 'file_share' &&
@@ -55,7 +57,9 @@ export default async (req, res) => {
     event.channel == process.env.CHANNEL
   ) {
     method = 'noFile'
-  } else if (event.subtype === 'message_changed') {
+  } else if (
+    event.subtype === 'message_changed'
+  ) {
     method = 'updated'
   } else if (
     event?.message?.text === 'forget scrapbook' &&

@@ -5,7 +5,7 @@ import {
   accountsTable,
   sendCommandResponse,
   rebuildScrapbookFor
-} from '@lib/api-utils'
+} from '../../../lib/api-utils'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
@@ -15,10 +15,7 @@ export default async (req, res) => {
   const { text, user_id, response_url } = req.body
   const args = text.split(' ')
   let webhook = args[0] === 'setwebhook' ? args[1] : args[0]
-  webhook =
-    webhook[webhook.length - 1] === '>'
-      ? webhook?.substring(1, webhook.length - 1)
-      : webhook?.substring(1, webhook.length)
+  webhook = webhook[webhook.length-1] === '>' ? webhook?.substring(1, webhook.length - 1) : webhook?.substring(1, webhook.length)
 
   if (!webhook) {
     sendCommandResponse(response_url, t('messages.webhook.noargs'))
