@@ -21,7 +21,7 @@ import {
   postEphemeral,
   t,
   unverifiedRequest
-} from '@lib/api-utils'
+} from '../../../lib/api-utils'
 
 import css from './css'
 

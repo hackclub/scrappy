@@ -4,7 +4,7 @@ import {
   reactionsTable,
   updatesTable,
   getUserRecord
-} from '@lib/api-utils'
+} from '../../../lib/api-utils'
 import Bottleneck from 'bottleneck'
 
 const limiter = new Bottleneck({

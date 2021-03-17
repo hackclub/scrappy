@@ -5,7 +5,7 @@ import {
   accountsTable,
   sendCommandResponse,
   rebuildScrapbookFor
-} from '@lib/api-utils'
+} from '../../../lib/api-utils'
 const fetch = require('node-fetch')
 
 export default async (req, res) => {
