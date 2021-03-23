@@ -503,10 +503,10 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   ]).then(values => {
     console.log('values', values)
     if (values[1] === 'error') {
-      return false
+      return 'error'
     }
   })
-  if (!upload) {
+  if (upload === 'error') {
     return
   }
   let userRecord = await getUserRecord(user)
