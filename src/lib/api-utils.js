@@ -465,7 +465,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   let videos = []
   let videoPlaybackIds = []
 
-  await Promise.all([
+  const upload = await Promise.all([
     react('add', channel, ts, 'beachball'),
     ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(
@@ -503,9 +503,12 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   ]).then(values => {
     console.log('values', values)
     if (values[1] === 'error') {
-      return 
+      return false
     }
   })
+  if (!upload) {
+    return
+  }
   let userRecord = await getUserRecord(user)
   const fullSlackMember = userRecord.fields['Full Slack Member?']
   if (!fullSlackMember) {
