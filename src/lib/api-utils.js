@@ -476,18 +476,20 @@ export const createPost = async (files = [], channel, ts, user, text) => {
       if (!publicUrl) {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
-          postEphemeral(channel, t('messages.errors.filetype'), user)
+          react('add', channel, ts, 'x'),
+          return reply(channel, ts, t('messages.errors.filetype'))
         ])
       } else if (publicUrl.url === 'heic') {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
-          postEphemeral(channel, t('messages.errors.heic'), user)
+          react('add', channel, ts, 'x'),
+          return reply(channel, ts, t('messages.errors.heic'))
         ])
       } else if (publicUrl.url === 'big boy') {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
-          reply(channel, ts, t('messages.errors.bigimage')),
-          postEphemeral(channel, t('messages.errors.bigimage'), user)
+          react('add', channel, ts, 'x'),
+          reply(channel, ts, t('messages.errors.bigimage'))
         ])
       }
       console.log('public url', publicUrl.url)
