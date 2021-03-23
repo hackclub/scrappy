@@ -501,6 +501,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
       }
     })
   ]).then(values => {
+    console.log('values', values)
     if (values[1] === 'error') {
       return 
     }
