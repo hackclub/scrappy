@@ -474,16 +474,18 @@ export const createPost = async (files = [], channel, ts, user, text) => {
         user
       )
       if (!publicUrl) {
-        return await Promise.all([
+        await Promise.all([
           react('remove', channel, ts, 'beachball'),
           react('add', channel, ts, 'x'),
           reply(channel, ts, t('messages.errors.filetype'))
+          return 'error'
         ])
       } else if (publicUrl.url === 'heic') {
-        return await Promise.all([
+        await Promise.all([
           react('remove', channel, ts, 'beachball'),
           react('add', channel, ts, 'x'),
           reply(channel, ts, t('messages.errors.heic'))
+          return 'error'
         ])
       } else if (publicUrl.url === 'big boy') {
         await Promise.all([
@@ -498,7 +500,11 @@ export const createPost = async (files = [], channel, ts, user, text) => {
         videoPlaybackIds.push(publicUrl.muxPlaybackId)
       }
     })
-  ])
+  ]).then(values => {
+    if (values[1] === 'error') {
+      return 
+    }
+  })
   let userRecord = await getUserRecord(user)
   const fullSlackMember = userRecord.fields['Full Slack Member?']
   if (!fullSlackMember) {
