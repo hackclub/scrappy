@@ -129,5 +129,13 @@
   "leap": "leap",
   "discord": "discord",
   "/z": "zoom",
-  "postgres": "postgres"
+  "postgres": "postgres",
+  "gatsby": "gatsby",
+  "prisma": "prisma",
+  "graphql": "graphql",
+  "product hunt": "producthunt",
+  "java": "java_duke",
+  "repl": "replit",
+  "repl.it": "replit",
+  "rick roll": "smolrick",
 }
