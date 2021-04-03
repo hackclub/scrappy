@@ -193,7 +193,7 @@ export const getUserRecord = async (userId) => {
     let profile = await fetch(
       `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
     ).then((r) => r.json())
-    let username = user.profile.display_name.replace(/\s/g, '')
+    let username = user.profile.display_name !== '' ? user.profile.display_name.replace(/\s/g, '') : user.profile.real_name.replace(/\s/g, '')
     let tzOffset = profile.user.tz_offset
     let tz = profile.user.tz.replace(`\\`, '')
     console.log(
