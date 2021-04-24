@@ -334,7 +334,7 @@ export const getRandomWebringPost = async (user) => {
     filterByFormula: `{Poster ID} = '${randomUserRecord[0].fields['ID']}'`
   })
   console.log('latest update', latestUpdate)
-  if (!latestUpdate[0].fields) {
+  if (!latestUpdate.length === 0) {
     // triggered when a user has somebody in their webring, but that person doesn't have any posts
     console.log('tried to get a user\'s latest webring post, but the person didn\'t have any posts :( NONEXISTENCEEEEEEEEEEEE')
     return {
