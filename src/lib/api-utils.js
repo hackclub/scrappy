@@ -336,7 +336,7 @@ export const getRandomWebringPost = async (user) => {
     console.log('tried to get a user\'s latest webring post, but the person didn\'t have any posts :( NONEXISTENCEEEEEEEEEEEE')
     return {
       post: null,
-      scrapbookUrl: randomUserRecord.fields['Scrapbook URL'],
+      scrapbookUrl: randomUserRecord[0].fields['Scrapbook URL'],
       nonexistence: true
     }
   }
