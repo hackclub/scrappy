@@ -696,7 +696,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     const randomWebringPost = await getRandomWebringPost(userId)
     let updatedMaxStreakCount
     const updatedStreakCount = userRecord.fields['Streak Count'] + 1
-    const scrapbookLink = `https://scrapbook.hackclub.com/${userRecord.fields['Username']}`
+    const scrapbookLink = userRecord.fields['Scrapbook URL']
     console.log('random webring post', randomWebringPost)
 
     if (shouldUpdate) {
