@@ -333,6 +333,7 @@ export const getRandomWebringPost = async (user) => {
     sort: [{ field: 'Post Time', direction: 'desc' }],
     filterByFormula: `{Poster ID} = '${randomUserRecord[0].fields['ID']}'`
   })
+  console.log('latest update', latestUpdate)
   if (!latestUpdate[0].fields) {
     // triggered when a user has somebody in their webring, but that person doesn't have any posts
     console.log('tried to get a user\'s latest webring post, but the person didn\'t have any posts :( NONEXISTENCEEEEEEEEEEEE')
@@ -341,14 +342,15 @@ export const getRandomWebringPost = async (user) => {
       scrapbookUrl: randomUserRecord[0].fields['Scrapbook URL'],
       nonexistence: true
     }
-  }
-  const messageTs = latestUpdate[0].fields['Message Timestamp'].replace('.', '')
-  const channel = latestUpdate[0].fields['Channel']
-  console.log('final message ts', messageTs)
-  console.log('webring channel', channel)
-  return {
-    post: `https://hackclub.slack.com/archives/${channel}/p${messageTs}`,
-    scrapbookUrl: randomUserRecord[0].fields['Scrapbook URL']
+  } else {
+    const messageTs = latestUpdate[0].fields['Message Timestamp'].replace('.', '')
+    const channel = latestUpdate[0].fields['Channel']
+    console.log('final message ts', messageTs)
+    console.log('webring channel', channel)
+    return {
+      post: `https://hackclub.slack.com/archives/${channel}/p${messageTs}`,
+      scrapbookUrl: randomUserRecord[0].fields['Scrapbook URL']
+    }
   }
 }
 
