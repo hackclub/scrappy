@@ -346,7 +346,7 @@ export const getRandomWebringPost = async (user) => {
   console.log('webring channel', channel)
   return {
     post: `https://hackclub.slack.com/archives/${channel}/p${messageTs}`,
-    scrapbookUrl: randomUserRecord.fields['Scrapbook URL']
+    scrapbookUrl: randomUserRecord[0].fields['Scrapbook URL']
   }
 }
 
