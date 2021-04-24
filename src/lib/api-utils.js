@@ -321,8 +321,10 @@ export const getRandomWebringPost = async (user) => {
   const randomUserRecord = await accountsTable.read({
     filterByFormula: `{Record ID} = '${randomWebringId}'`
   }).catch(err => {
-    console.log('error getting random webring = require(airtable', err)
-    return 'https://hackclub.slack.com/archives/C019RJ7H08J/p1599578598347100'
+    console.log('error getting random webring', err)
+    return {
+      post: 'https://hackclub.slack.com/archives/C019RJ7H08J/p1599578598347100'
+    }
   })
   console.log('random user record', randomUserRecord)
 
@@ -331,7 +333,7 @@ export const getRandomWebringPost = async (user) => {
     sort: [{ field: 'Post Time', direction: 'desc' }],
     filterByFormula: `{Poster ID} = '${randomUserRecord[0].fields['ID']}'`
   })
-  if (!latestUpdate.fields) {
+  if (!latestUpdate[0].fields) {
     // triggered when a user has somebody in their webring, but that person doesn't have any posts
     console.log('tried to get a user\'s latest webring post, but the person didn\'t have any posts :( NONEXISTENCEEEEEEEEEEEE')
     return {
