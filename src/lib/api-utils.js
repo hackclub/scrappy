@@ -331,8 +331,9 @@ export const getRandomWebringPost = async (user) => {
     sort: [{ field: 'Post Time', direction: 'desc' }],
     filterByFormula: `{Poster ID} = '${randomUserRecord[0].fields['ID']}'`
   })
-  if (!latestUpdate) {
+  if (!latestUpdate.fields) {
     // triggered when a user has somebody in their webring, but that person doesn't have any posts
+    console.log('tried to get a user\'s latest webring post, but the person didn\'t have any posts :( NONEXISTENCEEEEEEEEEEEE')
     return {
       post: null,
       scrapbookUrl: randomUserRecord.fields['Scrapbook URL'],
