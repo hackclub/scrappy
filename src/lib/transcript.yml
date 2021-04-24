@@ -97,6 +97,8 @@ messages:
       Hey! :watchingyou:  Add other people to your webring, not yourself!!!!
     invaliduser: |
       I couldn't find that user :thunj: Make sure you're tagging the user, and make sure they're a Scrapbook user.
+    nonexistence: |
+      ALSO BTW i tried to get the latest post from someone in your webring, but they've never posted to Scrapbook so there's no post to get!!!! you may wanna consider removing them from your webring. this is the someone in question: ${this.scrapbookUrl}
     random:
       - Put on your clout goggles for a new post from your webring! ${this.randomWebringPost}
       - Bounce on over to this new post from your webring! ${this.randomWebringPost}

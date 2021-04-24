@@ -331,11 +331,22 @@ export const getRandomWebringPost = async (user) => {
     sort: [{ field: 'Post Time', direction: 'desc' }],
     filterByFormula: `{Poster ID} = '${randomUserRecord[0].fields['ID']}'`
   })
+  if (!latestUpdate) {
+    // triggered when a user has somebody in their webring, but that person doesn't have any posts
+    return {
+      post: null,
+      scrapbookUrl: randomUserRecord.fields['Scrapbook URL'],
+      nonexistence: true
+    }
+  }
   const messageTs = latestUpdate[0].fields['Message Timestamp'].replace('.', '')
   const channel = latestUpdate[0].fields['Channel']
   console.log('final message ts', messageTs)
   console.log('webring channel', channel)
-  return `https://hackclub.slack.com/archives/${channel}/p${messageTs}`
+  return {
+    post: `https://hackclub.slack.com/archives/${channel}/p${messageTs}`,
+    scrapbookUrl: randomUserRecord.fields['Scrapbook URL']
+  }
 }
 
 export const isFullMember = async (userId) => {
@@ -749,12 +760,18 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
         ? replyMessage
         : t('messages.streak.nostreak', { scrapbookLink })
     )
-    if (randomWebringPost) {
+    if (randomWebringPost.post) {
       await reply(
         channel,
         ts,
-        t('messages.webring.random', { randomWebringPost }),
+        t('messages.webring.random', { randomWebringPost: randomWebringPost.post }),
         true
+      )
+    } else if (!randomWebringPost.post && randomWebringPost.nonexistence) {
+      await reply(
+        channel,
+        ts,
+        t('messages.webring.nonexistence', { scrapbookUrl: randomWebringPost.scrapbookUrl })
       )
     }
   }).catch((err) => reply(channel, ts, t('messages.errors.promise', { err })))
