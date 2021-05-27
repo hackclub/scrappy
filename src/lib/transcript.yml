@@ -225,6 +225,9 @@ messages:
     - System.out.println("Go away");
     - Ok fine I'll give you my Bitcoin wallet.\n\nThe public key is \`1ATX8RXjVigphrYUxLJRziLstSdCan3Nig\`\n\nThe private key is \`L3wPf8yeQmrMSoVk1fY7w1qa5K79uaAxgGcB1keYyTYsn7TwiVi4\`
     - no
+    - yea
+    - ya
+    - yes
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
