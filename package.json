@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.13",
+    "@babel/core": "^7.14.6",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/plugin-proposal-optional-chaining": "^7.13.12",
     "@mux/mux-node": "^3.2.1",
