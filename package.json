@@ -34,7 +34,7 @@
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "dotenv": "^9.0.2",
+    "dotenv": "^10.0.0",
     "nodemon": "^2.0.4",
     "prettier": "2.3.0"
   }
