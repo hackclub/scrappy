@@ -19,7 +19,7 @@
     "@babel/core": "^7.13.13",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/plugin-proposal-optional-chaining": "^7.13.12",
-    "@mux/mux-node": "^3.2.1",
+    "@mux/mux-node": "^3.2.3",
     "@babel/preset-env": "^7.14.1",
     "airtable-plus": "^1.0.4",
     "babel-plugin-module-resolver": "^4.1.0",
@@ -34,7 +34,7 @@
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "dotenv": "^9.0.2",
+    "dotenv": "^10.0.0",
     "nodemon": "^2.0.4",
     "prettier": "2.3.0"
   }
