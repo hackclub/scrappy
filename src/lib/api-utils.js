@@ -740,7 +740,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     )
     // remove beachball react
     await react('remove', channel, ts, 'beachball')
-    await react('add', channel, ts, 'summer-of-making')
+    await react('add', channel, ts, 'som-21')
 
     try { fetch(userRecord.fields['Webhook URL']) }
     catch (err) { }
