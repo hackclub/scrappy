@@ -993,10 +993,10 @@
     "@babel/helper-validator-identifier" "^7.14.0"
     to-fast-properties "^2.0.0"
 
-"@mux/mux-node@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-3.2.1.tgz#69870ebf91fcfa182bb47f69dc3a394d07a0797e"
-  integrity sha512-kpXxn5J4RP6BClSKYJwq7lHjcg4S3vYyqfOLQbxuBLcR+/MbXlFJE+IOLGKIkAbTbDrfrR91uyVFa8Kgj59Cyg==
+"@mux/mux-node@^3.2.3":
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-3.2.3.tgz#2ca6b54d6d48972a6fce9b301674a876430a3c54"
+  integrity sha512-incFthoAPP2RJrptWnSF0/1OX5ws0X1hnkUscA7PP57Ka1y6597/vhxpbdKb4K7GkKBJ0DEyDpfFBMdC0II1sA==
   dependencies:
     axios "^0.21.1"
     esdoc-ecmascript-proposal-plugin "^1.0.0"
