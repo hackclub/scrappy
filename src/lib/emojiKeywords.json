@@ -142,5 +142,20 @@
   "firefox": "firefoxlogo",
   "vivaldi": "vivaldi",
   "ABCO-1": "abcout",
-  "nix": "nix"
+  "nix": "nix",
+  "typescript": "typescript",
+  "ts": "typescript",
+  "zephyr": "train",
+  "summer": "sunny",
+  "plane": "airplane",
+  "train": "train",
+  "bus": "bus",
+  "awesome": "awesome",
+  "graph": "chart_with_upwards_trend",
+  "chart": "chart_with_upwards_trend",
+  "boba": "boba-parrot",
+  "bubble tea": "boba-parrot",
+  "spotify": "spotify",
+  "repair": "hammer_and_wrench",
+  "cow": "cow"
 }
