@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE")
+}
+
+model Accounts {
+  slackID                 String     @unique
+  username                String     @unique
+  streakCount             Int?
+  maxStreaks              Int?
+  displayStreak           Boolean?
+  streaksToggledOff       Boolean?
+  customDomain            String?
+  cssURL                  String?
+  website                 String
+  github                  String?
+  fullSlackMember         Boolean?
+  avatar                  String?
+  webring                 Accounts[] @relation("AccountsToAccounts")
+  updates                 Updates[]
+  newMember               Boolean
+  timezoneOffset          Int
+  timezone                String
+  pronouns                String
+  customAudioURL          String
+  lastUsernameUpdatedTime DateTime
+  webhookURL              String
+  Accounts                Accounts?  @relation("AccountsToAccounts", fields: [accountsSlackID], references: [slackID])
+  accountsSlackID         String?
+}
+
+model Updates {
+  id               String           @id @default(cuid())
+  Accounts         Accounts?        @relation(fields: [accountsSlackID], references: [slackID])
+  accountsSlackID  String?
+  postTime         DateTime         @default(now()) @map("created_at")
+  text             String?
+  imageAttachments String[]
+  muxAssetIDs      String[]
+  muxPlaybackIDs   String[]
+  muxAssetStatuses String?
+  messageTimestamp Float?
+  backupAssetID    String?
+  backupPlaybackID String?
+  isLargeVideo     Boolean?
+  emojiReactions   EmojiReactions[]
+  channel          String?
+}
+
+model EmojiType {
+  name           String           @unique
+  emojiSource    String?
+  emojiReactions EmojiReactions[]
+}
+
+model EmojiReactions {
+  id            String     @id @default(cuid())
+  update        Updates    @relation(fields: [id], references: [id])
+  EmojiType     EmojiType? @relation(fields: [emojiTypeName], references: [name])
+  emojiTypeName String?
+  updatedAt     DateTime   @default(now()) @map("created_at")
+}
