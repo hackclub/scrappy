@@ -78,7 +78,7 @@ export const getDayFromISOString = (ISOString) => {
   try {
     date.setHours(date.getHours() - 4)
     ISOString = date.toISOString()
-  } catch { }
+  } catch {}
   try {
     const month = ISOString.split('-')[1]
     const day = ISOString.split('-')[2].split('T')[0]
@@ -99,14 +99,14 @@ export const forgetUser = async (user) => {
     updatesTable.deleteWhere(`{Poster ID} = "${user}"`),
     await prisma.updates.deleteMany({
       where: {
-        slackID: user,
-      },
+        slackID: user
+      }
     }),
     // delete their account
     await prisma.accounts.deleteMany({
       where: {
-        accountsSlackID: user,
-      },
+        accountsSlackID: user
+      }
     })
   ])
   await rebuildScrapbookFor(userRecord)
@@ -172,16 +172,19 @@ export const getUserRecord = async (userId) => {
   let avatar = user.profile.image_192
 
   let record = await prisma.accounts.findUnique({
-      where: {
-        slackID: userId
-      }
-    })
+    where: {
+      slackID: userId
+    }
+  })
 
   if (record === null) {
     let profile = await fetch(
       `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
     ).then((r) => r.json())
-    let username = user.profile.display_name !== '' ? user.profile.display_name.replace(/\s/g, '') : user.profile.real_name.replace(/\s/g, '')
+    let username =
+      user.profile.display_name !== ''
+        ? user.profile.display_name.replace(/\s/g, '')
+        : user.profile.real_name.replace(/\s/g, '')
     let tzOffset = profile.user.tz_offset
     let tz = profile.user.tz.replace(`\\`, '')
     console.log(
@@ -191,21 +194,18 @@ export const getUserRecord = async (userId) => {
       tz
     )
     record = await prisma.accounts.create({
-      data: { 
-      ID: userId,
-      Username: username,
-      'Streak Count': 0,
-      Website: website,
-      GitHub: github,
-      'New Member': true,
-      Avatar: [
-        {
-          url: avatar
-        }
-      ],
-      'Timezone offset': tzOffset,
-      Timezone: tz
-    }})
+      data: {
+        slackID: userId,
+        username: username,
+        streakCount: 0,
+        website: website,
+        github: github,
+        newMember: true,
+        avatar: avatar,
+        timezoneOffset: tzOffset,
+        timezone: tz
+      }
+    })
     if (!user.profile.is_custom_image) {
       const animalImages = [
         'https://i.imgur.com/njP1JWx.jpg',
@@ -221,12 +221,9 @@ export const getUserRecord = async (userId) => {
       console.log(
         `User ${userId} doesn't have a profile picture set. Setting to ${animalImage}`
       )
-      await accountsTable.update(record.id, {
-        Avatar: [
-          {
-            url: animalImage
-          }
-        ]
+      await prisma.accounts.update({
+        where: { slackID: userId },
+        data: { avatar: animalImage }
       })
     }
   }
@@ -234,22 +231,33 @@ export const getUserRecord = async (userId) => {
 }
 
 export const emojiExists = async (emoji, updateId) =>
-  reactionsTable
-    .read({
-      filterByFormula: `AND({Emoji Name} = '${emoji}', {Update} = '${updateId}')`
+  prisma.emojireactions
+    .findMany({
+      where: {
+        updateId: updateId,
+        emojiTypeName: emoji
+      }
     })
     .then((r) => r.length > 0)
     .catch((err) => console.log('Cannot check if emoji exists', err))
 
 export const updateExists = async (updateId) =>
-  reactionsTable
-    .read({ filterByFormula: `{Update} = '${updateId}'` })
+  prisma.emojireactions
+    .findMany({
+      where: {
+        updateId: updateId
+      }
+    })
     .then((r) => r.length > 0)
     .catch((err) => console.log('Cannot check if update exists', err))
 
 export const updateExistsTS = async (TS) =>
-  updatesTable
-    .read({ filterByFormula: `{Message Timestamp} = '${TS}'` })
+  prisma.updates
+    .findMany({
+      where: {
+        messageTimestamp: TS
+      }
+    })
     .then((r) => r.length > 0)
     .catch((err) => console.log('Cannot check if update exists', err))
 
@@ -259,9 +267,10 @@ export const getEmojiRecord = async (reaction) => {
     reaction = reaction.split('::')[0]
   }
   console.log('Looking for reaction', reaction)
-  const emojiRecord = await emojiTypeTable.read({
-    filterByFormula: `Name = '${reaction}'`,
-    maxRecords: 1
+  const emojiRecord = await prisma.emojitype.findMany({
+    where: {
+      name: reaction
+    }
   })
   if (emojiRecord.length > 0) return emojiRecord[0]
   else {
@@ -279,9 +288,11 @@ export const getEmojiRecord = async (reaction) => {
     } else {
       emojiSource = unicodeEmoji.emoji
     }
-    const newEmojiRecord = await emojiTypeTable.create({
-      Name: reaction,
-      'Emoji Source': emojiSource
+    const newEmojiRecord = await prisma.emojitype.create({
+      data: {
+        name: reaction,
+        emojiSource: emojiSource
+      }
     })
     return newEmojiRecord
   }
@@ -307,14 +318,16 @@ export const getRandomWebringPost = async (user) => {
 
   const randomWebringId = sample(webring)
   console.log('random webring id', randomWebringId)
-  const randomUserRecord = await accountsTable.read({
-    filterByFormula: `{Record ID} = '${randomWebringId}'`
-  }).catch(err => {
-    console.log('error getting random webring', err)
-    return {
-      post: 'https://hackclub.slack.com/archives/C019RJ7H08J/p1599578598347100'
-    }
-  })
+  const randomUserRecord = await accountsTable
+    .read({
+      filterByFormula: `{Record ID} = '${randomWebringId}'`
+    })
+    .catch((err) => {
+      console.log('error getting random webring', err)
+      return {
+        post: 'https://hackclub.slack.com/archives/C019RJ7H08J/p1599578598347100'
+      }
+    })
   console.log('random user record', randomUserRecord)
 
   const latestUpdate = await updatesTable.read({
@@ -325,14 +338,19 @@ export const getRandomWebringPost = async (user) => {
   console.log('latest update', latestUpdate)
   if (latestUpdate.length === 0) {
     // triggered when a user has somebody in their webring, but that person doesn't have any posts
-    console.log('tried to get a user\'s latest webring post, but the person didn\'t have any posts :( NONEXISTENCEEEEEEEEEEEE')
+    console.log(
+      "tried to get a user's latest webring post, but the person didn't have any posts :( NONEXISTENCEEEEEEEEEEEE"
+    )
     return {
       post: null,
       scrapbookUrl: randomUserRecord[0].fields['Scrapbook URL'],
       nonexistence: true
     }
   } else {
-    const messageTs = latestUpdate[0].fields['Message Timestamp'].replace('.', '')
+    const messageTs = latestUpdate[0].fields['Message Timestamp'].replace(
+      '.',
+      ''
+    )
     const channel = latestUpdate[0].fields['Channel']
     console.log('final message ts', messageTs)
     console.log('webring channel', channel)
@@ -473,11 +491,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   const upload = await Promise.all([
     react('add', channel, ts, 'beachball'),
     ...files.map(async (file) => {
-      const publicUrl = await getPublicFileUrl(
-        file.url_private,
-        channel,
-        user
-      )
+      const publicUrl = await getPublicFileUrl(file.url_private, channel, user)
       if (!publicUrl) {
         await Promise.all([
           react('remove', channel, ts, 'beachball'),
@@ -505,7 +519,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
         videoPlaybackIds.push(publicUrl.muxPlaybackId)
       }
     })
-  ]).then(values => {
+  ]).then((values) => {
     console.log('values', values)
     if (values[1] === 'error') {
       return 'error'
@@ -541,25 +555,25 @@ export const createPost = async (files = [], channel, ts, user, text) => {
     'Is Large Video': attachments.some(
       (attachment) => attachment.url === 'https://i.imgur.com/UkXMexG.mp4'
     ),
-    'Channel': channel
+    Channel: channel
   })
-  
+
   console.log('calling incrementStreakCount')
   await incrementStreakCount(user, channel, messageText, ts)
 
   // Update the christmas livestream
-//   try{
-//     fetch("https://hackclub-scrapbook-livestream.herokuapp.com/webhook", {
-//       method: "POST",
-//       headers: {
-//         "Content-type": "application/json"
-//       },
-//       body: JSON.stringify({
-//         name: userRecord.fields['Username'],
-//         username: userRecord.fields['Username']
-//       })
-//     })
-//  } catch(e) {}
+  //   try{
+  //     fetch("https://hackclub-scrapbook-livestream.herokuapp.com/webhook", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json"
+  //       },
+  //       body: JSON.stringify({
+  //         name: userRecord.fields['Username'],
+  //         username: userRecord.fields['Username']
+  //       })
+  //     })
+  //  } catch(e) {}
 
   await fetchProfile(userRecord.fields['Username'])
 }
@@ -631,7 +645,9 @@ export const formatText = async (text) => {
         const userRecord = await getUserRecord(uID)
         if (!userRecord) {
           fetch(
-            `https://slack.com/api/users.profile.get?token=${process.env.SLACK_BOT_TOKEN}&user=${u.substring(2, u.length - 1)}`
+            `https://slack.com/api/users.profile.get?token=${
+              process.env.SLACK_BOT_TOKEN
+            }&user=${u.substring(2, u.length - 1)}`
           )
             .then((r) => r.json())
             .then(({ profile }) => profile.display_name || profile.real_name)
@@ -700,7 +716,10 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
           'New Member': false
         })
       }
-      if (userRecord.fields['Max Streaks'] < updatedStreakCount || !userRecord.fields['Max Streaks']) {
+      if (
+        userRecord.fields['Max Streaks'] < updatedStreakCount ||
+        !userRecord.fields['Max Streaks']
+      ) {
         updatedMaxStreakCount = updatedStreakCount
       } else {
         updatedMaxStreakCount = userRecord.fields['Max Streaks']
@@ -731,11 +750,13 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     await react('remove', channel, ts, 'beachball')
     await react('add', channel, ts, 'summer21')
 
-    try { fetch(userRecord.fields['Webhook URL']) }
-    catch (err) { }
+    try {
+      fetch(userRecord.fields['Webhook URL'])
+    } catch (err) {}
 
     const channelKeywords = require('./channelKeywords.json')
-    if (typeof channelKeywords[channel] !== 'undefined') await react('add', channel, ts, channelKeywords[channel])
+    if (typeof channelKeywords[channel] !== 'undefined')
+      await react('add', channel, ts, channelKeywords[channel])
     const emojiKeywords = require('./emojiKeywords.json')
     console.log('emoji keywords', emojiKeywords)
     Object.keys(emojiKeywords).forEach(async (keyword) => {
@@ -758,14 +779,18 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
       await reply(
         channel,
         ts,
-        t('messages.webring.random', { randomWebringPost: randomWebringPost.post }),
+        t('messages.webring.random', {
+          randomWebringPost: randomWebringPost.post
+        }),
         true
       )
     } else if (!randomWebringPost.post && randomWebringPost.nonexistence) {
       await reply(
         channel,
         ts,
-        t('messages.webring.nonexistence', { scrapbookUrl: randomWebringPost.scrapbookUrl })
+        t('messages.webring.nonexistence', {
+          scrapbookUrl: randomWebringPost.scrapbookUrl
+        })
       )
     }
   }).catch((err) => reply(channel, ts, t('messages.errors.promise', { err })))
@@ -778,9 +803,11 @@ export const setAudio = async (user, url) => {
 }
 
 export const tsHasScrap = async (ts) => {
-  const tsMessage = (await updatesTable.read({
-    filterByFormula: `{Message Timestamp} = '${ts}'`
-  }))[0]
+  const tsMessage = (
+    await updatesTable.read({
+      filterByFormula: `{Message Timestamp} = '${ts}'`
+    })
+  )[0]
   console.log('delete: ts message:', tsMessage)
   console.log('ts has scrap?', tsMessage !== undefined)
 
@@ -795,7 +822,8 @@ export const fetchProfile = (username) =>
   fetch(`https://scrapbook.hackclub.com/${username}`)
 
 export const getUrlFromString = (str) => {
-  const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi
+  const urlRegex =
+    /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi
   let url = str.match(urlRegex)[0]
   if (url.includes('|')) url = url.split('|')[0]
   if (url.startsWith('<')) url = url.substring(1, url.length - 1)
@@ -864,7 +892,9 @@ export const t = (search, vars) => {
     console.log(`I'm searching for words in my yaml file under "${search}"`)
   }
   const searchArr = search.split('.')
-  const transcriptObj = yaml.load(fs.readFileSync(path.join(__dirname, 'transcript.yml'),'utf-8'))
+  const transcriptObj = yaml.load(
+    fs.readFileSync(path.join(__dirname, 'transcript.yml'), 'utf-8')
+  )
 
   return evalTranscript(recurseTranscript(searchArr, transcriptObj), vars)
 }

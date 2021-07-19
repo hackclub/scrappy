@@ -59,7 +59,8 @@ model EmojiType {
 
 model EmojiReactions {
   id            String     @id @default(cuid())
-  update        Updates    @relation(fields: [id], references: [id])
+  update        Updates?    @relation(fields: [updateId], references: [id])
+  updateId      String?
   EmojiType     EmojiType? @relation(fields: [emojiTypeName], references: [name])
   emojiTypeName String?
   updatedAt     DateTime   @default(now()) @map("created_at")
