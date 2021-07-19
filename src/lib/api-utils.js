@@ -7,32 +7,12 @@ import fetch from 'node-fetch'
 import fs from 'fs'
 import path from 'path'
 const yaml = require('js-yaml')
+import prisma from './prisma'
 
 const { Video } = new Mux(
   process.env.MUX_TOKEN_ID,
   process.env.MUX_TOKEN_SECRET
 )
-
-export const accountsTable = new AirtablePlus({
-  apiKey: process.env.AIRTABLE_API_KEY,
-  baseID: 'appRxhF9qVMLbxAXR',
-  tableName: 'Slack Accounts'
-})
-export const updatesTable = new AirtablePlus({
-  apiKey: process.env.AIRTABLE_API_KEY,
-  baseID: 'appRxhF9qVMLbxAXR',
-  tableName: 'Updates'
-})
-export const emojiTypeTable = new AirtablePlus({
-  apiKey: process.env.AIRTABLE_API_KEY,
-  baseID: 'appRxhF9qVMLbxAXR',
-  tableName: 'Emoji Type'
-})
-export const reactionsTable = new AirtablePlus({
-  apiKey: process.env.AIRTABLE_API_KEY,
-  baseID: 'appRxhF9qVMLbxAXR',
-  tableName: 'Emoji Reactions'
-})
 
 export const timeout = (ms) => {
   return new Promise((resolve, reject) => {
@@ -117,8 +97,17 @@ export const forgetUser = async (user) => {
   await Promise.all([
     // delete their updates...
     updatesTable.deleteWhere(`{Poster ID} = "${user}"`),
-    // delete their profile...
-    accountsTable.deleteWhere(`{ID} = "${user}"`)
+    await prisma.updates.deleteMany({
+      where: {
+        slackID: user,
+      },
+    }),
+    // delete their account
+    await prisma.accounts.deleteMany({
+      where: {
+        accountsSlackID: user,
+      },
+    })
   ])
   await rebuildScrapbookFor(userRecord)
 }
@@ -128,9 +117,9 @@ export const rebuildScrapbookFor = async (user) => {
   try {
     let userScrapbookURL = ''
     if (typeof user == 'string') {
-      userScrapbookURL = (await getUserRecord(user)).fields['Scrapbook URL']
+      userScrapbookURL = (await getUserRecord(user)).username
     } else {
-      userScrapbookURL = user.fields['Scrapbook URL']
+      userScrapbookURL = `https://scrapbook.hackclub.com/${user.username}`
     }
     console.log('Attempting to rebuild scrapbook for', userScrapbookURL)
     // initiate a rebuild
@@ -151,8 +140,8 @@ export const displayStreaks = async (userId, streakCount) => {
     `https://slack.com/api/users.profile.get?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
   ).then((r) => r.json())
 
-  if (!userRecord.fields['Streaks Toggled Off']) {
-    if (streakCount == 0 || !userRecord.fields['Display Streak']) {
+  if (!userRecord.streaksToggledOff) {
+    if (streakCount == 0 || !userRecord.displayStreak) {
       setStatus(userId, '', '')
     } else {
       const statusText = 'day streak in #scrapbook'
@@ -164,7 +153,7 @@ export const displayStreaks = async (userId, streakCount) => {
 
 export const canDisplayStreaks = async (userId) => {
   let record = await getUserRecord(userId)
-  return record.fields['Display Streak']
+  return record.displayStreak
 }
 
 export const getUserRecord = async (userId) => {
@@ -182,14 +171,13 @@ export const getUserRecord = async (userId) => {
   }
   let avatar = user.profile.image_192
 
-  let record
-  record = (
-    await accountsTable.read({
-      filterByFormula: `{ID} = '${userId}'`,
-      maxRecords: 1
+  let record = await prisma.accounts.findUnique({
+      where: {
+        slackID: userId
+      }
     })
-  )[0]
-  if (typeof record === 'undefined') {
+
+  if (record === null) {
     let profile = await fetch(
       `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
     ).then((r) => r.json())
@@ -202,7 +190,8 @@ export const getUserRecord = async (userId) => {
       tzOffset,
       tz
     )
-    record = await accountsTable.create({
+    record = await prisma.accounts.create({
+      data: { 
       ID: userId,
       Username: username,
       'Streak Count': 0,
@@ -216,7 +205,7 @@ export const getUserRecord = async (userId) => {
       ],
       'Timezone offset': tzOffset,
       Timezone: tz
-    })
+    }})
     if (!user.profile.is_custom_image) {
       const animalImages = [
         'https://i.imgur.com/njP1JWx.jpg',

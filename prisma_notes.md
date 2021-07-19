@@ -14,12 +14,6 @@ Attachements to be merged with CDN links
 Users have been removed from Emoji reacts, will explore later
 A lot of emoji reactions fields must be done programmatically
 
-Files that need updating:
+Lines to look into:
 
-src/api/slack/buttons/css.js
-src/api/slack/commands/setaudio.js
-src/api/slack/commands/setcss.js
-src/api/slack/commands/setdomain.js
-src/api/slack/commands/setusername.js
-src/api/slack/commands/setwebhook.js
-src/api/slack/commands/steal-css.js
+await rebuildScrapbookFor(userRecord) (forgetUser)
