@@ -22,9 +22,9 @@ export default async (req, res) => {
   console.log(
     'found user record for ',
     userArg || user_id,
-    userRecord.fields['Scrapbook URL']
+    `https://scrapbook.hackclub.com/${userRecord.username}`
   )
-  const scrapbookLink = userRecord.fields['Scrapbook URL']
+  const scrapbookLink = `https://scrapbook.hackclub.com/${userRecord.username}`
   if (userArg) {
     sendCommandResponse(
       response_url,
