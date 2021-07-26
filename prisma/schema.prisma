@@ -37,7 +37,7 @@ model Updates {
   id               String           @id @default(cuid())
   Accounts         Accounts?        @relation(fields: [accountsSlackID], references: [slackID])
   accountsSlackID  String?
-  postTime         DateTime         @default(now()) @map("created_at")
+  postTime         DateTime         
   text             String?
   imageAttachments String[]
   muxAssetIDs      String[]

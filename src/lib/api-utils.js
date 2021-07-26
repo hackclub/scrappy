@@ -300,15 +300,18 @@ export const getEmojiRecord = async (reaction) => {
 
 export const getReactionRecord = async (emoji, updateId) =>
   (
-    await reactionsTable.read({
-      filterByFormula: `AND({Emoji Name} = '${emoji}', {Update} = '${updateId}')`
+    await prisma.emojitype.findWhere({
+      where: {
+        emojiTypeName: emoji,
+        updateId: updateId
+      }
     })
   )[0]
 
 export const getRandomWebringPost = async (user) => {
   console.log('ok!! getting webring for user ' + user)
   const userRecord = await getUserRecord(user)
-  const webring = userRecord.fields['Webring']
+  const webring = userRecord.webring
   console.log('webring for user', webring)
   if (!webring) {
     console.log('no webring found')
@@ -316,24 +319,18 @@ export const getRandomWebringPost = async (user) => {
   }
   console.log('webring for user exists! yay!')
 
-  const randomWebringId = sample(webring)
-  console.log('random webring id', randomWebringId)
-  const randomUserRecord = await accountsTable
-    .read({
-      filterByFormula: `{Record ID} = '${randomWebringId}'`
-    })
-    .catch((err) => {
-      console.log('error getting random webring', err)
-      return {
-        post: 'https://hackclub.slack.com/archives/C019RJ7H08J/p1599578598347100'
-      }
-    })
+  const randomUserRecord = sample(webring).slackID
   console.log('random user record', randomUserRecord)
 
-  const latestUpdate = await updatesTable.read({
-    maxRecords: 1,
-    sort: [{ field: 'Post Time', direction: 'desc' }],
-    filterByFormula: `{Poster ID} = '${randomUserRecord[0].fields['ID']}'`
+  const latestUpdate = await prisma.updates.findWhere({
+    orderBy: [
+      {
+        postTime: 'desc'
+      }
+    ],
+    where: {
+      accountsSlackID: randomUserRecord[0].slackID
+    }
   })
   console.log('latest update', latestUpdate)
   if (latestUpdate.length === 0) {
@@ -343,20 +340,19 @@ export const getRandomWebringPost = async (user) => {
     )
     return {
       post: null,
-      scrapbookUrl: randomUserRecord[0].fields['Scrapbook URL'],
+      scrapbookUrl:
+        'https://scrapbook.hackclub.com/' + randomUserRecord[0].username,
       nonexistence: true
     }
   } else {
-    const messageTs = latestUpdate[0].fields['Message Timestamp'].replace(
-      '.',
-      ''
-    )
-    const channel = latestUpdate[0].fields['Channel']
+    const messageTs = latestUpdate[0].messageTimestamp.replace('.', '')
+    const channel = latestUpdate[0].channel
     console.log('final message ts', messageTs)
     console.log('webring channel', channel)
     return {
       post: `https://hackclub.slack.com/archives/${channel}/p${messageTs}`,
-      scrapbookUrl: randomUserRecord[0].fields['Scrapbook URL']
+      scrapbookUrl:
+        'https://scrapbook.hackclub.com/' + randomUserRecord[0].username
     }
   }
 }
@@ -372,7 +368,7 @@ export const isFullMember = async (userId) => {
 
 export const isNewMember = async (userId) => {
   const userRecord = await getUserRecord(userId)
-  return userRecord.fields['New Member']
+  return userRecord.newMember
 }
 
 export const getPublicFileUrl = async (urlPrivate, channel, user) => {
@@ -476,8 +472,15 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
       muxPlaybackId: asset.playback_ids[0].id
     }
   }
+  let cdnAPIResponse = await fetch('https://cdn.hackclub.com/api/v1/new', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify([uploadedUrl])
+  }).then((r) => r.json())
   return {
-    url: uploadedUrl,
+    url: cdnAPIResponse[0],
     muxId: null,
     muxPlaybackId: null
   }
@@ -513,7 +516,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
         ])
       }
       console.log('public url', publicUrl.url)
-      attachments.push({ url: publicUrl.url })
+      attachments.push(publicUrl.url)
       if (publicUrl.muxId) {
         videos.push(publicUrl.muxId)
         videoPlaybackIds.push(publicUrl.muxPlaybackId)
@@ -529,11 +532,18 @@ export const createPost = async (files = [], channel, ts, user, text) => {
     return
   }
   let userRecord = await getUserRecord(user)
-  const fullSlackMember = userRecord.fields['Full Slack Member?']
+  const fullSlackMember = userRecord.fullSlackMember
   if (!fullSlackMember) {
     const fullMember = await isFullMember(user)
     if (fullMember) {
-      accountsTable.update(userRecord.id, { 'Full Slack Member?': true })
+      prisma.accountsTable.update({
+        where: {
+          slackID: userRecord.slackID
+        },
+        data: {
+          fullSlackMember: true
+        }
+      })
     }
   }
 
@@ -544,18 +554,18 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   const messageText = await formatText(text)
   console.log(convertedDate)
 
-  await updatesTable.create({
-    'Slack Account': [userRecord.id],
-    'Post Time': convertedDate,
-    'Message Timestamp': ts,
-    Text: messageText,
-    Attachments: attachments,
-    'Mux Asset IDs': videos.toString(),
-    'Mux Playback IDs': videoPlaybackIds.toString(),
-    'Is Large Video': attachments.some(
+  await prisma.updates.create({
+    accountsSlackID: userRecord.slackID,
+    postTime: convertedDate,
+    messageTimestamp: ts,
+    text: messageText,
+    attachments: attachments,
+    muxAssetIDs: videos,
+    muxPlaybackIDs: videoPlaybackIds,
+    isLargeVideo: attachments.some(
       (attachment) => attachment.url === 'https://i.imgur.com/UkXMexG.mp4'
     ),
-    Channel: channel
+    channel: channel
   })
 
   console.log('calling incrementStreakCount')
@@ -575,7 +585,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   //     })
   //  } catch(e) {}
 
-  await fetchProfile(userRecord.fields['Username'])
+  await fetchProfile(userRecord.username)
 }
 
 export const postEphemeral = (channel, text, user, threadTs) =>
@@ -627,7 +637,7 @@ export const getReplyMessage = async (user, username, day) => {
 
 export const streaksToggledOff = async (user) => {
   const userRecord = await getUserRecord(user)
-  return userRecord.fields['Streaks Toggled Off']
+  return userRecord.streaksToggledOff
 }
 
 export const replaceEmoji = (str) => emoji.emojify(str.replace(/::(.*):/, ':'))
@@ -654,7 +664,7 @@ export const formatText = async (text) => {
             .then((displayName) => (text = text.replace(u, `@${displayName}`)))
         } else {
           console.log('found user record', userRecord)
-          const username = userRecord.fields['Username']
+          const username = userRecord.username
           text = text.replace(u, `@${username}`)
         }
       })
@@ -675,17 +685,22 @@ export const formatText = async (text) => {
 
 export const shouldUpdateStreak = async (userId, increment) => {
   const userRecord = await getUserRecord(userId)
-  const now = getNow(userRecord.fields['Timezone'])
+  const now = getNow(userRecord.timezone)
 
-  const latestUpdates = await updatesTable.read({
-    maxRecords: 2,
-    sort: [{ field: 'Post Time', direction: 'desc' }],
-    filterByFormula: `FIND('${userId}', {ID}) > 0`
+  const latestUpdates = await prisma.updates.findWhere({
+    orderBy: [
+      {
+        postTime: 'desc'
+      }
+    ],
+    where: {
+      accountsSlackID: randomUserRecord[0].slackID
+    }
   })
 
   const createdTime = increment
-    ? latestUpdates[1]?.fields['Post Time']
-    : latestUpdates[0]?.fields['Post Time']
+    ? latestUpdates[1]?.postTime
+    : latestUpdates[0]?.postTime
   const nowDay = getDayFromISOString(now)
   const createdTimeDay = getDayFromISOString(createdTime)
   console.log('nowDay', nowDay)
@@ -704,35 +719,46 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     const shouldUpdate = await shouldUpdateStreak(userId, true)
     const randomWebringPost = await getRandomWebringPost(userId)
     let updatedMaxStreakCount
-    const updatedStreakCount = userRecord.fields['Streak Count'] + 1
-    const scrapbookLink = userRecord.fields['Scrapbook URL']
+    const updatedStreakCount = userRecord.streakCount + 1
+    const scrapbookLink =
+      'https://scrapbook.hackclub.com/' + userRecord.username
     console.log('random webring post', randomWebringPost)
 
     if (shouldUpdate) {
       console.log('Updating streak for', userId)
 
-      if (userRecord.fields['New Member'] && updatedStreakCount > 1) {
-        accountsTable.update(userRecord.id, {
-          'New Member': false
+      if (userRecord.newMember && updatedStreakCount > 1) {
+        prisma.accountsTable.update({
+          where: {
+            slackID: userRecord.slackID
+          },
+          data: {
+            newMember: true
+          }
         })
       }
       if (
-        userRecord.fields['Max Streaks'] < updatedStreakCount ||
-        !userRecord.fields['Max Streaks']
+        userRecord.maxStreaks < updatedStreakCount ||
+        !userRecord.maxStreaks
       ) {
         updatedMaxStreakCount = updatedStreakCount
       } else {
-        updatedMaxStreakCount = userRecord.fields['Max Streaks']
+        updatedMaxStreakCount = userRecord.maxStreaks
       }
 
-      await accountsTable.update(userRecord.id, {
-        'Streak Count': updatedStreakCount,
-        'Max Streaks': updatedMaxStreakCount
+      await prisma.accountsTable.update({
+        where: {
+          slackID: userRecord.slackID
+        },
+        data: {
+          maxStreaks: updatedMaxStreakCount,
+          streakCount: updatedStreakCount
+        }
       })
       await displayStreaks(userId, updatedStreakCount)
-      fetchProfile(userRecord.fields['Username'])
+      fetchProfile(userRecord.username)
 
-      if (userRecord.fields['New Member'] && updatedStreakCount === 1) {
+      if (userRecord.newMember && updatedStreakCount === 1) {
         postEphemeral(
           process.env.CHANNEL,
           t('messages.streak.newstreak'),
@@ -743,7 +769,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
 
     const replyMessage = await getReplyMessage(
       userId,
-      userRecord.fields['Username'],
+      userRecord.username,
       updatedStreakCount
     )
     // remove beachball react
@@ -751,7 +777,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     await react('add', channel, ts, 'summer21')
 
     try {
-      fetch(userRecord.fields['Webhook URL'])
+      fetch(userRecord.webhookURL)
     } catch (err) {}
 
     const channelKeywords = require('./channelKeywords.json')
@@ -797,8 +823,13 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
 
 export const setAudio = async (user, url) => {
   const userRecord = await getUserRecord(user)
-  accountsTable.update(userRecord.id, {
-    'Audio URL': url
+  await prisma.accountsTable.update({
+    where: {
+      slackID: userRecord.slackID
+    },
+    data: {
+      customAudioURL: url
+    }
   })
 }
 
