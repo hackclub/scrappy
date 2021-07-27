@@ -19,10 +19,10 @@ export default async (req, res) => {
 
   const userRecord = await getUserRecord(user_id)
   if (!url) {
-    if (userRecord.fields['Custom Audio URL'] != null) {
+    if (userRecord.customAudioURL != null) {
       sendCommandResponse(
         response_url,
-        t('messages.audio.removed', { previous: userRecord.fields['Custom Audio URL'] })
+        t('messages.audio.removed', { previous: userRecord.customAudioURL })
       )
       // update the account with the new audioless 
       await accountsTable.update(userRecord.id, {
