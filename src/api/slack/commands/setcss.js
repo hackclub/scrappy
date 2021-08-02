@@ -9,6 +9,7 @@ import {
   t,
   unverifiedRequest
 }  from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
@@ -24,9 +25,10 @@ export default async (req, res) => {
 
   if (!url) {
     const userRecord = await getUserRecord(command.user_id)
-    if (userRecord.fields['CSS URL'] != null) {
-      updatesTable.update(userRecord.id, {
-        'CSS URL': ''
+    if (userRecord.cssURL != null) {
+      await prisma.accounts.update({
+        where: { slackID: userRecord.slackID },
+        data: { cssURL: null }
       })
       sendCommandResponse(command.response_url, t('messages.css.removed'))
     } else {
@@ -44,11 +46,11 @@ export default async (req, res) => {
         if (raw.endsWith('.css')) {
           const user = await getUserRecord(command.user_id)
           const githubUrl = 'https://gist.githubusercontent.com' + raw
-          await accountsTable.update(user.id, {
-            'CSS URL': githubUrl
+          await prisma.accounts.update({
+            where: { slackID: userRecord.slackID },
+            data: { cssURL: githubUrl }
           })
-          const username = user.fields['Username']
-          // githubUrl, user.fields['Username']
+          const username = user.username
           sendCommandResponse(
             command.response_url,
             t('messages.css.set', { url: githubUrl, username })
@@ -59,18 +61,20 @@ export default async (req, res) => {
       })
   } else {
     const user = await getUserRecord(command.user_id)
-    const username = user.fields['Username']
+    const username = user.username
     if (url === 'delete' || url === 'remove') {
-      accountsTable.update(user.id, {
-        'CSS URL': ''
+      await prisma.accounts.update({
+        where: { slackID: userRecord.slackID },
+        data: { cssURL: '' }
       })
       sendCommandResponse(command.response_url, t('messages.css.removed'))
     } else {
       if (!url.includes('http')) {
         url = url
       }
-      await accountsTable.update(user.id, {
-        'CSS URL': url
+      await prisma.accounts.update({
+        where: { slackID: userRecord.slackID },
+        data: { cssURL: url }
       })
       await sendCommandResponse(
         command.response_url,
