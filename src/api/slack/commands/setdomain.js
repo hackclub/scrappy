@@ -5,6 +5,8 @@ import {
   t,
   unverifiedRequest
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
+
 import fetch from 'node-fetch'
 
 export default async (req, res) => {
@@ -18,8 +20,12 @@ export default async (req, res) => {
   if (!arg) {
     sendCommandResponse(command.response_url, t('messages.domain.noargs'))
   } else {
-    const updates = await accountsTable.read({
-      filterByFormula: `{Custom Domain} != ''`
+    const updates = await prisma.accounts.findt.findMany({
+      where: {
+        customDomain: {
+          contains: '.'
+        }
+      }
     })
     const domainCount = updates.length
 
@@ -27,9 +33,9 @@ export default async (req, res) => {
       sendCommandResponse(command.response_url, t('messages.domain.overlimit'))
     } else {
       const user = await getUserRecord(command.user_id)
-      if (user.fields['Custom Domain'] != null) {
+      if (user.customDomain != null) {
         console.log('DOMAIN ALREADY SET')
-        const prevDomain = user.fields['Custom Domain']
+        const prevDomain = user.customDomain
         await fetch(
           `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?domain=${prevDomain}&teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
           {
@@ -40,8 +46,9 @@ export default async (req, res) => {
           }
         )
       }
-      await accountsTable.update(user.id, {
-        'Custom Domain': arg
+      await prisma.accounts.update({
+        where: { slackID: user.slackID },
+        data: { customDomain: arg }
       })
 
       const vercelFetch = await fetch(
