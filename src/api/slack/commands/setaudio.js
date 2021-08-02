@@ -6,6 +6,7 @@ import {
   sendCommandResponse,
   rebuildScrapbookFor
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
@@ -25,23 +26,12 @@ export default async (req, res) => {
         t('messages.audio.removed', { previous: userRecord.customAudioURL })
       )
       // update the account with the new audioless 
-      await accountsTable.update(userRecord.id, {
-        'Custom Audio URL': null,
-        'Audio File': null
+      await prisma.accounts.update({
+        where: { slackID: userRecord.slackID },
+        data: { customAudioURL: null }
       })
     } 
     
-    else if (userRecord.fields['Audio File'] != null) {
-      sendCommandResponse(
-        response_url,
-        t('messages.audio.removed', { previous: userRecord.fields['Audio URL'] })
-      )
-      // update the account with the new audioless 
-      await accountsTable.update(userRecord.id, {
-        'Custom Audio URL': null,
-        'Audio File': null
-      })
-    }
     else {
       sendCommandResponse(response_url, t('messages.audio.noargs'))
     }
@@ -51,13 +41,9 @@ export default async (req, res) => {
     }
 
     // update the account with the new audio
-    await accountsTable.update(userRecord.id, {
-      'Custom Audio URL': url,
-      'Audio File': [
-        {
-          url: ''
-        }
-      ]
+    await prisma.accounts.update({
+      where: { slackID: userRecord.slackID },
+      data: { customAudioURL: url }
     })
 
     // force a rebuild of their site
@@ -66,7 +52,7 @@ export default async (req, res) => {
     // hang tight while the rebuild happens before giving out the new link
     await sendCommandResponse(
       response_url,
-      t('messages.audio.set', { url: userRecord.fields['Scrapbook URL'] })
+      t('messages.audio.set', { url: userScrapbookURL = `https://scrapbook.hackclub.com/${userRecord.username}` })
     )
   }
   res.status(200).end()
