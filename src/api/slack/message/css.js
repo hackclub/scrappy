@@ -8,6 +8,7 @@ import {
   postEphemeral,
   unverifiedRequest
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 import fetch from 'node-fetch'
 
 export default async (req, res) => {
@@ -30,10 +31,11 @@ export default async (req, res) => {
           if (Array.isArray(raw)) raw = raw[0]
           if (raw.endsWith('.css')) {
             const githubUrl = 'https://gist.githubusercontent.com' + raw
-            await accountsTable.update(userRecord.id, {
-              'CSS URL': githubUrl
+            await prisma.accounts.update({
+              where: { slackID: userRecord.slackID },
+              data: { cssURL: githubUrl }
             })
-            const username = userRecord.fields['Username']
+            const username = userRecord.username
             sendCSSMessage(
               channel,
               ts,
@@ -43,7 +45,7 @@ export default async (req, res) => {
               'C015M6U6JKU',
               t('messages.css.set', {
                 url,
-                username: userRecord.fields['Username']
+                username: userRecord.username
               }),
               user
             )
@@ -53,9 +55,10 @@ export default async (req, res) => {
           }
         })
     } else {
-      const username = userRecord.fields['Username']
-      await accountsTable.update(userRecord.id, {
-        'CSS URL': url
+      const username = userRecord.username
+      await prisma.accounts.update({
+        where: { slackID: userRecord.slackID },
+        data: { cssURL: url }
       })
       sendCSSMessage(channel, ts, `https://scrapbook.hackclub.com/${username}`)
       await postEphemeral(
