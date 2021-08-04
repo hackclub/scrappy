@@ -12,6 +12,7 @@ import {
   accountsTable,
   react
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
@@ -42,14 +43,16 @@ export default async (req, res) => {
 
   const userRecord = await getUserRecord(user)
   const publicUrl = await getPublicFileUrl(urlPrivate, channel, user)
-
-  await accountsTable.update(userRecord.id, {
-    'Audio File': [
-      {
-        url: publicUrl.url
-      }
-    ],
-    'Custom Audio URL': ''
+  let cdnAPIResponse = await fetch('https://cdn.hackclub.com/api/v1/new', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify([publicUrl.url])
+  }).then((r) => r.json())
+  await prisma.accounts.update({
+    where: { slackID: userRecord.slackID },
+    data: { customAudioURL: cdnAPIResponse[0] }
   })
   await rebuildScrapbookFor(userRecord)
 
@@ -60,7 +63,7 @@ export default async (req, res) => {
       channel,
       ts,
       t('messages.audio.set', {
-        url: `https://scrapbook.hackclub.com/${userRecord.fields['Username']}`
+        url: `https://scrapbook.hackclub.com/${userRecord.username}`
       })
     )
   ])

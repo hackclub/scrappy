@@ -1,11 +1,11 @@
 import {
   unverifiedRequest,
   getUserRecord,
-  accountsTable,
   sendCommandResponse,
   t,
   fetchProfile
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
@@ -31,8 +31,8 @@ export default async (req, res) => {
 
   const userRecord = await getUserRecord(user_id)
   const webringUserRecord = await getUserRecord(webringUser)
-  const scrapbookLink = userRecord.fields['Scrapbook URL']
-  let currentWebring = userRecord.fields['Webring']
+  const scrapbookLink = `https://scrapbook.hackclub.com/${userRecord.username}`
+  let currentWebring = userRecord.webring
   console.log('current webrings', currentWebring)
   if (!currentWebring) {
     currentWebring = [webringUserRecord.id]
@@ -51,6 +51,9 @@ export default async (req, res) => {
       t(`messages.webring.remove`, { webringUser, scrapbookLink })
     )
   }
-  await accountsTable.update(userRecord.id, { Webring: currentWebring })
-  await fetchProfile(userRecord.fields['Username'])
+  await prisma.accounts.update({
+    where: { slackID: userRecord.slackID },
+    data: { webring: currentWebring }
+  })
+  await fetchProfile(userRecord.username)
 }
