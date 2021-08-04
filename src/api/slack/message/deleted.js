@@ -43,16 +43,17 @@ const deleteThreadedMessages = async (ts, channel, user) => {
   const userRecord = await getUserRecord(user)
   const shouldUpdate = await shouldUpdateStreak(user, false)
   if (shouldUpdate) {
-    const updatedStreakCount = userRecord.fields['Streak Count'] - 1
+    const updatedStreakCount = userRecord.streakCount - 1
     if (updatedStreakCount >= 0) {
-      accountsTable.update(userRecord.id, {
-        'Streak Count': updatedStreakCount
+      await prisma.accounts.update({
+        where: { slackID: userRecord.slackID },
+        data: { streakCount: updatedStreakCount }
       })
       displayStreaks(user, updatedStreakCount)
     }
   }
   postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user)
-  await fetchProfile(userRecord.fields['Username'])
+  await fetchProfile(userRecord.username)
 }
 
 export default async (req, res) => {
