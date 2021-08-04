@@ -1,7 +1,7 @@
 import {
   unverifiedRequest,
   getUserRecord,
-  accountsTable,
+  
   sendCommandResponse,
   t,
   fetchProfile

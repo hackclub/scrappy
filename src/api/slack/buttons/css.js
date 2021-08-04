@@ -1,6 +1,6 @@
 import {
   getUserRecord,
-  accountsTable,
+  
   getUrlFromString,
   sendCommandResponse,
   t,
@@ -27,7 +27,7 @@ export default async (req, res) => {
   }
 
   const userRecord = await getUserRecord(userId)
-  await prisma.accountsTable.update({
+  await prisma.accounts.update({
     where: {
       slackID: userRecord.slackID
     },

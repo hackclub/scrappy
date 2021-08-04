@@ -5,7 +5,7 @@ import {
   getUserRecord,
   fetchProfile,
   setStatus,
-  accountsTable,
+  
   displayStreaks,
   shouldUpdateStreak,
   unverifiedRequest,

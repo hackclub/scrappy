@@ -1,6 +1,6 @@
 import {
   sendCommandResponse,
-  accountsTable,
+  
   getUserRecord,
   t,
   unverifiedRequest

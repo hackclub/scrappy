@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 
 import {
   sendCommandResponse,
-  accountsTable,
+  
   getUserRecord,
   updatesTable,
   t,

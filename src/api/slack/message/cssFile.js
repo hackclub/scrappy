@@ -12,7 +12,7 @@ import {
   reply,
   react,
   updatesTable,
-  accountsTable,
+  
   displayStreaks,
   getReplyMessage,
   fetchProfile,

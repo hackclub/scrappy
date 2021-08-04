@@ -1,7 +1,7 @@
 // This API route is pinged by a Zap every hour
 
 import {
-  accountsTable,
+  
   updatesTable,
   getNow,
   setStatus,

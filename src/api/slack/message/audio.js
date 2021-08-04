@@ -9,7 +9,7 @@ import {
   reply,
   t,
   rebuildScrapbookFor,
-  accountsTable,
+  
   react
 } from '../../../lib/api-utils'
 import prisma from '../../../lib/prisma'

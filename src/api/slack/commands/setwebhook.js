@@ -2,7 +2,7 @@ import {
   unverifiedRequest,
   getUserRecord,
   t,
-  accountsTable,
+  
   sendCommandResponse,
   rebuildScrapbookFor
 } from '../../../lib/api-utils'

@@ -1,7 +1,7 @@
 import cheerio from 'cheerio'
 import {
   getUserRecord,
-  accountsTable,
+  
   reply,
   t,
   getUrlFromString,

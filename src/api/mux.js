@@ -6,15 +6,18 @@ export default async (req, res) => {
   if (req.body.type === 'video.asset.ready') {
     const assetId = req.body.object.id
     const videoUpdate = (
-      await updatesTable.read({
-        maxRecords: 1,
-        filterByFormula: `FIND('${assetId}', {Mux Asset IDs}) > 0`
+      await prisma.updates.findMany({
+        where: {
+          muxAssetIDs: {
+            contains: assetId,
+          },
+        }
       })
     )[0]
-    const largeVideo = videoUpdate.fields['Is Large Video']
+    const largeVideo = videoUpdate.isLargeVideo
     if (largeVideo) {
-      const ts = videoUpdate.fields['Message Timestamp']
-      const user = videoUpdate.fields['Poster ID']
+      const ts = videoUpdate.messageTimestamp
+      const user = videoUpdate.accountsSlackID
       reply(process.env.CHANNEL, ts, t('messages.assetReady', { user }))
     }
   }

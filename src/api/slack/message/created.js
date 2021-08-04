@@ -12,7 +12,7 @@ import {
   react,
   replaceEmoji,
   updatesTable,
-  accountsTable,
+  
   displayStreaks,
   getReplyMessage,
   fetchProfile,

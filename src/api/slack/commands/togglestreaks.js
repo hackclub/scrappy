@@ -1,5 +1,5 @@
 import {
-  accountsTable,
+  
   displayStreaks,
   getUserRecord,
   sendCommandResponse,

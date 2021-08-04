@@ -536,7 +536,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   if (!fullSlackMember) {
     const fullMember = await isFullMember(user)
     if (fullMember) {
-      prisma.accountsTable.update({
+      prisma.accounts.update({
         where: {
           slackID: userRecord.slackID
         },
@@ -728,7 +728,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
       console.log('Updating streak for', userId)
 
       if (userRecord.newMember && updatedStreakCount > 1) {
-        prisma.accountsTable.update({
+        prisma.accounts.update({
           where: {
             slackID: userRecord.slackID
           },
@@ -746,7 +746,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
         updatedMaxStreakCount = userRecord.maxStreaks
       }
 
-      await prisma.accountsTable.update({
+      await prisma.accounts.update({
         where: {
           slackID: userRecord.slackID
         },
@@ -823,7 +823,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
 
 export const setAudio = async (user, url) => {
   const userRecord = await getUserRecord(user)
-  await prisma.accountsTable.update({
+  await prisma.accounts.update({
     where: {
       slackID: userRecord.slackID
     },
