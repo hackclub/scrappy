@@ -6,6 +6,7 @@ import {
   unverifiedRequest,
   t
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
@@ -21,14 +22,17 @@ export default async (req, res) => {
   const allArg = args[args[0] === 'togglestreaks' ? 1 : 0]
   const toggleAllStreaks = allArg && allArg === 'all'
   const record = await getUserRecord(user_id)
-  const display = record.fields['Display Streak']
-  const streaksToggledOff = record.fields['Streaks Toggled Off']
+  const display = record.displayStreak
+  const streaksToggledOff = record.streaksToggledOff
 
   if (toggleAllStreaks) {
     await Promise.all([
-      accountsTable.update(record.id, {
-        'Display Streak': streaksToggledOff ? true : false, // this is the correct syntax, due to airtable's bull shit
-        'Streaks Toggled Off': !streaksToggledOff
+      prisma.accounts.update({
+        where: { slackID: record.id },
+        data: {
+          displayStreak: streaksToggledOff ? true : false,
+          streaksToggledOff: !streaksToggledOff
+        }
       }),
       sendCommandResponse(
         response_url,
@@ -39,8 +43,11 @@ export default async (req, res) => {
     ])
   } else {
     await Promise.all([
-      accountsTable.update(record.id, {
-        'Display Streak': !display
+      prisma.accounts.update({
+        where: { slackID: record.id },
+        data: {
+          displayStreak: !display,
+        }
       }),
       sendCommandResponse(
         response_url,
@@ -50,5 +57,5 @@ export default async (req, res) => {
       )
     ])
   }
-  await displayStreaks(user_id, record.fields['Streak Count'])
+  await displayStreaks(user_id, record.streakCount)
 }
