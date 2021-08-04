@@ -10,6 +10,7 @@ import {
   fetchProfile,
   unverifiedRequest
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
@@ -18,21 +19,24 @@ export default async (req, res) => {
 
   const newMessage = await formatText(req.body.event.message.text)
   const prevTs = req.body.event.previous_message.ts
-
   const updateRecord = (
-    await updatesTable.read({
-      maxRecords: 1,
-      filterByFormula: `{Message Timestamp} = '${prevTs}'`
+    await prisma.updates.findMany({
+      where: {
+        messageTimestamp: prevTs
+      }
     })
   )[0]
   if (updateRecord) {
-    await updatesTable.update(updateRecord.id, { Text: newMessage })
+    await prisma.updates.update({
+      where: { id: updateRecord.id },
+      data: { text: newMessage }
+    })
     await postEphemeral(
       req.body.event.channel,
       `Your post has been edited! You should see it update on the website in a few seconds.`,
       req.body.event.message.user
     )
     const userRecord = await getUserRecord(req.body.event.message.user)
-    fetchProfile(userRecord.fields['Username'])
+    fetchProfile(userRecord.username)
   }
 }

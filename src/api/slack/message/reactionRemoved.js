@@ -23,18 +23,26 @@ export default async (req, res) => {
   limiter.schedule(async () => {
     const userRecord = await getUserRecord(user)
     const update = (
-      await updatesTable.read({
-        maxRecords: 1,
-        filterByFormula: `{Message Timestamp} = '${ts}'`
+      await prisma.updates.findMany({
+        where: {
+          messageTimestamp: ts
+        }
       })
     )[0]
+    if (!update) {
+      console.log(
+        startTS,
+        'reaction was removed from a message in a thread. skipping...'
+      )
+      return
+    }
     //console.log('reaction_removed: update record', update)
     const reactionRecord = await getReactionRecord(
       reaction,
-      update.fields['ID']
+      update.id
     )
 
-    let usersReacted = reactionRecord.fields['Users Reacted']
+    let usersReacted = reactionRecord.usersReacted
     const updatedUsersReacted = usersReacted.filter(
       (userReacted) => userReacted != userRecord.id
     )
@@ -45,11 +53,16 @@ export default async (req, res) => {
         startTS,
         'i deleted the reaction record because that was the only reaction!'
       )
-      await reactionsTable.delete(reactionRecord.id)
+      await prisma.emojireactions.deleteMany({
+        where: {
+          id: reactionRecord.id
+        }
+      })
     } else {
       console.log(startTS, 'there have been multiple reactions, removing...')
-      await reactionsTable.update(reactionRecord.id, {
-        'Users Reacted': updatedUsersReacted
+      await prisma.emojireactions.update({
+        where: { id: reactionRecord.id },
+        data: { usersReacted: updatedUsersReacted }
       })
     }
     console.log(

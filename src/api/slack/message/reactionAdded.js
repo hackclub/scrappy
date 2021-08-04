@@ -18,6 +18,7 @@ import {
   createPost,
   postEphemeral
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 import Bottleneck from 'bottleneck'
 import fetch from 'node-fetch'
 
