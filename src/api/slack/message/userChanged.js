@@ -5,6 +5,7 @@ import {
   accountsTable
 } from '../../../lib/api-utils'
 import fetch from 'node-fetch'
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
@@ -22,7 +23,7 @@ export default async (req, res) => {
     const statusEmojiCount = statusEmoji.split('-')[1].split(':')[0]
     console.log('count', statusEmojiCount)
     const userRecord = await getUserRecord(user.id)
-    const streakCount = userRecord.fields['Streak Count']
+    const streakCount = userRecord.streakCount
     console.log('user record count', streakCount)
     if (
       (streakCount != statusEmojiCount && streakCount <= 7) ||
@@ -36,7 +37,7 @@ export default async (req, res) => {
     }
   }
 
-  // While we're here, check if any of the user's profile fields have been changed & update them in Airtable
+  // While we're here, check if any of the user's profile fields have been changed & update them
 
   const info = await fetch(
     `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${user.id}`
@@ -50,22 +51,26 @@ export default async (req, res) => {
   const website = user.profile.fields['Xf5LNGS86L']?.value
 
   if (github != userRecord.fields['GitHub']) {
-    accountsTable.update(userRecord.id, {
-      GitHub: github
+    await prisma.accounts.update({
+      where: { slackID: userRecord.slackID },
+      data: { github: github }
     })
   }
   if (website != userRecord.fields['Website']) {
-    accountsTable.update(userRecord.id, {
-      Website: website
+    await prisma.accounts.update({
+      where: { slackID: userRecord.slackID },
+      data: { website: website }
     })
   }
-  accountsTable.update(userRecord.id, {
-    Timezone: tz,
-    'Timezone offset': tzOffset,
-    Avatar: [
-      {
-        url: avatar
-      }
-    ]
+  let cdnAPIResponse = await fetch('https://cdn.hackclub.com/api/v1/new', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify([avatar])
+  }).then((r) => r.json())
+  await prisma.accounts.update({
+    where: { slackID: userRecord.slackID },
+    data: { timezoneOffset: tzOffset, timezone: tz, avatar: cdnAPIResponse[0] }
   })
 }
