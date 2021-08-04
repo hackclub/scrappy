@@ -1,8 +1,6 @@
 import {
   unverifiedRequest,
   getReactionRecord,
-  reactionsTable,
-  updatesTable,
   getUserRecord
 } from '../../../lib/api-utils'
 import Bottleneck from 'bottleneck'

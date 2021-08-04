@@ -11,7 +11,7 @@ import {
   getUserRecord,
   reply,
   react,
-  updatesTable,
+  
   
   displayStreaks,
   getReplyMessage,

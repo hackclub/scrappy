@@ -2,7 +2,7 @@
 
 import {
   
-  updatesTable,
+  
   getNow,
   setStatus,
   unverifiedRequest,

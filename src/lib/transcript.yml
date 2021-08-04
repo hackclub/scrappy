@@ -180,7 +180,7 @@ messages:
     - <@${this.user}> :()
     - <@${this.user}> aosidjghlkj;LKasASDLKGJ AASDFLKJ LAKJSHDF ;OIHA GKLJRWHG AJSDGH
     - <@${this.user}> no u ${'!'.repeat(Math.floor(Math.random() * 7))}
-    - <@${this.user}> you are SO MEAN OMG. i am going to delete your account in airtable
+    - <@${this.user}> you are SO MEAN OMG. i am going to delete your account
     - take it back <@${this.user}>, or i will ping staff and ask them to ban you from the slack
     - oh yeah <@${this.user}>?? actually i think the same abotu you're mom. pwned
     - <@${this.user}> BULLLYYY :((((

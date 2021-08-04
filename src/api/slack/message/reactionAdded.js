@@ -1,8 +1,6 @@
 import {
   unverifiedRequest,
   getEmojiRecord,
-  updatesTable,
-  reactionsTable,
   getUserRecord,
   getReactionRecord,
   updateExists,

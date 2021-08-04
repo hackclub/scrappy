@@ -11,7 +11,7 @@ import {
   reply,
   react,
   replaceEmoji,
-  updatesTable,
+  
   
   displayStreaks,
   getReplyMessage,

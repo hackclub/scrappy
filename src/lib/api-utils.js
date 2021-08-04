@@ -1,5 +1,4 @@
 import cheerio from 'cheerio'
-import AirtablePlus from 'airtable-plus'
 import FormData from 'form-data'
 import Mux from '@mux/mux-node'
 import emoji from 'node-emoji'
@@ -96,7 +95,6 @@ export const forgetUser = async (user) => {
 
   await Promise.all([
     // delete their updates...
-    updatesTable.deleteWhere(`{Poster ID} = "${user}"`),
     await prisma.updates.deleteMany({
       where: {
         slackID: user
@@ -835,8 +833,10 @@ export const setAudio = async (user, url) => {
 
 export const tsHasScrap = async (ts) => {
   const tsMessage = (
-    await updatesTable.read({
-      filterByFormula: `{Message Timestamp} = '${ts}'`
+    await prisma.updates.findMany({
+      where: {
+        messageTimestamp: ts
+      }
     })
   )[0]
   console.log('delete: ts message:', tsMessage)
@@ -846,7 +846,11 @@ export const tsHasScrap = async (ts) => {
 }
 
 export const deleteScrap = async (ts) => {
-  return await updatesTable.deleteWhere(`{Message Timestamp} = '${ts}'`)
+  return await prisma.updates.deleteMany({
+    where: {
+      messageTimestamp: ts
+    }
+  })
 }
 
 export const fetchProfile = (username) =>

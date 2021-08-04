@@ -5,7 +5,7 @@ import {
   sendCommandResponse,
   
   getUserRecord,
-  updatesTable,
+  
   t,
   unverifiedRequest
 }  from '../../../lib/api-utils'

@@ -4,7 +4,7 @@ This message is called when a poster updates their previous post
 import {
   react,
   postEphemeral,
-  updatesTable,
+  
   getUserRecord,
   formatText,
   fetchProfile,

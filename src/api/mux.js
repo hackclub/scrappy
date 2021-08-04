@@ -1,5 +1,5 @@
-import { updatesTable, reply, t } from '../lib/api-utils'
-
+import { reply, t } from '../lib/api-utils'
+import prisma from '../lib/prisma'
 // Only runs when a user uploads a large video, to notify them when Mux processes the video
 export default async (req, res) => {
   console.log(req.body)
