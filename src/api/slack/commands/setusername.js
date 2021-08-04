@@ -6,7 +6,7 @@ import {
   sendCommandResponse,
   rebuildScrapbookFor
 } from '../../../lib/api-utils'
-const fetch = require('node-fetch')
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
@@ -20,20 +20,17 @@ export default async (req, res) => {
 
   const userRecord = await getUserRecord(user_id)
 
-  const exists = await fetch(
-    `https://airbridge.hackclub.com/v0.1/Summer%20of%20Making%20Streaks/Slack%20Accounts?select=${JSON.stringify(
-      {
-        maxRecords: 1,
-        filterByFormula: `{Username} = "${username}"`
-      }
-    )}`
-  ).then((r) => r.json())
+  const exists = await prisma.accounts.findMany({
+    where: {
+      username
+    }
+  })
 
   console.log(exists.length)
 
   if (
-    userRecord.fields['Last Username Updated Time'] >
-    new Date(Date.now() - 86400 * 1000).toISOString()
+    userRecord.fields.lastUsernameUpdatedTime >
+    new Date(Date.now() - 86400 * 1000)
   ) {
     sendCommandResponse(response_url, t('messages.username.time'))
   } else if (!username) {
@@ -44,9 +41,9 @@ export default async (req, res) => {
     sendCommandResponse(response_url, t('messages.username.exists'))
   } else {
     // update the account with the new username
-    await accountsTable.update(userRecord.id, {
-      Username: username,
-      'Last Username Updated Time': Date.now()
+    await prisma.accounts.update({
+      where: { slackID: userRecord.slackID },
+      data: { username: username, lastUsernameUpdatedTime:Date.now()  }
     })
 
     // force a rebuild of their site

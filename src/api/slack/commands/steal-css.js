@@ -6,6 +6,7 @@ import {
   t,
   fetchProfile
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
@@ -24,7 +25,7 @@ export default async (req, res) => {
     return sendCommandResponse(response_url, t('messages.steal.noargs'))
   }
   const userRecord = await getUserRecord(user_id)
-  const scrapbookLink = userRecord.fields['Scrapbook URL']
+  const scrapbookLink = `https://scrapbook.hackclub.com/${userRecord.username}`
   let victimUserRecord
   try {
     victimUserRecord = await getUserRecord(victimUser)
@@ -32,7 +33,7 @@ export default async (req, res) => {
     return sendCommandResponse(response_url, t('messages.steal.invaliduser'))
   }
 
-  const newCSS = victimUserRecord.fields['CSS URL']
+  const newCSS = victimUserRecord.cssURL
   if (!newCSS)
     return sendCommandResponse(
       response_url,
@@ -40,11 +41,14 @@ export default async (req, res) => {
     )
 
   await Promise.all([
-    accountsTable.update(userRecord.id, { 'CSS URL': newCSS }),
+    await prisma.accounts.update({
+      where: { slackID: userRecord.slackID },
+      data: { cssURL: newCSS }
+    }),
     sendCommandResponse(
       response_url,
       t(`messages.steal.done`, { victimUser, scrapbookLink })
     )
   ])
-  await fetchProfile(userRecord.fields['Username'])
+  await fetchProfile(userRecord.username)
 }

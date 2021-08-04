@@ -20,7 +20,7 @@ export default async (req, res) => {
   if (!arg) {
     sendCommandResponse(command.response_url, t('messages.domain.noargs'))
   } else {
-    const updates = await prisma.accounts.findt.findMany({
+    const updates = await prisma.accounts.findMany({
       where: {
         customDomain: {
           contains: '.'

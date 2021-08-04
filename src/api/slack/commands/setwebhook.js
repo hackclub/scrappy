@@ -6,6 +6,7 @@ import {
   sendCommandResponse,
   rebuildScrapbookFor
 } from '../../../lib/api-utils'
+import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
@@ -22,8 +23,9 @@ export default async (req, res) => {
   } else {
     const userRecord = await getUserRecord(user_id)
 
-    await accountsTable.update(userRecord.id, {
-      'Webhook URL': webhook
+    await prisma.accounts.update({
+      where: { slackID: userRecord.slackID },
+      data: { webhookURL: webhook }
     })
 
     // hang tight while the rebuild happens before giving out the new link
