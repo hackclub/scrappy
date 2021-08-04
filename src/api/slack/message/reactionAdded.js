@@ -141,6 +141,7 @@ export default async (req, res) => {
         startTS,
         `Post hasn't been reacted to at all, or it has been reacted to, but not with this emoji`
       )
+
       await prisma.emojireactions.create({
         updateId: update.id,
         emojiTypeName: emojiRecord.name
@@ -148,6 +149,18 @@ export default async (req, res) => {
     } else if (postExists && reactionExists) {
       // Post has been reacted to with this emoji
       console.log(startTS, 'Post has been reacted to with this emoji')
+      const reactionRecord = await getReactionRecord(
+        reaction,
+        update.id
+      ).catch((err) => console.log('Cannot get reaction record', err))
+      let usersReacted = reactionRecord.usersReacted
+      console.log(startTS, 'adding reaction')
+      await usersReacted.push(userRecord.id)
+      await prisma.emojireactions.update({
+        where: { id: reactionRecord.id },
+        data: { usersReacted: usersReacted }
+      })
+      console.log(startTS, 'added reaction!')
     }
     console.log(
       startTS,
