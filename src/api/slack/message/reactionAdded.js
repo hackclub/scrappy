@@ -45,7 +45,9 @@ export default async (req, res) => {
 
   if ((await updateExistsTS(ts)) && reaction === 'scrappy-retry') {
     try {
-      fetch(userRecord.webhookURL)
+      if(userRecord.webhookURL){
+        fetch(userRecord.webhookURL)
+      }
     } catch (err) {}
     const message = await getMessage(ts, channel)
     const channelKeywords = require('../../../lib/channelKeywords.json')

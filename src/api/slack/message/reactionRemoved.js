@@ -4,6 +4,7 @@ import {
   getUserRecord
 } from '../../../lib/api-utils'
 import Bottleneck from 'bottleneck'
+import prisma from '../../../lib/prisma'
 
 const limiter = new Bottleneck({
   maxConcurrent: 1
@@ -35,10 +36,13 @@ export default async (req, res) => {
       return
     }
     //console.log('reaction_removed: update record', update)
-    const reactionRecord = await getReactionRecord(
-      reaction,
-      update.id
-    )
+    console.log([reaction, update.id])
+    const reactionRecord = await getReactionRecord(reaction, update.id)
+
+    if(typeof reactionRecord== 'undefined'){
+      console.log('BAAAAA!!! why is this reaction not in our DB')
+      return
+    }
 
     let usersReacted = reactionRecord.usersReacted
     const updatedUsersReacted = usersReacted.filter(

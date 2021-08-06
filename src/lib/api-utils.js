@@ -321,7 +321,7 @@ export const getEmojiRecord = async (reaction) => {
 
 export const getReactionRecord = async (emoji, updateId) =>
   (
-    await prisma.emojiType.findMany({
+    await prisma.emojiReactions.findMany({
       where: {
         emojiTypeName: emoji,
         updateId: updateId
@@ -334,13 +334,13 @@ export const getRandomWebringPost = async (user) => {
   const userRecord = await getUserRecord(user)
   const webring = userRecord.webring
   console.log('webring for user', webring)
-  if (webring === null) {
+  if (!webring) {
     console.log('no webring found')
-    return
+    return { notfound: true}
   }
   console.log('webring for user exists! yay!')
 
-  const randomUserRecord = sample(webring).slackID
+  const randomUserRecord = sample(webring)
   console.log('random user record', randomUserRecord)
 
   const latestUpdate = await prisma.updates.findMany({
@@ -350,7 +350,12 @@ export const getRandomWebringPost = async (user) => {
       }
     ],
     where: {
-      accountsSlackID: randomUserRecord[0].slackID
+      accountsSlackID: randomUserRecord
+    }
+  })
+  const randomUserRecordFull = await prisma.accounts.findFirst({
+    where: {
+      slackID: randomUserRecord
     }
   })
   console.log('latest update', latestUpdate)
@@ -362,7 +367,7 @@ export const getRandomWebringPost = async (user) => {
     return {
       post: null,
       scrapbookUrl:
-        'https://scrapbook.hackclub.com/' + randomUserRecord[0].username,
+        'https://scrapbook.hackclub.com/' + randomUserRecordFull.username,
       nonexistence: true
     }
   } else {
@@ -373,7 +378,7 @@ export const getRandomWebringPost = async (user) => {
     return {
       post: `https://hackclub.slack.com/archives/${channel}/p${messageTs}`,
       scrapbookUrl:
-        'https://scrapbook.hackclub.com/' + randomUserRecord[0].username
+        'https://scrapbook.hackclub.com/' + randomUserRecordFull.username
     }
   }
 }
@@ -789,7 +794,9 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     await react('add', channel, ts, 'summer21')
 
     try {
-      fetch(userRecord.webhookURL)
+      if(userRecord.webhookURL){
+        fetch(userRecord.webhookURL)
+      }
     } catch (err) {}
 
     const channelKeywords = require('./channelKeywords.json')

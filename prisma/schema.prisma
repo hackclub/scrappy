@@ -20,7 +20,7 @@ model Accounts {
   github                  String?
   fullSlackMember         Boolean?
   avatar                  String?
-  webring                 Accounts[] @relation("AccountsToAccounts")
+  webring                 String[]
   updates                 Updates[]
   newMember               Boolean
   timezoneOffset          Int
@@ -29,17 +29,16 @@ model Accounts {
   customAudioURL          String?
   lastUsernameUpdatedTime DateTime?
   webhookURL              String?
-  Accounts                Accounts?  @relation("AccountsToAccounts", fields: [accountsSlackID], references: [slackID])
-  accountsSlackID         String?
+
 }
 
 model Updates {
   id               String           @id @default(cuid())
   Accounts         Accounts?        @relation(fields: [accountsSlackID], references: [slackID])
   accountsSlackID  String?
-  postTime         DateTime         
+  postTime         DateTime
   text             String?
-  attachments String[]
+  attachments      String[]
   muxAssetIDs      String[]
   muxPlaybackIDs   String[]
   muxAssetStatuses String?
@@ -59,10 +58,10 @@ model EmojiType {
 
 model EmojiReactions {
   id            String     @id @default(cuid())
-  update        Updates?    @relation(fields: [updateId], references: [id])
+  update        Updates?   @relation(fields: [updateId], references: [id])
   updateId      String?
   EmojiType     EmojiType? @relation(fields: [emojiTypeName], references: [name])
   emojiTypeName String?
-  usersReacted   String[]
+  usersReacted  String[]
   updatedAt     DateTime   @default(now()) @map("created_at")
 }
