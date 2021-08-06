@@ -1,6 +1,5 @@
 import {
   getUserRecord,
-  
   getUrlFromString,
   sendCommandResponse,
   t,
@@ -18,7 +17,12 @@ export default async (req, res) => {
   const userId = data.user.id
 
   const parentMessage = await fetch(
-    `https://slack.com/api/conversations.history?token=${process.env.SLACK_BOT_TOKEN}&channel=${data.channel.id}&latest=${data.message.thread_ts}&limit=1&inclusive=true`
+    `https://slack.com/api/conversations.history?channel=${data.channel.id}&latest=${data.message.thread_ts}&limit=1&inclusive=true`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+      }
+    }
   ).then((r) => r.json())
   const text = parentMessage.messages[0].text
   let url = getUrlFromString(text)

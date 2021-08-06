@@ -135,7 +135,11 @@ export const rebuildScrapbookFor = async (user) => {
 export const displayStreaks = async (userId, streakCount) => {
   const userRecord = await getUserRecord(userId)
   const user = await fetch(
-    `https://slack.com/api/users.profile.get?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
+    `https://slack.com/api/users.profile.get?user=${userId}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+      }
+    }
   ).then((r) => r.json())
 
   if (!userRecord.streaksToggledOff) {
@@ -156,10 +160,21 @@ export const canDisplayStreaks = async (userId) => {
 
 export const getUserRecord = async (userId) => {
   const user = await fetch(
-    `https://slack.com/api/users.profile.get?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
+    `https://slack.com/api/users.profile.get?user=${userId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+      }
+    }
   ).then((r) => r.json())
+  console.log(`https://slack.com/api/users.profile.get?user=${userId}`,{
+    headers: {
+      Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+    }
+  })
   let github
   let website
+  console.log(user)
   if (user.profile.fields == null) {
     github = null
     website = null
@@ -177,7 +192,11 @@ export const getUserRecord = async (userId) => {
 
   if (record === null) {
     let profile = await fetch(
-      `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
+      `https://slack.com/api/users.info?user=${userId}`,{
+        headers: {
+          Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+        }
+      }
     ).then((r) => r.json())
     let username =
       user.profile.display_name !== ''
@@ -229,7 +248,7 @@ export const getUserRecord = async (userId) => {
 }
 
 export const emojiExists = async (emoji, updateId) =>
-  prisma.emojireactions
+  prisma.emojiReactions
     .findMany({
       where: {
         updateId: updateId,
@@ -240,7 +259,7 @@ export const emojiExists = async (emoji, updateId) =>
     .catch((err) => console.log('Cannot check if emoji exists', err))
 
 export const updateExists = async (updateId) =>
-  prisma.emojireactions
+  prisma.emojiReactions
     .findMany({
       where: {
         updateId: updateId
@@ -253,7 +272,7 @@ export const updateExistsTS = async (TS) =>
   prisma.updates
     .findMany({
       where: {
-        messageTimestamp: TS
+        messageTimestamp: parseFloat(TS)
       }
     })
     .then((r) => r.length > 0)
@@ -265,7 +284,7 @@ export const getEmojiRecord = async (reaction) => {
     reaction = reaction.split('::')[0]
   }
   console.log('Looking for reaction', reaction)
-  const emojiRecord = await prisma.emojitype.findMany({
+  const emojiRecord = await prisma.emojiType.findMany({
     where: {
       name: reaction
     }
@@ -278,7 +297,11 @@ export const getEmojiRecord = async (reaction) => {
     if (!unicodeEmoji) {
       console.log('looks like this is a custom emoji. finding the link...')
       const emojiList = await fetch(
-        `https://slack.com/api/emoji.list?token=${process.env.SLACK_USER_TOKEN}`
+        `https://slack.com/api/emoji.list`, {
+          headers: {
+            Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+          }
+        }
       ).then((r) => r.json())
       //console.log('reaction list', emojiList.emoji)
       console.log('reaction url', emojiList.emoji[reaction])
@@ -286,7 +309,7 @@ export const getEmojiRecord = async (reaction) => {
     } else {
       emojiSource = unicodeEmoji.emoji
     }
-    const newEmojiRecord = await prisma.emojitype.create({
+    const newEmojiRecord = await prisma.emojiType.create({
       data: {
         name: reaction,
         emojiSource: emojiSource
@@ -298,7 +321,7 @@ export const getEmojiRecord = async (reaction) => {
 
 export const getReactionRecord = async (emoji, updateId) =>
   (
-    await prisma.emojitype.findWhere({
+    await prisma.emojiType.findMany({
       where: {
         emojiTypeName: emoji,
         updateId: updateId
@@ -311,7 +334,7 @@ export const getRandomWebringPost = async (user) => {
   const userRecord = await getUserRecord(user)
   const webring = userRecord.webring
   console.log('webring for user', webring)
-  if (!webring) {
+  if (webring === null) {
     console.log('no webring found')
     return
   }
@@ -320,7 +343,7 @@ export const getRandomWebringPost = async (user) => {
   const randomUserRecord = sample(webring).slackID
   console.log('random user record', randomUserRecord)
 
-  const latestUpdate = await prisma.updates.findWhere({
+  const latestUpdate = await prisma.updates.findMany({
     orderBy: [
       {
         postTime: 'desc'
@@ -357,7 +380,11 @@ export const getRandomWebringPost = async (user) => {
 
 export const isFullMember = async (userId) => {
   const user = await fetch(
-    `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${userId}`
+    `https://slack.com/api/users.info?user=${userId}`,{
+      headers: {
+        Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+      }
+    }
   ).then((r) => r.json())
   console.log('user restricted', user.user.is_restricted)
   console.log('the opposite of that', !user.user.is_restricted)
@@ -546,16 +573,16 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   }
 
   const date = new Date().toLocaleString('en-US', {
-    timeZone: userRecord.fields['Timezone']
+    timeZone: userRecord.timezone
   })
   const convertedDate = new Date(date).toISOString()
   const messageText = await formatText(text)
   console.log(convertedDate)
 
-  await prisma.updates.create({
+  await prisma.updates.create({data:{
     accountsSlackID: userRecord.slackID,
     postTime: convertedDate,
-    messageTimestamp: ts,
+    messageTimestamp: parseFloat(ts),
     text: messageText,
     attachments: attachments,
     muxAssetIDs: videos,
@@ -564,25 +591,10 @@ export const createPost = async (files = [], channel, ts, user, text) => {
       (attachment) => attachment.url === 'https://i.imgur.com/UkXMexG.mp4'
     ),
     channel: channel
-  })
+  }})
 
   console.log('calling incrementStreakCount')
   await incrementStreakCount(user, channel, messageText, ts)
-
-  // Update the christmas livestream
-  //   try{
-  //     fetch("https://hackclub-scrapbook-livestream.herokuapp.com/webhook", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-type": "application/json"
-  //       },
-  //       body: JSON.stringify({
-  //         name: userRecord.fields['Username'],
-  //         username: userRecord.fields['Username']
-  //       })
-  //     })
-  //  } catch(e) {}
-
   await fetchProfile(userRecord.username)
 }
 
@@ -653,9 +665,11 @@ export const formatText = async (text) => {
         const userRecord = await getUserRecord(uID)
         if (!userRecord) {
           fetch(
-            `https://slack.com/api/users.profile.get?token=${
-              process.env.SLACK_BOT_TOKEN
-            }&user=${u.substring(2, u.length - 1)}`
+            `https://slack.com/api/users.profile.get?user=${u.substring(2, u.length - 1)}`, {
+              headers: {
+                Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+              }
+            }
           )
             .then((r) => r.json())
             .then(({ profile }) => profile.display_name || profile.real_name)
@@ -685,14 +699,14 @@ export const shouldUpdateStreak = async (userId, increment) => {
   const userRecord = await getUserRecord(userId)
   const now = getNow(userRecord.timezone)
 
-  const latestUpdates = await prisma.updates.findWhere({
+  const latestUpdates = await prisma.updates.findMany({
     orderBy: [
       {
         postTime: 'desc'
       }
     ],
     where: {
-      accountsSlackID: randomUserRecord[0].slackID
+      accountsSlackID: userRecord.slackID
     }
   })
 
@@ -835,7 +849,7 @@ export const tsHasScrap = async (ts) => {
   const tsMessage = (
     await prisma.updates.findMany({
       where: {
-        messageTimestamp: ts
+        messageTimestamp: parseFloat(ts)
       }
     })
   )[0]
@@ -848,7 +862,7 @@ export const tsHasScrap = async (ts) => {
 export const deleteScrap = async (ts) => {
   return await prisma.updates.deleteMany({
     where: {
-      messageTimestamp: ts
+      messageTimestamp: parseFloat(ts)
     }
   })
 }
@@ -964,7 +978,11 @@ const evalTranscript = (target, vars = {}) => {
 export const getMessage = async (ts, channel) => {
   try {
     const history = await fetch(
-      `https://slack.com/api/conversations.history?token=${process.env.SLACK_BOT_TOKEN}&channel=${channel}&latest=${ts}&limit=1&inclusive=true`
+      `https://slack.com/api/conversations.history?channel=${channel}&latest=${ts}&limit=1&inclusive=true`, {
+        headers: {
+          Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+        }
+      }
     ).then((r) => r.json())
     console.log('history', history)
 

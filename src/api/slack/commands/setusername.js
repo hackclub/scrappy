@@ -29,7 +29,7 @@ export default async (req, res) => {
   console.log(exists.length)
 
   if (
-    userRecord.fields.lastUsernameUpdatedTime >
+    userRecord.lastUsernameUpdatedTime >
     new Date(Date.now() - 86400 * 1000)
   ) {
     sendCommandResponse(response_url, t('messages.username.time'))

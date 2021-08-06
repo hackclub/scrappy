@@ -1,4 +1,4 @@
-// require('dotenv').config()
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const fetch = require('node-fetch')
@@ -14,7 +14,7 @@ app.get('/ping', (req, res) => {
 
 require('./router')(app)
 
-const port = process.env.PORT || 0
+const port = 57602
 const listener = app.listen(port, (err) => {
   if (err) throw err
   console.log(`> Listening on port ${listener.address().port}`)

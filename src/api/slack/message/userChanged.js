@@ -40,23 +40,28 @@ export default async (req, res) => {
   // While we're here, check if any of the user's profile fields have been changed & update them
 
   const info = await fetch(
-    `https://slack.com/api/users.info?token=${process.env.SLACK_BOT_TOKEN}&user=${user.id}`
+    `https://slack.com/api/users.info?user=${user.id}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+      }
+    }
   ).then((r) => r.json())
   const tzOffset = info.user.tz_offset
   const tz = info.user.tz.replace(`\\`, '')
-
+  console.log(user.profile)
+  console.log(info)
   const avatar = user.profile.image_192 // user = require(the event
   if (!user.profile.fields) return
   const github = user.profile.fields['Xf0DMHFDQA']?.value
   const website = user.profile.fields['Xf5LNGS86L']?.value
 
-  if (github != userRecord.fields['GitHub']) {
+  if (github != userRecord.github) {
     await prisma.accounts.update({
       where: { slackID: userRecord.slackID },
       data: { github: github }
     })
   }
-  if (website != userRecord.fields['Website']) {
+  if (website != userRecord.website) {
     await prisma.accounts.update({
       where: { slackID: userRecord.slackID },
       data: { website: website }

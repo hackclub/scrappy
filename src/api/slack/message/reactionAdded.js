@@ -119,7 +119,7 @@ export default async (req, res) => {
     const update = (
       await prisma.updates.findMany({
         where: {
-          messageTimestamp: ts
+          messageTimestamp: parseFloat(ts)
         }
       })
     )[0]
@@ -141,10 +141,10 @@ export default async (req, res) => {
         `Post hasn't been reacted to at all, or it has been reacted to, but not with this emoji`
       )
 
-      await prisma.emojireactions.create({
+      await prisma.emojiReactions.create({data:{
         updateId: update.id,
         emojiTypeName: emojiRecord.name
-      })
+      }})
     } else if (postExists && reactionExists) {
       // Post has been reacted to with this emoji
       console.log(startTS, 'Post has been reacted to with this emoji')
@@ -155,7 +155,7 @@ export default async (req, res) => {
       let usersReacted = reactionRecord.usersReacted
       console.log(startTS, 'adding reaction')
       await usersReacted.push(userRecord.id)
-      await prisma.emojireactions.update({
+      await prisma.emojiReactions.update({
         where: { id: reactionRecord.id },
         data: { usersReacted: usersReacted }
       })

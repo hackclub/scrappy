@@ -22,7 +22,7 @@ export default async (req, res) => {
   const updateRecord = (
     await prisma.updates.findMany({
       where: {
-        messageTimestamp: prevTs
+        messageTimestamp: parseFloat(prevTs)
       }
     })
   )[0]

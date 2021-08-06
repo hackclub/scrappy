@@ -23,7 +23,7 @@ export default async (req, res) => {
     const update = (
       await prisma.updates.findMany({
         where: {
-          messageTimestamp: ts
+          messageTimestamp: parseFloat(ts)
         }
       })
     )[0]
@@ -51,14 +51,14 @@ export default async (req, res) => {
         startTS,
         'i deleted the reaction record because that was the only reaction!'
       )
-      await prisma.emojireactions.deleteMany({
+      await prisma.emojiReactions.deleteMany({
         where: {
           id: reactionRecord.id
         }
       })
     } else {
       console.log(startTS, 'there have been multiple reactions, removing...')
-      await prisma.emojireactions.update({
+      await prisma.emojiReactions.update({
         where: { id: reactionRecord.id },
         data: { usersReacted: updatedUsersReacted }
       })

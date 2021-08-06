@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE")
+  url      = env("DATABASE_URL")
 }
 
 model Accounts {
@@ -16,7 +16,7 @@ model Accounts {
   streaksToggledOff       Boolean?
   customDomain            String?
   cssURL                  String?
-  website                 String
+  website                 String?
   github                  String?
   fullSlackMember         Boolean?
   avatar                  String?
@@ -25,10 +25,10 @@ model Accounts {
   newMember               Boolean
   timezoneOffset          Int
   timezone                String
-  pronouns                String
-  customAudioURL          String
-  lastUsernameUpdatedTime DateTime
-  webhookURL              String
+  pronouns                String?
+  customAudioURL          String?
+  lastUsernameUpdatedTime DateTime?
+  webhookURL              String?
   Accounts                Accounts?  @relation("AccountsToAccounts", fields: [accountsSlackID], references: [slackID])
   accountsSlackID         String?
 }
@@ -39,7 +39,7 @@ model Updates {
   accountsSlackID  String?
   postTime         DateTime         
   text             String?
-  imageAttachments String[]
+  attachments String[]
   muxAssetIDs      String[]
   muxPlaybackIDs   String[]
   muxAssetStatuses String?
