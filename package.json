@@ -5,8 +5,7 @@
   "private": true,
   "engines": {
     "node": "16.x"
-  },
-  "scripts": {
+  },  "scripts": {
     "dev": "node src/server.js",
     "start": "node build/server.js",
     "build": "rm -rf ./build && mkdir build && babel ./src -d ./build --ignore node_modules -s --copy-files",
@@ -21,7 +20,7 @@
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/preset-env": "^7.14.1",
     "@mux/mux-node": "^3.2.3",
-    "@prisma/client": "2.27.0",
+    "@prisma/client": "2.28.0",
     "airtable-plus": "^1.0.4",
     "babel-plugin-module-resolver": "^4.1.0",
     "bottleneck": "^2.19.5",
@@ -38,6 +37,6 @@
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.4",
     "prettier": "2.3.2",
-    "prisma": "2.27.0"
+    "prisma": "2.28.0"
   }
 }
