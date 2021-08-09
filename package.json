@@ -22,6 +22,7 @@
     "@babel/preset-env": "^7.14.1",
     "@mux/mux-node": "^3.2.3",
     "@prisma/client": "2.27.0",
+    "airtable-plus": "^1.0.4",
     "babel-plugin-module-resolver": "^4.1.0",
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0-rc.10",
