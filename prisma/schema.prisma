@@ -36,7 +36,7 @@ model Updates {
   id               String           @id @default(cuid())
   Accounts         Accounts?        @relation(fields: [accountsSlackID], references: [slackID])
   accountsSlackID  String?
-  postTime         DateTime
+  postTime         DateTime?
   text             String?
   attachments      String[]
   muxAssetIDs      String[]
