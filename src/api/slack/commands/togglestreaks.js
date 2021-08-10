@@ -28,7 +28,7 @@ export default async (req, res) => {
   if (toggleAllStreaks) {
     await Promise.all([
       prisma.accounts.update({
-        where: { slackID: record.id },
+        where: { slackID: record.slackID },
         data: {
           displayStreak: streaksToggledOff ? true : false,
           streaksToggledOff: !streaksToggledOff
@@ -44,7 +44,7 @@ export default async (req, res) => {
   } else {
     await Promise.all([
       prisma.accounts.update({
-        where: { slackID: record.id },
+        where: { slackID: record.slackID },
         data: {
           displayStreak: !display,
         }
