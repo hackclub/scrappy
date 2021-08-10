@@ -12,8 +12,6 @@ export default async (req, res) => {
     return res.status(400).send('Unverified Slack request!')
   else res.status(200).end()
 
-  console.log(req.body)
-
   const { user } = req.body.event
   const statusEmoji = user.profile.status_emoji
 
@@ -48,8 +46,6 @@ export default async (req, res) => {
   ).then((r) => r.json())
   const tzOffset = info.user.tz_offset
   const tz = info.user.tz.replace(`\\`, '')
-  console.log(user.profile)
-  console.log(info)
   const avatar = user.profile.image_192 // user = require(the event
   if (!user.profile.fields) return
   const github = user.profile.fields['Xf0DMHFDQA']?.value
