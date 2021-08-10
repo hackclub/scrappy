@@ -30,7 +30,6 @@ export default async (req, res) => {
   }
 
   const { item, user, reaction, item_user } = req.body.event
-  console.log(item, user, reaction)
 
   const { channel, ts } = item
 

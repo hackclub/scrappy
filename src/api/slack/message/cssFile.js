@@ -54,8 +54,6 @@ export default async (req, res) => {
     })
   ])
   let userRecord = await getUserRecord(user)
-  console.log(attachments)
-  console.log(userRecord)
 
   // I am assuming that this method will only ever be called when attachments has at least one file.
   const url = attachments[0].url

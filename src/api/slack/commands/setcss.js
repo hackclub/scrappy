@@ -38,11 +38,9 @@ export default async (req, res) => {
     url = await fetch(url)
       .then((r) => r.text())
       .then(async (html) => {
-        console.log(html)
         const $ = cheerio.load(html)
         let raw = $('.file .file-actions a').attr('href')
         if (Array.isArray(raw)) raw = raw[0]
-        console.log(raw)
         if (raw.endsWith('.css')) {
           const user = await getUserRecord(command.user_id)
           const githubUrl = 'https://gist.githubusercontent.com' + raw
