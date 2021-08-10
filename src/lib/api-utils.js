@@ -210,10 +210,13 @@ export const getUserRecord = async (userId) => {
       tzOffset,
       tz
     )
+    let checkIfExists = prisma.accounts.findFirst({
+      where: {username: username}
+    })
     record = await prisma.accounts.create({
       data: {
         slackID: userId,
-        username: username,
+        username: checkIfExists == null ? username : username + '-' + userId ,
         streakCount: 0,
         website: website,
         github: github,
