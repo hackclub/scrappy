@@ -374,7 +374,7 @@ export const getRandomWebringPost = async (user) => {
     }
   } else {
     console.log(latestUpdate[0])
-    const messageTs = latestUpdate[0].messageTimestamp.toString().replace('.', '')
+    const messageTs = latestUpdate[0].messageTimestamp.toString().replace('.', '') +'00'
     const channel = latestUpdate[0].channel
     console.log('final message ts', messageTs)
     console.log('webring channel', channel)
