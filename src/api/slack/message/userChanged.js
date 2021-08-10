@@ -63,15 +63,8 @@ export default async (req, res) => {
       data: { website: website }
     })
   }
-  let cdnAPIResponse = await fetch('https://cdn.hackclub.com/api/v1/new', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify([avatar])
-  }).then((r) => r.json())
   await prisma.accounts.update({
     where: { slackID: userRecord.slackID },
-    data: { timezoneOffset: tzOffset, timezone: tz, avatar: cdnAPIResponse[0] }
+    data: { timezoneOffset: tzOffset, timezone: tz, avatar: avatar }
   })
 }
