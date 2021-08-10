@@ -45,7 +45,7 @@ export default async (req, res) => {
 
   if ((await updateExistsTS(ts)) && reaction === 'scrappy-retry') {
     try {
-      if(userRecord.webhookURL){
+      if (userRecord.webhookURL) {
         fetch(userRecord.webhookURL)
       }
     } catch (err) {}
@@ -143,20 +143,23 @@ export default async (req, res) => {
         `Post hasn't been reacted to at all, or it has been reacted to, but not with this emoji`
       )
 
-      await prisma.emojiReactions.create({data:{
-        updateId: update.id,
-        emojiTypeName: emojiRecord.name
-      }})
+      await prisma.emojiReactions.create({
+        data: {
+          updateId: update.id,
+          emojiTypeName: emojiRecord.name
+        }
+      })
     } else if (postExists && reactionExists) {
       // Post has been reacted to with this emoji
       console.log(startTS, 'Post has been reacted to with this emoji')
-      const reactionRecord = await getReactionRecord(
-        reaction,
-        update.id
-      ).catch((err) => console.log('Cannot get reaction record', err))
+      const reactionRecord = await getReactionRecord(reaction, update.id).catch(
+        (err) => console.log('Cannot get reaction record', err)
+      )
       let usersReacted = reactionRecord.usersReacted
       console.log(startTS, 'adding reaction')
-      await usersReacted.push(userRecord.id)
+      if (userRecord.id) {
+        await usersReacted.push(userRecord.id)
+      }
       await prisma.emojiReactions.update({
         where: { id: reactionRecord.id },
         data: { usersReacted: usersReacted }
