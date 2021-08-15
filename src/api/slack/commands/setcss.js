@@ -45,7 +45,7 @@ export default async (req, res) => {
           const user = await getUserRecord(command.user_id)
           const githubUrl = 'https://gist.githubusercontent.com' + raw
           await prisma.accounts.update({
-            where: { slackID: userRecord.slackID },
+            where: { slackID: user.slackID },
             data: { cssURL: githubUrl }
           })
           const username = user.username
@@ -62,7 +62,7 @@ export default async (req, res) => {
     const username = user.username
     if (url === 'delete' || url === 'remove') {
       await prisma.accounts.update({
-        where: { slackID: userRecord.slackID },
+        where: { slackID: user.slackID },
         data: { cssURL: '' }
       })
       sendCommandResponse(command.response_url, t('messages.css.removed'))
@@ -71,7 +71,7 @@ export default async (req, res) => {
         url = url
       }
       await prisma.accounts.update({
-        where: { slackID: userRecord.slackID },
+        where: { slackID: user.slackID },
         data: { cssURL: url }
       })
       await sendCommandResponse(
