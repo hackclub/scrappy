@@ -46,10 +46,6 @@ export default async (req, res) => {
           }
         )
       }
-      await prisma.accounts.update({
-        where: { slackID: user.slackID },
-        data: { customDomain: arg }
-      })
 
       const vercelFetch = await fetch(
         `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
@@ -76,6 +72,10 @@ export default async (req, res) => {
         )
       } else {
         const domainsLeft = 50 - domainCount
+        await prisma.accounts.update({
+          where: { slackID: user.slackID },
+          data: { customDomain: arg }
+        })
         sendCommandResponse(
           command.response_url,
           t('messages.domain.domainset', { text: arg, domainsLeft })
