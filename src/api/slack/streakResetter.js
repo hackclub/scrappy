@@ -1,13 +1,12 @@
 // This API route is pinged by a Zap every hour
 
 import {
-  
-  
   getNow,
   setStatus,
   unverifiedRequest,
   timeout
 } from '../../lib/api-utils'
+import prisma from '../../lib/prisma'
 import fetch from 'node-fetch'
 
 export default async (req, res) => {
@@ -37,7 +36,9 @@ export default async (req, res) => {
         }
       ]
     })
-    const createdTime = latestUpdate[0]?.postTime
+    console.log(latestUpdate)
+    const createdTime = latestUpdate.postTime
+    console.log(createdTime)
     const createdDate = new Date(createdTime).getDate()
     console.log(username, now.getDate(), new Date(createdTime).getDate())
 
