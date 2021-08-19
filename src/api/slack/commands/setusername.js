@@ -43,7 +43,7 @@ export default async (req, res) => {
     // update the account with the new username
     await prisma.accounts.update({
       where: { slackID: userRecord.slackID },
-      data: { username: username, lastUsernameUpdatedTime:Date.now()  }
+      data: { username: username, lastUsernameUpdatedTime: new Date(Date.now())  }
     })
 
     // force a rebuild of their site
