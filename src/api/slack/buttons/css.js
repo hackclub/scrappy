@@ -7,7 +7,7 @@ import {
   processGist,
   unverifiedRequest
 } from '../../../lib/api-utils'
-import prisma from './prisma'
+import prisma from '../../../lib/prisma'
 const fetch = require('node-fetch')
 
 export default async (req, res) => {
