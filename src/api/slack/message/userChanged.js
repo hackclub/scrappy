@@ -19,10 +19,8 @@ export default async (req, res) => {
 
   if (statusEmoji.includes('som-')) {
     const statusEmojiCount = statusEmoji.split('-')[1].split(':')[0]
-    console.log('count', statusEmojiCount)
     const userRecord = await getUserRecord(user.id)
     const streakCount = userRecord.streakCount
-    console.log('user record count', streakCount)
     if (
       (streakCount != statusEmojiCount && streakCount <= 7) ||
       ('7+' != statusEmojiCount && streakCount >= 8)
