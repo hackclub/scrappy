@@ -1,4 +1,5 @@
 import { unverifiedRequest } from '../../../lib/api-utils'
+const fetch = require('node-fetch')
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
