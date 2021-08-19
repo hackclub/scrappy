@@ -112,10 +112,6 @@ export default async (req, res) => {
   limiter.schedule(async () => {
     console.log(startTS, 'Starting a reaction update')
     const emojiRecord = await getEmojiRecord(reaction)
-    const userRecord = await getUserRecord(user).catch((err) =>
-      console.log('Cannot get user record', err)
-    )
-
     const { ts } = item
     const update = (
       await prisma.updates.findMany({
@@ -149,6 +145,9 @@ export default async (req, res) => {
         }
       })
     } else if (postExists && reactionExists) {
+      const userRecord = await getUserRecord(user).catch((err) =>
+        console.log('Cannot get user record', err)
+      )
       // Post has been reacted to with this emoji
       console.log(startTS, 'Post has been reacted to with this emoji')
       const reactionRecord = await getReactionRecord(reaction, update.id).catch(
