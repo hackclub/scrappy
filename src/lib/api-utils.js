@@ -167,13 +167,11 @@ export const getUserRecord = async (userId) => {
       }
     }
   ).then((r) => r.json())
-  console.log(`https://slack.com/api/users.profile.get?user=${userId}`,{
-    headers: {
-      Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
-    }
-  })
   let github
   let website
+  if(user.profile === undefined){
+    return
+  }
   if (user.profile.fields === null) {
     github = null
     website = null
@@ -181,6 +179,7 @@ export const getUserRecord = async (userId) => {
     github = user.profile.fields['Xf0DMHFDQA']?.value
     website = user.profile.fields['Xf5LNGS86L']?.value
   }
+  
   let avatar = user.profile.image_192
 
   let record = await prisma.accounts.findUnique({
