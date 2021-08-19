@@ -683,7 +683,6 @@ export const formatText = async (text) => {
             .then(({ profile }) => profile.display_name || profile.real_name)
             .then((displayName) => (text = text.replace(u, `@${displayName}`)))
         } else {
-          console.log('found user record', userRecord)
           const username = userRecord.username
           text = text.replace(u, `@${username}`)
         }
