@@ -8,6 +8,7 @@ import {
   unverifiedRequest
 } from '../../../lib/api-utils'
 import prisma from './prisma'
+const fetch = require('node-fetch')
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
