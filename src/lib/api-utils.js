@@ -159,6 +159,7 @@ export const canDisplayStreaks = async (userId) => {
 }
 
 export const getUserRecord = async (userId) => {
+  console.log(userId)
   const user = await fetch(
     `https://slack.com/api/users.profile.get?user=${userId}`,
     {
@@ -167,6 +168,7 @@ export const getUserRecord = async (userId) => {
       }
     }
   ).then((r) => r.json())
+  console.log(user)
   let github
   let website
   if(user.profile === undefined){
