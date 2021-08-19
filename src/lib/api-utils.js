@@ -174,7 +174,7 @@ export const getUserRecord = async (userId) => {
   })
   let github
   let website
-  if (user.profile.fields === undefined) {
+  if (user.profile.fields === null) {
     github = null
     website = null
   } else {
