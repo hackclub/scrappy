@@ -172,14 +172,19 @@ export const getUserRecord = async (userId) => {
   if(user.profile === undefined){
     return
   }
-  if (user.profile.fields === null) {
-    github = null
-    website = null
-  } else {
-    github = user.profile.fields['Xf0DMHFDQA']?.value
-    website = user.profile.fields['Xf5LNGS86L']?.value
+  try{
+    if (user.profile.fields === null) {
+      github = null
+      website = null
+    } else {
+      github = user.profile.fields['Xf0DMHFDQA']?.value
+      website = user.profile.fields['Xf5LNGS86L']?.value
+    }
   }
-  
+  catch(e){
+    console.log(e)
+  }
+
   let avatar = user.profile.image_192
 
   let record = await prisma.accounts.findUnique({
