@@ -20,7 +20,6 @@ export default async (req, res) => {
 
   const startTS = Date.now()
   limiter.schedule(async () => {
-    const userRecord = await getUserRecord(user)
     const update = (
       await prisma.updates.findMany({
         where: {
@@ -43,6 +42,8 @@ export default async (req, res) => {
       console.log('BAAAAA!!! why is this reaction not in our DB')
       return
     }
+    
+    const userRecord = await getUserRecord(user)
 
     let usersReacted = reactionRecord.usersReacted
     const updatedUsersReacted = usersReacted.filter(
