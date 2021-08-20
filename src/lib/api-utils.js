@@ -159,6 +159,7 @@ export const canDisplayStreaks = async (userId) => {
 }
 
 export const getUserRecord = async (userId) => {
+  console.log(userId)
   const user = await fetch(
     `https://slack.com/api/users.profile.get?user=${userId}`,
     {
@@ -195,6 +196,13 @@ export const getUserRecord = async (userId) => {
   })
 
   if (record === null) {
+    let profile = await fetch(
+      `https://slack.com/api/users.info?user=${userId}`,{
+        headers: {
+          Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+        }
+      }
+    ).then((r) => r.json())
     let username =
       user.profile.display_name !== ''
         ? user.profile.display_name.replace(/\s/g, '')
