@@ -16,8 +16,6 @@ export default async (req, res) => {
   if (unverifiedRequest(req))
     return res.status(400).send('Unverified Slack request!')
   else res.status(200).json({ ok: true })
-
-  const newMessage = await formatText(req.body.event.message.text)
   const prevTs = req.body.event.previous_message.ts
   const updateRecord = (
     await prisma.updates.findMany({
@@ -27,6 +25,7 @@ export default async (req, res) => {
     })
   )[0]
   if (updateRecord) {
+    const newMessage = await formatText(req.body.event.message.text)
     await prisma.updates.update({
       where: { id: updateRecord.id },
       data: { text: newMessage }
