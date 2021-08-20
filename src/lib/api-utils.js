@@ -246,7 +246,7 @@ export const getUserRecord = async (userId) => {
       })
     }
   }
-  return { ...record, slack: user }
+  return { ...record }
 }
 
 export const emojiExists = async (emoji, updateId) =>
