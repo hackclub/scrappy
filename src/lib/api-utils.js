@@ -142,7 +142,9 @@ export const displayStreaks = async (userId, streakCount) => {
     }
   ).then((r) => r.json())
   
-  if (user.profile["status_text"] || user.profile["status_emoji"])return;
+  if (user.profile["status_text"] || user.profile["status_emoji"]){ 
+    if (!user.profile["status_text"].startsWith("day streak in #scrapbook")return;
+  };
 
   if (!userRecord.streaksToggledOff) {
     if (streakCount == 0 || !userRecord.displayStreak) {
