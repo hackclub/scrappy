@@ -159,34 +159,6 @@ export const canDisplayStreaks = async (userId) => {
 }
 
 export const getUserRecord = async (userId) => {
-  const user = await fetch(
-    `https://slack.com/api/users.profile.get?user=${userId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
-      }
-    }
-  ).then((r) => r.json())
-  console.log(user)
-  let github
-  let website
-  if(user.profile === undefined){
-    return
-  }
-  try{
-    if (user.profile.fields === null) {
-      github = null
-      website = null
-    } else {
-      github = user.profile.fields['Xf0DMHFDQA']?.value
-      website = user.profile.fields['Xf5LNGS86L']?.value
-    }
-  }
-  catch(e){
-    console.log(e)
-  }
-
-  let avatar = user.profile.image_192
 
   let record = await prisma.accounts.findUnique({
     where: {
@@ -195,6 +167,36 @@ export const getUserRecord = async (userId) => {
   })
 
   if (record === null) {
+    const user = await fetch(
+      `https://slack.com/api/users.profile.get?user=${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+        }
+      }
+    ).then((r) => r.json())
+    if(user.ok === false){
+      return
+    }
+    let github
+    let website
+    if(user.profile === undefined){
+      return
+    }
+    try{
+      if (user.profile.fields === null) {
+        github = null
+        website = null
+      } else {
+        github = user.profile.fields['Xf0DMHFDQA']?.value
+        website = user.profile.fields['Xf5LNGS86L']?.value
+      }
+    }
+    catch(e){
+      console.log(e)
+    }
+
+    let avatar = user.profile.image_192
     let username =
       user.profile.display_name !== ''
         ? user.profile.display_name.replace(/\s/g, '')
