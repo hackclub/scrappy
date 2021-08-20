@@ -141,6 +141,8 @@ export const displayStreaks = async (userId, streakCount) => {
       }
     }
   ).then((r) => r.json())
+  
+  if (user.profile["status_text"] || user.profile["status_emoji"])return;
 
   if (!userRecord.streaksToggledOff) {
     if (streakCount == 0 || !userRecord.displayStreak) {
