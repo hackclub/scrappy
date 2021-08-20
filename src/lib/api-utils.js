@@ -686,7 +686,7 @@ export const formatText = async (text) => {
             }
           )
             .then((r) => r.json())
-            .then(({ profile }) => profile === undefined ? uID : profile.display_name || profile.real_name  )
+            .then(({ profile }) => profile.display_name || profile.real_name)
             .then((displayName) => (text = text.replace(u, `@${displayName}`)))
         } else {
           const username = userRecord.username
