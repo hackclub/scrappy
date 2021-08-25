@@ -33,7 +33,7 @@ export default async (req, res) => {
 
   const { channel, ts } = item
 
-  if (reaction !== 'spring-of-making' && user === 'U015D6A36AG') return
+  if (reaction !== 'summer21' && user === 'U015D6A36AG') return
 
   if (
     (await updateExistsTS(ts)) &&
@@ -64,7 +64,7 @@ export default async (req, res) => {
       }
     })
     await react('remove', channel, ts, 'beachball')
-    await react('add', channel, ts, 'spring-of-making')
+    await react('add', channel, ts, 'summer21')
     return
   }
 
