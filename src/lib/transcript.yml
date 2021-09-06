@@ -41,7 +41,7 @@ messages:
     3: |
       I'll scarf that down and add it to your scrapbook for day 3. You're moving up the ranks! ${this.scrapbookLink}
 
-      Did you know you can add a custom domain to your scrapbook? Check out <@U0266FRGP>\'s: https://zachlatta.com
+      Did you know you can add a custom domain to your scrapbook? Check out <@USNPNJXNX>\'s: https://scrapbook.sampoder.com
       Add your own domain by typing \`/scrappy setdomain\`.
     4: Hello, hello? Uh, I wanted to let you know that that's day 4 completed!!! ${this.scrapbookLink}
     5: 5 whole days of streaks! That's like one more than yesterday!!! ${this.scrapbookLink}
@@ -245,7 +245,9 @@ startup:
     - consumes
     - devours
     - wolfs down
+    - scarfs down
     - swallows
+    - slurps
     - gobbles
     - gulps down
     - ingests
