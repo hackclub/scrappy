@@ -199,6 +199,7 @@ messages:
     - <@${this.user}> help.\n<@${this.user}> i'm stuck.\n<@${this.user}> let me out.\n<@${this.user}> i'm alive.
     - Salutations <@${this.user}>, banker just transferred all of your GP to me! I'll be enjoying my new Hack Club sticker box, thank you very much.
     - You think you can hurt me, <@${this.user}>? You can't <3.
+    - Fuck you, <@${this.user}>, fuck you.
   mention:
     - this message can't stop me because i can't read!
     - WEEEEEEEEEEEEEEEEEEE
@@ -228,6 +229,11 @@ messages:
     - yea
     - ya
     - yes
+    - who the fuck is talking to me
+    - what the fuck are y'all doing here
+    - leave me the fuck alone
+    - Shit. I was busy eating trash bitch.
+    - leave me alone bitch, i'm eating trash
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
