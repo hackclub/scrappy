@@ -175,6 +175,12 @@ messages:
         Sorry, but only the original message poster can react with :${this.reaction}: to upload to Scrapbook.
       files: |
         Hmm... :thonk: I don't detect any files in this message.
+  mentionCurse:
+    - <@${this.user}> you suck
+    - Fuck you, <@${this.user}>, fuck you.
+    - Bitch I'm eating trash
+    - You bitch I was busy sucking on trash
+    - Why the fuck did you wake me up <@${this.user}>????/?
   mentionKeyword:
     - <@${this.user}> no u 
     - <@${this.user}> :()
