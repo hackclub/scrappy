@@ -300,11 +300,18 @@ mention:
     - You think you can hurt me, <@${this.user}>? You can't <3.
   spicy: # further out insults, complements of @arcade. only trigger for users who opted-in
     general:
-      - <@${this.user}> you suck
-      - Fuck you, <@${this.user}>, fuck you.
-      - Bitch I'm eating trash
-      - You bitch I was busy sucking on trash
-      - Why the fuck did you wake me up <@${this.user}>????/?
+      - _GET OFF MY CHEEKS <@${this.user}>_
+      - I don't like the way you type <@${this.user}>
+      - _trash can_ you not
+      - i _would_ be eating trash right now, but i'm not allowed to eat slack users
     fuck: # this is an example of how you can use a specific response for a specific 'mention.triggerSpicy'
       - go suck a duck <@${this.user}>
-      - _GET OFF MY CHEEKS <@${this.user}>_
+    crappy:
+      - instead of crappy, did you mean scrappy?
+      - it looks like you're insulting a bot on slack. would you like help with that?
+    bitch:
+      - stop talking about my dog!
+      - don't talk about <@${this.t('users.maildog')}> that way!
+      - don't insult <@${this.t('users.maildog')}>
+users:
+  maildog: URZHZS3L6
