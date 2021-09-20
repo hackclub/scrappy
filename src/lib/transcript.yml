@@ -175,65 +175,6 @@ messages:
         Sorry, but only the original message poster can react with :${this.reaction}: to upload to Scrapbook.
       files: |
         Hmm... :thonk: I don't detect any files in this message.
-  mentionCurse:
-    - <@${this.user}> you suck
-    - Fuck you, <@${this.user}>, fuck you.
-    - Bitch I'm eating trash
-    - You bitch I was busy sucking on trash
-    - Why the fuck did you wake me up <@${this.user}>????/?
-  mentionKeyword:
-    - <@${this.user}> no u 
-    - <@${this.user}> :()
-    - <@${this.user}> aosidjghlkj;LKasASDLKGJ AASDFLKJ LAKJSHDF ;OIHA GKLJRWHG AJSDGH
-    - <@${this.user}> no u ${'!'.repeat(Math.floor(Math.random() * 7))}
-    - <@${this.user}> you are SO MEAN OMG. i am going to delete your account
-    - take it back <@${this.user}>, or i will ping staff and ask them to ban you from the slack
-    - oh yeah <@${this.user}>?? actually i think the same abotu you're mom. pwned
-    - <@${this.user}> BULLLYYY :((((
-    - <@${this.user}> https://cloud-r8zkxq6k0.vercel.app/image.png
-    - <@${this.user}> 01110011 01100011 01110010 01100101 01110111 00100000 01111001 01101111 01110101
-    - here <@${this.user}>, eat some dog food and rethink your actions
-    - <@${this.user}> i don't think thats very nice!!!!!!!!!!!!!!!
-    - <@${this.user}> OMG SHUT YOUR MOUTH I DO SO MUCH FOR YOU AND THIS HOW YOU TREAT MEJKMMEMEEEEE?????!!!?!?
-    - <@${this.user}> OMG Lemme tell zach to ban you.
-    - <@${this.user}> GET LOST OR I WILL RESET YOUR STREAK
-    - <@${this.user}> Why did you do this to me! You traitor :(
-    - <@${this.user}> Gimme your address, i wanna ship you some trash
-    - <@${this.user}> imma tell my creator, they're an adminnnnn
-    - <@${this.user}> haha todays opposite day so no u MWHAHAHAHAHAH
-    - <@${this.user}> u wanna fight? im gonna fight hyou. stinky
-    - <@${this.user}> help.\n<@${this.user}> i'm stuck.\n<@${this.user}> let me out.\n<@${this.user}> i'm alive.
-    - Salutations <@${this.user}>, banker just transferred all of your GP to me! I'll be enjoying my new Hack Club sticker box, thank you very much.
-    - You think you can hurt me, <@${this.user}>? You can't <3.
-  mention:
-    - this message can't stop me because i can't read!
-    - WEEEEEEEEEEEEEEEEEEE
-    - (gobbling down trash) what???????????????? i am busy
-    - asdfl kshfd kjs aighsdu AIU SYDGIUAYSD Y76R42 DS 723R DSFJKS 287RI7SD
-    - cGxlYXNlIGhlbHAgbWU=
-    - you mentioned me but i dropped out of elementary school because i wanted to eat trash so i can't read your message
-    - hiiiiiiiiiii hELLLOOOOOOOOOOOO
-    - I love you 3<
-    - but like why though
-    - huh?
-    - not funny. didn't laugh
-    - You are the best
-    - no. 3>
-    - 01100111 01101111 00100000 01100001 01110111 01100001 01111001
-    - leave me alone I'm trying to finish eating the rest of my trash.
-    - i'm buzzy trying to keep track of all these scrapbooksasdjlasaaousao
-    - 3 looks like a sideways butt haha
-    - garbador i chooooseeee youuuuuuuuuu
-    - cAn yOu lEt mE eAt mY tRaSh iN pEaCe?!÷™¡™¡˙ø∆b
-    - ļ̴̹̪̳͍̦̹̣̖̺̺͔͖̽̒̄̏̀e̴̢̯̗̱̳͇̦̩̤͚̟̎́̇͋̉̔͆͌͐̒̅̀̌̏ẗ̴̛̩̎͂̾̒̓̏͂̾̒ ̷̧̛͎̞̮͍̫͛̍̐̒̾̈́̿ṃ̸̓̋̐̍̍͠ȩ̴̙̼͓̺̌͐̔͊̓̆͆̀͝͝ ̶͙̟͎͛̀͑͂̕̚͘͜ỡ̵̗͚͍̞͇̲̟̭̬͉͉̌̒̆̊͑̋͛̕̕͜ͅṷ̴̧̡͎̬̈́̆͗̑̀͒̑͐͒̎̐̈́͝͝ṭ̷̢̙̮̭͎̘̥̩̳̟̖̞͆̈̇͑̇̂͛͛̆́͜͜
-    - So guys, in a way, people are like trash cans. When you stomp on them, their mouth opens up. *stomp*
-    - Hiya, I hope you're having a great day so far, <@${this.user}>! I need to go back to eating trash, but here's a virtual hugQ34978UFAIHSAI;DFGHSLHAS ;LKSADFG ;LOKAOISGPHOIUASG IAYUWEYAFSZVAG;EOUROIU;AHSAUGPI;.
-    - System.out.println("Go away");
-    - Ok fine I'll give you my Bitcoin wallet.\n\nThe public key is \`1ATX8RXjVigphrYUxLJRziLstSdCan3Nig\`\n\nThe private key is \`L3wPf8yeQmrMSoVk1fY7w1qa5K79uaAxgGcB1keYyTYsn7TwiVi4\`
-    - no
-    - yea
-    - ya
-    - yes
 startup:
   trashType:
     - type ${1 + Math.floor(Math.random() * 7)} recyclables
@@ -286,3 +227,96 @@ startup:
       - ${this.t('startup.randomChange')}
       - ${this.t('startup.scrappyChange')}
       - ${this.latestCommitMsg}
+mention:
+  triggerMild:
+    array:
+      - dumb
+      - suck
+      - stupid
+      - trash
+      - trashy
+  triggerSpicy:
+    array:
+      - fuck
+      - shit
+      - fudge
+      - crap
+      - crappy
+  triggerSpicyOptIn:
+    array: # keep in mind scrappy will curse at you if you add yourself to this list
+      - UM1L1C38X # @orpheus (as an example)
+  any:
+    - this message can't stop me because i can't read!
+    - WEEEEEEEEEEEEEEEEEEE
+    - (gobbling down trash) what???????????????? i am busy
+    - asdfl kshfd kjs aighsdu AIU SYDGIUAYSD Y76R42 DS 723R DSFJKS 287RI7SD
+    - cGxlYXNlIGhlbHAgbWU=
+    - you mentioned me but i dropped out of elementary school because i wanted to eat trash so i can't read your message
+    - hiiiiiiiiiii hELLLOOOOOOOOOOOO
+    - I love you 3<
+    - but like why though
+    - huh?
+    - not funny. didn't laugh
+    - You are the best
+    - no. 3>
+    - 01100111 01101111 00100000 01100001 01110111 01100001 01111001
+    - leave me alone I'm trying to finish eating the rest of my trash.
+    - i'm buzzy trying to keep track of all these scrapbooksasdjlasaaousao
+    - 3 looks like a sideways butt haha
+    - garbador i chooooseeee youuuuuuuuuu
+    - cAn yOu lEt mE eAt mY tRaSh iN pEaCe?!÷™¡™¡˙ø∆b
+    - ļ̴̹̪̳͍̦̹̣̖̺̺͔͖̽̒̄̏̀e̴̢̯̗̱̳͇̦̩̤͚̟̎́̇͋̉̔͆͌͐̒̅̀̌̏ẗ̴̛̩̎͂̾̒̓̏͂̾̒ ̷̧̛͎̞̮͍̫͛̍̐̒̾̈́̿ṃ̸̓̋̐̍̍͠ȩ̴̙̼͓̺̌͐̔͊̓̆͆̀͝͝ ̶͙̟͎͛̀͑͂̕̚͘͜ỡ̵̗͚͍̞͇̲̟̭̬͉͉̌̒̆̊͑̋͛̕̕͜ͅṷ̴̧̡͎̬̈́̆͗̑̀͒̑͐͒̎̐̈́͝͝ṭ̷̢̙̮̭͎̘̥̩̳̟̖̞͆̈̇͑̇̂͛͛̆́͜͜
+    - So guys, in a way, people are like trash cans. When you stomp on them, their mouth opens up. *stomp*
+    - Hiya, I hope you're having a great day so far, <@${this.user}>! I need to go back to eating trash, but here's a virtual hugQ34978UFAIHSAI;DFGHSLHAS ;LKSADFG ;LOKAOISGPHOIUASG IAYUWEYAFSZVAG;EOUROIU;AHSAUGPI;.
+    - System.out.println("Go away");
+    - Ok fine I'll give you my Bitcoin wallet.\n\nThe public key is \`1ATX8RXjVigphrYUxLJRziLstSdCan3Nig\`\n\nThe private key is \`L3wPf8yeQmrMSoVk1fY7w1qa5K79uaAxgGcB1keYyTYsn7TwiVi4\`
+    - no
+    - yea
+    - ya
+    - yes
+  mild: # pg-13 insults
+    - <@${this.user}> no u
+    - <@${this.user}> :()
+    - <@${this.user}> aosidjghlkj;LKasASDLKGJ AASDFLKJ LAKJSHDF ;OIHA GKLJRWHG AJSDGH
+    - <@${this.user}> no u ${'!'.repeat(Math.floor(Math.random() * 7))}
+    - <@${this.user}> you are SO MEAN OMG. i am going to delete your account
+    - take it back <@${this.user}>, or i will ping staff and ask them to ban you from the slack
+    - oh yeah <@${this.user}>?? actually i think the same abotu you're mom. pwned
+    - <@${this.user}> BULLLYYY :((((
+    - <@${this.user}> https://cloud-r8zkxq6k0.vercel.app/image.png
+    - <@${this.user}> 01110011 01100011 01110010 01100101 01110111 00100000 01111001 01101111 01110101
+    - here <@${this.user}>, eat some dog food and rethink your actions
+    - <@${this.user}> i don't think thats very nice!!!!!!!!!!!!!!!
+    - <@${this.user}> OMG SHUT YOUR MOUTH I DO SO MUCH FOR YOU AND THIS HOW YOU TREAT MEJKMMEMEEEEE?????!!!?!?
+    - <@${this.user}> OMG Lemme tell zach to ban you.
+    - <@${this.user}> GET LOST OR I WILL RESET YOUR STREAK
+    - <@${this.user}> Why did you do this to me! You traitor :(
+    - <@${this.user}> Gimme your address, i wanna ship you some trash
+    - <@${this.user}> imma tell my creator, they're an adminnnnn
+    - <@${this.user}> haha todays opposite day so no u MWHAHAHAHAHAH
+    - <@${this.user}> u wanna fight? im gonna fight hyou. stinky
+    - <@${this.user}> help.\n<@${this.user}> i'm stuck.\n<@${this.user}> let me out.\n<@${this.user}> i'm alive.
+    - Salutations <@${this.user}>, banker just transferred all of your GP to me! I'll be enjoying my new Hack Club sticker box, thank you very much.
+    - You think you can hurt me, <@${this.user}>? You can't <3.
+  spicy: # further out insults, complements of @arcade. only trigger for users who opted-in
+    general:
+      - _GET OFF MY CHEEKS <@${this.user}>_
+      - I don't like the way you type <@${this.user}>
+      - _trash can_ you not
+      - i _would_ be eating trash right now, but i'm not allowed to eat slack users
+      - you know i don't care what everyone else says, i like you
+      - your forehead looks like an elbow
+      - you know that really sounds like a personal problem
+      - someone should really garbage collect YOU
+      - are you even vaccinated?
+    fuck: # this is an example of how you can use a specific response for a specific 'mention.triggerSpicy'
+      - go suck a duck <@${this.user}>
+    crappy:
+      - instead of crappy, did you mean scrappy?
+      - it looks like you're insulting a bot on slack. would you like help with that?
+    bitch:
+      - stop talking about my dog!
+      - don't talk about <@${this.t('users.maildog')}> that way!
+      - don't insult <@${this.t('users.maildog')}>
+users:
+  maildog: URZHZS3L6
