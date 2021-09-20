@@ -304,6 +304,11 @@ mention:
       - I don't like the way you type <@${this.user}>
       - _trash can_ you not
       - i _would_ be eating trash right now, but i'm not allowed to eat slack users
+      - you know i don't care what everyone else says, i like you
+      - your forehead looks like an elbow
+      - you know that really sounds like a personal problem
+      - someone should really garbage collect YOU
+      - are you even vaccinated?
     fuck: # this is an example of how you can use a specific response for a specific 'mention.triggerSpicy'
       - go suck a duck <@${this.user}>
     crappy:
