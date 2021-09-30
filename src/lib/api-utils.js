@@ -342,7 +342,7 @@ export const getRandomWebringPost = async (user) => {
   const userRecord = await getUserRecord(user)
   const webring = userRecord.webring
   console.log('webring for user', webring)
-  if (!webring) {
+  if (!webring || !webring.length) {
     console.log('no webring found')
     return { notfound: true}
   }
