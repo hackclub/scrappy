@@ -48,7 +48,11 @@ export default async (req, res) => {
 
     // force a rebuild of their site
     await rebuildScrapbookFor(user_id)
-
+    try {
+      await fetch(process.env.VC_DEPLOY)
+	  } catch (err) {
+      console.log(err)
+    }
     // hang tight while the rebuild happens before giving out the new link
     await sendCommandResponse(
       response_url,
