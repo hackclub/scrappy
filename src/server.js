@@ -1,7 +1,7 @@
 // require('dotenv').config()
 const express = require('express')
 const app = express()
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
