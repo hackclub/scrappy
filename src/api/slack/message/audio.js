@@ -12,6 +12,7 @@ import {
   
   react
 } from '../../../lib/api-utils'
+import fetch from 'node-fetch'
 import prisma from '../../../lib/prisma'
 
 export default async (req, res) => {
