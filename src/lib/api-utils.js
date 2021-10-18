@@ -758,7 +758,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
             slackID: userRecord.slackID
           },
           data: {
-            newMember: true
+            newMember: false
           }
         })
       }
