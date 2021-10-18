@@ -785,7 +785,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
 
       if (userRecord.newMember && updatedStreakCount === 1) {
         postEphemeral(
-          process.env.CHANNEL,
+          channel,
           t('messages.streak.newstreak'),
           userId
         )
