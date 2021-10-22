@@ -36,7 +36,7 @@ export default async (req, res) => {
   console.log('current webrings', currentWebring)
   if (!currentWebring) {
     currentWebring = [webringUserRecord.slackID]
-  } else if (!currentWebring.includes(webringUserRecord.id)) {
+  } else if (!currentWebring.includes(webringUserRecord.slackID)) {
     if (currentWebring.length >= 8)
       return sendCommandResponse(response_url, t('messages.webring.toolong'))
     currentWebring.push(webringUserRecord.slackID)
