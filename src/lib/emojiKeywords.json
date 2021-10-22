@@ -170,5 +170,13 @@
   "chess": "chess_pawn",
   "pr": "pr",
   "pull request": "pr",
-  "bread": "bank-hackclub"
+  "bread": "bank-hackclub",
+  "nft": "nft",
+  "nfts": "nft",
+  "hns": "hns",
+  "decentralized": "hns",
+  "internet": "hns",
+  "domain": "hns",
+  "domains": "hns",
+  "dns": "hns"
 }
