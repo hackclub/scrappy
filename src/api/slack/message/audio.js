@@ -64,7 +64,7 @@ export default async (req, res) => {
       channel,
       ts,
       t('messages.audio.set', {
-        url: publicUrl
+        url: JSON.stringify(publicUrl)
       })
     )
   ])
