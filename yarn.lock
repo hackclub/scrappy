@@ -896,12 +896,12 @@
     "@babel/helper-validator-identifier" "^7.14.9"
     to-fast-properties "^2.0.0"
 
-"@mux/mux-node@^3.2.3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-3.2.3.tgz#2ca6b54d6d48972a6fce9b301674a876430a3c54"
-  integrity sha512-incFthoAPP2RJrptWnSF0/1OX5ws0X1hnkUscA7PP57Ka1y6597/vhxpbdKb4K7GkKBJ0DEyDpfFBMdC0II1sA==
+"@mux/mux-node@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-3.3.1.tgz#81001779b5ab779aaeed522c5b2eed2e4564a8a6"
+  integrity sha512-BJoUzbqWQKQ34ENMLthH9eK8xwoa5pkl3u4Na1aMDOH8d7DGUSKBw5YbmSgm5tOk9Twn/0kLN9AoJRZHkAC1pg==
   dependencies:
-    axios "^0.21.1"
+    axios "^0.21.4"
     esdoc-ecmascript-proposal-plugin "^1.0.0"
     jsonwebtoken "^8.4.0"
 
@@ -1111,7 +1111,7 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^0.21.1:
+axios@^0.21.4:
   version "0.21.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
