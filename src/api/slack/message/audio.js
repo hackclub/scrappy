@@ -44,16 +44,9 @@ export default async (req, res) => {
 
   const userRecord = await getUserRecord(user)
   const publicUrl = await getPublicFileUrl(urlPrivate, channel, user)
-  let cdnAPIResponse = await fetch('https://cdn.hackclub.com/api/v1/new', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify([publicUrl.url])
-  }).then((r) => r.json())
   await prisma.accounts.update({
     where: { slackID: userRecord.slackID },
-    data: { customAudioURL: cdnAPIResponse[0] }
+    data: { customAudioURL: publicUrl.url }
   })
   await rebuildScrapbookFor(userRecord)
 
