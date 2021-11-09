@@ -8,11 +8,6 @@ import path from 'path'
 const yaml = require('js-yaml')
 import prisma from './prisma'
 
-const { Video } = new Mux(
-  process.env.MUX_TOKEN_ID,
-  process.env.MUX_TOKEN_SECRET
-)
-
 export const timeout = (ms) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -411,6 +406,11 @@ export const isNewMember = async (userId) => {
 }
 
 export const getPublicFileUrl = async (urlPrivate, channel, user) => {
+  const { Video } = new Mux(
+    process.env.MUX_TOKEN_ID,
+    process.env.MUX_TOKEN_SECRET
+  )
+  
   const fileName = urlPrivate.split('/').pop()
   const fileId = urlPrivate.split('-')[2].split('/')[0]
   console.log('file id', fileId)
