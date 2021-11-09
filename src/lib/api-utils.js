@@ -575,7 +575,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   if (!fullSlackMember) {
     const fullMember = await isFullMember(user)
     if (fullMember) {
-      prisma.accounts.update({
+      await prisma.accounts.update({
         where: {
           slackID: userRecord.slackID
         },
