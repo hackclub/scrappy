@@ -13,9 +13,9 @@ app.use(express.urlencoded({extended: true}))
 
 const dev = process.env.NODE_ENV !== 'production'
 
-// app.get('/ping', (req, res) => {
-//   res.send('pong!')
-// })
+app.get('/ping', (req, res) => {
+  res.send('pong!')
+})
 
 const port = process.env.PORT || 3000
  app.listen(port, (err) => {
