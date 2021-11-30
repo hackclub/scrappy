@@ -1,4 +1,4 @@
-{
+export default {
   "C0M8PUPU6": "ship",
   "C6C026NHJ": "hardware",
   "CJ1UVDF7E": "art",

@@ -2,11 +2,10 @@ import {
   unverifiedRequest,
   getUserRecord,
   t,
-  
   sendCommandResponse,
   rebuildScrapbookFor
-} from '../../../lib/api-utils'
-import prisma from '../../../lib/prisma'
+} from '../../../lib/api-utils.js'
+import prisma from '../../../lib/prisma.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
@@ -29,8 +28,7 @@ export default async (req, res) => {
   console.log(exists.length)
 
   if (
-    userRecord.lastUsernameUpdatedTime >
-    new Date(Date.now() - 86400 * 1000)
+    userRecord.lastUsernameUpdatedTime > new Date(Date.now() - 86400 * 1000)
   ) {
     sendCommandResponse(response_url, t('messages.username.time'))
   } else if (!username) {
@@ -43,14 +41,17 @@ export default async (req, res) => {
     // update the account with the new username
     await prisma.accounts.update({
       where: { slackID: userRecord.slackID },
-      data: { username: username, lastUsernameUpdatedTime: new Date(Date.now())  }
+      data: {
+        username: username,
+        lastUsernameUpdatedTime: new Date(Date.now())
+      }
     })
 
     // force a rebuild of their site
     await rebuildScrapbookFor(user_id)
     try {
       await fetch(process.env.VC_DEPLOY)
-	  } catch (err) {
+    } catch (err) {
       console.log(err)
     }
     // hang tight while the rebuild happens before giving out the new link

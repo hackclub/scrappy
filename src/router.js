@@ -1,6 +1,5 @@
-import { resolve, relative, extname, basename, dirname }  from 'path'
-import fs from 'fs'
-const { readdir } = require('fs').promises
+import { resolve, relative, extname, join }  from 'path'
+import { readdir } from "fs/promises"
 
 async function getFiles(dir) {
   const dirents = await readdir(dir, { withFileTypes: true })
@@ -11,35 +10,23 @@ async function getFiles(dir) {
   return Array.prototype.concat(...files)
 }
 
-module.exports = async (app) => {
-  const startTS = Date.now()
-  await getFiles('./build/api').then(files => files.forEach(file => {
+export default async function(app)  {
+  const files = await getFiles("./src/api")
+  files.forEach(async file => {
     if (extname(file) != '.js') {
       // skip loading non-js files
       return
     }
-    console.log('file', file)
 
-    let routePath = relative(__dirname, dirname(file)).substr(3)
-    if (basename(file, extname(file)) != 'index') {
-      routePath = `${routePath}/${basename(file, extname(file))}`
-    }
-    console.log('loading file', routePath)
+    const routePath = relative(join(process.cwd(), 'src/api'), file).replace(/\.js$/, "")
+    const route = await import(file)
 
-    app.all('/api' + routePath, async (req, res) => {
+    app.all(`/api/${routePath}`, async (req, res) => {
       try {
-        let route = require(file).default
-        await route(req, res)
-      } catch (err) {
-        try {
-          let route = require(file)
-          await route(req, res)
-        } catch {
-          console.error(err)
-        }
+        await route.default(req, res)
+      } catch (e) {
+        console.log(e);
       }
     })
-  })).then(_ => {
-    console.log(`Finished loading in ${Date.now() - startTS}ms`)
-  })
+  });
 }

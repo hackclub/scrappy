@@ -1,14 +1,13 @@
 import cheerio from 'cheerio'
 import {
   getUserRecord,
-  
   reply,
   t,
   getUrlFromString,
   postEphemeral,
   unverifiedRequest
-} from '../../../lib/api-utils'
-import prisma from '../../../lib/prisma'
+} from '../../../lib/api-utils.js'
+import prisma from '../../../lib/prisma.js'
 import fetch from 'node-fetch'
 
 export default async (req, res) => {

@@ -11,8 +11,6 @@ import {
   reply,
   react,
   replaceEmoji,
-  
-  
   displayStreaks,
   getReplyMessage,
   fetchProfile,
@@ -23,7 +21,7 @@ import {
   unverifiedRequest,
   isFullMember,
   createPost
-} from '../../../lib/api-utils'
+} from '../../../lib/api-utils.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))

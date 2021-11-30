@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import Prisma from "@prisma/client";
 
-let prisma = new PrismaClient();
+let prisma = new Prisma.PrismaClient();
 
 export default prisma;

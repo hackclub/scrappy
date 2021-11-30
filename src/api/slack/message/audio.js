@@ -9,11 +9,10 @@ import {
   reply,
   t,
   rebuildScrapbookFor,
-  
   react
-} from '../../../lib/api-utils'
+} from '../../../lib/api-utils.js'
 import fetch from 'node-fetch'
-import prisma from '../../../lib/prisma'
+import prisma from '../../../lib/prisma.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))

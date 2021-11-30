@@ -5,8 +5,8 @@ import {
   setStatus,
   unverifiedRequest,
   timeout
-} from '../../lib/api-utils'
-import prisma from '../../lib/prisma'
+} from '../../lib/api-utils.js'
+import prisma from '../../lib/prisma.js'
 import fetch from 'node-fetch'
 
 export default async (req, res) => {

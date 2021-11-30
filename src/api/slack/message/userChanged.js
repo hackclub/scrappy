@@ -2,10 +2,9 @@ import {
   getUserRecord,
   setStatus,
   unverifiedRequest,
-  accountsTable
-} from '../../../lib/api-utils'
+} from '../../../lib/api-utils.js'
 import fetch from 'node-fetch'
-import prisma from '../../../lib/prisma'
+import prisma from '../../../lib/prisma.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
@@ -35,13 +34,11 @@ export default async (req, res) => {
 
   // While we're here, check if any of the user's profile fields have been changed & update them
 
-  const info = await fetch(
-    `https://slack.com/api/users.info?user=${user.id}`, {
-      headers: {
-        Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
-      }
+  const info = await fetch(`https://slack.com/api/users.info?user=${user.id}`, {
+    headers: {
+      Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
     }
-  ).then((r) => r.json())
+  }).then((r) => r.json())
   const tzOffset = info.user.tz_offset
   const tz = info.user.tz.replace(`\\`, '')
   const avatar = user.profile.image_192 // user = require(the event

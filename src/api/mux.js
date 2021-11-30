@@ -1,5 +1,5 @@
-import { reply, t } from '../lib/api-utils'
-import prisma from '../lib/prisma'
+import { reply, t } from '../lib/api-utils.js'
+import prisma from '../lib/prisma.js'
 // Only runs when a user uploads a large video, to notify them when Mux processes the video
 export default async (req, res) => {
   if (req.body.type === 'video.asset.ready') {

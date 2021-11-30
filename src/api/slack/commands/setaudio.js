@@ -2,11 +2,10 @@ import {
   unverifiedRequest,
   getUserRecord,
   t,
-  
   sendCommandResponse,
   rebuildScrapbookFor
-} from '../../../lib/api-utils'
-import prisma from '../../../lib/prisma'
+} from '../../../lib/api-utils.js'
+import prisma from '../../../lib/prisma.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
@@ -25,14 +24,12 @@ export default async (req, res) => {
         response_url,
         t('messages.audio.removed', { previous: userRecord.customAudioURL })
       )
-      // update the account with the new audioless 
+      // update the account with the new audioless
       await prisma.accounts.update({
         where: { slackID: userRecord.slackID },
         data: { customAudioURL: null }
       })
-    } 
-    
-    else {
+    } else {
       sendCommandResponse(response_url, t('messages.audio.noargs'))
     }
   } else {
@@ -52,7 +49,9 @@ export default async (req, res) => {
     // hang tight while the rebuild happens before giving out the new link
     await sendCommandResponse(
       response_url,
-      t('messages.audio.set', { url: `https://scrapbook.hackclub.com/${userRecord.username}` })
+      t('messages.audio.set', {
+        url: `https://scrapbook.hackclub.com/${userRecord.username}`
+      })
     )
   }
   res.status(200).end()

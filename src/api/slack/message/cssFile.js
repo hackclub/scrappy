@@ -11,8 +11,6 @@ import {
   getUserRecord,
   reply,
   react,
-  
-  
   displayStreaks,
   getReplyMessage,
   fetchProfile,
@@ -21,9 +19,9 @@ import {
   postEphemeral,
   t,
   unverifiedRequest
-} from '../../../lib/api-utils'
+} from '../../../lib/api-utils.js'
 
-import css from './css'
+import css from './css.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
