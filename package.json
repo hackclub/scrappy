@@ -6,24 +6,17 @@
   "engines": {
     "node": "16.x"
   },
+  "type": "module",
   "scripts": {
-    "dev": "node src/server.js",
-    "start": "node build/server.js",
-    "build": "rm -rf ./build && mkdir build && babel ./src -d ./build --ignore node_modules -s --copy-files",
-    "heroku-prebuild": "rm -rf node_modules",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
     "format": "prettier --write .",
     "checkFormat": "prettier --check ."
   },
   "dependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.13",
-    "@babel/plugin-proposal-optional-chaining": "^7.13.12",
-    "@babel/plugin-transform-runtime": "^7.13.10",
-    "@babel/preset-env": "^7.14.1",
     "@mux/mux-node": "^3.3.1",
     "@prisma/client": "3.5.0",
     "airtable-plus": "^1.0.4",
-    "babel-plugin-module-resolver": "^4.1.0",
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0-rc.10",
     "express": "^4.17.1",

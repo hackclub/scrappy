@@ -3,13 +3,11 @@ import fetch from 'node-fetch'
 
 import {
   sendCommandResponse,
-  
   getUserRecord,
-  
   t,
   unverifiedRequest
-}  from '../../../lib/api-utils'
-import prisma from '../../../lib/prisma'
+} from '../../../lib/api-utils.js'
+import prisma from '../../../lib/prisma.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {

@@ -1,4 +1,4 @@
-import { unverifiedRequest } from '../../../lib/api-utils'
+import { unverifiedRequest } from '../../../lib/api-utils.js'
 import fetch from 'node-fetch'
 
 export default async (req, res) => {

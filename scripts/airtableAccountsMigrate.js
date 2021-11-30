@@ -1,6 +1,5 @@
-const AirtablePlus = require('airtable-plus')
-const { PrismaClient } = require('@prisma/client')
-require('dotenv').config()
+import AirtablePlus from "airtable-plus"
+import { PrismaClient } from "@prisma/client"
 
 let prisma = new PrismaClient()
 

@@ -15,12 +15,14 @@ import {
   isFullMember,
   createPost,
   postEphemeral
-} from '../../../lib/api-utils'
-import prisma from '../../../lib/prisma'
+} from '../../../lib/api-utils.js'
+import prisma from '../../../lib/prisma.js'
 import Bottleneck from 'bottleneck'
 import fetch from 'node-fetch'
 
 const limiter = new Bottleneck({ maxConcurrent: 1 })
+import channelKeywords from '../../../lib/channelKeywords.js'
+import emojiKeywords from '../../../lib/emojiKeywords.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
@@ -49,10 +51,8 @@ export default async (req, res) => {
       }
     } catch (err) {}
     const message = await getMessage(ts, channel)
-    const channelKeywords = require('../../../lib/channelKeywords.json')
     if (typeof channelKeywords[channel] !== 'undefined')
       await react('add', channel, ts, channelKeywords[channel])
-    const emojiKeywords = require('../../../lib/emojiKeywords.json')
     console.log('emoji keywords', emojiKeywords)
     Object.keys(emojiKeywords).forEach(async (keyword) => {
       if (

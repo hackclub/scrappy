@@ -5,8 +5,10 @@ import emoji from 'node-emoji'
 import fetch from 'node-fetch'
 import fs from 'fs'
 import path from 'path'
-const yaml = require('js-yaml')
-import prisma from './prisma'
+import yaml from 'js-yaml'
+import prisma from './prisma.js'
+import channelKeywords from './channelKeywords.js'
+import emojiKeywords from './emojiKeywords.js'
 
 const { Video } = new Mux(
   process.env.MUX_TOKEN_ID,
@@ -807,10 +809,8 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
       }
     } catch (err) {}
 
-    const channelKeywords = require('./channelKeywords.json')
     if (typeof channelKeywords[channel] !== 'undefined')
       await react('add', channel, ts, channelKeywords[channel])
-    const emojiKeywords = require('./emojiKeywords.json')
     console.log('emoji keywords', emojiKeywords)
     Object.keys(emojiKeywords).forEach(async (keyword) => {
       if (
@@ -957,7 +957,7 @@ export const t = (search, vars) => {
   }
   const searchArr = search.split('.')
   const transcriptObj = yaml.load(
-    fs.readFileSync(path.join(__dirname, 'transcript.yml'), 'utf-8')
+    fs.readFileSync(path.join(process.cwd(), 'src/lib/transcript.yml'), 'utf-8')
   )
 
   return evalTranscript(recurseTranscript(searchArr, transcriptObj), vars)

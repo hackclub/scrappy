@@ -1,12 +1,11 @@
 import {
-  
   displayStreaks,
   getUserRecord,
   sendCommandResponse,
   unverifiedRequest,
   t
-} from '../../../lib/api-utils'
-import prisma from '../../../lib/prisma'
+} from '../../../lib/api-utils.js'
+import prisma from '../../../lib/prisma.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
@@ -46,7 +45,7 @@ export default async (req, res) => {
       prisma.accounts.update({
         where: { slackID: record.slackID },
         data: {
-          displayStreak: !display,
+          displayStreak: !display
         }
       }),
       sendCommandResponse(

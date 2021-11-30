@@ -1,12 +1,11 @@
 import {
   unverifiedRequest,
   getUserRecord,
-  
   sendCommandResponse,
   t,
   fetchProfile
-} from '../../../lib/api-utils'
-import prisma from '../../../lib/prisma'
+} from '../../../lib/api-utils.js'
+import prisma from '../../../lib/prisma.js'
 
 export default async (req, res) => {
   if (unverifiedRequest(req))
