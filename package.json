@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
+    "prettier": "2.5.0",
     "nodemon": "^2.0.15",
-    "prettier": "2.4.1",
     "prisma": "3.5.0"
   }
 }
