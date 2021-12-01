@@ -1,4 +1,4 @@
-import { resolve, relative, extname, join }  from 'path'
+import { resolve, relative, extname, join, dirname, basename }  from 'path'
 import { readdir } from "fs/promises"
 
 async function getFiles(dir) {
@@ -18,7 +18,10 @@ export default async function(app)  {
       return
     }
 
-    const routePath = relative(join(process.cwd(), 'src/api'), file).replace(/\.js$/, "")
+    let routePath = relative(resolve(), dirname(file)).substr(3)
+    if (basename(file, extname(file)) != 'index') {
+      routePath = `${routePath}/${basename(file, extname(file))}`
+    }
     const route = await import(file)
 
     app.all(`/api/${routePath}`, async (req, res) => {
