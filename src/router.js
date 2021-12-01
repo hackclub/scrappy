@@ -11,14 +11,14 @@ async function getFiles(dir) {
 }
 
 export default async function(app)  {
-  const files = await getFiles("./src/api")
+  const files = await getFiles("./api")
   files.forEach(async file => {
     if (extname(file) != '.js') {
       // skip loading non-js files
       return
     }
 
-    const routePath = relative(join(process.cwd(), 'api'), file).replace(/\.js$/, "")
+    const routePath = relative(join(process.cwd(), '/api'), file).replace(/\.js$/, "")
     const route = await import(file)
 
     app.all(`/api/${routePath}`, async (req, res) => {
