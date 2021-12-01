@@ -18,7 +18,7 @@ export default async function(app)  {
       return
     }
 
-    const routePath = relative(join(process.cwd(), 'src/api'), file).replace(/\.js$/, "")
+    const routePath = relative(join(process.cwd(), 'api'), file).replace(/\.js$/, "")
     const route = await import(file)
 
     app.all(`/api/${routePath}`, async (req, res) => {
