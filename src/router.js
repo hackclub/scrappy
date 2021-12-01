@@ -11,7 +11,7 @@ async function getFiles(dir) {
 }
 
 export default async function(app)  {
-  const files = await getFiles("./api")
+  const files = await getFiles("./src/api")
   files.forEach(async file => {
     if (extname(file) != '.js') {
       // skip loading non-js files
