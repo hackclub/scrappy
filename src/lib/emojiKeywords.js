@@ -166,5 +166,8 @@ export default {
   "pull request": "pr",
   "bread": "bank-hackclub",
   "nft": "nft",
-  "hns": "hns"
+  "hns": "hns",
+  "wahoo": "wahoo-fish",
+  "aoc": "aoc",
+  "advent": "aoc"
 }
