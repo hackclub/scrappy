@@ -169,5 +169,6 @@ export default {
   "hns": "hns",
   "wahoo": "wahoo-fish",
   "aoc": "aoc",
-  "advent": "aoc"
+  "advent": "aoc",
+  "C01GF9987SL": "aoc"
 }
