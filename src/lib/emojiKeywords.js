@@ -170,5 +170,6 @@ export default {
   "wahoo": "wahoo-fish",
   "aoc": "aoc",
   "advent": "aoc",
-  "C01GF9987SL": "aoc"
+  "C01GF9987SL": "aoc",
+  "svelte": "svelte",
 }
