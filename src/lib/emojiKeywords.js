@@ -172,4 +172,5 @@ export default {
   "advent": "aoc",
   "C01GF9987SL": "aoc",
   "svelte": "svelte",
+  "cold": "snowflake"
 }
