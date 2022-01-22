@@ -175,5 +175,5 @@ export default {
   "cold": "snowflake",
   "tailwind": "tailwind",
   "tailwindcss": "tailwind",
-  " c ": "c"
+  "c": "c"
 }
