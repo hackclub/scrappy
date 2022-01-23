@@ -174,5 +174,6 @@ export default {
   "svelte": "svelte",
   "cold": "snowflake",
   "tailwind": "tailwind",
-  "tailwindcss": "tailwind"
+  "tailwindcss": "tailwind",
+  "c": "c"
 }
