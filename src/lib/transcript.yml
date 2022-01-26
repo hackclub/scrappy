@@ -48,7 +48,7 @@ messages:
     6: 6 days! You've almost made it to a week!!! Don't stop now!!!! A week is 7 days by the way. ${this.scrapbookLink}
     7: |
       A WHOLE WEEK OF STREAKS?!?! https://www.youtube.com/watch?v=i0dmSIAzWeQ
-      
+
       ${this.scrapbookLink}
     '7+':
       - Yahoo! ${this.scrapbookLink}
@@ -66,8 +66,7 @@ messages:
       :yay::yay::yay: Your update is live on your scrapbook! :yay::yay::yay: ${this.scrapbookLink}
 
       (PS: you've already posted today, so I didn't increment your streak. But great job!)
-    newstreak:
-      ':yay: You just started a streak! Keep posting every day to continue your streak. In the meantime, type \`/scrappy help\` to see what else you can do!'
+    newstreak: ':yay: You just started a streak! Keep posting every day to continue your streak. In the meantime, type \`/scrappy help\` to see what else you can do!'
     oldmember:
       1: |
         Far out! You've started a new streak! Welcome back to Scrapbook :yay:
@@ -135,7 +134,8 @@ messages:
   domain:
     noargs: To link a custom domain to your scrapbook, type \`/scrappy-setdomain\` followed by the domain or subdomain you want to link. e.g. \`/scrappy-setdomain zachlatta.com\`. Then, create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
     overlimit: Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains. <https://hackclub.slack.com/archives/C0M8PUPU6/p1602535670075000|Here's an alternative>.
-    domainexists: Couldn't set your domain \`${this.text}\`. You can't add a domain if it's already set to another Vercel project. Try again with a different domain. <https://hackclub.slack.com/archives/C0M8PUPU6/p1602535670075000|Here's an alternative>.
+    domainerror: Couldn't set your domain \`${this.text}\`. Here's the error - \`${this.message}\`
+    domaindelegated: Your domain is owned by another Vercel account, so you'll need to approve the delegation request sent to your email, then run \`/scrappy-setdomain ${this.text}\` again.
     domainset: |
       Custom domain \`${this.text}\` set!
 
@@ -174,7 +174,7 @@ messages:
       files: |
         Hmm... :thonk: I don't detect any files in this message.
   mentionKeyword:
-    - <@${this.user}> no u 
+    - <@${this.user}> no u
     - <@${this.user}> :()
     - <@${this.user}> aosidjghlkj;LKasASDLKGJ AASDFLKJ LAKJSHDF ;OIHA GKLJRWHG AJSDGH
     - <@${this.user}> no u ${'!'.repeat(Math.floor(Math.random() * 7))}
