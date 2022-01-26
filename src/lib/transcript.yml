@@ -140,8 +140,6 @@ messages:
       Custom domain \`${this.text}\` set!
 
       *Your next steps*: create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
-
-      You're one of 50 people who can add a custom domain during the Summer of Making. There are *${this.domainsLeft}* domains spots left.
   open:
     invaliduser: Hmmmmmmmm THAT'S NOT A REAL USER!!!! What are you trying to pull here????
     userArg: <@${this.userArg}>'s scrapbook is ${this.scrapbookLink}

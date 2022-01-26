@@ -26,60 +26,54 @@ export default async (req, res) => {
         }
       }
     })
-    const domainCount = updates.length
 
-    if (domainCount > 50) {
-      sendCommandResponse(command.response_url, t('messages.domain.overlimit'))
-    } else {
-      const user = await getUserRecord(command.user_id)
-      if (user.customDomain != null) {
-        console.log('DOMAIN ALREADY SET')
-        const prevDomain = user.customDomain
-        await fetch(
-          `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?domain=${prevDomain}&teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
-          {
-            method: 'DELETE',
-            headers: {
-              Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
-            }
-          }
-        )
-      }
-
-      const vercelFetch = await fetch(
-        `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
+    const user = await getUserRecord(command.user_id)
+    if (user.customDomain != null) {
+      console.log('DOMAIN ALREADY SET')
+      const prevDomain = user.customDomain
+      await fetch(
+        `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?domain=${prevDomain}&teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
         {
-          method: 'POST',
+          method: 'DELETE',
           headers: {
-            'Content-Type': 'application/json',
             Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
-          },
-          body: JSON.stringify({
-            domain: arg
-          })
+          }
         }
       )
-        .then((r) => r.json())
-        .catch((err) => {
-          console.log(`Error while setting custom domain ${arg}: ${err}`)
+    }
+
+    const vercelFetch = await fetch(
+      `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
+        },
+        body: JSON.stringify({
+          domain: arg
         })
-      console.log(vercelFetch)
-      if (vercelFetch.error) {
-        sendCommandResponse(
-          command.response_url,
-          t('messages.domain.domainexists', { text: arg })
-        )
-      } else {
-        const domainsLeft = 50 - domainCount
-        await prisma.accounts.update({
-          where: { slackID: user.slackID },
-          data: { customDomain: arg }
-        })
-        sendCommandResponse(
-          command.response_url,
-          t('messages.domain.domainset', { text: arg, domainsLeft })
-        )
       }
+    )
+      .then((r) => r.json())
+      .catch((err) => {
+        console.log(`Error while setting custom domain ${arg}: ${err}`)
+      })
+    console.log(vercelFetch)
+    if (vercelFetch.error) {
+      sendCommandResponse(
+        command.response_url,
+        t('messages.domain.domainexists', { text: arg })
+      )
+    } else {
+      await prisma.accounts.update({
+        where: { slackID: user.slackID },
+        data: { customDomain: arg }
+      })
+      sendCommandResponse(
+        command.response_url,
+        t('messages.domain.domainset', { text: arg })
+      )
     }
   }
 
