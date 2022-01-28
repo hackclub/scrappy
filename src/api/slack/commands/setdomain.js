@@ -75,7 +75,7 @@ export default async (req, res) => {
           command.response_url,
           t('messages.domain.domainerror', {
             text: arg,
-            error: delegationReq.error.message
+            error: JSON.stringify(delegationReq.error)
           })
         )
       } else {
@@ -92,7 +92,7 @@ export default async (req, res) => {
         command.response_url,
         t('messages.domain.domainerror', {
           text: arg,
-          error: vercelFetch.error.message
+          error: JSON.stringify(vercelFetch.error)
         })
       )
     } else {
