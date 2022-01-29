@@ -8,6 +8,8 @@ import prisma from '../../../lib/prisma.js'
 
 import fetch from 'node-fetch'
 
+const TEAM_ID = "team_gUyibHqOWrQfv3PDfEUpB45J"
+
 export default async (req, res) => {
   if (unverifiedRequest(req)) {
     return res.status(400).send('Unverified Slack request!')
@@ -24,7 +26,7 @@ export default async (req, res) => {
       console.log('DOMAIN ALREADY SET')
       const prevDomain = user.customDomain
       await fetch(
-        `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?domain=${prevDomain}&teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
+        `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?domain=${prevDomain}&teamId=${TEAM_ID}`,
         {
           method: 'DELETE',
           headers: {
@@ -35,7 +37,7 @@ export default async (req, res) => {
     }
 
     const vercelFetch = await fetch(
-      `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?teamId=team_gUyibHqOWrQfv3PDfEUpB45J`,
+      `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?teamId=${TEAM_ID}`,
       {
         method: 'POST',
         headers: {
@@ -61,7 +63,7 @@ export default async (req, res) => {
         })
       )
       const delegationReq = await fetch(
-        `https://api.vercel.com/v6/domains/${arg}/request-delegation`,
+        `https://api.vercel.com/v6/domains/${arg}/request-delegation?teamId=${TEAM_ID}`,
         {
           method: 'POST',
           headers: {
