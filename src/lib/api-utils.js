@@ -755,7 +755,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
       console.log('Updating streak for', userId)
 
       if (userRecord.newMember && updatedStreakCount > 1) {
-        prisma.accounts.update({
+        await prisma.accounts.update({
           where: {
             slackID: userRecord.slackID
           },
