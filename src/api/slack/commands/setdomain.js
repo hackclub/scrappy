@@ -54,6 +54,12 @@ export default async (req, res) => {
     console.log(vercelFetch)
     // domain is owned by another Vercel account, but we can request a delegation
     if (vercelFetch.error?.code === 'forbidden') {
+      sendCommandResponse(
+        command.response_url,
+        t('messages.domain.debug', {
+          error: JSON.stringify(vercelFetch.error)
+        })
+      )
       const delegationReq = await fetch(
         `https://api.vercel.com/v6/domains/${arg}/request-delegation`,
         {
