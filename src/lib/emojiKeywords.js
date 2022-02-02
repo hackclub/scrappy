@@ -176,5 +176,5 @@ export default {
   "tailwind": "tailwind",
   "tailwindcss": "tailwind",
   "c": "c",
-  "nft": "squaresupply"
+  "squaresupply": "squaresupply"
 }
