@@ -14,6 +14,12 @@ export default async (req, res) => {
     return res.status(400).send('Unverified Slack request!')
   res.sendStatus(200)
 
+  const containsGamelabLink = (text) => {
+    const gamelabLinkRegex = /https:\/\/gamelab\.hackclub\.com[\-A-Za-z0-9+&@#\/%?=~_|$!:,.;]*/g
+    const detectedLinks = text.match(gamelabLinkRegex)
+    return detectedLinks
+  }
+
   let method
   if (
     event.type === 'member_joined_channel' &&
@@ -48,6 +54,14 @@ export default async (req, res) => {
     event.channel === 'C016QNX2SJ1'
   ) {
     method = 'audio'
+  } else if (
+    event.type === 'message' &&
+    !event.subtype &&
+    !event.thread_ts &&
+    event.channel == process.env.CHANNEL &&
+    containsGamelabLink(event?.message?.text)
+  ) {
+    method = 'created'
   } else if (
     event.type === 'message' &&
     !event.subtype &&
