@@ -176,5 +176,6 @@ export default {
   "tailwind": "tailwind",
   "tailwindcss": "tailwind",
   "c": "c",
-  "squaresupply": "squaresupply"
+  "squaresupply": "squaresupply",
+  "gamelab": "gamelab",
 }
