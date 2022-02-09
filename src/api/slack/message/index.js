@@ -20,6 +20,8 @@ export default async (req, res) => {
     return detectedLinks
   }
 
+  console.log({event})
+
   let method
   if (
     event.type === 'member_joined_channel' &&
