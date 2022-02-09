@@ -1008,3 +1008,9 @@ export const getMessage = async (ts, channel) => {
     return null
   }
 }
+
+export const containsGamelabLink = (text = '') => {
+  const gamelabLinkRegex = /https:\/\/gamelab\.hackclub\.com[\-A-Za-z0-9+&@#\/%?=~_|$!:,.;]*/g
+  const detectedLinks = text.match(gamelabLinkRegex)
+  return detectedLinks
+}

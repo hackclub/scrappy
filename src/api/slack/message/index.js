@@ -1,4 +1,4 @@
-import { unverifiedRequest } from '../../../lib/api-utils.js'
+import { containsGamelabLink, unverifiedRequest } from '../../../lib/api-utils.js'
 import fetch from 'node-fetch'
 
 // the data sent to us to another serverless function for longer processing.
@@ -13,14 +13,6 @@ export default async (req, res) => {
   if (unverifiedRequest(req))
     return res.status(400).send('Unverified Slack request!')
   res.sendStatus(200)
-
-  const containsGamelabLink = (text = '') => {
-    const gamelabLinkRegex = /https:\/\/gamelab\.hackclub\.com[\-A-Za-z0-9+&@#\/%?=~_|$!:,.;]*/g
-    const detectedLinks = text.match(gamelabLinkRegex)
-    return detectedLinks
-  }
-
-  console.log({event})
 
   let method
   if (

@@ -14,7 +14,8 @@ import {
   formatText,
   isFullMember,
   createPost,
-  postEphemeral
+  postEphemeral,
+  containsGamelabLink
 } from '../../../lib/api-utils.js'
 import prisma from '../../../lib/prisma.js'
 import Bottleneck from 'bottleneck'
@@ -85,7 +86,7 @@ export default async (req, res) => {
 
       if (!message) return
 
-      if (!message.files || message.files.length == 0) {
+      if (!containsGamelabLink(message.text) && (!message.files || message.files.length == 0)) {
         postEphemeral(channel, t('messages.errors.anywhere.files'), user)
         return
       }
