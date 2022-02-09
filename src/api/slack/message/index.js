@@ -57,7 +57,7 @@ export default async (req, res) => {
     !event.subtype &&
     !event.thread_ts &&
     event.channel == process.env.CHANNEL &&
-    containsGamelabLink(event?.message?.text)
+    containsGamelabLink(event?.text)
   ) {
     method = 'created'
   } else if (
