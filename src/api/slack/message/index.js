@@ -14,7 +14,7 @@ export default async (req, res) => {
     return res.status(400).send('Unverified Slack request!')
   res.sendStatus(200)
 
-  const containsGamelabLink = (text) => {
+  const containsGamelabLink = (text = '') => {
     const gamelabLinkRegex = /https:\/\/gamelab\.hackclub\.com[\-A-Za-z0-9+&@#\/%?=~_|$!:,.;]*/g
     const detectedLinks = text.match(gamelabLinkRegex)
     return detectedLinks
