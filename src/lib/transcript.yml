@@ -16,7 +16,8 @@ messages:
     BTW if you want to delete or update a post you can do so by simply editing or deleting your Slack message.
 
     Learn all about Scrapbook at https://scrapbook.hackclub.com/about
-  gamelab: psst. hey kid. you want some fancy gamelab cartridge previews on <https://scrapbook.hackclub.com/r/gamelab|the arcade?> i bet you do. just include the gamelab link in your message! 
+  gamelab_no_link: psst. hey kid. you want some fancy gamelab cartridge previews on <https://scrapbook.hackclub.com/r/gamelab|the arcade?> i bet you do. just include the gamelab link in your message! 
+  gamelab_link: nice gamelab link! did you know about <https://scrapbook.hackclub.com/r/gamelab|the arcade?>
   forget: |
     Forgetting about all recorded scraps from....
     uhhhh....
