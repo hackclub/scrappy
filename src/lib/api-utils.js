@@ -612,6 +612,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   console.log('calling incrementStreakCount')
   await incrementStreakCount(user, channel, messageText, ts)
   await fetchProfile(userRecord.username)
+  await gamelabMessage(user, channel, messageText, ts)
 }
 
 export const postEphemeral = (channel, text, user, threadTs) =>
@@ -738,6 +739,17 @@ export const shouldUpdateStreak = async (userId, increment) => {
     (increment ? !latestUpdates[1] : !latestUpdates[0])
   )
 }
+
+// when someone says gamelab tell them what they need to do to post playable link
+export const gamelabMessage = async (userId, channel, message, ts) =>
+  new Promise(async (resolve, reject) => {
+    console.log('game lab message');
+
+    if (userId == 'UN971L2UQ')
+      postEphemeral(channel, t('messages.gamelab'), userId);
+
+    resolve();
+  })
 
 export const incrementStreakCount = (userId, channel, message, ts) =>
   new Promise(async (resolve, reject) => {
