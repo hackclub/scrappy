@@ -609,8 +609,11 @@ export const createPost = async (files = [], channel, ts, user, text) => {
     channel: channel
   }})
 
+  console.log('gamelab message')
+  await gamelabMessage(user, channel, messageText, ts)
   console.log('calling incrementStreakCount')
   await incrementStreakCount(user, channel, messageText, ts)
+  console.log('fetchprofile')
   await fetchProfile(userRecord.username)
   await gamelabMessage(user, channel, messageText, ts)
 }
@@ -858,6 +861,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
         })
       )
     }
+    resolve()
   }).catch((err) => reply(channel, ts, t('messages.errors.promise', { err })))
 
 export const setAudio = async (user, url) => {
