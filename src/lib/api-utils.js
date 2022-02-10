@@ -615,7 +615,6 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   await incrementStreakCount(user, channel, messageText, ts)
   console.log('fetchprofile')
   await fetchProfile(userRecord.username)
-  await gamelabMessage(user, channel, messageText, ts)
 }
 
 export const postEphemeral = (channel, text, user, threadTs) =>
@@ -748,8 +747,7 @@ export const gamelabMessage = async (userId, channel, message, ts) =>
   new Promise(async (resolve, reject) => {
     console.log('game lab message');
 
-    postEphemeral(channel, message, userId);
-    if (userId == 'UN971L2UQ' && message.includes("gamelab") && !containsGamelabLink(message))
+    if (message.includes("gamelab") && !containsGamelabLink(message))
       postEphemeral(channel, t('messages.gamelab'), userId);
 
     resolve();
