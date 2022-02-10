@@ -28,7 +28,7 @@
     "node-fetch": "2.6.1"
   },
   "devDependencies": {
-    "dotenv": "^15.0.0",
+    "dotenv": "^16.0.0",
     "nodemon": "^2.0.15",
     "prettier": "2.5.1",
     "prisma": "3.9.1"
