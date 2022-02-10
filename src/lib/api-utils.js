@@ -749,7 +749,7 @@ export const gamelabMessage = async (userId, channel, message, ts) =>
     console.log('game lab message');
 
     postEphemeral(channel, message, userId);
-    if (userId == 'UN971L2UQ' && message.includes("gamelab") && !containsGamelabLink)
+    if (userId == 'UN971L2UQ' && message.includes("gamelab") && !containsGamelabLink(message))
       postEphemeral(channel, t('messages.gamelab'), userId);
 
     resolve();
