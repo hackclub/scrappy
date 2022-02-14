@@ -1382,10 +1382,10 @@ prettier@2.5.1:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
   integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
 
-prisma@3.9.1:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/prisma/-/prisma-3.9.1.tgz#7510a8bf06018a5313b9427b1127ce4750b1ce5c"
-  integrity sha512-IGcJAu5LzlFv+i+NNhOEh1J1xVVttsVdRBxmrMN7eIH+7mRN6L89Hz1npUAiz4jOpNlHC7n9QwaOYZGxTqlwQw==
+prisma@3.9.2:
+  version "3.9.2"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-3.9.2.tgz#cc2da4e8db91231dea7465adf9db6e19f11032a9"
+  integrity sha512-i9eK6cexV74OgeWaH3+e6S07kvC9jEZTl6BqtBH398nlCU0tck7mE9dicY6YQd+euvMjjCtY89q4NgmaPnUsSg==
   dependencies:
     "@prisma/engines" "3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009"
 

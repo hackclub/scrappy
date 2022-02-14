@@ -31,6 +31,6 @@
     "dotenv": "^15.0.0",
     "nodemon": "^2.0.15",
     "prettier": "2.5.1",
-    "prisma": "3.9.1"
+    "prisma": "3.9.2"
   }
 }
