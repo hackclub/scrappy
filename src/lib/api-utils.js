@@ -119,9 +119,9 @@ export const rebuildScrapbookFor = async (user) => {
     if (typeof user == 'string') {
       userScrapbookURL = (await getUserRecord(user)).username
     } else {
-      userScrapbookURL = `https://scrapbook.hackclub.com/${user.username}`
+      userScrapbookURL = `https://scrapbook.hackclub.com/api/revalidate/${user.username}`
     }
-    console.log('Attempting to rebuild scrapbook for', userScrapbookURL)
+    console.log('Attempting to rebuild scrapbook by fetching ', userScrapbookURL)
     // initiate a rebuild
     await fetch(userScrapbookURL)
     // give the site some time to generate
