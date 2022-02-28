@@ -36,7 +36,7 @@ export default async (req, res) => {
 
   const { channel, ts } = item
 
-  if (reaction !== 'wom' && user === 'U015D6A36AG') return
+  if (reaction !== `${process.env.EMOJI}` && user === 'U015D6A36AG') return
 
   if (
     (await updateExistsTS(ts)) &&
@@ -65,7 +65,7 @@ export default async (req, res) => {
       }
     })
     await react('remove', channel, ts, 'beachball')
-    await react('add', channel, ts, 'wom')
+    await react('add', channel, ts, `${process.env.EMOJI}`)
     return
   }
 
