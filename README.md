@@ -5,7 +5,7 @@
 The Slack bot that powers [scrapbook.hackclub.com](https://scrapbook.hackclub.com).
 
 ## Commands
-Scrappy not only handles the automatic generation of things, but provides some helpful commands as well. These commands are also documented in our Slack if you send the message `/scrappy` in any channel.
+Scrappy not only handles the automatic generation of a Scrapbook and its posts, but provides some helpful commands in Slack as well. These commands are also documented in our Slack if you send the message `/scrappy` in any channel.
 
 - `/scrappy-togglestreaks`: toggles your streak count on/off in your status
 - `/scrappy-togglestreaks all`: opts out of streaks completely
@@ -27,20 +27,19 @@ Contributions are encouraged and welcome! There are two GitHub repositories that
 Development chatter happens in the [#scrapbook-dev](https://app.slack.com/client/T0266FRGM/C035D6S6TFW) channel in the [Hack Club Slack](https://hackclub.com/slack/).
 
 ## Running locally
-In order to run Scrappy locally, you'll need to [join the Hack Club Slack](https://hackclub.com/slack). To get started developing, ask @sampoder to be added to the `scrappy (dev)` app on Slack and for a `.env` file.
+In order to run Scrappy locally, you'll need to [join the Hack Club Slack](https://hackclub.com/slack). From there, ask @sampoder to be added to the `scrappy (dev)` app on Slack.
 
 1. Clone this repository
    - `git clone https://github.com/hackclub/scrappy.git && cd scrappy`
+1. Install [ngrok](https://dashboard.ngrok.com/get-started/setup)
+   - Recommended installation is via [Homebrew](https://brew.sh/)
+   - `brew install ngrok`
 1. Install dependencies
    - `yarn`
-1. Ask `@sampoder` for the `.env` file
+1. Create `.env` file at root of project
+   - `touch .env`
+   - Ask `@sampoder` for the `.env` file contents
 1. Start server
    - `yarn dev`
-1. View your server
-   - `open http://localhost:3000/`
-
-then use `ngrok` to forward your local instance onto the world wide web.
-
----
-
-[learn more about how to get started](https://scrapbook.hackclub.com/about)
+1. Forward your local server to ngrok
+   - `ngrok http 3000`
