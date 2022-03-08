@@ -40,23 +40,13 @@ In order to run Scrappy locally, you'll need to [join the Hack Club Slack](https
 1. Create `.env` file at root of project
    - `touch .env`
    - Ask `@sampoder` for the `.env` file contents
-1. Link your `.env` with your prisma schema
+1. Link your `.env` with your Prisma schema
    `npx prisma generate`
 1. Start server
    - `yarn dev`
 1. Forward your local server to ngrok
    - `ngrok http 3000`
-
-Those with access to HQ's Heroku account can also create their own `.env` file:
-
-- Install Heroku's CLI (if you haven't already)
-   - `brew install heroku`
-- Link Heroku to your account
-   - `heroku login`
-- View environment variables from Heroku
-   - `heroku config --app scrappy-hackclub`
-- Copy these into your `.env` file, formatted like:
-```
-  PG_DATABASE_URL="insert value here"
-  SLACK_BOT_TOKEN="insert value here"
-```
+   - Your ngrok URL will be printed out after running this command, which you will need for the next step
+1. Update the [Slack settings](https://api.slack.com/apps/A015DCRTT43/event-subscriptions?)
+   - Click the toggle to enable events
+   - Update the URL request URL to be `<your-ngrok-url>/api/slack/message`. An example would look like `https://ea61-73-68-194-110.ngrok.io/api/slack/message`
