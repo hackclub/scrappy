@@ -30,7 +30,7 @@ Development chatter happens in the [#scrapbook-dev](https://app.slack.com/client
 In order to run Scrappy locally, you'll need to [join the Hack Club Slack](https://hackclub.com/slack). To get started developing, ask @sampoder to be added to the `scrappy (dev)` app on Slack and for a `.env` file.
 
 1. Clone this repository
-   - `git clone https://github.com/hackclub/scrapbook.git && cd scrapbook`
+   - `git clone https://github.com/hackclub/scrappy.git && cd scrappy`
 1. Install dependencies
    - `yarn`
 1. Ask `@sampoder` for the `.env` file
