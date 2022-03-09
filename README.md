@@ -1,4 +1,4 @@
-# Scrappy the Slack Bot
+# Scrappy
 
 ![build](https://github.com/hackclub/scrappy/workflows/build/badge.svg)
 
