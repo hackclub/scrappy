@@ -2,7 +2,7 @@
 
 ![build](https://github.com/hackclub/scrappy/workflows/build/badge.svg)
 
-Scrappy is the Slack bot that powers [scrapbook.hackclub.com](https://scrapbook.hackclub.com). Scrappy generates your Scrapbook and Scrapbook posts via Slack messages. For more information about how to sign up for Scrapbook, check out the [about page]([scrapbook.hackclub.com](https://scrapbook.hackclub.com).
+Scrappy is the Slack bot that powers [scrapbook.hackclub.com](https://scrapbook.hackclub.com). Scrappy generates your Scrapbook and Scrapbook posts via Slack messages. For more information about how to sign up for Scrapbook, check out the [about page](https://scrapbook.hackclub.com/about).
 
 [Click here to view the Scrapbook repository](https://github.com/hackclub/scrapbook), which hosts the Scrapbook web code.
 
