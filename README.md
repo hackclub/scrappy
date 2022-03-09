@@ -42,7 +42,7 @@ In order to run Scrappy locally, you'll need to [join the Hack Club Slack](https
    - `touch .env`
    - Ask `@sampoder` for the `.env` file contents
 1. Link your `.env` with your Prisma schema
-   `npx prisma generate`
+   - `npx prisma generate`
 1. Start server
    - `yarn dev`
 1. Forward your local server to ngrok
