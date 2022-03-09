@@ -20,7 +20,7 @@ Scrappy provides some helpful commands in Slack. These commands are also documen
 - `/scrappy-webring`: adds or removes someone to your webring
 - *Remove* a post: delete the Slack message and Scrappy will automatically update for you
 - *Edit* a post: edit the Slack message and it will automatically update for you
-- *Post* an existing Slack message to Scrapbook by reacting to it with the `:scrappy:` emoji (Note: If it isn't working, make sure Scrappy is added to the channel by mentioning `@scrappy`)
+- *Post* a message to the `#scrapbook` channel or add an existing Slack message to Scrapbook by reacting to it with the `:scrappy:` emoji (Note: If it isn't working, make sure Scrappy is added to the channel by mentioning `@scrappy`)
 
 ## Contributing
 
