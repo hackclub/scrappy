@@ -595,6 +595,15 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   const messageText = await formatText(text)
   console.log(convertedDate)
 
+  const clubscrapRecord = await prisma.clubscraps.findUnique({
+    where: {
+      timestamp: parseFloat(ts)
+    },
+    select: {
+      id: true
+    }
+  })
+
   await prisma.updates.create({data:{
     accountsSlackID: userRecord.slackID,
     postTime: convertedDate,
@@ -606,7 +615,8 @@ export const createPost = async (files = [], channel, ts, user, text) => {
     isLargeVideo: attachments.some(
       (attachment) => attachment.url === 'https://i.imgur.com/UkXMexG.mp4'
     ),
-    channel: channel
+    channel: channel,
+    clubscrapID: clubscrapRecord?.id
   }})
 
   console.log('gamelab message')
