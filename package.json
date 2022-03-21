@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@mux/mux-node": "^4.0.0",
-    "@prisma/client": "3.10.0",
+    "@prisma/client": "3.11.0",
     "airtable-plus": "^1.0.4",
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0-rc.10",
