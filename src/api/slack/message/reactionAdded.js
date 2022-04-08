@@ -66,7 +66,7 @@ export default async (req, res) => {
       }
     })
     await react('remove', channel, ts, 'beachball')
-    await react('add', channel, ts, {SEASON_EMOJI})
+    await react('add', channel, ts, SEASON_EMOJI)
     return
   }
 
