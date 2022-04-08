@@ -17,6 +17,7 @@ import {
   postEphemeral,
   containsGamelabLink
 } from '../../../lib/api-utils.js'
+import { SEASON_EMOJI } from '../../../lib/seasonEmoji.js'
 import prisma from '../../../lib/prisma.js'
 import Bottleneck from 'bottleneck'
 import fetch from 'node-fetch'
@@ -36,7 +37,7 @@ export default async (req, res) => {
 
   const { channel, ts } = item
 
-  if (reaction !== 'wom' && user === 'U015D6A36AG') return
+  if (reaction !== SEASON_EMOJI && user === 'U015D6A36AG') return
 
   if (
     (await updateExistsTS(ts)) &&
@@ -65,7 +66,7 @@ export default async (req, res) => {
       }
     })
     await react('remove', channel, ts, 'beachball')
-    await react('add', channel, ts, 'wom')
+    await react('add', channel, ts, SEASON_EMOJI)
     return
   }
 

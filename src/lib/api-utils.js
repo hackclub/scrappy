@@ -9,6 +9,7 @@ import yaml from 'js-yaml'
 import prisma from './prisma.js'
 import channelKeywords from './channelKeywords.js'
 import emojiKeywords from './emojiKeywords.js'
+import { SEASON_EMOJI } from './seasonEmoji.js'
 
 const { Video } = new Mux(
   process.env.MUX_TOKEN_ID,
@@ -828,7 +829,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     )
     // remove beachball react
     await react('remove', channel, ts, 'beachball')
-    await react('add', channel, ts, 'wom')
+    await react('add', channel, ts, SEASON_EMOJI)
 
     try {
       if(userRecord.webhookURL){
