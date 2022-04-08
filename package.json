@@ -19,6 +19,7 @@
     "airtable-plus": "^1.0.4",
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0-rc.10",
+    "date-season": "^0.0.2",
     "express": "^4.17.3",
     "form-data": "^4.0.0",
     "heic-convert": "^1.2.3",
@@ -30,7 +31,7 @@
   "devDependencies": {
     "dotenv": "^16.0.0",
     "nodemon": "^2.0.15",
-    "prettier": "2.6.0",
+    "prettier": "2.6.2",
     "prisma": "3.11.1"
   }
 }
