@@ -182,7 +182,7 @@ export default {
   "c": "c",
   "squaresupply": "squaresupply",
   "gamelab": "gamelab",
-  "annoyingsite": "annoyingsite",
+  "annoying site": "annoyingsite",
   "redwood": "redwoodjs",
   "redwoodjs": "redwoodjs",
 }
