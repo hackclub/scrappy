@@ -10,7 +10,7 @@ export default {
   "C0166QHR0HG": "swift",
   "C012LPZUAPR": "gopher",
   "C14D3AQTT": "package",
-  "CD543U2UD": "thug_lachlan", // #lachlanfans
+  "CD543U2UD": "lachlan", // #lachlanfans
   "CDDMDRJUA": "hacktoberfest",
   "C019RMWTECD": "ussr",
   "CDLBHGUQN": "cat", // #cats
