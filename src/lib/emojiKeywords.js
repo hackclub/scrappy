@@ -51,6 +51,7 @@ export default {
   "twitter": "twitter",
   "bot": "robot_face",
   "robot": "robot_face",
+  "robotics": "robot_face",
   "minecraft": "minecraft",
   "game": "video_game",
   "npm": "npm",

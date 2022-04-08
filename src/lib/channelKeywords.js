@@ -18,7 +18,7 @@ export default {
   "C01504DCLVD": "scrappy", // #scrapbook
   "C01NQTDFUR5": "scrappy", // #scrappy-dev
   "C02TWKX227J": "wordle",
-  "C0P5NE354": "robot", // #bot-spam
+  "C0P5NE354": "robot_face", // #bot-spam
   "C01GF9987SL": "aoc", // #adventofcode
   "C02UN35M7LG": "gamelab", // #gamelab-dev
 }
