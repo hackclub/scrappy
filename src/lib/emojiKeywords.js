@@ -178,4 +178,5 @@ export default {
   "c": "c",
   "squaresupply": "squaresupply",
   "gamelab": "gamelab",
+  "annoyingsite": "annoyingsite",
 }
