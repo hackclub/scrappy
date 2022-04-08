@@ -183,4 +183,6 @@ export default {
   "squaresupply": "squaresupply",
   "gamelab": "gamelab",
   "annoyingsite": "annoyingsite",
+  "redwood": "redwoodjs",
+  "redwoodjs": "redwoodjs",
 }
