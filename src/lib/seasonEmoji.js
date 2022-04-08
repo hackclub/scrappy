@@ -1,0 +1,1 @@
+export const SEASON_EMOJI = 'spring-of-making'
