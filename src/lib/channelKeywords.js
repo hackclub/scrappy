@@ -15,7 +15,6 @@ export default {
   "C019RMWTECD": "ussr",
   "CDLBHGUQN": "cat", // #cats
   "CDJV1CXC2": "dog", // #dogs
-  "C01504DCLVD": "scrappy", // #scrapbook
   "C01NQTDFUR5": "scrappy", // #scrappy-dev
   "C02TWKX227J": "wordle",
   "C0P5NE354": "robot_face", // #bot-spam
