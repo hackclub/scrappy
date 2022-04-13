@@ -40,7 +40,7 @@ In order to run Scrappy locally, you'll need to [join the Hack Club Slack](https
    - `yarn`
 1. Create `.env` file at root of project
    - `touch .env`
-   - Ask `@sampoder` for the `.env` file contents
+   - Send a message mentioning `@creds` in [Hack Club's Slack](https://hackclub.com/slack/) asking for the `.env` file contents
 1. Link your `.env` with your Prisma schema
    - `npx prisma generate`
 1. Start server
@@ -52,4 +52,4 @@ In order to run Scrappy locally, you'll need to [join the Hack Club Slack](https
    - Click the toggle to enable events
    - Update the URL request URL to be `<your-ngrok-url>/api/slack/message`. An example would look like `https://ea61-73-68-194-110.ngrok.io/api/slack/message`
    - Save changes and reinstall the Slack app
-   - This will regenerate Scrappy's [oauth](https://api.slack.com/apps/A015DCRTT43/oauth?) tokens, so make sure to update these in the .env
+   - This will regenerate Scrappy's [oauth](https://api.slack.com/apps/A015DCRTT43/oauth?) tokens, so make sure to update these in the `.env` file
