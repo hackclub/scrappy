@@ -11,6 +11,7 @@ datasource db {
 
 model Accounts {
   slackID                 String    @unique(map: "Accounts.slackID_unique")
+  email                   String?   @unique(map: "Accounts.email_unique")
   username                String    @unique(map: "Accounts.username_unique")
   streakCount             Int?
   maxStreaks              Int?
