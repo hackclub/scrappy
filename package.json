@@ -18,7 +18,7 @@
     "@prisma/client": "3.14.0",
     "airtable-plus": "^1.0.4",
     "bottleneck": "^2.19.5",
-    "cheerio": "^1.0.0-rc.10",
+    "cheerio": "^1.0.0-rc.11",
     "date-season": "^0.0.2",
     "express": "^4.18.1",
     "form-data": "^4.0.0",
