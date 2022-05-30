@@ -14,7 +14,7 @@
     "checkFormat": "prettier --check ."
   },
   "dependencies": {
-    "@mux/mux-node": "^4.0.0",
+    "@mux/mux-node": "^5.0.2",
     "@prisma/client": "3.14.0",
     "airtable-plus": "^1.0.4",
     "bottleneck": "^2.19.5",
