@@ -37,7 +37,7 @@ export default async (req, res) => {
     }
 
     const vercelFetch = await fetch(
-      `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?teamId=${TEAM_ID}`,
+      `https://api.vercel.com/v9/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/domains?teamId=${TEAM_ID}`,
       {
         method: 'POST',
         headers: {
@@ -45,7 +45,7 @@ export default async (req, res) => {
           Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
         },
         body: JSON.stringify({
-          domain: arg
+          name: arg
         })
       }
     )
@@ -54,41 +54,28 @@ export default async (req, res) => {
         console.log(`Error while setting custom domain ${arg}: ${err}`)
       })
     console.log(vercelFetch)
-    // domain is owned by another Vercel account, but we can request a delegation
-    if (vercelFetch.error?.code === 'forbidden') {
-      const delegationReq = await fetch(
-        `https://api.vercel.com/v6/domains/${arg}/request-delegation?teamId=${TEAM_ID}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.VC_SCRAPBOOK_TOKEN}`
-          }
-        }
-      )
-        .then((r) => r.json())
-        .catch((err) => {
-          console.log(`Error while delegating custom domain ${arg}: ${err}`)
-        })
-
-      if (delegationReq.error) {
-        // something went wrong, such as the domain being an apex domain
+    // domain is owned by another Vercel account, but we can ask the owner to verify 
+    if (vercelFetch.status == 409 || !vercelFetch.verified) {
+      console.log(vercelFetch.verification)
+      if (!vercelFetch.verification) {
         sendCommandResponse(
           command.response_url,
           t('messages.domain.domainerror', {
             text: arg,
-            error: JSON.stringify(delegationReq.error)
-          })
-        )
-      } else {
-        // successfully requested delegation
-        sendCommandResponse(
-          command.response_url,
-          t('messages.domain.domaindelegated', {
-            text: arg
+            error: "No verification records were provided by the Vercel API"
           })
         )
       }
+      const record = vercelFetch.verification[0]
+      const recordText = `type: \`${record.type}\`
+domain: \`${record.domain}\`
+value: \`${record.value}\``
+      sendCommandResponse(
+        command.response_url,
+        t('messages.domain.domainverify', {
+          text: recordText,
+        })
+      )
     } else if (vercelFetch.error) {
       sendCommandResponse(
         command.response_url,
