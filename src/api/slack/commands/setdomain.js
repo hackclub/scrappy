@@ -25,7 +25,7 @@ export default async (req, res) => {
     if (user.customDomain != null) {
       console.log('DOMAIN ALREADY SET')
       const prevDomain = user.customDomain
-      await fetch(
+      const response = await fetch(
         `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?domain=${prevDomain}&teamId=${TEAM_ID}`,
         {
           method: 'DELETE',
@@ -34,6 +34,8 @@ export default async (req, res) => {
           }
         }
       )
+      .then(res => res.json())
+      console.log(response)
     }
 
     const vercelFetch = await fetch(
@@ -54,8 +56,17 @@ export default async (req, res) => {
         console.log(`Error while setting custom domain ${arg}: ${err}`)
       })
     console.log(vercelFetch)
+    if (vercelFetch.error) {
+      sendCommandResponse(
+        command.response_url,
+        t('messages.domain.domainerror', {
+          text: arg,
+          error: JSON.stringify(vercelFetch.error)
+        })
+      )
+    } 
     // domain is owned by another Vercel account, but we can ask the owner to verify 
-    if (vercelFetch.status == 409 || !vercelFetch.verified) {
+    else if (!vercelFetch.verified) {
       console.log(vercelFetch.verification)
       if (!vercelFetch.verification) {
         sendCommandResponse(
@@ -74,14 +85,7 @@ value: \`${record.value}\``
         command.response_url,
         t('messages.domain.domainverify', {
           text: recordText,
-        })
-      )
-    } else if (vercelFetch.error) {
-      sendCommandResponse(
-        command.response_url,
-        t('messages.domain.domainerror', {
-          text: arg,
-          error: JSON.stringify(vercelFetch.error)
+          domain: arg,
         })
       )
     } else {
