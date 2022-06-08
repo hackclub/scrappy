@@ -2,9 +2,13 @@ import { unverifiedRequest } from '../../../lib/api-utils.js'
 import fetch from 'node-fetch'
 
 export default async (req, res) => {
-  if (unverifiedRequest(req))
+  console.log("req command", req)
+  if (unverifiedRequest(req)){
+    console.log("unverified")
     return res.status(400).send('Unverified Slack request!')
+  }
   else res.status(200).end()
+  res.status(200).end()
 
   let { text } = req.body
   text = text.split(' ')[1] ? text.split(' ')[0] : text
@@ -20,6 +24,9 @@ export default async (req, res) => {
       break
     case 'setdomain':
       method = 'setdomain'
+      break
+    case 'verifydomain':
+      method = 'verifydomain'
       break
     case 'webring':
     case 'webrings':

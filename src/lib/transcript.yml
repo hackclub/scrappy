@@ -8,6 +8,7 @@ messages:
     - \`/scrappy-open\`: opens your scrapbook (or another user's if you specify a username)
     - \`/scrappy-setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
     - \`/scrappy-setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
+    - \`/scrappy-verifydomain\`: verifies a custom domain (only if you use your domain on Vercel) 
     - \`/scrappy-setusername\`: change your profile username
     - \`/scrappy-setaudio\`: links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
     - \`/scrappy-setwebhook\`: create a Scrappy Webhook we will make a blank fetch request to this URL every time you post
@@ -137,11 +138,22 @@ messages:
     noargs: To link a custom domain to your scrapbook, type \`/scrappy-setdomain\` followed by the domain or subdomain you want to link. e.g. \`/scrappy-setdomain zachlatta.com\`. Then, create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
     overlimit: Couldn't set your domain. Only 50 custom domains can be added to a project, and 50 people have already added their custom domains. <https://hackclub.slack.com/archives/C0M8PUPU6/p1602535670075000|Here's an alternative>.
     domainerror: Couldn't set your domain \`${this.text}\`. Here's the error - \`${this.error}\`
-    domaindelegated: Your domain is owned by another Vercel account, so you'll need to approve the delegation request sent to your email, then run \`/scrappy-setdomain ${this.text}\` again.
+    domainverifyerror: Couldn't verify your domain \`${this.text}\`. Here's the error - \`${this.error}\`
+    domaindoesnotexist: |
+      Couldn't verify your domain \`${this.text}\`. Here's the error - \`${this.error}\`
+
+      Try running \`/scrappy-setdomain ${this.text}\` first.
+    domainverify: |
+      Your domain is owned by another Vercel account, so you'll need to verify the domain by adding the following DNS record
+
+      ${this.text}
+
+      Then, run \`/scrappy-verifydomain ${this.domain}\` to verify the domain.
     domainset: |
       Custom domain \`${this.text}\` set!
 
       *Your next steps*: create a CNAME record in your DNS provider for your domain and point it to \`cname.vercel-dns.com\`.
+    domainverified: Your custom domain \`${this.text}\` has been verified and set!
     debug: Error - \`${this.error}\`
   open:
     invaliduser: Hmmmmmmmm THAT'S NOT A REAL USER!!!! What are you trying to pull here????
