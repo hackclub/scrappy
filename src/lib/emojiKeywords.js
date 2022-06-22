@@ -11,6 +11,7 @@ export default {
   "figma": "figma",
   "3d print": "3d-printer",
   "3d printing": "3d-printer",
+  "3d printer": "3d-printer",
   "covid": "coronavirus",
   "singapore": "singaporeparrot",
   "canada": "canadaparrot",
