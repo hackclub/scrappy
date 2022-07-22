@@ -207,5 +207,5 @@ export default {
   "pictures": "camera",
   "photography": "camera_with_flash",
   "assemble": "assemble",
-  "sprig": "leaves"
+  "sprig": "leaves",
 }
