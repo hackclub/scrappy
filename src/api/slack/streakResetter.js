@@ -37,7 +37,12 @@ export default async (req, res) => {
       ]
     })
     console.log(latestUpdate)
-    const createdTime = latestUpdate.postTime
+    const createdTime = latestUpdate?.postTime
+    if (!createdTime) {
+      // @msw: this fixes a bug where a user creates their first post then deletes it before streak resetter runs
+      // this prevents trying to reset streaks based on a user without posts
+      return
+    }
     console.log(createdTime)
     const createdDate = new Date(createdTime).getDate()
     console.log(username, now.getDate(), new Date(createdTime).getDate())
