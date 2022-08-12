@@ -433,6 +433,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
   const containsAcceptedFileTypes = acceptedFileTypes.some((el) =>
     fileName.toLowerCase().endsWith(el)
   )
+
   const isVideo = videoFileTypes.some((el) =>
     fileName.toLowerCase().endsWith(el)
   )
@@ -441,15 +442,27 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
     return null
   else if (fileName.toLowerCase().endsWith('heic')) return { url: 'heic' }
 
-  const file = await fetch(urlPrivate, {
-    headers: {
-      Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
-    }
-  })
-  let blob = await file.blob()
-  console.log('blob', blob.size, blob)
+  let file
 
-  if (blob.size === 19) {
+  let needsToBeMadePublic = false
+
+  if(isVideo){
+    needsToBeMadePublic = true 
+  }
+  else{
+    file = await fetch(urlPrivate, {
+      headers: {
+        Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+      }
+    })
+    let blob = await file.blob()
+    console.log('blob', blob.size, blob)
+    if (blob.size === 19) {
+      needsToBeMadePublic = true
+    }
+  }
+
+  if (needsToBeMadePublic) {
     const publicFile = await fetch(
       'https://slack.com/api/files.sharedPublicURL',
       {
