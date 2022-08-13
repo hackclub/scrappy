@@ -208,5 +208,6 @@ export default {
   "pictures": "camera",
   "photography": "camera_with_flash",
   "assemble": "assemble",
-  "sprig": "leaves",
+  "sprig": "sprig-dino",
+  "laser": "monkey-laser",
 }
