@@ -863,7 +863,7 @@ heic-convert@^1.2.3:
   integrity sha512-klJHyv+BqbgKiCQvCqI9IKIvweCcohDuDl0Jphearj8+16+v8eff2piVevHqq4dW9TK0r1onTR6PKHP1I4hdbA==
   dependencies:
     heic-decode "^1.1.2"
-    jpeg-js "^0.4.1"
+    jpeg-js "^0.4.4"
     pngjs "^3.4.0"
 
 heic-decode@^1.1.2:
@@ -1034,9 +1034,9 @@ isstream@~0.1.2:
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
-jpeg-js@^0.4.1:
+jpeg-js@^0.4.4:
   version "0.4.3"
-  resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.4.3.tgz#6158e09f1983ad773813704be80680550eff977b"
+  resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.4.4.tgz#6158e09f1983ad773813704be80680550eff977b"
   integrity sha512-ru1HWKek8octvUHFHvE5ZzQ1yAsJmIvRdGWvSoKV52XKyuyYA437QWDttXT8eZXDSbuMpHlLzPDZUPd6idIz+Q==
 
 js-yaml@^4.1.0:
