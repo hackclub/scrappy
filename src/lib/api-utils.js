@@ -424,12 +424,13 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
     'gif',
     'mp4',
     'mov',
+    'webm',
     'mp3',
     'wav',
     'aiff',
     'm4a'
   ]
-  const videoFileTypes = ['mp4', 'mov']
+  const videoFileTypes = ['mp4', 'mov', 'webm']
   const containsAcceptedFileTypes = acceptedFileTypes.some((el) =>
     fileName.toLowerCase().endsWith(el)
   )
