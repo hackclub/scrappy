@@ -210,5 +210,5 @@ export default {
   "assemble": "assemble",
   "sprig": "sprig-dino",
   "laser": "monkey-laser",
-  "music": "music"
+  "music": "music",
 }
