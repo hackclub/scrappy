@@ -211,4 +211,5 @@ export default {
   "sprig": "sprig-dino",
   "laser": "monkey-laser",
   "music": "music",
+  "<#C045S4393CY>": "10daysinpublic",
 }

@@ -21,4 +21,5 @@ export default {
   "C01GF9987SL": "aoc", // #adventofcode
   "C02UN35M7LG": "gamelab", // #gamelab-dev
   "C02EWM09ACE": "undeniablytrue", // #surroundings
+  "C045S4393CY": "10daysinpublic", // #10-days-in-public
 }
