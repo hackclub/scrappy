@@ -60,6 +60,7 @@ export default {
   "soldering": "hardware",
   "arduino": "hardware",
   "instagram": "instagram",
+  "observable": "observable",
   "js": "js",
   "javascript": "js",
   "reactjs": "react",
