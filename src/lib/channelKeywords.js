@@ -19,7 +19,7 @@ export default {
   "C02TWKX227J": "wordle",
   "C0P5NE354": "robot_face", // #bot-spam
   "C01GF9987SL": "aoc", // #adventofcode
-  "C02UN35M7LG": "gamelab", // #gamelab-dev
+  "C02UN35M7LG": "sprig-dino", // #sprig
   "C02EWM09ACE": "undeniablytrue", // #surroundings
   "C045S4393CY": "10daysinpublic", // #10-days-in-public
 }
