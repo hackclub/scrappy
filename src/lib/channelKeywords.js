@@ -22,4 +22,5 @@ export default {
   "C02UN35M7LG": "sprig-dino", // #sprig
   "C02EWM09ACE": "undeniablytrue", // #surroundings
   "C045S4393CY": "10daysinpublic", // #10-days-in-public
+  "C0168BR5PDE": "winter-hardware-wonderland", // hardware-party
 }

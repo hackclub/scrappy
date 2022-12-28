@@ -213,4 +213,6 @@ export default {
   "laser": "monkey-laser",
   "music": "music",
   "<#C045S4393CY>": "10daysinpublic",
+  "10daysinpublic": "10daysinpublic",
+  "winter hardware": "winter-hardware-wonderland",
 }
