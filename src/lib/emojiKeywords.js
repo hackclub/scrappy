@@ -141,6 +141,8 @@ export default {
   "vivaldi": "vivaldi",
   "ABCO-1": "abcout",
   "nix": "nix",
+  "nixos": "nix",
+  "nixpkgs": "nix",
   "typescript": "typescript",
   "ts": "typescript",
   "zephyr": "train",
