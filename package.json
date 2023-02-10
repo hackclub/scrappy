@@ -1,37 +1,35 @@
 {
-  "name": "@hackclub/scrappy-bot",
-  "version": "1.0.0",
-  "license": "MIT",
-  "private": true,
-  "engines": {
-    "node": "16.x"
-  },
-  "type": "module",
-  "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
-    "format": "prettier --write .",
-    "checkFormat": "prettier --check ."
-  },
-  "dependencies": {
-    "@mux/mux-node": "^5.0.3",
-    "@prisma/client": "3.14.0",
-    "airtable-plus": "^1.0.4",
-    "bottleneck": "^2.19.5",
-    "cheerio": "^1.0.0-rc.10",
-    "date-season": "^0.0.2",
-    "express": "^4.18.1",
-    "form-data": "^4.0.0",
-    "heic-convert": "^1.2.3",
-    "js-yaml": "^4.1.0",
-    "lodash": "^4.17.19",
-    "node-emoji": "^1.11.0",
-    "node-fetch": "2.6.1"
-  },
-  "devDependencies": {
-    "dotenv": "^16.0.1",
-    "nodemon": "^2.0.16",
-    "prettier": "2.6.2",
-    "prisma": "3.14.0"
-  }
+	"name": "@hackclub/scrappy",
+	"type": "module",
+	"version": "2.0.0-DEV",
+	"main": "dist/index.js",
+	"repository": "https://github.com/hackclub/netherite-golem",
+	"license": "MIT",
+	"private": true,
+	"devDependencies": {
+		"@sapphire/prettier-config": "^1.4.5",
+		"@types/js-yaml": "^4.0.5",
+		"@types/node": "^18.11.18",
+		"prettier": "^2.8.3",
+		"ts-node": "^10.9.1",
+		"typescript": "^4.9.4"
+	},
+	"dependencies": {
+		"@sapphire/eslint-config": "^4.3.8",
+		"@slack/bolt": "^3.12.2",
+		"airtable": "^0.11.6",
+		"dotenv": "^16.0.3",
+		"js-yaml": "^4.1.0",
+		"node-fetch": "^3.3.0"
+	},
+	"scripts": {
+		"build": "tsc -p .",
+		"start": "node dist/index.js",
+		"start:dev": "ts-node src/index.ts",
+		"prettier": "prettier --write src/**/*.ts .",
+		"eslint": "eslint --fix src --ext ts",
+		"lint": "yarn eslint && yarn prettier"
+	},
+	"prettier": "@sapphire/prettier-config",
+	"packageManager": "yarn@3.3.1"
 }

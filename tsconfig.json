@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"module": "ES2022",
+		"moduleResolution": "node",
+		"allowSyntheticDefaultImports": true,
+		"target": "ES2022",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"baseUrl": "./src",
+		"incremental": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["src"]
+}
