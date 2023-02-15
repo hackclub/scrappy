@@ -214,6 +214,10 @@ export default {
   "music": "music",
   "<#C045S4393CY>": "10daysinpublic",
   "10daysinpublic": "10daysinpublic",
+  "hardware party": "winter-hardware-wonderland",
+  "hardware wonderland": "winter-hardware-wonderland",
+  "hardware-party": "winter-hardware-wonderland",
+  "days of making": "winter-hardware-wonderland",
   "winter hardware": "winter-hardware-wonderland",
   "ipfs": "ipfs"
 }
