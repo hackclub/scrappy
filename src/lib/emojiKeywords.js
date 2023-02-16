@@ -219,5 +219,8 @@ export default {
   "hardware-party": "winter-hardware-wonderland",
   "days of making": "winter-hardware-wonderland",
   "winter hardware": "winter-hardware-wonderland",
+  "winter": "winter-hardware-wonderland",
+  "wonderland": "winter-hardware-wonderland",
+  "whw": "winter-hardware-wonderland",
   "ipfs": "ipfs"
 }
