@@ -515,7 +515,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
       muxPlaybackId: asset.playback_ids[0].id
     }
   }
-  let cdnAPIResponse = await fetch('https://cdn.hackclub.com/api/v1/new', {
+  let cdnAPIResponse = await fetch('https://cdn-2moycvmxo.hackclub.dev/api/v1/new', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
