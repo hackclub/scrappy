@@ -82,6 +82,16 @@ const shouldReset = (now, createdDate) => {
   ) {
     return now.getDate() - createdDate > -30
   } else if (
+    createdDate === 28 &&
+    (now.getDate() === 1 || now.getDate() === 2)
+  ) {
+    return now.getDate() - createdDate > -27
+  } else if (
+    createdDate === 29 &&
+    (now.getDate() === 1 || now.getDate() === 2)
+  ) {
+    return now.getDate() - createdDate > -28
+  } else if (
     createdDate === 1 &&
     (now.getDate() === 30 || now.getDate() === 31)
   ) {
