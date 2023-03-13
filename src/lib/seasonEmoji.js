@@ -1,6 +1,6 @@
-import createSeasonResolver from "date-season"
+import createSeasonResolver from "date-season";
 
-var seasonNorth = createSeasonResolver();
+let seasonNorth = createSeasonResolver();
 
 export const SEASON_EMOJI =
   seasonNorth(new Date()) == "Spring"
