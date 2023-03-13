@@ -20,7 +20,6 @@ import { SEASON_EMOJI } from "../lib/seasonEmoji.js";
 import prisma from "../lib/prisma.js";
 import Bottleneck from "bottleneck";
 import fetch from "node-fetch";
-
 const limiter = new Bottleneck({ maxConcurrent: 1 });
 import channelKeywords from "../lib/channelKeywords.js";
 import emojiKeywords from "../lib/emojiKeywords.js";
@@ -35,7 +34,6 @@ export default async ({ event }) => {
     channel !== process.env.CHANNEL
   )
     return;
-
   if ((await updateExistsTS(ts)) && reaction === "scrappy-retry") {
     try {
       if (userRecord.webhookURL) {
@@ -58,7 +56,6 @@ export default async ({ event }) => {
     await react("add", channel, ts, SEASON_EMOJI);
     return;
   }
-
   // If someone reacted with a Scrappy emoji in a non-#scrapbook channel, then maybe upload it.
   if (
     (reaction === "scrappy" || reaction === "scrappyparrot") &&
