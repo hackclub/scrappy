@@ -4,15 +4,6 @@ import yaml from "js-yaml";
 // ex. t('greeting', { userID: 'UX12U391' })
 
 export const t = (search, vars) => {
-  if (vars) {
-    console.log(
-      `I'm searching for words in my yaml file under "${search}". These variables are set: ${JSON.stringify(
-        vars
-      )}`
-    );
-  } else {
-    console.log(`I'm searching for words in my yaml file under "${search}"`);
-  }
   const searchArr = search.split(".");
   const transcriptObj = yaml.load(
     fs.readFileSync(path.join(process.cwd(), "src/lib/transcript.yml"), "utf-8")
