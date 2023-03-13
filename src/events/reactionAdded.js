@@ -13,6 +13,7 @@ import {
   isFullMember,
   createPost,
   postEphemeral,
+  reactBasedOnKeywords,
 } from "../lib/api-utils.js";
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
@@ -34,24 +35,11 @@ export default async ({ event }) => {
     channel !== process.env.CHANNEL
   )
     return;
+  const message = await getMessage(ts, channel);
   if ((await updateExistsTS(ts)) && reaction === "scrappy-retry") {
-    try {
-      if (userRecord.webhookURL) {
-        fetch(userRecord.webhookURL);
-      }
-    } catch (err) {}
-    const message = await getMessage(ts, channel);
-    if (typeof channelKeywords[channel] !== "undefined")
+    if (channelKeywords[channel])
       await react("add", channel, ts, channelKeywords[channel]);
-    Object.keys(emojiKeywords).forEach(async (keyword) => {
-      if (
-        message.text
-          .toLowerCase()
-          .search(new RegExp("\\b" + keyword + "\\b", "gi")) !== -1
-      ) {
-        await react("add", channel, ts, emojiKeywords[keyword]);
-      }
-    });
+    await reactBasedOnKeywords(channel, message, ts);
     await react("remove", channel, ts, "beachball");
     await react("add", channel, ts, SEASON_EMOJI);
     return;
@@ -68,17 +56,16 @@ export default async ({ event }) => {
         t("messages.errors.anywhere.op", { reaction }),
         user
       );
-    } else {
-      const message = await getMessage(ts, channel);
-      if (!message) return;
+    } else if (message) {
       await createPost(message.files, channel, ts, user, message.text);
     }
     return;
   }
-
-  if (reaction === "scrappy-retry" && channel == process.env.CHANNEL) {
-    const message = await getMessage(ts, channel);
-    if (!message) return;
+  if (
+    reaction === "scrappy-retry" &&
+    channel == process.env.CHANNEL &&
+    message
+  ) {
     if (!message.files || message.files.length == 0) {
       postEphemeral(channel, t("messages.errors.anywhere.files"), user);
       return;
@@ -87,21 +74,12 @@ export default async ({ event }) => {
   }
   limiter.schedule(async () => {
     const emojiRecord = await getEmojiRecord(reaction);
-    const { ts } = item;
-    const update = (
-      await prisma.updates.findMany({
-        where: {
-          messageTimestamp: parseFloat(ts),
-        },
-      })
-    )[0];
-    if (!update) {
-      console.log(
-        startTS,
-        "reaction was added to a message in a thread. skipping..."
-      );
-      return;
-    }
+    const update = await prisma.updates.findFirst({
+      where: {
+        messageTimestamp: parseFloat(ts),
+      },
+    });
+    if (!update) return;
     const postExists = await updateExists(update.id);
     const reactionExists = await emojiExists(reaction, update.id);
     if (!reactionExists) {

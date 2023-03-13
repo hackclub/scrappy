@@ -631,6 +631,18 @@ export const shouldUpdateStreak = async (userId, increment) => {
   );
 };
 
+export const reactBasedOnKeywords = (channel, message, ts) => {
+  Object.keys(emojiKeywords).forEach(async (keyword) => {
+    if (
+      message
+        .toLowerCase()
+        .search(new RegExp("\\b" + keyword + "\\b", "gi")) !== -1
+    ) {
+      await react("add", channel, ts, emojiKeywords[keyword]);
+    }
+  });
+};
+
 export const incrementStreakCount = (userId, channel, message, ts) =>
   new Promise(async (resolve, reject) => {
     console.log("increment streak count");
@@ -697,16 +709,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
 
     if (typeof channelKeywords[channel] !== "undefined")
       await react("add", channel, ts, channelKeywords[channel]);
-    console.log("emoji keywords", emojiKeywords);
-    Object.keys(emojiKeywords).forEach(async (keyword) => {
-      if (
-        message
-          .toLowerCase()
-          .search(new RegExp("\\b" + keyword + "\\b", "gi")) !== -1
-      ) {
-        await react("add", channel, ts, emojiKeywords[keyword]);
-      }
-    });
+    await reactBasedOnKeywords(channel, message, ts);
     await reply(
       channel,
       ts,
