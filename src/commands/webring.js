@@ -9,7 +9,7 @@ export default async ({ command, ack, respond }) => {
     ?.split("@")[1]
     ?.split("|")[0];
   if (!webringUser) {
-    return sendCommandResponse(response_url, t("messages.webring.noargs"));
+    return await respond(t("messages.webring.noargs"));
   }
   if (webringUser && !text.includes("<@")) {
     return await respond(t("messages.open.invaliduser"));
@@ -25,7 +25,7 @@ export default async ({ command, ack, respond }) => {
     currentWebring = [webringUserRecord.slackID];
   } else if (!currentWebring.includes(webringUserRecord.slackID)) {
     if (currentWebring.length >= 8)
-      return sendCommandResponse(response_url, t("messages.webring.toolong"));
+      return await respond(t("messages.webring.toolong"));
     currentWebring.push(webringUserRecord.slackID);
     await respond(t(`messages.webring.add`, { webringUser, scrapbookLink }));
   } else {

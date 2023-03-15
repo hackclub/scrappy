@@ -10,13 +10,13 @@ export default async ({ command, ack, respond }) => {
   if (
     userRecord.lastUsernameUpdatedTime > new Date(Date.now() - 86400 * 1000)
   ) {
-    sendCommandResponse(response_url, t("messages.username.time"));
+    await respond(t("messages.username.time"));
   } else if (!username) {
-    sendCommandResponse(response_url, t("messages.username.noargs"));
+    await respond(t("messages.username.noargs"));
   } else if (username.length < 2) {
-    sendCommandResponse(response_url, t("messages.username.short"));
+    await respond(t("messages.username.short"));
   } else if (exists.length > 0) {
-    sendCommandResponse(response_url, t("messages.username.exists"));
+    await respond(t("messages.username.exists"));
   } else {
     await prisma.accounts.update({
       // update the account with the new username

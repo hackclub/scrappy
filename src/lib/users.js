@@ -1,30 +1,13 @@
 export const getUserRecord = async (userId) => {
-  const user = await fetch(
-    `https://slack.com/api/users.profile.get?user=${userId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
-      },
-    }
-  ).then((r) => r.json());
-
-  if (user.profile === undefined) {
-    return;
-  }
+  const user = await app.client.users.profile.get({ user: userId });
+  if (user.profile === undefined) return;
   let record = await prisma.accounts.findUnique({
     where: {
       slackID: userId,
     },
   });
   if (record === null) {
-    let profile = await fetch(
-      `https://slack.com/api/users.info?user=${userId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
-        },
-      }
-    ).then((r) => r.json());
+    let profile = await app.client.users.info({ user: userId });
     let username =
       user.profile.display_name !== ""
         ? user.profile.display_name.replace(/\s/g, "")
@@ -66,4 +49,27 @@ export const getUserRecord = async (userId) => {
     }
   }
   return { ...record, slack: user };
+};
+
+export const forgetUser = async (user) => {
+  const userRecord = await getUserRecord(user); // get the user's info
+  await Promise.all([
+    await prisma.updates.deleteMany({
+      // delete their updates...
+      where: {
+        slackID: user,
+      },
+    }),
+    await prisma.accounts.deleteMany({
+      // delete their account
+      where: {
+        accountsSlackID: user,
+      },
+    }),
+  ]);
+};
+
+export const canDisplayStreaks = async (userId) => {
+  let record = await getUserRecord(userId);
+  return record.displayStreak;
 };

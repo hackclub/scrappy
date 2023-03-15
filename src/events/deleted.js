@@ -5,7 +5,7 @@ import {
   setStatus,
   displayStreaks,
   shouldUpdateStreak,
-  tsHasScrap,
+  updateExistsTS,
 } from "../lib/api-utils.js";
 import { getUserRecord } from "../lib/users.js";
 import fetch from "node-fetch";
@@ -39,7 +39,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 export default async ({ event, ack }) => {
   const { channel, message, previous_message, thread_ts } = event;
   const ts = thread_ts || message.thread_ts;
-  const hasScrap = await tsHasScrap(ts);
+  const hasScrap = await updateExistsTS(ts);
   if (ts && hasScrap) {
     await Promise.all([
       await react("remove", channel, ts, "beachball"),

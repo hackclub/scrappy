@@ -10,14 +10,13 @@ import {
   getPublicFileUrl,
   incrementStreakCount,
   formatText,
-  isFullMember,
-  createPost,
+  createUpdate,
   postEphemeral,
   reactBasedOnKeywords,
 } from "../lib/api-utils.js";
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
-import { SEASON_EMOJI } from "../lib/seasonEmoji.js";
+import { SEASON_EMOJI } from "../lib/seasons.js";
 import prisma from "../lib/prisma.js";
 import Bottleneck from "bottleneck";
 import fetch from "node-fetch";
@@ -57,7 +56,7 @@ export default async ({ event }) => {
         user
       );
     } else if (message) {
-      await createPost(message.files, channel, ts, user, message.text);
+      await createUpdate(message.files, channel, ts, user, message.text);
     }
     return;
   }
@@ -70,7 +69,7 @@ export default async ({ event }) => {
       postEphemeral(channel, t("messages.errors.anywhere.files"), user);
       return;
     }
-    await createPost(message.files, channel, ts, item_user, message.text);
+    await createUpdate(message.files, channel, ts, item_user, message.text);
   }
   limiter.schedule(async () => {
     const emojiRecord = await getEmojiRecord(reaction);
