@@ -221,6 +221,8 @@ export const getUserRecord = async (userId) => {
     let checkIfExists = prisma.accounts.findFirst({
       where: {username: username}
     })
+    console.log("CHECK!!!!! IF.")
+    console.log(checkIfExists)
     record = await prisma.accounts.create({
       data: {
         slackID: userId,
