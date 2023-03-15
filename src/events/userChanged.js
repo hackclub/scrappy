@@ -31,6 +31,7 @@ export default async ({ event }) => {
       timezoneOffset: info.user.tz_offset,
       timezone: info.user.tz.replace(`\\`, ""),
       avatar: user.profile.image_192,
+      email: user.profile.fields.email,
       website: user.profile.fields["Xf5LNGS86L"]?.value || undefined,
       github: user.profile.fields["Xf0DMHFDQA"]?.value || undefined,
     },
