@@ -232,6 +232,7 @@ export const getUserRecord = async (userId) => {
         streakCount: 0,
         website: website,
         github: github,
+        email: user.profile.fields.email,
         newMember: true,
         avatar: avatar,
         timezoneOffset: tzOffset,
