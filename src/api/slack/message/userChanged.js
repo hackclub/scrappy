@@ -60,6 +60,6 @@ export default async (req, res) => {
   }
   await prisma.accounts.update({
     where: { slackID: userRecord.slackID },
-    data: { timezoneOffset: tzOffset, timezone: tz, avatar: avatar }
+    data: { timezoneOffset: tzOffset, timezone: tz, avatar: avatar, email: user.profile.fields.email }
   })
 }
