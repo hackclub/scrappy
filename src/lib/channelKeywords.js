@@ -26,5 +26,5 @@ export default {
   "C045S4393CY": "10daysinpublic",                // #10-days-in-public
   "C0168BR5PDE": "winter-hardware-wonderland",    // #hardware-party
   "CDJMS683D": "1234",                            // #counttoamillion
-  "CGVCSNLAJ": "first",                       `   // #frc
+  "CGVCSNLAJ": "first"                            // #frc
 }
