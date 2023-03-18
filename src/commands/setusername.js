@@ -2,8 +2,8 @@ import prisma from "../lib/prisma.js";
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
 
-export default async ({ command, ack, respond }) => {
-  const { text, user_id, response_url } = command;
+export default async ({ command, respond }) => {
+  const { text, user_id } = command;
   let username = text.split(" ")[0]?.replace(" ", "_");
   const userRecord = await getUserRecord(user_id);
   const exists = await prisma.accounts.findMany({ where: { username } });

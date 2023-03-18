@@ -1,6 +1,6 @@
 import { postEphemeral } from "../lib/slack.js";
 import { t } from "../lib/transcript.js";
-import fetch from "node-fetch";
+import { app } from "../app.js"
 
 export default async ({ event }) => {
   const { channel, ts, user, text } = event;

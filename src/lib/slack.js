@@ -1,3 +1,5 @@
+import { app } from "../app.js";
+
 // ex. react('add', 'C248d81234', '12384391.12231', 'beachball')
 export const react = async (addOrRemove, channel, ts, reaction) =>
   await app.client.reactions[addOrRemove]({

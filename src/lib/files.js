@@ -1,4 +1,11 @@
 import S3 from "./s3.js";
+import Mux from "@mux/mux-node";
+import { app } from "../app.js";
+import { postEphemeral } from './slack.js'
+import { t } from './transcript.js'
+import { timeout } from './utils.js'
+import { v4 as uuidv4 } from 'uuid'
+import fetch from 'node-fetch'
 
 const { Video } = new Mux(
   process.env.MUX_TOKEN_ID,
@@ -24,6 +31,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
   let blob = await file.blob();
   if (blob.size === 19) {
     const publicFile = app.client.files.sharedPublicURL({
+      token: process.env.SLACK_USER_TOKEN,
       file: fileId,
     });
     const pubSecret = publicFile.file.permalink_public.split("-").pop();
@@ -71,7 +79,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
     Body: blob.stream(),
   }).promise();
   return {
-    url: uploadedImage.location,
+    url: uploadedImage.Location,
     muxId: null,
     muxPlaybackId: null,
   };

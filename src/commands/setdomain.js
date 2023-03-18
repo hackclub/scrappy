@@ -5,14 +5,14 @@ import fetch from "node-fetch";
 
 const TEAM_ID = "team_gUyibHqOWrQfv3PDfEUpB45J";
 
-export default async ({ command, ack, respond }) => {
+export default async ({ command, respond }) => {
   const arg = command.text.split(" ")[0];
   if (!arg) {
     await respond(t("messages.domain.noargs"));
   } else {
     const user = await getUserRecord(command.user_id);
     if (user.customDomain != null) {
-      const response = await fetch(
+      await fetch(
         `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?domain=${user.customDomain}&teamId=${TEAM_ID}`,
         {
           method: "DELETE",

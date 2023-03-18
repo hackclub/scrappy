@@ -3,7 +3,7 @@ import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
 import { displayStreaks } from "../lib/streaks.js";
 
-export default async ({ command, ack, respond }) => {
+export default async ({ command, respond }) => {
   // /scrappy-togglestreaks: toggle status
   // /scrappy-togglestreaks all: opt out of streaks completely
   const { user_id, text } = command;

@@ -2,12 +2,12 @@ import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
 import prisma from "../lib/prisma.js";
 
-export default async ({ command, ack, respond }) => {
+export default async ({ command, respond }) => {
   const { text, user_id } = command;
   let url = text.split(" ")[0];
   url = url?.substring(1, url.length - 1);
+  let userRecord = await getUserRecord(user_id);
   if (!url) {
-    let userRecord = await getUserRecord(user_id);
     if (userRecord.customAudioURL != null) {
       await respond(
         t("messages.audio.removed", { previous: userRecord.customAudioURL })

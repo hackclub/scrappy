@@ -2,9 +2,9 @@ import { displayStreaks } from "../lib/streaks.js";
 import { postEphemeral, react } from "../lib/slack.js";
 import { getUserRecord } from "../lib/users.js";
 import { deleteUpdate, updateExistsTS } from "../lib/updates.js";
-import { setStatus } from "../lib/profiles.js";
 import { shouldUpdateStreak } from "../lib/streaks.js";
-import fetch from "node-fetch";
+import { app } from "../app.js"
+import prisma from "../lib/prisma.js"
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   let result = await app.conversations.replies({ channel, ts });
@@ -32,7 +32,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
   postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user);
 };
 
-export default async ({ event, ack }) => {
+export default async ({ event }) => {
   const { channel, message, previous_message, thread_ts } = event;
   const ts = thread_ts || message.thread_ts;
   const hasScrap = await updateExistsTS(ts);

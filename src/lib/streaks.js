@@ -1,3 +1,14 @@
+import prisma from './prisma.js'
+import { getUserRecord } from "./users.js"
+import { getDayFromISOString, getNow } from "./utils.js"
+import { getRandomWebringPost } from "./webring.js"
+import { postEphemeral, react, reply } from "./slack.js"
+import { t } from "./transcript.js"
+import { SEASON_EMOJI } from "./seasons.js";
+import channelKeywords from "./channelKeywords.js";
+import { reactBasedOnKeywords } from "./reactions.js"
+import { setStatus } from "./profiles.js"
+
 export const shouldUpdateStreak = async (userId, increment) => {
   const userRecord = await getUserRecord(userId);
   const latestUpdates = await prisma.updates.findMany({
@@ -24,7 +35,7 @@ export const streaksToggledOff = async (user) => {
 };
 
 export const incrementStreakCount = (userId, channel, message, ts) =>
-  new Promise(async (resolve, reject) => {
+  new Promise(async (resolve) => {
     const userRecord = await getUserRecord(userId);
     const shouldUpdate = await shouldUpdateStreak(userId, true);
     const randomWebringPost = await getRandomWebringPost(userId);
@@ -104,12 +115,11 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
   }).catch((err) => reply(channel, ts, t("messages.errors.promise", { err })));
 
 export const getReplyMessage = async (user, username, day) => {
-  const newMember = await isNewMember(user);
   const toggledOff = await streaksToggledOff(user);
   const scrapbookLink = `https://scrapbook.hackclub.com/${username}`;
   let streakNumber = day <= 7 ? day : "7+";
   if (toggledOff) streakNumber = "7+";
-  if (!newMember && day <= 3 && !toggledOff) {
+  if (day <= 3 && !toggledOff) {
     return t("messages.streak.oldmember." + streakNumber, {
       scrapbookLink,
       user,
@@ -120,7 +130,6 @@ export const getReplyMessage = async (user, username, day) => {
 
 export const displayStreaks = async (userId, streakCount) => {
   const userRecord = await getUserRecord(userId);
-  const user = await app.client.users.profile.get({ user: userId });
   if (!userRecord.streaksToggledOff) {
     if (streakCount == 0 || !userRecord.displayStreak) {
       setStatus(userId, "", "");

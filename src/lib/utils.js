@@ -1,30 +1,18 @@
-import FormData from "form-data";
-import Mux from "@mux/mux-node";
 import emoji from "node-emoji";
-import fetch from "node-fetch";
-import fs from "fs";
-import path from "path";
-import prisma from "./prisma.js";
-import channelKeywords from "./channelKeywords.js";
-import emojiKeywords from "./emojiKeywords.js";
-import { SEASON_EMOJI } from "./seasons.js";
+import { getUserRecord } from "./users.js"
+import { app } from "../app.js"
+
+const replaceEmoji = (str) => emoji.emojify(str.replace(/::(.*):/, ":"));
 
 export const timeout = (ms) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve();
     }, ms);
   });
 };
 
-const sample = (arr) => arr[Math.floor(Math.random() * arr.length)];
-
-export const execute = async (actionToExecute) => {
-  return async (slackObject, ...props) => {
-    await slackObject.ack();
-    await functionAdd(slackObject, ...props);
-  };
-};
+export const sample = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 export const getNow = (tz) => {
   const date = new Date().toLocaleString("en-US", { timeZone: tz });

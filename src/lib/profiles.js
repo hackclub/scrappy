@@ -1,5 +1,10 @@
+import { app } from "../app.js";
+import { t } from "./transcript.js";
+import { getUserRecord } from "./users.js";
+import prisma from "./prisma.js";
+
 export const setStatus = async (user, statusText, statusEmoji) => {
-  app.client.users.profile.set({
+  const setProfile = app.client.users.profile.set({
     user,
     profile: {
       status_text: statusText,

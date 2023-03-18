@@ -3,7 +3,7 @@ import { forgetUser } from "../lib/users.js";
 import { t } from "../lib/transcript.js";
 
 export default async ({ event }) => {
-  const { user, channel } = event;
+  const { user, channel, ts } = event;
   if (channel != process.env.CHANNEL) return;
   await Promise.all([react("add", channel, ts, "beachball"), forgetUser(user)]);
   await Promise.all([
@@ -11,5 +11,5 @@ export default async ({ event }) => {
     react("add", channel, ts, "confusedparrot"),
     postEphemeral(channel, t("messages.forget"), user),
   ]);
-  return res.json({ ok: true });
+  return { ok: true };
 };

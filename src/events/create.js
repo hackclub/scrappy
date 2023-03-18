@@ -7,7 +7,7 @@ This is triggered when a new post shows up in the #scrapbook channel
 
 import { createUpdate } from "../lib/updates.js";
 
-export default async ({ event, ack }) => {
+export default async ({ event }) => {
   if (event.thread_ts || event.channel != process.env.CHANNEL) return;
   const { files = [], channel, ts, user, text, thread_ts } = event;
   if (!thread_ts) await createUpdate(files, channel, ts, user, text);

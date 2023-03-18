@@ -24,6 +24,6 @@ export default async ({ event }) => {
       `Your post has been edited! You should see it update on the website in a few seconds.`,
       event.message.user
     );
-    const userRecord = await getUserRecord(event.message.user);
+    await getUserRecord(event.message.user);
   }
 };

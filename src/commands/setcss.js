@@ -2,7 +2,7 @@ import prisma from "../lib/prisma.js";
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
 
-export default async ({ command, ack, respond }) => {
+export default async ({ command, respond }) => {
   const args = command.text.split(" ");
   let url = args[0];
   url = url?.substring(0, url.length);
@@ -19,7 +19,6 @@ export default async ({ command, ack, respond }) => {
     }
   } else {
     const user = await getUserRecord(command.user_id);
-    const username = user.username;
     if (url === "delete" || url === "remove") {
       await prisma.accounts.update({
         where: { slackID: user.slackID },
@@ -27,9 +26,6 @@ export default async ({ command, ack, respond }) => {
       });
       await respond(t("messages.css.removed"));
     } else {
-      if (!url.includes("http")) {
-        url = url;
-      }
       await prisma.accounts.update({
         where: { slackID: user.slackID },
         data: { cssURL: url },

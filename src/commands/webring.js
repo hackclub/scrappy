@@ -2,7 +2,7 @@ import prisma from "../lib/prisma.js";
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
 
-export default async ({ command, ack, respond }) => {
+export default async ({ command, respond }) => {
   const { user_id, text } = command;
   const args = text.split(" ");
   const webringUser = args[args[0] === "webring" ? 1 : 0]

@@ -8,7 +8,7 @@ const limiter = new Bottleneck({
 });
 
 export default async ({ event }) => {
-  const { item, user, reaction } = req.body.event;
+  const { item, user, reaction } = event;
   const ts = item.ts;
   limiter.schedule(async () => {
     const update = (

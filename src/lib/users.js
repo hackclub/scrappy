@@ -1,3 +1,7 @@
+import prisma from './prisma.js'
+import { app } from '../app.js'
+import { sample } from "./utils.js"
+
 export const getUserRecord = async (userId) => {
   const user = await app.client.users.profile.get({ user: userId });
   if (user.profile === undefined) return;
@@ -53,7 +57,6 @@ export const getUserRecord = async (userId) => {
 };
 
 export const forgetUser = async (user) => {
-  const userRecord = await getUserRecord(user); // get the user's info
   await Promise.all([
     await prisma.updates.deleteMany({
       // delete their updates...

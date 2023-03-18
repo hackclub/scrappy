@@ -1,6 +1,6 @@
 import { setStatus } from "../lib/utils.js";
 import { getUserRecord } from "../lib/users.js";
-import fetch from "node-fetch";
+import { app } from "../app.js";
 import prisma from "../lib/prisma.js";
 
 export default async ({ event }) => {

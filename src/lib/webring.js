@@ -1,3 +1,7 @@
+import { getUserRecord } from "./users.js"
+import { sample } from "./utils.js"
+import prisma from "./prisma.js"
+
 export const getRandomWebringPost = async (user) => {
   const userRecord = await getUserRecord(user);
   const webring = userRecord.webring;

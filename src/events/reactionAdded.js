@@ -1,19 +1,14 @@
-import { formatText } from "../lib/utils.js";
 import { createUpdate, updateExists, updateExistsTS } from "../lib/updates.js";
 import { getEmojiRecord, emojiExists } from "../lib/emojis.js"
 import { getReactionRecord, reactBasedOnKeywords } from '../lib/reactions.js'
 import { react, getMessage, postEphemeral } from "../lib/slack.js"
-import { getPublicFileUrl } from "../lib/files.js"
-import { incrementStreakCount } from "../lib/streaks.js"
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
 import { SEASON_EMOJI } from "../lib/seasons.js";
 import prisma from "../lib/prisma.js";
 import Bottleneck from "bottleneck";
-import fetch from "node-fetch";
 const limiter = new Bottleneck({ maxConcurrent: 1 });
 import channelKeywords from "../lib/channelKeywords.js";
-import emojiKeywords from "../lib/emojiKeywords.js";
 
 export default async ({ event }) => {
   const { item, user, reaction, item_user } = event;

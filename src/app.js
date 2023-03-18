@@ -1,5 +1,6 @@
-const { App, subtype } = require("@slack/bolt");
-import { execute } from "./lib/utils.js";
+import bolt from '@slack/bolt';
+const { App, subtype } = bolt;
+import fetch from 'node-fetch'
 import { t } from "./lib/transcript.js";
 import { mux } from "./routes/mux.js";
 import help from "./commands/help.js";
@@ -20,54 +21,54 @@ import noFile, { noFileCheck } from "./events/noFile.js";
 import reactionAdded from "./events/reactionAdded.js";
 import reactionRemoved from "./events/reactionAdded.js";
 
-const app = new App({
+export const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   customRoutes: [mux],
 });
 
-app.command("/scrappy", execute(help));
+app.command("/scrappy", help);
 
-app.command("/scrappy-help", execute(help));
+app.command("/scrappy-help", help);
 
-app.command("/scrappy-setaudio", execute(setAudio));
+app.command("/scrappy-setaudio", setAudio);
 
-app.command("/scrappy-setcss", execute(setCSS));
+app.command("/scrappy-setcss", setCSS);
 
-app.command("/scrappy-setdomain", execute(setDomain));
+app.command("/scrappy-setdomain", setDomain);
 
-app.command("/scrappy-setusername", execute(setUsername));
+app.command("/scrappy-setusername", setUsername);
 
-app.command("/scrappy-togglestreaks", execute(toggleStreaks));
+app.command("/scrappy-togglestreaks", toggleStreaks);
 
-app.command("/scrappy-webring", execute(webring));
+app.command("/scrappy-webring", webring);
 
-app.event("reaction_added", execute(reactionAdded));
+app.event("reaction_added", reactionAdded);
 
-app.event("reaction_removed", execute(reactionRemoved));
+app.event("reaction_removed", reactionRemoved);
 
-app.event("member_joined_channel", execute(joined));
+app.event("member_joined_channel", joined);
 
-app.event("user_change", execute(userChanged));
+app.event("user_change", userChanged);
+ 
+app.message(subtype("file_share"), create);
 
-app.message(subtype("file_share"), execute(create));
+app.message(noFileCheck, noFile);
 
-app.message(noFileCheck, execute(noFile));
+app.event(subtype("message_deleted"), deleted);
 
-app.event(subtype("message_deleted"), execute(deleted));
+app.event(subtype("message_changed"), updated);
 
-app.event(subtype("message_changed"), execute(updated));
+app.event("forget scrapbook", forget);
 
-app.event("forget scrapbook", execute(forget));
-
-app.message("<@U015D6A36AG>", execute(mention));
+app.message("<@U015D6A36AG>", mention);
 
 (async () => {
   await app.start(process.env.PORT || 3000);
   let latestCommitMsg = "misc...";
   await fetch("https://api.github.com/repos/hackclub/scrappy/commits/main")
     .then((r) => r.json())
-    .then((d) => (latestCommitMsg = d.commit.message));
+    .then((d) => (latestCommitMsg = d.commit?.message || ""));
   app.client.chat.postMessage({
     channel: "C0P5NE354",
     text: t("startup.message", { latestCommitMsg }),
@@ -75,5 +76,5 @@ app.message("<@U015D6A36AG>", execute(mention));
     unfurl_links: false,
     unfurl_media: false,
   });
-  console.log("⚡️ Scrappy is running!");
-})();
+  console.log("⚡️ Scrappy is running !"); 
+})(); 
