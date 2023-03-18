@@ -7,29 +7,36 @@ import { app } from "../app.js"
 import prisma from "../lib/prisma.js"
 
 const deleteThreadedMessages = async (ts, channel, user) => {
-  let result = await app.conversations.replies({ channel, ts });
-  await Promise.all(
-    result.messages.map(async (msg) => {
-      if (msg.ts != msg.thread_ts) {
-        return await app.client.chat.delete({ token: process.env.SLACK_USER_TOKEN, channel, ts: msg.ts });
-      } else {
-        return null;
-      } // top-level comment
-    })
-  );
-  const userRecord = await getUserRecord(user);
-  const shouldUpdate = await shouldUpdateStreak(user, false);
-  if (shouldUpdate) {
-    const updatedStreakCount = userRecord.streakCount - 1;
-    if (updatedStreakCount >= 0) {
-      await prisma.accounts.update({
-        where: { slackID: userRecord.slackID },
-        data: { streakCount: updatedStreakCount },
-      });
-      displayStreaks(user, updatedStreakCount);
+  try {
+    let result = await app.conversations.replies({ channel, ts });
+    await Promise.all(
+      result.messages.map(async (msg) => {
+        if (msg.ts != msg.thread_ts) {
+          let deleteM = await app.client.chat.delete({ token: process.env.SLACK_USER_TOKEN, channel, ts: msg.ts });
+          console.log(deleteM)
+          return deleteM
+        } else {
+          return null;
+        } // top-level comment
+      })
+    );
+    const userRecord = await getUserRecord(user);
+    const shouldUpdate = await shouldUpdateStreak(user, false);
+    if (shouldUpdate) {
+      const updatedStreakCount = userRecord.streakCount - 1;
+      if (updatedStreakCount >= 0) {
+        await prisma.accounts.update({
+          where: { slackID: userRecord.slackID },
+          data: { streakCount: updatedStreakCount },
+        });
+        displayStreaks(user, updatedStreakCount);
+      }
     }
+    postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user); 
   }
-  postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user);
+  catch(e) {
+    console.log(e)
+  }
 };
 
 export default async ({ event }) => {
