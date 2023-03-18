@@ -30,10 +30,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
         });
         displayStreaks(user, updatedStreakCount);
       }
-    }
-    console.log(user)
-    console.log(userRecord)
-    postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user); 
+    };
   }
   catch(e) {
     console.log(e)
