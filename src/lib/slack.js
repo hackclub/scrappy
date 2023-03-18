@@ -38,11 +38,18 @@ export const getMessage = async (ts, channel) => {
   }
 };
 
-export const postEphemeral = (channel, text, user, threadTs) =>
-  app.client.chat.postEphemeral({
-    attachments: [],
-    channel: channel,
-    text: text,
-    user: user,
-    thread_ts: threadTs,
-  });
+export const postEphemeral = async (channel, text, user, threadTs) => {
+  try {
+    await app.client.chat.postEphemeral({
+      attachments: [],
+      channel: channel,
+      text: text,
+      user: user,
+      thread_ts: threadTs
+    });
+  }
+  catch(e) {
+    console.log(e)
+  }
+}
+  
