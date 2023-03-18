@@ -27,5 +27,6 @@ export const mux = {
       }
     }
     res.writeHead(200);
+    res.end();
   },
 };
