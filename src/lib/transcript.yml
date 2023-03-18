@@ -1,4 +1,9 @@
 ping: pong
+error: |
+  ERROR! ERROR! :skull:
+  ```
+  <@${this.e}>
+  ```
 messages:
   help: |
     Hello!!!!!!!!!!!!!! I'm a bot that helps you build your <https://scrapbook.hackclub.com/|Scrapbook>. Here are all the commands you can run:

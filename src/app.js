@@ -29,8 +29,21 @@ export const app = new App({
 
 export const execute = (actionToExecute) => {
   return async (slackObject, ...props) => {
-    await slackObject.ack();
-    await actionToExecute(slackObject, ...props);
+    if(slackObject.ack){
+      await slackObject.ack();
+    }
+    try {
+      await actionToExecute(slackObject, ...props);
+    } catch(e) {
+      console.log(e)
+      app.client.chat.postMessage({
+        channel: "C04ULNY90BC",
+        text: t("error", { e }),
+        parse: "mrkdwn",
+        unfurl_links: false,
+        unfurl_media: false,
+      });
+    }
   };
 };
 
@@ -50,25 +63,25 @@ app.command("/scrappy-togglestreaks", execute(toggleStreaks));
 
 app.command("/scrappy-webring", execute(webring));
 
-app.event("reaction_added", reactionAdded);
+app.event("reaction_added", execute(reactionAdded));
 
-app.event("reaction_removed", reactionRemoved);
+app.event("reaction_removed", execute(reactionRemoved));
 
-app.event("member_joined_channel", joined);
+app.event("member_joined_channel", execute(joined));
 
-app.event("user_change", userChanged);
+app.event("user_change", execute(userChanged));
  
-app.message(subtype("file_share"), create);
+app.message(subtype("file_share"), execute(create));
 
-app.message(noFileCheck, noFile);
+app.message(noFileCheck, execute(noFile));
 
-app.event(subtype("message_deleted"), deleted);
+app.event(subtype("message_deleted"), execute(deleted));
 
-app.event(subtype("message_changed"), updated);
+app.event(subtype("message_changed"), execute(updated));
 
-app.event("forget scrapbook", forget);
+app.event("forget scrapbook", execute(forget));
 
-app.message("<@U015D6A36AG>", mention);
+app.message("<@U015D6A36AG>", execute(mention));
 
 (async () => {
   await app.start(process.env.PORT || 3000);
