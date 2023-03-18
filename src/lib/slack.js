@@ -30,7 +30,6 @@ export const getMessage = async (ts, channel) => {
     });
     return history.messages[0] || null;
   } catch (e) {
-    console.log(e)
     return null;
   }
 };

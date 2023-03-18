@@ -24,7 +24,6 @@ export default async ({ event }) => {
   if ((await updateExistsTS(ts)) && reaction === "scrappy-retry") {
     if (channelKeywords[channel])
       await react("add", channel, ts, channelKeywords[channel]);
-    console.log(message)
     await reactBasedOnKeywords(channel, message, ts);
     await react("remove", channel, ts, "beachball");
     await react("add", channel, ts, SEASON_EMOJI);
