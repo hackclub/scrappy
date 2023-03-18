@@ -8,8 +8,8 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
     "format": "prettier --write .",
     "checkFormat": "prettier --check ."
   },
