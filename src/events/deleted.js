@@ -11,7 +11,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
   await Promise.all(
     result.messages.map(async (msg) => {
       if (msg.ts != msg.thread_ts) {
-        return await app.client.chat.delete({ channel, ts: msg.ts });
+        return await app.client.chat.delete({ token: process.env.SLACK_USER_TOKEN, channel, ts: msg.ts });
       } else {
         return null;
       } // top-level comment
