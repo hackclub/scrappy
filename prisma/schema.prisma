@@ -53,7 +53,6 @@ model Updates {
   backupPlaybackID String?
   isLargeVideo     Boolean?
   channel          String?
-  clubscrapID      String?          @unique
   accountsID       String?
   Accounts         Accounts?        @relation(fields: [accountsID], references: [id])
   ClubUpdate       ClubUpdate?
