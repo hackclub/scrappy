@@ -1,6 +1,7 @@
 // This posts an introductory message to the #scrapbook channel when someone shows up
 
-import { postEphemeral, timeout } from "../lib/utils.js";
+import { timeout } from "../lib/utils.js";
+import { postEphemeral } from "../lib/slack.js";
 import { t } from "../lib/transcript.js";
 
 export default async ({ event }) => {

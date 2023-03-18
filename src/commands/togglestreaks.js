@@ -1,7 +1,7 @@
 import prisma from "../lib/prisma.js";
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
-import { displayStreaks } from "../lib/utils.js";
+import { displayStreaks } from "../lib/streaks.js";
 
 export default async ({ command, ack, respond }) => {
   // /scrappy-togglestreaks: toggle status

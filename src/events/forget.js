@@ -1,4 +1,5 @@
-import { postEphemeral, forgetUser, react } from "../lib/utils.js";
+import { postEphemeral, react } from "../lib/slack.js";
+import { forgetUser } from "../lib/users.js";
 import { t } from "../lib/transcript.js";
 
 export default async ({ event }) => {

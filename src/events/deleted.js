@@ -1,13 +1,9 @@
-import {
-  react,
-  deleteScrap,
-  postEphemeral,
-  setStatus,
-  displayStreaks,
-  shouldUpdateStreak,
-  updateExistsTS,
-} from "../lib/utils.js";
+import { displayStreaks } from "../lib/streaks.js";
+import { postEphemeral, react } from "../lib/slack.js";
 import { getUserRecord } from "../lib/users.js";
+import { deleteUpdate, updateExistsTS } from "../lib/updates.js";
+import { setStatus } from "../lib/profiles.js";
+import { shouldUpdateStreak } from "../lib/streaks.js";
 import fetch from "node-fetch";
 
 const deleteThreadedMessages = async (ts, channel, user) => {
@@ -47,7 +43,7 @@ export default async ({ event, ack }) => {
     ]);
     await Promise.all([
       react("add", channel, ts, "beachball"),
-      deleteScrap(ts),
+      deleteUpdate(ts),
       deleteThreadedMessages(ts, channel, previous_message.user),
     ]);
   }
