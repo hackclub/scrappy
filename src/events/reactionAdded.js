@@ -1,19 +1,10 @@
-import {
-  unverifiedRequest,
-  getEmojiRecord,
-  getReactionRecord,
-  updateExists,
-  emojiExists,
-  react,
-  getMessage,
-  updateExistsTS,
-  getPublicFileUrl,
-  incrementStreakCount,
-  formatText,
-  createUpdate,
-  postEphemeral,
-  reactBasedOnKeywords,
-} from "../lib/utils.js";
+import { formatText } from "../lib/utils.js";
+import { createUpdate, updateExists, updateExistsTS } from "../lib/updates.js";
+import { getEmojiRecord, emojiExists } from "../lib/emojis.js"
+import { getReactionRecord, reactBasedOnKeywords } from '../lib/reactions.js'
+import { react, getMessage, postEphemeral } from "../lib/slack.js"
+import { getPublicFileUrl } from "../lib/files.js"
+import { incrementStreakCount } from "../lib/streaks.js"
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
 import { SEASON_EMOJI } from "../lib/seasons.js";

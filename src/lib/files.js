@@ -1,4 +1,4 @@
-import S3 from "../lib/s3";
+import S3 from "./s3.js";
 
 const { Video } = new Mux(
   process.env.MUX_TOKEN_ID,
