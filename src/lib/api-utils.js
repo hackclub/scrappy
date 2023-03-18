@@ -612,8 +612,7 @@ export const createPost = async (files = [], channel, ts, user, text) => {
     isLargeVideo: attachments.some(
       (attachment) => attachment.url === 'https://i.imgur.com/UkXMexG.mp4'
     ),
-    channel: channel,
-    clubscrapID: clubscrapRecord?.id
+    channel: channel
   }})
 
   console.log('gamelab message')
