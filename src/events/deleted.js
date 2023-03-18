@@ -42,7 +42,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 export default async ({ event }) => {
   const { channel, message, previous_message, thread_ts } = event;
   console.log(event)
-  const ts = thread_ts || message.thread_ts;
+  const ts = deleted_ts || previous_message.thread_ts;
   const hasScrap = await updateExistsTS(ts);
   console.log("here!!")
   if (ts && hasScrap) {
