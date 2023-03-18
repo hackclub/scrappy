@@ -44,6 +44,7 @@ export default async ({ event }) => {
   const ts = thread_ts || message.thread_ts;
   const hasScrap = await updateExistsTS(ts);
   if (ts && hasScrap) {
+    console.log("here!!")
     await Promise.all([
       await react("remove", channel, ts, "beachball"),
       await react("add", channel, ts, "boom"),
