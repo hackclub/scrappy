@@ -231,6 +231,7 @@ export const getUserRecord = async (userId) => {
         username: checkIfExists == null ? username : username + '-' + userId ,
         streakCount: 0,
         website: website,
+        email: user.profile.fields.email,
         github: github,
         newMember: true,
         avatar: avatar,
