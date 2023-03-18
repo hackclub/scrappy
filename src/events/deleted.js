@@ -43,6 +43,7 @@ export default async ({ event }) => {
   const { channel, message, previous_message, thread_ts } = event;
   const ts = thread_ts || message.thread_ts;
   const hasScrap = await updateExistsTS(ts);
+  console.log("here!!")
   if (ts && hasScrap) {
     console.log("here!!")
     await Promise.all([
