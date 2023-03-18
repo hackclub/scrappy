@@ -8,22 +8,24 @@ export const mux = {
   path: "/api/mux",
   method: ["POST"],
   handler: async (req, res) => {
-    if (req.body.type === "video.asset.ready") {
-      const assetId = req.body.object.id;
-      const videoUpdate = (
-        await prisma.updates.findMany({
-          where: {
-            muxAssetIDs: {
-              has: assetId,
+    if(req.body.type) {
+      if (req.body.type === "video.asset.ready") {
+        const assetId = req.body.object.id;
+        const videoUpdate = (
+          await prisma.updates.findMany({
+            where: {
+              muxAssetIDs: {
+                has: assetId,
+              },
             },
-          },
-        })
-      )[0];
-      const largeVideo = videoUpdate.isLargeVideo;
-      if (largeVideo) {
-        const ts = videoUpdate.messageTimestamp;
-        const user = videoUpdate.accountsSlackID;
-        reply(process.env.CHANNEL, ts, t("messages.assetReady", { user }));
+          })
+        )[0];
+        const largeVideo = videoUpdate.isLargeVideo;
+        if (largeVideo) {
+          const ts = videoUpdate.messageTimestamp;
+          const user = videoUpdate.accountsSlackID;
+          reply(process.env.CHANNEL, ts, t("messages.assetReady", { user }));
+        }
       }
     }
     res.status(200).end();
