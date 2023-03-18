@@ -41,21 +41,26 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 };
 
 export default async ({ event }) => {
-  const { channel, message, previous_message, deleted_ts } = event;
-  console.log(event)
-  const ts = deleted_ts || previous_message.thread_ts;
-  const hasScrap = await updateExistsTS(ts);
-  console.log("here!!")
-  if (ts && hasScrap) {
+  try {
+    const { channel, message, previous_message, deleted_ts } = event;
+    console.log(event)
+    const ts = deleted_ts || previous_message.thread_ts;
+    const hasScrap = await updateExistsTS(ts);
     console.log("here!!")
-    await Promise.all([
-      await react("remove", channel, ts, "beachball"),
-      await react("add", channel, ts, "boom"),
-    ]);
-    await Promise.all([
-      react("add", channel, ts, "beachball"),
-      deleteUpdate(ts),
-      deleteThreadedMessages(ts, channel, previous_message.user),
-    ]);
+    if (ts && hasScrap) {
+      console.log("here!!")
+      await Promise.all([
+        await react("remove", channel, ts, "beachball"),
+        await react("add", channel, ts, "boom"),
+      ]);
+      await Promise.all([
+        react("add", channel, ts, "beachball"),
+        deleteUpdate(ts),
+        deleteThreadedMessages(ts, channel, previous_message.user),
+      ]);
+    }
+  } 
+  catch (e){
+    console.log(e)
   }
 };

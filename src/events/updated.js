@@ -6,26 +6,31 @@ import { getUserRecord } from "../lib/users.js";
 import prisma from "../lib/prisma.js";
 
 export default async ({ event }) => {
-  const updateRecord = (
-    await prisma.updates.findMany({
-      where: {
-        messageTimestamp: parseFloat(event.previous_message.ts),
-      },
-    })
-  )[0];
-  if (updateRecord) {
-    const newMessage = await formatText(event.message.text);
-    await prisma.updates.update({
-      where: { id: updateRecord.id },
-      data: { text: newMessage },
-    });
-    console.log(event.channel)
-    console.log(event.message.user)
-    await postEphemeral(
-      event.channel,
-      `Your post has been edited! You should see it update on the website in a few seconds.`,
-      event.message.user
-    );
-    await getUserRecord(event.message.user);
+  try {
+    const updateRecord = (
+      await prisma.updates.findMany({
+        where: {
+          messageTimestamp: parseFloat(event.previous_message.ts),
+        },
+      })
+    )[0];
+    if (updateRecord) {
+      const newMessage = await formatText(event.message.text);
+      await prisma.updates.update({
+        where: { id: updateRecord.id },
+        data: { text: newMessage },
+      });
+      console.log(event.channel)
+      console.log(event.message.user)
+      await postEphemeral(
+        event.channel,
+        `Your post has been edited! You should see it update on the website in a few seconds.`,
+        event.message.user
+      );
+      await getUserRecord(event.message.user);
+    }
+  }
+  catch(e){
+    console.log(e)
   }
 };
