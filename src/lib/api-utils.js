@@ -200,7 +200,7 @@ export const getUserRecord = async (userId) => {
 
   if (record === null) {
     let profile = await fetch(
-      `https://slack.com/api/users.info?user=${userId}`,{
+      `https://slack.com/api/users.info?user=${userId}&pretty=1`,{
         headers: {
           Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
         }
@@ -231,7 +231,7 @@ export const getUserRecord = async (userId) => {
         username: checkIfExists == null ? username : username + '-' + userId ,
         streakCount: 0,
         website: website,
-        email: user.profile.fields.email,
+        email: user.profile.email,
         github: github,
         newMember: true,
         avatar: avatar,
