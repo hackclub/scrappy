@@ -5,7 +5,7 @@ import prisma from "../lib/prisma.js";
 // Only runs when a user uploads a large video, to notify them when Mux processes the video
 
 export const mux = {
-  path: "/mux",
+  path: "/api/mux",
   method: ["GET"],
   handler: async (req, res) => {
     if (req.body.type === "video.asset.ready") {
