@@ -1,5 +1,6 @@
 import bolt from '@slack/bolt';
-const { App, subtype } = bolt;
+const { App, subtype, ExpressReceiver } = bolt
+import bodyParser from 'body-parser'
 import fetch from 'node-fetch'
 import { t } from "./lib/transcript.js";
 import { mux } from "./routes/mux.js";
@@ -21,10 +22,15 @@ import noFile, { noFileCheck } from "./events/noFile.js";
 import reactionAdded from "./events/reactionAdded.js";
 import reactionRemoved from "./events/reactionAdded.js";
 
+const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET })
+receiver.router.use(bodyParser.urlencoded({ extended: true }))
+receiver.router.use(bodyParser.json())
+
 export const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   customRoutes: [mux],
+  receiver
 });
 
 export const execute = (actionToExecute) => {
@@ -82,6 +88,8 @@ app.event(subtype("message_changed"), execute(updated));
 app.event("forget scrapbook", execute(forget));
 
 app.message("<@U015D6A36AG>", execute(mention));
+
+receiver.router.post('/api/mux', mux)
 
 (async () => {
   await app.start(process.env.PORT || 3000);
