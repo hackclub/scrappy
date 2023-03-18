@@ -601,15 +601,6 @@ export const createPost = async (files = [], channel, ts, user, text) => {
   const messageText = await formatText(text)
   console.log(convertedDate)
 
-  const clubscrapRecord = await prisma.clubscraps.findUnique({
-    where: {
-      timestamp: parseFloat(ts)
-    },
-    select: {
-      id: true
-    }
-  })
-
   await prisma.updates.create({data:{
     accountsSlackID: userRecord.slackID,
     postTime: convertedDate,
