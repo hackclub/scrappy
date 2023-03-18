@@ -14,7 +14,7 @@ export const mux = {
         await prisma.updates.findMany({
           where: {
             muxAssetIDs: {
-              contains: assetId,
+              has: assetId,
             },
           },
         })
