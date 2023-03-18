@@ -2,17 +2,13 @@ import { app } from "../app.js";
 
 // ex. react('add', 'C248d81234', '12384391.12231', 'beachball')
 export const react = async (addOrRemove, channel, ts, reaction) => {
-  console.log(addOrRemove)
-  console.log({
+  try {
+    await app.client.reactions[addOrRemove]({
       channel: channel,
       name: reaction,
       timestamp: ts,
-    })
-  await app.client.reactions[addOrRemove]({
-    channel: channel,
-    name: reaction,
-    timestamp: ts,
-  });
+    });
+  } catch {}
 }
   
 
