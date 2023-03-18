@@ -14,6 +14,7 @@ export const reactBasedOnKeywords = (channel, message, ts) => {
   Object.keys(emojiKeywords).forEach(async (keyword) => {
     if (
       message
+        .text
         .toLowerCase()
         .search(new RegExp("\\b" + keyword + "\\b", "gi")) !== -1
     ) {
