@@ -5,6 +5,7 @@ import prisma from "./prisma.js";
 
 export const setStatus = async (user, statusText, statusEmoji) => {
   const setProfile = app.client.users.profile.set({
+    token: process.env.SLACK_USER_TOKEN,
     user,
     profile: {
       status_text: statusText,
