@@ -19,7 +19,7 @@ export const mux = {
           },
         })
       )[0];
-      const largeVideo = videoUpdate.isLargeVideo;
+      const largeVideo = videoUpdate?.isLargeVideo || false;
       if (largeVideo) {
         const ts = videoUpdate.messageTimestamp;
         const user = videoUpdate.accountsSlackID;
