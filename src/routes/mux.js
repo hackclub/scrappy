@@ -8,6 +8,7 @@ export const mux = {
   path: "/api/mux",
   method: ["POST"],
   handler: async (req, res) => {
+    console.log(req)
     if (req.body.type === "video.asset.ready") {
       const assetId = req.body.object.id;
       const videoUpdate = (
