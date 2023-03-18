@@ -112,7 +112,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
       );
     }
     resolve();
-  }).catch((err) => reply(channel, ts, t("messages.errors.promise", { err })));
+  });
 
 export const getReplyMessage = async (user, username, day) => {
   const toggledOff = await streaksToggledOff(user);
