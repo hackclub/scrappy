@@ -88,7 +88,12 @@ app.event("forget scrapbook", execute(forget));
 
 app.message("<@U015D6A36AG>", execute(mention));
 
-receiver.router.post('/api/mux', mux.handler)
+try{
+  receiver.router.post('/api/mux', mux.handler)
+}catch(e){
+  console.log(e)
+}
+
 
 (async () => {
   await app.start(process.env.PORT || 3000);
