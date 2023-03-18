@@ -27,10 +27,10 @@ export const app = new App({
   customRoutes: [mux],
 });
 
-export const execute = async (actionToExecute) => {
+export const execute = (actionToExecute) => {
   return async (slackObject, ...props) => {
     await slackObject.ack();
-    await functionAdd(slackObject, ...props);
+    await actionToExecute(slackObject, ...props);
   };
 };
 
