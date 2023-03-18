@@ -27,21 +27,28 @@ export const app = new App({
   customRoutes: [mux],
 });
 
-app.command("/scrappy", help);
+export const execute = async (actionToExecute) => {
+  return async (slackObject, ...props) => {
+    await slackObject.ack();
+    await functionAdd(slackObject, ...props);
+  };
+};
 
-app.command("/scrappy-help", help);
+app.command("/scrappy", execute(help));
 
-app.command("/scrappy-setaudio", setAudio);
+app.command("/scrappy-help", execute(help));
 
-app.command("/scrappy-setcss", setCSS);
+app.command("/scrappy-setaudio", execute(setAudio));
 
-app.command("/scrappy-setdomain", setDomain);
+app.command("/scrappy-setcss", execute(setCSS));
 
-app.command("/scrappy-setusername", setUsername);
+app.command("/scrappy-setdomain", execute(setDomain));
 
-app.command("/scrappy-togglestreaks", toggleStreaks);
+app.command("/scrappy-setusername", execute(setUsername));
 
-app.command("/scrappy-webring", webring);
+app.command("/scrappy-togglestreaks", execute(toggleStreaks));
+
+app.command("/scrappy-webring", execute(webring));
 
 app.event("reaction_added", reactionAdded);
 
