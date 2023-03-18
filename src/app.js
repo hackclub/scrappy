@@ -9,16 +9,16 @@ import setDomain from "./commands/setdomain.js";
 import setUsername from "./commands/setusername.js";
 import toggleStreaks from "./commands/togglestreaks.js";
 import webring from "./commands/webring.js";
-import joined from "./events/joined";
-import userChanged from "./events/joined";
-import create from "./events/create";
-import deleted from "./events/deleted";
-import mention from "./events/mention";
-import updated from "./events/updated";
-import forget from "./events/forget";
-import noFile, { noFileCheck } from "./events/noFile";
-import reactionAdded from "./events/reactionAdded";
-import reactionRemoved from "./events/reactionAdded";
+import joined from "./events/joined.js";
+import userChanged from "./events/joined.js";
+import create from "./events/create.js";
+import deleted from "./events/deleted.js";
+import mention from "./events/mention.js";
+import updated from "./events/updated.js";
+import forget from "./events/forget.js";
+import noFile, { noFileCheck } from "./events/noFile.js";
+import reactionAdded from "./events/reactionAdded.js";
+import reactionRemoved from "./events/reactionAdded.js";
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
