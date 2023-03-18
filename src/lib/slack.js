@@ -1,12 +1,20 @@
 import { app } from "../app.js";
 
 // ex. react('add', 'C248d81234', '12384391.12231', 'beachball')
-export const react = async (addOrRemove, channel, ts, reaction) =>
+export const react = async (addOrRemove, channel, ts, reaction) => {
+  console.log(addOrRemove)
+  console.log({
+      channel: channel,
+      name: reaction,
+      timestamp: ts,
+    })
   await app.client.reactions[addOrRemove]({
     channel: channel,
     name: reaction,
     timestamp: ts,
   });
+}
+  
 
 // replies to a message in a thread
 // ex. reply('C34234d934', '31482975923.12331', 'this is a threaded reply!')
