@@ -19,10 +19,7 @@ export const reactBasedOnKeywords = (channel, message, ts) => {
         ?.toLowerCase()
         .search(new RegExp("\\b" + keyword + "\\b", "gi")) !== -1
     ) {
-      try{
-        console.log(["add", channel, ts, emojiKeywords[keyword]])
-        await react("add", channel, ts, emojiKeywords[keyword]);
-      } catch {}
+      await react("add", channel, ts, emojiKeywords[keyword]);
     }
   });
 };
