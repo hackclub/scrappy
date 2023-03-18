@@ -13,7 +13,6 @@ const deleteThreadedMessages = async (ts, channel, user) => {
       result.messages.map(async (msg) => {
         if (msg.ts != msg.thread_ts) {
           let deleteM = await app.client.chat.delete({ token: process.env.SLACK_USER_TOKEN, channel, ts: msg.ts });
-          console.log(deleteM)
           return deleteM
         } else {
           return null;
@@ -32,6 +31,8 @@ const deleteThreadedMessages = async (ts, channel, user) => {
         displayStreaks(user, updatedStreakCount);
       }
     }
+    console.log(user)
+    console.log(userRecord)
     postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user); 
   }
   catch(e) {
