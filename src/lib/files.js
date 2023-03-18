@@ -6,6 +6,7 @@ import { t } from './transcript.js'
 import { timeout } from './utils.js'
 import { v4 as uuidv4 } from 'uuid'
 import fetch from 'node-fetch'
+import FormData from 'form-data'
 
 const { Video } = new Mux(
   process.env.MUX_TOKEN_ID,
