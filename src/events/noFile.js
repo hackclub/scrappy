@@ -5,7 +5,7 @@ import { app } from "../app.js"
 export default async ({ event }) => {
   const { channel, ts, user, text } = event;
   await Promise.all([
-    app.chat.delete({ channel, ts }),
+    app.client.chat.delete({ channel, ts }),
     postEphemeral(channel, t("messages.delete", { text }), user),
   ]);
 };
