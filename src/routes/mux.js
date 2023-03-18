@@ -9,6 +9,7 @@ export const mux = {
   method: ["GET"],
   handler: async (req, res) => {
     if (req.body.type === "video.asset.ready") {
+      console.log("MADE IT HERE!")
       const assetId = req.body.object.id;
       const videoUpdate = (
         await prisma.updates.findMany({
@@ -23,6 +24,7 @@ export const mux = {
       if (largeVideo) {
         const ts = videoUpdate.messageTimestamp;
         const user = videoUpdate.accountsSlackID;
+        console.log("MADE IT HERE!")
         reply(process.env.CHANNEL, ts, t("messages.assetReady", { user }));
       }
     }
