@@ -10,8 +10,7 @@ const airtable = new AirtablePlus({
   tableName: 'Emoji Reactions'
 })
 
-;(async () => {
-  
+(async () => {
   console.log('running!')
   const deleteReactions = await prisma.emojiReactions.deleteMany({
     where: {

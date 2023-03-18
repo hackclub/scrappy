@@ -10,5 +10,5 @@
         if (await isFullMember(user)) {
             prisma.accounts.update({where: { slackID: user.slackID }, data: { fullSlackMember: true }})
         }
-    });
-})();
+    })
+})()

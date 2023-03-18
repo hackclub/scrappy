@@ -10,7 +10,7 @@ const airtable = new AirtablePlus({
   tableName: 'Emoji Type'
 })
 
-;(async () => {
+(async () => {
   console.log('running!')
   const read = await airtable.read()
   console.log('read!')
