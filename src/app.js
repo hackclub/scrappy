@@ -80,11 +80,11 @@ app.message(subtype("file_share"), execute(create));
 
 app.message(noFileCheck, execute(noFile));
 
-app.event(subtype("message_deleted"), execute(deleted));
+app.message(subtype("message_deleted"), execute(deleted));
 
-app.event(subtype("message_changed"), execute(updated));
+app.message(subtype("message_changed"), execute(updated));
 
-app.event("forget scrapbook", execute(forget));
+app.message("forget scrapbook", execute(forget));
 
 app.message("<@U015D6A36AG>", execute(mention));
 
