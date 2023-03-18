@@ -34,7 +34,7 @@ export default async (req, res) => {
 
   // While we're here, check if any of the user's profile fields have been changed & update them
 
-  const info = await fetch(`https://slack.com/api/users.info?user=${user.id}`, {
+  const info = await fetch(`https://slack.com/api/users.info?user=${user.id}&pretty=1`, {
     headers: {
       Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
     }
@@ -60,6 +60,6 @@ export default async (req, res) => {
   }
   await prisma.accounts.update({
     where: { slackID: userRecord.slackID },
-    data: { timezoneOffset: tzOffset, timezone: tz, avatar: avatar, email: user.profile.fields.email }
+    data: { timezoneOffset: tzOffset, timezone: tz, avatar: avatar, email: user.profile.email }
   })
 }
