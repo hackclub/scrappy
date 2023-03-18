@@ -19,6 +19,8 @@ export default async ({ event }) => {
       where: { id: updateRecord.id },
       data: { text: newMessage },
     });
+    console.log(event.channel)
+    console.log(event.message.user)
     await postEphemeral(
       event.channel,
       `Your post has been edited! You should see it update on the website in a few seconds.`,
