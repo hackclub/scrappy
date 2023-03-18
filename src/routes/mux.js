@@ -27,7 +27,7 @@ export const mux = {
           reply(process.env.CHANNEL, ts, t("messages.assetReady", { user }));
         }
       }
+      res.status(200).end();
     }
-    res.status(200).end();
   },
 };
