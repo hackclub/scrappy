@@ -1,5 +1,5 @@
 const { App, subtype } = require("@slack/bolt");
-import { execute } from "./lib/api-utils.js";
+import { execute } from "./lib/utils.js";
 import { t } from "./lib/transcript.js";
 import { mux } from "./routes/mux.js";
 import help from "./commands/help.js";
