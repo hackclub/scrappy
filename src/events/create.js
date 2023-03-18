@@ -5,7 +5,7 @@ This is triggered when a new post shows up in the #scrapbook channel
 - posts with attachments should be added to the scrapbook & replied to with a threaded message
 */
 
-import { createUpdate } from "../lib/api-utils.js";
+import { createUpdate } from "../lib/utils.js";
 
 export default async ({ event, ack }) => {
   if (event.thread_ts || event.channel != process.env.CHANNEL) return;

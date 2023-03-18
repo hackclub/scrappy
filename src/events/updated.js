@@ -1,6 +1,6 @@
 // This function is called when a poster updates their previous post
 
-import { postEphemeral, formatText } from "../lib/api-utils.js";
+import { postEphemeral, formatText } from "../lib/utils.js";
 import { getUserRecord } from "../lib/users.js";
 import prisma from "../lib/prisma.js";
 

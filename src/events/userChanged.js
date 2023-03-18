@@ -1,4 +1,4 @@
-import { setStatus } from "../lib/api-utils.js";
+import { setStatus } from "../lib/utils.js";
 import { getUserRecord } from "../lib/users.js";
 import fetch from "node-fetch";
 import prisma from "../lib/prisma.js";

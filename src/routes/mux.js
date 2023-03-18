@@ -1,4 +1,4 @@
-import { reply } from "../lib/api-utils.js";
+import { reply } from "../lib/slack.js";
 import { t } from "../lib/transcript.js";
 import prisma from "../lib/prisma.js";
 

@@ -6,7 +6,7 @@ import {
   displayStreaks,
   shouldUpdateStreak,
   updateExistsTS,
-} from "../lib/api-utils.js";
+} from "../lib/utils.js";
 import { getUserRecord } from "../lib/users.js";
 import fetch from "node-fetch";
 

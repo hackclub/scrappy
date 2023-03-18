@@ -2,7 +2,7 @@
 // Make sure to run `yarn run build` and have the PG_DATABASE_URL environment variable set before running this script.
 (async () => {
     require('dotenv').config()
-    const { isFullMember } = require('../build/lib/api-utils.js');
+    const { isFullMember } = require('../build/lib/utils.js');
     const { PrismaClient } = require('@prisma/client')
     let prisma = new PrismaClient()
     const users = await prisma.accounts.findMany({where: { fullSlackMember: null }})

@@ -1,4 +1,4 @@
-import { postEphemeral } from "../lib/api-utils.js";
+import { postEphemeral } from "../lib/utils.js";
 import { t } from "../lib/transcript.js";
 import fetch from "node-fetch";
 

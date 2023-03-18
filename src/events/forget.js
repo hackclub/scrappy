@@ -1,4 +1,4 @@
-import { postEphemeral, forgetUser, react } from "../lib/api-utils.js";
+import { postEphemeral, forgetUser, react } from "../lib/utils.js";
 import { t } from "../lib/transcript.js";
 
 export default async ({ event }) => {

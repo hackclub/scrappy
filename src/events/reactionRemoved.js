@@ -1,4 +1,4 @@
-import { getReactionRecord } from "../lib/api-utils.js";
+import { getReactionRecord } from "../lib/utils.js";
 import { getUserRecord } from "../lib/users.js";
 import Bottleneck from "bottleneck";
 import prisma from "../lib/prisma.js";

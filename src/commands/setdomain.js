@@ -1,4 +1,4 @@
-import prisma from "../../../lib/prisma.js";
+import prisma from "../lib/prisma.js";
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
 import fetch from "node-fetch";

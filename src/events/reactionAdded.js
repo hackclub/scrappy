@@ -13,7 +13,7 @@ import {
   createUpdate,
   postEphemeral,
   reactBasedOnKeywords,
-} from "../lib/api-utils.js";
+} from "../lib/utils.js";
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
 import { SEASON_EMOJI } from "../lib/seasons.js";
