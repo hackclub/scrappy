@@ -86,6 +86,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     if (typeof channelKeywords[channel] !== "undefined")
       await react("add", channel, ts, channelKeywords[channel]);
     await reactBasedOnKeywords(channel, message, ts);
+    console.log("I MADE IT HERE")
     await reply(
       channel,
       ts,
