@@ -7,21 +7,18 @@ import prisma from "../lib/prisma.js";
 
 export default async ({ event }) => {
   try {
-    const updateRecord = (
-      await prisma.updates.findMany({
-        where: {
-          messageTimestamp: parseFloat(event.previous_message.ts),
-        },
-      })
-    )[0];
+    const updateRecord = await prisma.updates.findFirst({
+      where: {
+        messageTimestamp: parseFloat(event.previous_message.ts),
+      },
+    });
+    console.log(updateRecord)
     if (updateRecord) {
       const newMessage = await formatText(event.message.text);
       await prisma.updates.update({
         where: { id: updateRecord.id },
         data: { text: newMessage },
       });
-      console.log(event.channel)
-      console.log(event.message.user)
       await postEphemeral(
         event.channel,
         `Your post has been edited! You should see it update on the website in a few seconds.`,
