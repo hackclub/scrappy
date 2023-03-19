@@ -14,6 +14,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     react("add", channel, ts, "beachball"),
     ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(file.url_private, channel, user);
+      console.log(publicUrl)
       if (!publicUrl) {
         await Promise.all([
           react("remove", channel, ts, "beachball"),
