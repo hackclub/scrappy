@@ -83,9 +83,9 @@ app.message(subtype("file_share"), execute(create));
 
 app.message(noFileCheck, execute(noFile));
 
-app.message(subtype("message_deleted"), execute(deleted, trye));
+app.message(subtype("message_deleted"), execute(deleted, true));
 
-app.message(subtype("message_changed"), execute(updated));
+app.message(subtype("message_changed"), execute(updated, true));
 
 app.message("forget scrapbook", execute(forget));
 
