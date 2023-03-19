@@ -4,16 +4,18 @@ import { getUserRecord } from "./users.js";
 import prisma from "./prisma.js";
 
 export const setStatus = async (user, statusText, statusEmoji) => {
-  const setProfile = app.client.users.profile.set({
-    token: process.env.SLACK_USER_TOKEN,
-    user,
-    profile: {
-      status_text: statusText,
-      status_emoji: statusEmoji,
-      status_expiration: 0,
-    },
-  });
-  if (!setProfile.ok) {
+  try{
+    const setProfile = app.client.users.profile.set({
+      token: process.env.SLACK_USER_TOKEN,
+      user,
+      profile: {
+        status_text: statusText,
+        status_emoji: statusEmoji,
+        status_expiration: 0,
+      },
+    });
+  }
+  catch(e){
     app.client.chat.postMessage({
       channel: "U0266FRGP",
       text: t("messages.errors.zach"),
