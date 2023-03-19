@@ -14,7 +14,6 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     react("add", channel, ts, "beachball"),
     ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(file.url_private, channel, user);
-      console.log(publicUrl)
       if (!publicUrl) {
         await Promise.all([
           react("remove", channel, ts, "beachball"),
@@ -22,7 +21,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
           reply(channel, ts, t("messages.errors.filetype")),
         ]);
         return "error";
-      } else if (publicUrl.toLowerCase().endsWith("heic")) {
+      } else if (publicUrl.url.toLowerCase().endsWith("heic")) {
         await Promise.all([
           react("remove", channel, ts, "beachball"),
           react("add", channel, ts, "x"),
