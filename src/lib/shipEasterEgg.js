@@ -1,4 +1,5 @@
-import { random } from "lodash";
+import lodash from 'lodash';
+const { random } = lodash;
 
 export default async ({ event }) => {
   const get = (arr) => random(0, arr.length - 1);
