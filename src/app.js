@@ -83,9 +83,16 @@ app.message(subtype("file_share"), execute(create));
 
 app.message(noFileCheck, execute(noFile));
 
-app.message(subtype("message_deleted"), execute(deleted, true));
+const messageChanged = (slackObject, ...props) => {
+  if(slackObject.event.message.subtype == "tombstone"){
+    execute(deleted)(slackObject, ...props)
+  }
+  else {
+    return execute(updated)(slackObject, ...props)
+  }
+}
 
-app.message(subtype("message_changed"), execute(updated, true));
+app.message(subtype("message_changed"), messageChanged);
 
 app.message("forget scrapbook", execute(forget));
 
