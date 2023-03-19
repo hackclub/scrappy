@@ -25,8 +25,7 @@ export default async ({ event }) => {
       );
       await getUserRecord(event.message.user);
     }
-  }
-  catch(e){
-    console.log(e)
+  } catch (e) {
+    console.log(e);
   }
 };

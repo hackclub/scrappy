@@ -9,8 +9,7 @@ export const react = async (addOrRemove, channel, ts, reaction) => {
       timestamp: ts,
     });
   } catch {}
-}
-  
+};
 
 // replies to a message in a thread
 // ex. reply('C34234d934', '31482975923.12331', 'this is a threaded reply!')
@@ -45,11 +44,9 @@ export const postEphemeral = async (channel, text, user, threadTs) => {
       channel: channel,
       text: text,
       user: user,
-      thread_ts: threadTs
+      thread_ts: threadTs,
     });
+  } catch (e) {
+    console.log(e);
   }
-  catch(e) {
-    console.log(e)
-  }
-}
-  
+};

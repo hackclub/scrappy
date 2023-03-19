@@ -1,13 +1,13 @@
-import prisma from './prisma.js'
-import { getUserRecord } from "./users.js"
-import { getDayFromISOString, getNow } from "./utils.js"
-import { getRandomWebringPost } from "./webring.js"
-import { postEphemeral, react, reply } from "./slack.js"
-import { t } from "./transcript.js"
+import prisma from "./prisma.js";
+import { getUserRecord } from "./users.js";
+import { getDayFromISOString, getNow } from "./utils.js";
+import { getRandomWebringPost } from "./webring.js";
+import { postEphemeral, react, reply } from "./slack.js";
+import { t } from "./transcript.js";
 import { SEASON_EMOJI } from "./seasons.js";
 import channelKeywords from "./channelKeywords.js";
-import { reactBasedOnKeywords } from "./reactions.js"
-import { setStatus } from "./profiles.js"
+import { reactBasedOnKeywords } from "./reactions.js";
+import { setStatus } from "./profiles.js";
 
 export const shouldUpdateStreak = async (userId, increment) => {
   const userRecord = await getUserRecord(userId);

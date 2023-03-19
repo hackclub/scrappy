@@ -7,6 +7,7 @@ Scrappy is the Slack bot that powers [scrapbook.hackclub.com](https://scrapbook.
 [Click here to view the Scrapbook repository](https://github.com/hackclub/scrapbook), which hosts the Scrapbook web code.
 
 ## Commands
+
 Scrappy provides some helpful commands in Slack. These commands are also documented in our Slack if you send the message `/scrappy` in any channel.
 
 - `/scrappy-togglestreaks`: toggles your streak count on/off in your status
@@ -18,9 +19,9 @@ Scrappy provides some helpful commands in Slack. These commands are also documen
 - `/scrappy-setaudio`: links an audio file to your Scrapbook. [See an example here](https://scrapbook.hackclub.com/matthew)!
 - `/scrappy-setwebhook`: create a Scrappy Webhook we will make a blank fetch request to this URL every time you post
 - `/scrappy-webring`: adds or removes someone to your webring
-- *Remove* a post: delete the Slack message and Scrappy will automatically update for you
-- *Edit* a post: edit the Slack message and it will automatically update for you
-- *Post* a message to the `#scrapbook` channel or add an existing Slack message to Scrapbook by reacting to it with the `:scrappy:` emoji (Note: If it isn't working, make sure Scrappy is added to the channel by mentioning `@scrappy`)
+- _Remove_ a post: delete the Slack message and Scrappy will automatically update for you
+- _Edit_ a post: edit the Slack message and it will automatically update for you
+- _Post_ a message to the `#scrapbook` channel or add an existing Slack message to Scrapbook by reacting to it with the `:scrappy:` emoji (Note: If it isn't working, make sure Scrappy is added to the channel by mentioning `@scrappy`)
 
 ## Contributing
 
@@ -29,6 +30,7 @@ Contributions are encouraged and welcome! There are two GitHub repositories that
 Development chatter happens in the [#scrapbook-dev](https://app.slack.com/client/T0266FRGM/C035D6S6TFW) channel in the [Hack Club Slack](https://hackclub.com/slack/). Development Scrappy posts happen in the [#scrappy-dev](https://app.slack.com/client/T0266FRGM/C01NQTDFUR5) channel.
 
 ## Running locally
+
 In order to run Scrappy locally, you'll need to [join the Hack Club Slack](https://hackclub.com/slack). From there, ask @sampoder to be added to the `scrappy (dev)` app on Slack.
 
 1. Clone this repository

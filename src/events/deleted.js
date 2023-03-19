@@ -3,8 +3,8 @@ import { postEphemeral, react } from "../lib/slack.js";
 import { getUserRecord } from "../lib/users.js";
 import { deleteUpdate, updateExistsTS } from "../lib/updates.js";
 import { shouldUpdateStreak } from "../lib/streaks.js";
-import { app } from "../app.js"
-import prisma from "../lib/prisma.js"
+import { app } from "../app.js";
+import prisma from "../lib/prisma.js";
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   try {
@@ -12,8 +12,12 @@ const deleteThreadedMessages = async (ts, channel, user) => {
     await Promise.all(
       result.messages.map(async (msg) => {
         if (msg.ts != msg.thread_ts) {
-          let deleteM = await app.client.chat.delete({ token: process.env.SLACK_USER_TOKEN, channel, ts: msg.ts });
-          return deleteM
+          let deleteM = await app.client.chat.delete({
+            token: process.env.SLACK_USER_TOKEN,
+            channel,
+            ts: msg.ts,
+          });
+          return deleteM;
         } else {
           return null;
         } // top-level comment
@@ -30,11 +34,14 @@ const deleteThreadedMessages = async (ts, channel, user) => {
         });
         displayStreaks(user, updatedStreakCount);
       }
-    };
-    await postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user); 
-  }
-  catch(e) {
-    console.log(e)
+    }
+    await postEphemeral(
+      channel,
+      `Your scrapbook update has been deleted :boom:`,
+      user
+    );
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -54,8 +61,7 @@ export default async ({ event }) => {
         deleteThreadedMessages(ts, channel, previous_message.user),
       ]);
     }
-  } 
-  catch (e){
-    console.log(e)
+  } catch (e) {
+    console.log(e);
   }
 };

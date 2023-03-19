@@ -1,9 +1,10 @@
 import { createUpdate, updateExists, updateExistsTS } from "../lib/updates.js";
-import { getEmojiRecord, emojiExists } from "../lib/emojis.js"
-import { getReactionRecord, reactBasedOnKeywords } from '../lib/reactions.js'
-import { react, getMessage, postEphemeral } from "../lib/slack.js"
+import { getEmojiRecord, emojiExists } from "../lib/emojis.js";
+import { getReactionRecord, reactBasedOnKeywords } from "../lib/reactions.js";
+import { react, getMessage, postEphemeral } from "../lib/slack.js";
 import { t } from "../lib/transcript.js";
 import { getUserRecord } from "../lib/users.js";
+import shipEasterEgg from "../lib/shipEasterEgg.js";
 import { SEASON_EMOJI } from "../lib/seasons.js";
 import prisma from "../lib/prisma.js";
 import Bottleneck from "bottleneck";
@@ -13,6 +14,9 @@ import channelKeywords from "../lib/channelKeywords.js";
 export default async ({ event }) => {
   const { item, user, reaction, item_user } = event;
   const { channel, ts } = item;
+  if (channel == "C0M8PUPU6" && ts == "1592496685.142800") {
+    return await shipEasterEgg();
+  }
   if (reaction !== SEASON_EMOJI && user === "U015D6A36AG") return;
   if (
     (await updateExistsTS(ts)) &&

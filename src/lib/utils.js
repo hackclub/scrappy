@@ -1,6 +1,6 @@
 import emoji from "node-emoji";
-import { getUserRecord } from "./users.js"
-import { app } from "../app.js"
+import { getUserRecord } from "./users.js";
+import { app } from "../app.js";
 
 const replaceEmoji = (str) => emoji.emojify(str.replace(/::(.*):/, ":"));
 

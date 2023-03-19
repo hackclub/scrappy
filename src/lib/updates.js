@@ -1,11 +1,11 @@
-import prisma from './prisma.js'
-import { react, reply, postEphemeral } from "./slack.js"
-import { getPublicFileUrl } from "./files.js"
-import { t } from "./transcript.js"
-import { getUserRecord } from "./users.js"
+import prisma from "./prisma.js";
+import { react, reply, postEphemeral } from "./slack.js";
+import { getPublicFileUrl } from "./files.js";
+import { t } from "./transcript.js";
+import { getUserRecord } from "./users.js";
 import { formatText } from "./utils.js";
-import { incrementStreakCount } from "./streaks.js"
-import { app } from '../app.js'
+import { incrementStreakCount } from "./streaks.js";
+import { app } from "../app.js";
 
 export const createUpdate = async (files = [], channel, ts, user, text) => {
   let attachments = [];
@@ -27,7 +27,11 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
           react("remove", channel, ts, "beachball"),
           react("add", channel, ts, "x"),
           postEphemeral(channel, t("messages.errors.heic"), user),
-          app.client.chat.delete({ token: process.env.SLACK_USER_TOKEN, channel, ts })
+          app.client.chat.delete({
+            token: process.env.SLACK_USER_TOKEN,
+            channel,
+            ts,
+          }),
         ]);
         return "error";
       } else if (publicUrl.url === "big boy") {

@@ -1,7 +1,7 @@
-import bolt from '@slack/bolt';
-const { App, subtype, ExpressReceiver } = bolt
-import bodyParser from 'body-parser'
-import fetch from 'node-fetch'
+import bolt from "@slack/bolt";
+const { App, subtype, ExpressReceiver } = bolt;
+import bodyParser from "body-parser";
+import fetch from "node-fetch";
 import { t } from "./lib/transcript.js";
 import { mux } from "./routes/mux.js";
 import help from "./commands/help.js";
@@ -22,28 +22,30 @@ import noFile, { noFileCheck } from "./events/noFile.js";
 import reactionAdded from "./events/reactionAdded.js";
 import reactionRemoved from "./events/reactionAdded.js";
 
-const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET })
-receiver.router.use(bodyParser.urlencoded({ extended: true }))
-receiver.router.use(bodyParser.json())
+const receiver = new ExpressReceiver({
+  signingSecret: process.env.SLACK_SIGNING_SECRET,
+});
+receiver.router.use(bodyParser.urlencoded({ extended: true }));
+receiver.router.use(bodyParser.json());
 
 export const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
-  receiver
+  receiver,
 });
 
 export const execute = (actionToExecute, print = false) => {
   return async (slackObject, ...props) => {
-    if(slackObject.ack){
+    if (slackObject.ack) {
       await slackObject.ack();
     }
     try {
-      if(print){
-        console.log(slackObject)
+      if (print) {
+        console.log(slackObject);
       }
       await actionToExecute(slackObject, ...props);
-    } catch(e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
       app.client.chat.postMessage({
         channel: "C04ULNY90BC",
         text: t("error", { e }),
@@ -78,19 +80,18 @@ app.event("reaction_removed", execute(reactionRemoved));
 app.event("member_joined_channel", execute(joined));
 
 app.event("user_change", execute(userChanged));
- 
+
 app.message(subtype("file_share"), execute(create));
 
 app.message(noFileCheck, execute(noFile));
 
 const messageChanged = (slackObject, ...props) => {
-  if(slackObject.event.message.subtype == "tombstone"){
-    execute(deleted)(slackObject, ...props)
+  if (slackObject.event.message.subtype == "tombstone") {
+    execute(deleted)(slackObject, ...props);
+  } else {
+    return execute(updated)(slackObject, ...props);
   }
-  else {
-    return execute(updated)(slackObject, ...props)
-  }
-}
+};
 
 app.message(subtype("message_changed"), messageChanged);
 
@@ -98,12 +99,11 @@ app.message("forget scrapbook", execute(forget));
 
 app.message("<@U015D6A36AG>", execute(mention));
 
-try{
-  receiver.router.post('/api/mux', mux.handler)
-}catch(e){
-  console.log(e)
+try {
+  receiver.router.post("/api/mux", mux.handler);
+} catch (e) {
+  console.log(e);
 }
-
 
 (async () => {
   await app.start(process.env.PORT || 3000);
@@ -118,5 +118,5 @@ try{
     unfurl_links: false,
     unfurl_media: false,
   });
-  console.log("⚡️ Scrappy is running !"); 
-})(); 
+  console.log("⚡️ Scrappy is running !");
+})();

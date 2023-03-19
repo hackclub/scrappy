@@ -1,6 +1,6 @@
-import prisma from './prisma.js'
-import { app } from '../app.js'
-import { sample } from "./utils.js"
+import prisma from "./prisma.js";
+import { app } from "../app.js";
+import { sample } from "./utils.js";
 
 export const getUserRecord = async (userId) => {
   const user = await app.client.users.profile.get({ user: userId });
