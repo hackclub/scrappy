@@ -31,6 +31,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
         displayStreaks(user, updatedStreakCount);
       }
     };
+    await postEphemeral(channel, `Your scrapbook update has been deleted :boom:`, user); 
   }
   catch(e) {
     console.log(e)
