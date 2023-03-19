@@ -21,7 +21,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
           reply(channel, ts, t("messages.errors.filetype")),
         ]);
         return "error";
-      } else if (publicUrl.url === "heic") {
+      } else if (publicUrl.toLowerCase().endsWith("heic")) {
         await Promise.all([
           react("remove", channel, ts, "beachball"),
           react("add", channel, ts, "x"),
