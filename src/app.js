@@ -32,12 +32,15 @@ export const app = new App({
   receiver
 });
 
-export const execute = (actionToExecute) => {
+export const execute = (actionToExecute, print = false) => {
   return async (slackObject, ...props) => {
     if(slackObject.ack){
       await slackObject.ack();
     }
     try {
+      if(print){
+        console.log(slackObject)
+      }
       await actionToExecute(slackObject, ...props);
     } catch(e) {
       console.log(e)
@@ -80,7 +83,7 @@ app.message(subtype("file_share"), execute(create));
 
 app.message(noFileCheck, execute(noFile));
 
-app.message(subtype("message_deleted"), execute(deleted));
+app.message(subtype("message_deleted"), execute(deleted, trye));
 
 app.message(subtype("message_changed"), execute(updated));
 
