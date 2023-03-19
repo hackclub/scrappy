@@ -12,7 +12,7 @@ export default async ({ event }) => {
         messageTimestamp: parseFloat(event.previous_message.ts),
       },
     });
-    if (updateRecord.id) {
+    if (updateRecord?.id) {
       const newMessage = await formatText(event.message.text);
       await prisma.updates.update({
         where: { id: updateRecord.id },
