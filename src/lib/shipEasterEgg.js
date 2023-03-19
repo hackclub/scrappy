@@ -3,6 +3,8 @@ const { random } = lodash;
 import { postEphemeral } from "./slack.js"
 
 export default async ({ event }) => {
+  const { item, user, reaction, item_user } = event;
+  const { channel, ts } = item;
   const get = (arr) => random(0, arr.length - 1);
   const randomize = () => [
     get(platforms),
