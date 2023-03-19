@@ -8,7 +8,7 @@ import prisma from "../lib/prisma.js"
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   try {
-    let result = await app.conversations.replies({ channel, ts });
+    let result = await app.client.conversations.replies({ channel, ts });
     await Promise.all(
       result.messages.map(async (msg) => {
         if (msg.ts != msg.thread_ts) {
@@ -40,12 +40,9 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 export default async ({ event }) => {
   try {
     const { channel, message, previous_message, deleted_ts } = event;
-    console.log(event)
     const ts = deleted_ts || previous_message.thread_ts;
     const hasScrap = await updateExistsTS(ts);
-    console.log("here!!")
     if (ts && hasScrap) {
-      console.log("here!!")
       await Promise.all([
         await react("remove", channel, ts, "beachball"),
         await react("add", channel, ts, "boom"),
