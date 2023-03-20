@@ -58,6 +58,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   const messageText = await formatText(text);
   await prisma.updates.create({
     data: {
+      accountsID: userRecord.id,
       accountsSlackID: userRecord.slackID,
       postTime: convertedDate,
       messageTimestamp: parseFloat(ts),
