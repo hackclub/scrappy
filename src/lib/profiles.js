@@ -20,6 +20,10 @@ export const setStatus = async (user, statusText, statusEmoji) => {
       channel: "U0266FRGP",
       text: t("messages.errors.zach"),
     });
+    app.client.chat.postMessage({
+      channel: "USNPNJXNX",
+      text: t("messages.errors.zach"),
+    });
   }
 };
 
