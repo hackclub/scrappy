@@ -14,7 +14,7 @@ import channelKeywords from "../lib/channelKeywords.js";
 export default async ({ event }) => {
   const { item, user, reaction, item_user } = event;
   const { channel, ts } = item;
-  if (channel == "C0M8PUPU6" && ts == "1592496685.142800" && reaction == "boom") {
+  if (channel == "C0M8PUPU6" && ts == "1679405777.423309" && reaction == "boom") {
     return await shipEasterEgg({ event });
   }
   if (reaction !== SEASON_EMOJI && user === "U015D6A36AG") return;
