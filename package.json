@@ -33,7 +33,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.3",
     "nodemon": "^2.0.21",
     "prettier": "2.8.5",
     "prisma": "4.11.0"
