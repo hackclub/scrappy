@@ -1,4 +1,4 @@
-import { setStatus } from "../lib/utils.js";
+import { setStatus } from "../lib/profiles.js";
 import { getUserRecord } from "../lib/users.js";
 import { app } from "../app.js";
 import prisma from "../lib/prisma.js";
