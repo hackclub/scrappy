@@ -21,17 +21,15 @@ export default async ({ event }) => {
     }
   }
   // While we're here, check if any of the user's profile fields have been changed & update them
-  const info = app.client.users.info({
+  const info = await app.client.users.info({
     user: user.id,
   });
-  console.log(`userChanged.js / MADE IT HERE:`)
-  console.log(info);
   if (!user.profile.fields) return;
   await prisma.accounts.update({
     where: { slackID: user.id },
     data: {
-      timezoneOffset: info.user.tz_offset,
-      timezone: info.user.tz.replace(`\\`, ""),
+      timezoneOffset: info.user?.tz_offset,
+      timezone: info.user?.tz.replace(`\\`, ""),
       avatar: user.profile.image_192,
       email: user.profile.fields.email,
       website: user.profile.fields["Xf5LNGS86L"]?.value || undefined,
