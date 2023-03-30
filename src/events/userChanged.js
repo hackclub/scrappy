@@ -6,7 +6,7 @@ import prisma from "../lib/prisma.js";
 export default async ({ event }) => {
   const { user } = event;
   const statusEmoji = user.profile.status_emoji;
-  if (statusEmoji.includes("som-")) {
+  if (statusEmoji?.includes("som-")) {
     const statusEmojiCount = statusEmoji.split("-")[1].split(":")[0];
     const { streakCount } = await getUserRecord(user.id);
     if (

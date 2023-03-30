@@ -34,15 +34,12 @@ export const app = new App({
   receiver,
 });
 
-export const execute = (actionToExecute, print = false) => {
+export const execute = (actionToExecute) => {
   return async (slackObject, ...props) => {
     if (slackObject.ack) {
       await slackObject.ack();
     }
     try {
-      if (print) {
-        console.log(slackObject);
-      }
       await actionToExecute(slackObject, ...props);
     } catch (e) {
       console.log(e);
@@ -66,6 +63,8 @@ app.command("/scrappy-setaudio", execute(setAudio));
 app.command("/scrappy-setcss", execute(setCSS));
 
 app.command("/scrappy-setdomain", execute(setDomain));
+
+app.command("/scrappy-displaystreaks", execute(toggleStreaks));
 
 app.command("/scrappy-setusername", execute(setUsername));
 
