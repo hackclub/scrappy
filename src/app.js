@@ -12,7 +12,7 @@ import setUsername from "./commands/setusername.js";
 import toggleStreaks from "./commands/togglestreaks.js";
 import webring from "./commands/webring.js";
 import joined from "./events/joined.js";
-import userChanged from "./events/joined.js";
+import userChanged from "./events/userChanged.js";
 import create from "./events/create.js";
 import deleted from "./events/deleted.js";
 import mention from "./events/mention.js";
