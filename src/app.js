@@ -106,7 +106,7 @@ try {
 }
 
 try {
-  receiver.router.post("/api/slack/streakResetter", streakResetter);
+  receiver.router.post("/api/streakResetter", streakResetter);
 } catch (e) {
   console.log(e);
 }
