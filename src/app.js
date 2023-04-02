@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import fetch from "node-fetch";
 import { t } from "./lib/transcript.js";
 import { mux } from "./routes/mux.js";
-import { streakResetter } from "./routes/streakResetter.js";
+import streakResetter from "./routes/streakResetter.js";
 import help from "./commands/help.js";
 import setAudio from "./commands/setaudio.js";
 import setCSS from "./commands/setcss.js";
@@ -106,7 +106,7 @@ try {
 }
 
 try {
-  receiver.router.post("/api/slack/streakResetter", streakResetter.handler);
+  receiver.router.post("/api/slack/streakResetter", streakResetter);
 } catch (e) {
   console.log(e);
 }
