@@ -106,7 +106,7 @@ try {
 }
 
 try {
-  receiver.router.post("/api/streakResetter", streakResetter);
+  receiver.router.get("/api/streakResetter", streakResetter);
 } catch (e) {
   console.log(e);
 }
