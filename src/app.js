@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import fetch from "node-fetch";
 import { t } from "./lib/transcript.js";
 import { mux } from "./routes/mux.js";
+import { streakResetter } from "./routes/streakResetter.js";
 import help from "./commands/help.js";
 import setAudio from "./commands/setaudio.js";
 import setCSS from "./commands/setcss.js";
@@ -100,6 +101,12 @@ app.message("<@U015D6A36AG>", execute(mention));
 
 try {
   receiver.router.post("/api/mux", mux.handler);
+} catch (e) {
+  console.log(e);
+}
+
+try {
+  receiver.router.post("/api/slack/streakResetter", streakResetter.handler);
 } catch (e) {
   console.log(e);
 }
