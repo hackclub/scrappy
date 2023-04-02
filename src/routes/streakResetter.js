@@ -1,8 +1,8 @@
 // This API route is pinged by a Zap every hour
 
-import { getNow, timeout } from '../../lib/utils.js'
-import { setStatus } from '../../lib/prodiles.js'
-import prisma from '../../lib/prisma.js'
+import { getNow, timeout } from '../lib/utils.js'
+import { setStatus } from '../lib/prodiles.js'
+import prisma from '../lib/prisma.js'
 import fetch from 'node-fetch'
 
 export default async (req, res) => {
