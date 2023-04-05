@@ -46,6 +46,10 @@ export default async ({ event }) => {
         user
       );
     } else if (message) {
+      if (!message.files || message.files.length == 0) {
+        postEphemeral(channel, t("messages.errors.anywhere.files"), user);
+        return;
+      }
       await createUpdate(message.files, channel, ts, user, message.text);
     }
     return;
