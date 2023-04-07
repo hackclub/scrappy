@@ -13,7 +13,7 @@ export default async ({ command, respond }) => {
     const user = await getUserRecord(command.user_id);
     if (user.customDomain != null) {
       await fetch(
-        `https://api.vercel.com/v1/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/alias?domain=${user.customDomain}&teamId=${TEAM_ID}`,
+        `https://api.vercel.com/v1/projects/QmWRnAGRMjviMn7f2EkW5QEieMv2TAGjUz8RS698KZm5q8/alias?domain=${user.customDomain}&teamId=${TEAM_ID}`,
         {
           method: "DELETE",
           headers: {
@@ -23,7 +23,7 @@ export default async ({ command, respond }) => {
       ).then((res) => res.json());
     }
     const vercelFetch = await fetch(
-      `https://api.vercel.com/v9/projects/QmbACrEv2xvaVA3J5GWKzfQ5tYSiHTVX2DqTYfcAxRzvHj/domains?teamId=${TEAM_ID}`,
+      `https://api.vercel.com/v9/projects/QmWRnAGRMjviMn7f2EkW5QEieMv2TAGjUz8RS698KZm5q8/domains?teamId=${TEAM_ID}`,
       {
         method: "POST",
         headers: {
