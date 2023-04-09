@@ -223,4 +223,9 @@ export default {
   wonderland: "winter-hardware-wonderland",
   whw: "winter-hardware-wonderland",
   ipfs: "ipfs",
+  "the orpheus show": "tos-icon",
+  "orpheus show": "tos-icon",
+  "the orpheus podcast": "tos-icon",
+  "orpheus podcast": "tos-icon",
+  podcast: "studio_microphone"
 };
