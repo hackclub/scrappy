@@ -14,13 +14,7 @@ export const reactBasedOnKeywords = (channel, message, ts) => {
   Object.keys(emojiKeywords).forEach(async (keyword) => {
     try {
        if (
-        (
-          message?.text &&
-          message?.text
-            ?.toLowerCase()
-            .search(new RegExp("\\b" + keyword + "\\b", "gi")) !== -1
-        ) || message?.toLowerCase()
-            .search(new RegExp("\\b" + keyword + "\\b", "gi")) !== -1
+        message?.toLowerCase().search(new RegExp("\\b" + keyword + "\\b", "gi")) !== -1
       ) {
         await react("add", channel, ts, emojiKeywords[keyword]);
       }
