@@ -26,6 +26,7 @@ export const reactBasedOnKeywords = (channel, message, ts) => {
       }
     }
     catch (e) {
+      console.log(message)
       console.log(e)
     }
   });
