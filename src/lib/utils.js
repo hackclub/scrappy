@@ -38,6 +38,7 @@ export const formatText = async (text) => {
   await Promise.all(
     users.map(async (u) => {
       const uID = u.substring(2, u.length - 1);
+      console.log(uID)
       const userRecord = await getUserRecord(uID);
       if (!userRecord) {
         app.client.users.profile
