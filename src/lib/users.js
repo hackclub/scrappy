@@ -3,7 +3,15 @@ import { app } from "../app.js";
 import { sample } from "./utils.js";
 
 export const getUserRecord = async (userId) => {
-  const user = await app.client.users.profile.get({ user: userId });
+  let user
+  try {
+    user = await app.client.users.profile.get({ user: userId });
+  }
+  catch (e) {
+    console.log(userId)
+    console.error(e)
+    return
+  }
   if (user.profile === undefined) return;
   let record = await prisma.accounts.findUnique({
     where: {
