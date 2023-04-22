@@ -43,6 +43,10 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     const updatedStreakCount = userRecord.streakCount + 1;
     const scrapbookLink =
       "https://scrapbook.hackclub.com/" + userRecord.username;
+    await react("remove", channel, ts, "beachball"); // remove beachball react
+    await react("add", channel, ts, SEASON_EMOJI);
+    if (typeof channelKeywords[channel] !== "undefined")
+      await react("add", channel, ts, channelKeywords[channel]);
     await reactBasedOnKeywords(channel, message, ts);
     if (shouldUpdate) {
       if (userRecord.newMember && updatedStreakCount > 1) {
@@ -82,10 +86,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
       userRecord.username,
       updatedStreakCount
     );
-    await react("remove", channel, ts, "beachball"); // remove beachball react
-    await react("add", channel, ts, SEASON_EMOJI);
-    if (typeof channelKeywords[channel] !== "undefined")
-      await react("add", channel, ts, channelKeywords[channel]);
+
     await reply(
       channel,
       ts,
