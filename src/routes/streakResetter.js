@@ -14,6 +14,7 @@ export default async (req, res) => {
       }
     }
   })
+  console.log(users)
   users.forEach(async (user) => {
     await timeout(500)
     const userId = user.slackID
