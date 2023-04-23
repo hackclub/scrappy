@@ -5,6 +5,7 @@ import prisma from "./prisma.js";
 
 export const setStatus = async (user, statusText, statusEmoji) => {
   try{
+    if(user == "U0C7B14Q3" || user == "U0266FRGP") return false
     const setProfile = app.client.users.profile.set({
       token: process.env.SLACK_USER_TOKEN,
       user,
