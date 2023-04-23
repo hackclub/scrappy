@@ -38,9 +38,9 @@ export default async (req, res) => {
       // this prevents trying to reset streaks based on a user without posts
       return
     }
-    const createdDate = new Date(createdTime).getDate()
-    const yesterday =  new Date(getNow(timezone)).setDate(createdDate.getDate() - 1).getDate()
-    if (createdDate == yesterday && user.streakCount != 0) {
+    const createdDate = new Date(createdTime)
+    const yesterday =  new Date(getNow(timezone)).setDate(createdDate.getDate() - 1).setHours(0).setMinutes(0)
+    if (createdDate >= yesterday && user.streakCount != 0) {
       console.log(
         `It's been more than a day since ${username} last posted. Resetting their streak...`
       )
