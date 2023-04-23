@@ -135,13 +135,15 @@ export default async (req, res) => {
       }
       createdDate = newCreatedDate
     }
-    if(streak > 0 && streak != user.streakCount){
+    if(streak > 0 && streak > user.streakCount){
+      console.log(user.slackID)
+      console.log(user.streakCount)
       await prisma.accounts.update({
         where: { slackID: user.slackID },
         data: { streakCount: streak }
       })
       if (user.displayStreak) {
-        await fetch('https://slack.com/api/chat.postMessage', {
+        /*await fetch('https://slack.com/api/chat.postMessage', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -151,7 +153,7 @@ export default async (req, res) => {
             channel: userId, //userId
             text: `<@${userId}> - I have something to confess. I've been a very naughty bot! Your streak has been wrongly calculated - it's now been fixed! HOORAY!!!! (patting myself on the back)`
           })
-        })
+        })*/
       }
     }
   })
