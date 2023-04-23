@@ -4,6 +4,7 @@ import { getNow, timeout } from '../lib/utils.js'
 import { setStatus } from '../lib/profiles.js'
 import prisma from '../lib/prisma.js'
 import fetch from 'node-fetch'
+import { app } from "../app.js";
 
 export default async (req, res) => {
   res.status(200).end()
