@@ -86,14 +86,14 @@ export default async (req, res) => {
   threeDaysBehind.setDate(twoDaysAhead.getDate() - 3)
   const usersToCalculate = await prisma.accounts.findMany({
     include: {
-      Updates: {
+      updates: {
         orderBy: {
           postTime: 'desc',
         },
       }
     },
     where: {
-      Updates: {
+      updates: {
         some: {
           postTime: {
             lte: twoDaysAhead,
@@ -110,7 +110,7 @@ export default async (req, res) => {
     const username = user.username
     let now = new Date(getNow(timezone))
     now.setHours(now.getHours() - 4)
-    const latestUpdate = user.Updates[0]
+    const latestUpdate = user.updates[0]
     const createdTime = latestUpdate?.postTime
     if (!createdTime) {
       // @msw: this fixes a bug where a user creates their first post then deletes it before streak resetter runs
@@ -128,10 +128,10 @@ export default async (req, res) => {
       streak++
       k++
       yesterday.setDate(yesterday.getDate() - 1)
-      let newCreatedDate = new Date(user.Updates[k]?.postTime)
+      let newCreatedDate = new Date(user.updates[k]?.postTime)
       while(createdDate.toDateString() == newCreatedDate.toDateString()){
         k++
-        newCreatedDate = new Date(user.Updates[k]?.postTime)
+        newCreatedDate = new Date(user.updates[k]?.postTime)
       }
       createdDate = newCreatedDate
     }
