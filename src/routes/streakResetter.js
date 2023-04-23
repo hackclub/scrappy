@@ -79,6 +79,83 @@ export default async (req, res) => {
       }
     }
   })
+  // Calculate streaks
+  let twoDaysAhead = new Date()
+  twoDaysAhead.setDate(twoDaysAhead.getDate() + 2)
+  let threeDaysBehind = new Date()
+  threeDaysBehind.setDate(twoDaysAhead.getDate() - 3)
+  const usersToCalculate = await prisma.accounts.findMany({
+    include: {
+      Updates: {
+        orderBy: {
+          postTime: 'desc',
+        },
+      }
+    },
+    where: {
+      Updates: {
+        some: {
+          postTime: {
+            lte: twoDaysAhead,
+            gte: threeDaysBehind
+          },
+        }
+      }
+    },
+  })
+  usersToCalculate.forEach(async (user) => {
+    await timeout(500)
+    const userId = user.slackID
+    const timezone = user.timezone
+    const username = user.username
+    let now = new Date(getNow(timezone))
+    now.setHours(now.getHours() - 4)
+    const latestUpdate = user.Updates[0]
+    const createdTime = latestUpdate?.postTime
+    if (!createdTime) {
+      // @msw: this fixes a bug where a user creates their first post then deletes it before streak resetter runs
+      // this prevents trying to reset streaks based on a user without posts
+      return
+    }
+    let createdDate = new Date(createdTime)
+    let streak = 0
+    let k = 0
+    const yesterday = new Date(getNow(timezone))
+    yesterday.setDate(now.getDate() - 1)
+    yesterday.setHours(0)
+    yesterday.setMinutes(0)
+    while(createdDate >= yesterday) {
+      streak++
+      k++
+      yesterday.setDate(yesterday.getDate() - 1)
+      let newCreatedDate = new Date(user.Updates[k]?.postTime)
+      while(createdDate.toDateString() == newCreatedDate.toDateString()){
+        k++
+        newCreatedDate = new Date(user.Updates[k]?.postTime)
+      }
+      createdDate = newCreatedDate
+    }
+    if(streak > 0 && streak != user.streakCount){
+      await prisma.accounts.update({
+        where: { slackID: user.slackID },
+        data: { streakCount: streak }
+      })
+      if (user.displayStreak) {
+        await fetch('https://slack.com/api/chat.postMessage', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+          },
+          body: JSON.stringify({
+            channel: userId, //userId
+            text: `<@${userId}> - I have something to confess. I've been a very naughty bot! Your streak has been wrongly calculated - it's now been fixed! HOORAY!!!! (patting myself on the back)`
+          })
+        })
+      }
+    }
+  })
+  
 }
 
 const shouldReset = (now, createdDate) => {
