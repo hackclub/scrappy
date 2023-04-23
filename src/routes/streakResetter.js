@@ -39,7 +39,8 @@ export default async (req, res) => {
       return
     }
     const createdDate = new Date(createdTime).getDate()
-    if (shouldReset(now, createdDate) && user.streakCount != 0) {
+    const yesterday =  new Date(getNow(timezone)).setDate(createdDate.getDate() - 1).getDate()
+    if (createdDate == yesterday && user.streakCount != 0) {
       console.log(
         `It's been more than a day since ${username} last posted. Resetting their streak...`
       )
