@@ -40,7 +40,7 @@ export default async (req, res) => {
     }
     const createdDate = new Date(createdTime)
     const yesterday = new Date(getNow(timezone))
-    yesterday.setDate(createdDate.getDate() - 1)
+    yesterday.setDate(now.getDate() - 1)
     yesterday.setHours(0)
     yesterday.setMinutes(0)
     if (createdDate >= yesterday && user.streakCount != 0) {
