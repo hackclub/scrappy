@@ -79,7 +79,7 @@ export default async (req, res) => {
       }
     }
   })
-  // Calculate streaks
+  // Calculate streaks to fix any errors
   let twoDaysAhead = new Date()
   twoDaysAhead.setDate(twoDaysAhead.getDate() + 2)
   let threeDaysBehind = new Date()
@@ -108,8 +108,6 @@ export default async (req, res) => {
     const userId = user.slackID
     const timezone = user.timezone
     const username = user.username
-    let now = new Date(getNow(timezone))
-    now.setHours(now.getHours() - 4)
     const latestUpdate = user.updates[0]
     const createdTime = latestUpdate?.postTime
     if (!createdTime) {
@@ -136,44 +134,10 @@ export default async (req, res) => {
       createdDate = newCreatedDate
     }
     if(streak > 0 && streak > user.streakCount){
-      console.log(user.slackID)
-      console.log(user.streakCount)
       await prisma.accounts.update({
         where: { slackID: user.slackID },
         data: { streakCount: streak }
       })
-      if (user.displayStreak) {
-        /*await fetch('https://slack.com/api/chat.postMessage', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
-          },
-          body: JSON.stringify({
-            channel: userId, //userId
-            text: `<@${userId}> - I have something to confess. I've been a very naughty bot! Your streak has been wrongly calculated - it's now been fixed! HOORAY!!!! (patting myself on the back)`
-          })
-        })*/
-      }
     }
   })
-  
-}
-
-const shouldReset = (now, createdDate) => {
-  if (createdDate === 30 && (now.getDate() === 1 || now.getDate() === 2)) {
-    return now.getDate() - createdDate > -29
-  } else if (
-    createdDate === 31 &&
-    (now.getDate() === 1 || now.getDate() === 2)
-  ) {
-    return now.getDate() - createdDate > -30
-  } else if (
-    createdDate === 1 &&
-    (now.getDate() === 30 || now.getDate() === 31)
-  ) {
-    return false
-  } else {
-    return now.getDate() - createdDate > 1
-  }
 }
