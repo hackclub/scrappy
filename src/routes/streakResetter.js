@@ -52,7 +52,15 @@ export default async (req, res) => {
         data: { streakCount: 0 }
       })
       if (user.displayStreak) {
-        await setStatus(userId, '', '')
+        try {
+          await setStatus(userId, '', '')
+        }
+        catch(e) {
+          app.client.chat.postMessage({
+            channel: "USNPNJXNX",
+            text: t("messages.errors.zach"),
+          });
+        }
         await fetch('https://slack.com/api/chat.postMessage', {
           method: 'POST',
           headers: {
