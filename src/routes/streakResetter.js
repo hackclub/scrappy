@@ -44,6 +44,7 @@ export default async (req, res) => {
     yesterday.setHours(0)
     yesterday.setMinutes(0)
     if ((createdDate <= yesterday) && user.streakCount != 0) {
+      
       console.log(
         `It's been more than a day since ${username} last posted. Resetting their streak...`
       )
@@ -53,7 +54,10 @@ export default async (req, res) => {
       })
       if (user.displayStreak) {
         try {
-          await setStatus(userId, '', '')
+          const info = await app.client.users.info({
+            user: user.slackID 
+          });
+          if(!info.is_admin) await setStatus(userId, '', '')
         }
         catch(e) {
           app.client.chat.postMessage({
