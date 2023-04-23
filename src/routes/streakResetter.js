@@ -44,7 +44,6 @@ export default async (req, res) => {
     yesterday.setHours(0)
     yesterday.setMinutes(0)
     if ((createdDate <= yesterday) && user.streakCount != 0) {
-      
       console.log(
         `It's been more than a day since ${username} last posted. Resetting their streak...`
       )
