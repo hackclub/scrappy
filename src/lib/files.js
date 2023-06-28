@@ -19,7 +19,7 @@ const isFileType = (types, fileName) =>
 export const getPublicFileUrl = async (urlPrivate, channel, user) => {
   const fileName = urlPrivate.split("/").pop();
   const fileId = urlPrivate.split("-")[2].split("/")[0];
-  const isImage = isFileType(["jpg", "jpeg", "png", "gif"], fileName);
+  const isImage = isFileType(["jpg", "jpeg", "png", "gif", "webp"], fileName);
   const isAudio = isFileType(["mp3", "wav", "aiff", "m4a"], fileName);
   const isVideo = isFileType(["mp4", "mov", "webm"], fileName);
   if (fileName.toLowerCase().endsWith("heic")) return { url: "heic" };
