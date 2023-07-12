@@ -2,6 +2,7 @@ import { getReactionRecord } from "../lib/utils.js";
 import { getUserRecord } from "../lib/users.js";
 import Bottleneck from "bottleneck";
 import prisma from "../lib/prisma.js";
+import clubEmojis from "../lib/clubEmojis.js";
 
 const limiter = new Bottleneck({
   maxConcurrent: 1,
@@ -32,6 +33,16 @@ export default async ({ event }) => {
           id: reactionRecord.id,
         },
       });
+      if (Object.keys(clubEmojis).includes(emojiRecord.name)){
+        await prisma.clubUpdate.deleteMany({
+          where: {
+            updateId: update.id,
+            club: {
+              slug: clubEmojis[emojiRecord.name]
+            }
+          },
+        });
+      }
     } else {
       await prisma.emojiReactions.update({
         where: { id: reactionRecord.id },

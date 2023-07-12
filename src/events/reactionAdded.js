@@ -10,6 +10,7 @@ import prisma from "../lib/prisma.js";
 import Bottleneck from "bottleneck";
 const limiter = new Bottleneck({ maxConcurrent: 1 });
 import channelKeywords from "../lib/channelKeywords.js";
+import clubEmojis from "../lib/clubEmojis.js";
 
 export default async ({ event }) => {
   const { item, user, reaction, item_user } = event;
@@ -75,6 +76,18 @@ export default async ({ event }) => {
     if (!update) return;
     const postExists = await updateExists(update.id);
     const reactionExists = await emojiExists(reaction, update.id);
+    if (Object.keys(clubEmojis).includes(emojiRecord.name)){
+      await prisma.clubUpdate.create({
+        data: {
+          updateId: update.id,
+          club: {
+            connect: {
+              slug: clubEmojis[emojiRecord.name]
+            },
+          }
+        },
+      });
+    }
     if (!reactionExists) {
       // Post hasn't been reacted to yet at all, or it has been reacted to, but not with this emoji
       await prisma.emojiReactions.create({
