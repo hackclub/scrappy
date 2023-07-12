@@ -79,7 +79,11 @@ export default async ({ event }) => {
     if (Object.keys(clubEmojis).includes(emojiRecord.name)){
       await prisma.clubUpdate.create({
         data: {
-          updateId: update.id,
+          update: {
+            connect: {
+              id: update.id
+            },
+          },
           club: {
             connect: {
               slug: clubEmojis[emojiRecord.name]
