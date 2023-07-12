@@ -34,6 +34,12 @@ export default async ({ event }) => {
         },
       });
       if (Object.keys(clubEmojis).includes(emojiRecord.name)){
+        console.log({
+            updateId: update.id,
+            club: {
+              slug: clubEmojis[emojiRecord.name]
+            }
+          })
         await prisma.clubUpdate.deleteMany({
           where: {
             updateId: update.id,
