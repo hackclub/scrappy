@@ -8,6 +8,7 @@ export default {
   paint: "art",
   wrote: "lower_left_fountain_pen",
   slack: "slack",
+  pcb: "pcb",
   figma: "figma",
   "3d print": "3d-printer",
   "3d printing": "3d-printer",
