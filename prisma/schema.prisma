@@ -1,7 +1,7 @@
 // This needs to be synced with hackclub/scrapbook
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
 }
 
 datasource db {
@@ -9,10 +9,28 @@ datasource db {
   url      = env("PG_DATABASE_URL")
 }
 
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         Accounts @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
 model Accounts {
-  slackID                 String    @unique(map: "Accounts.slackID_unique")
-  email                   String?   @unique(map: "Accounts.email_unique")
-  username                String    @unique(map: "Accounts.username_unique")
+  id                      String       @unique @default(cuid())
+  slackID                 String?      @unique(map: "Accounts.slackID_unique")
+  email                   String?      @unique(map: "Accounts.email_unique")
+  emailVerified           DateTime?
+  username                String       @unique(map: "Accounts.username_unique")
   streakCount             Int?
   maxStreaks              Int?
   displayStreak           Boolean?
@@ -21,24 +39,27 @@ model Accounts {
   cssURL                  String?
   website                 String?
   github                  String?
+  image                   String?
   fullSlackMember         Boolean?
   avatar                  String?
   webring                 String[]
-  newMember               Boolean
-  timezoneOffset          Int
-  timezone                String
+  newMember               Boolean      @default(false)
+  timezoneOffset          Int?
+  timezone                String?
   pronouns                String?
   customAudioURL          String?
   lastUsernameUpdatedTime DateTime?
   webhookURL              String?
-  updates                 Updates[]
-  tokens                  Token[]
+  ClubMember              ClubMember[]
+  sessions                Session[]
+  updates                 Updates[] @relation("updates")
+  slackUpdates            Updates[] @relation("slackUpdates")
 }
 
 model Updates {
   id               String           @id @default(cuid())
   accountsSlackID  String?
-  postTime         DateTime?
+  postTime         DateTime?        @default(now())
   text             String?
   attachments      String[]
   muxAssetIDs      String[]
@@ -49,10 +70,11 @@ model Updates {
   backupPlaybackID String?
   isLargeVideo     Boolean?
   channel          String?
-  Accounts         Accounts?        @relation(fields: [accountsSlackID], references: [slackID])
+  accountsID       String?
+  ClubUpdate       ClubUpdate?
   emojiReactions   EmojiReactions[]
-  clubscrapID      String?          @unique
-  clubscrap        Clubscraps?      @relation(fields: [clubscrapID], references: [id])
+  Accounts         Accounts?        @relation("updates", fields: [accountsID], references: [id])
+  SlackAccounts    Accounts?        @relation("slackUpdates", fields: [accountsSlackID], references: [slackID])
 }
 
 model EmojiType {
@@ -71,20 +93,35 @@ model EmojiReactions {
   update        Updates?   @relation(fields: [updateId], references: [id])
 }
 
-model Clubscraps {
-  id          String   @id @default(cuid())
-  createdAt   DateTime
-  description String
-  name        String
-  email       String
-  club        String?
-  timestamp   Float    @unique
-  update      Updates?
+model ClubMember {
+  id        String   @id @default(cuid())
+  accountId String
+  clubId    String
+  admin     Boolean  @default(false)
+  account   Accounts @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  club      Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
 }
 
-model Token {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  userEmail String
-  user      Accounts     @relation(fields: [userEmail], references: [email])
+model ClubUpdate {
+  id       String  @id @default(cuid())
+  updateId String  @unique
+  clubId   String
+  club     Club    @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  update   Updates @relation(fields: [updateId], references: [id], onDelete: Cascade)
+}
+
+model Club {
+  id           String       @id @default(cuid())
+  slug         String       @unique
+  name         String
+  logo         String
+  customDomain String?
+  cssURL       String?
+  website      String?
+  location     String?
+  github       String?
+  description  String?
+  banner       String       @default("https://wallpapercave.com/wp/wp10026724.jpg")
+  members      ClubMember[]
+  updates      ClubUpdate[]
 }

@@ -1,14 +1,17 @@
 ping: pong
+error: |
+  ERROR! ERROR! :skull:
+  ```
+  <@${this.e}>
+  ```
 messages:
   help: |
     Hello!!!!!!!!!!!!!! I'm a bot that helps you build your <https://scrapbook.hackclub.com/|Scrapbook>. Here are all the commands you can run:
 
     - \`/scrappy-togglestreaks\`: toggles your streak count on/off in your status
     - \`/scrappy-togglestreaks all\`: opts out of streaks completely
-    - \`/scrappy-open\`: opens your scrapbook (or another user's if you specify a username)
     - \`/scrappy-setcss\`: adds a custom CSS file to your scrapbook profile. <https://scrapbook.hackclub.com/sampoder|Check out this cool example!>
     - \`/scrappy-setdomain\`: links a custom domain to your scrapbook profile, e.g. https://zachlatta.com
-    - \`/scrappy-verifydomain\`: verifies a custom domain (only if you use your domain on Vercel) 
     - \`/scrappy-setusername\`: change your profile username
     - \`/scrappy-setaudio\`: links an audio file to your Scrapbook. <https://scrapbook.hackclub.com/matthew|See an example here!>
     - \`/scrappy-setwebhook\`: create a Scrappy Webhook we will make a blank fetch request to this URL every time you post
@@ -17,8 +20,6 @@ messages:
     BTW if you want to delete or update a post you can do so by simply editing or deleting your Slack message.
 
     Learn all about Scrapbook at https://scrapbook.hackclub.com/about
-  gamelab_no_link: psst. hey kid. you want some fancy gamelab cartridge previews on <https://scrapbook.hackclub.com/r/gamelab|the arcade?> i bet you do. just include the gamelab link in your message! 
-  gamelab_link: nice gamelab link! did you know about <https://scrapbook.hackclub.com/r/gamelab|the arcade?>
   forget: |
     Forgetting about all recorded scraps from....
     uhhhh....
@@ -53,11 +54,11 @@ messages:
       A WHOLE WEEK OF STREAKS?!?! https://www.youtube.com/watch?v=i0dmSIAzWeQ
 
       ${this.scrapbookLink}
-    '7+':
+    "7+":
       - Yahoo! ${this.scrapbookLink}
-      - ':yay: ${this.scrapbookLink}'
-      - ':dance::dance1::dance2: ${this.scrapbookLink}'
-      - ':parrotwave1::parrotwave2::parrotwave3::parrotwave4::parrotwave5::parrotwave6::parrotwave7: ${this.scrapbookLink}'
+      - ":yay: ${this.scrapbookLink}"
+      - ":dance::dance1::dance2: ${this.scrapbookLink}"
+      - ":parrotwave1::parrotwave2::parrotwave3::parrotwave4::parrotwave5::parrotwave6::parrotwave7: ${this.scrapbookLink}"
       - |
         Thanks for the memory on ${this.scrapbookLink}!
         —Your future self
@@ -104,9 +105,9 @@ messages:
     random:
       - Put on your clout goggles for a new post from your webring! ${this.randomWebringPost}
       - Bounce on over to this new post from your webring! ${this.randomWebringPost}
-      - 'Quick!!!!!!! Go check out this new post from your webring before it blows away: ${this.randomWebringPost}'
-      - 'Here, have a new post from your webring to munch on: ${this.randomWebringPost}'
-      - 'Check it out!!! Go CHOMP DOWN on this new post from your webring: ${this.randomWebringPost}'
+      - "Quick!!!!!!! Go check out this new post from your webring before it blows away: ${this.randomWebringPost}"
+      - "Here, have a new post from your webring to munch on: ${this.randomWebringPost}"
+      - "Check it out!!! Go CHOMP DOWN on this new post from your webring: ${this.randomWebringPost}"
   css:
     noargs: To link a custom CSS file, type \`/scrappy-setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/scrappy setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
     removed: Your CSS file has been removed from your profile. If you would like to re-add it, type \`/scrappy-setcss <link to css file>\`.
@@ -143,12 +144,7 @@ messages:
       Couldn't verify your domain \`${this.text}\`. Here's the error - \`${this.error}\`
 
       Try running \`/scrappy-setdomain ${this.text}\` first.
-    domainverify: |
-      Your domain is owned by another Vercel account, so you'll need to verify the domain by adding the following DNS record
-
-      ${this.text}
-
-      Then, run \`/scrappy-verifydomain ${this.domain}\` to verify the domain.
+    domainverify: Couldn't set your domain \`${this.text}\`. You can't add a domain if it's already set to another Vercel project. Try again with a different domain.
     domainset: |
       Custom domain \`${this.text}\` set!
 
