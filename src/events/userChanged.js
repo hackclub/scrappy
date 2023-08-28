@@ -2,6 +2,7 @@ import { setStatus } from "../lib/profiles.js";
 import { getUserRecord } from "../lib/users.js";
 import { app } from "../app.js";
 import prisma from "../lib/prisma.js";
+import metrics from "../metrics.js";
 
 export default async ({ event }) => {
   try {
@@ -37,8 +38,10 @@ export default async ({ event }) => {
         github: user.profile.fields["Xf0DMHFDQA"]?.value || undefined,
       },
     });
+    metrics.increment("success.user_change", 1);
   }
   catch (e) {
+    metrics.increment("errors.user_change", 1);
     console.log(e);
   }
 };

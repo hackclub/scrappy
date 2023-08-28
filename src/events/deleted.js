@@ -5,6 +5,7 @@ import { deleteUpdate, updateExistsTS } from "../lib/updates.js";
 import { shouldUpdateStreak } from "../lib/streaks.js";
 import { app } from "../app.js";
 import prisma from "../lib/prisma.js";
+import metrics from "../metrics.js";
 
 const deleteThreadedMessages = async (ts, channel, user) => {
   try {
@@ -61,7 +62,9 @@ export default async ({ event }) => {
         deleteThreadedMessages(ts, channel, previous_message.user),
       ]);
     }
+    metrics.increment("success.delete_msg", 1);
   } catch (e) {
+    metrics.increment("errors.delete_msg", 1);
     console.log(e);
   }
 };
