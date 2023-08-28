@@ -22,6 +22,7 @@ import forget from "./events/forget.js";
 import noFile, { noFileCheck } from "./events/noFile.js";
 import reactionAdded from "./events/reactionAdded.js";
 import reactionRemoved from "./events/reactionAdded.js";
+import metrics from "./metrics.js";
 
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -41,8 +42,12 @@ export const execute = (actionToExecute) => {
       await slackObject.ack();
     }
     try {
+      const metricMsg = `success.${slackObject.command.text}`;
       await actionToExecute(slackObject, ...props);
+      metrics.increment(metricMsg, 1);
     } catch (e) {
+      const metricMsg = `error.${slackObject.command.text}`;
+      metrics.increment(metricMsg, 1);
       console.log(e);
       app.client.chat.postMessage({
         channel: "C04ULNY90BC",

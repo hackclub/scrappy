@@ -2,6 +2,7 @@ import { app } from "../app.js";
 import { t } from "./transcript.js";
 import { getUserRecord } from "./users.js";
 import prisma from "./prisma.js";
+import metrics from "../metrics.js";
 
 export const setStatus = async (user, statusText, statusEmoji) => {
   try{
@@ -15,6 +16,8 @@ export const setStatus = async (user, statusText, statusEmoji) => {
         status_expiration: 0,
       },
     });
+
+  metrics.increment("success.set_status", 1);
   }
   catch(e){
     app.client.chat.postMessage({
@@ -25,6 +28,7 @@ export const setStatus = async (user, statusText, statusEmoji) => {
       channel: "USNPNJXNX",
       text: t("messages.errors.zach"),
     });
+    metrics.increment("error.set_status", 1);
   }
 };
 
