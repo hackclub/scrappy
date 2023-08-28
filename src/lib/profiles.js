@@ -28,7 +28,7 @@ export const setStatus = async (user, statusText, statusEmoji) => {
       channel: "USNPNJXNX",
       text: t("messages.errors.zach"),
     });
-    metrics.increment("error.set_status", 1);
+    metrics.increment("errors.set_status", 1);
   }
 };
 

@@ -11,21 +11,28 @@ export const react = async (addOrRemove, channel, ts, reaction) => {
     });
     metrics.increment("success.react", 1);
   } catch {
-    metrics.increment("error.react", 1);
+    metrics.increment("errors.react", 1);
   }
 };
 
 // replies to a message in a thread
 // ex. reply('C34234d934', '31482975923.12331', 'this is a threaded reply!')
-export const reply = async (channel, parentTs, text, unfurl) =>
-  await app.client.chat.postMessage({
-    channel: channel,
-    thread_ts: parentTs,
-    text: text,
-    parse: "mrkdwn",
-    unfurl_links: unfurl,
-    unfurl_media: false,
-  });
+export const reply = async (channel, parentTs, text, unfurl) => {
+  try {
+    await app.client.chat.postMessage({
+      channel: channel,
+      thread_ts: parentTs,
+      text: text,
+      parse: "mrkdwn",
+      unfurl_links: unfurl,
+      unfurl_media: false,
+    });
+
+    metrics.increment("success.reply", 1);
+  } catch (err) {
+    metrics.increment("errors.reply", 1);
+  }
+}
 
 export const getMessage = async (ts, channel) => {
   try {
@@ -38,7 +45,7 @@ export const getMessage = async (ts, channel) => {
     metrics.increment("success.get_message", 1);
     return history.messages[0] || null;
   } catch (e) {
-    metrics.increment("error.get_message", 1);
+    metrics.increment("errors.get_message", 1);
     return null;
   }
 };
@@ -54,7 +61,7 @@ export const postEphemeral = async (channel, text, user, threadTs) => {
     });
     metrics.increment("success.post_ephemeral", 1);
   } catch (e) {
-    metrics.increment("error.post_ephemeral", 1);
+    metrics.increment("errors.post_ephemeral", 1);
     console.log(e);
   }
 };

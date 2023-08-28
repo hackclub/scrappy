@@ -46,7 +46,7 @@ export const execute = (actionToExecute) => {
       await actionToExecute(slackObject, ...props);
       metrics.increment(metricMsg, 1);
     } catch (e) {
-      const metricMsg = `error.${slackObject.command.text}`;
+      const metricMsg = `errors.${slackObject.command.text}`;
       metrics.increment(metricMsg, 1);
       console.log(e);
       app.client.chat.postMessage({

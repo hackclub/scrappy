@@ -4,6 +4,7 @@ import { formatText } from "../lib/utils.js";
 import { postEphemeral } from "../lib/slack.js";
 import { getUserRecord } from "../lib/users.js";
 import prisma from "../lib/prisma.js";
+import metrics from "../metrics.js";
 
 export default async ({ event }) => {
   try {
@@ -25,7 +26,9 @@ export default async ({ event }) => {
       );
       await getUserRecord(event.message.user);
     }
+    mwtrics.increment("success.update_post", 1);
   } catch (e) {
+    metrics.increment("errors.update_post", 1);
     console.log(e);
   }
 };
