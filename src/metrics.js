@@ -2,7 +2,7 @@ import { StatsD } from "node-statsd";
 import { config } from "dotenv";
 
 config();
-const environment = process.env.DEPLOYMENT_ENV;
+const environment = process.env.NODE_ENV;
 const graphite = process.env.GRAPHITE_HOST;
 
 if (graphite === null) {
