@@ -41,12 +41,14 @@ export const execute = (actionToExecute) => {
     if (slackObject.ack) {
       await slackObject.ack();
     }
+    
+    const metricKey = slackObject.payload.command ?? slackObject.payload.type;
     try {
-      const metricMsg = `success.${slackObject.command.text}`;
+      const metricMsg = `success.${metricKey}`;
       await actionToExecute(slackObject, ...props);
       metrics.increment(metricMsg, 1);
     } catch (e) {
-      const metricMsg = `errors.${slackObject.command.text}`;
+      const metricMsg = `errors.${metricKey}`;
       metrics.increment(metricMsg, 1);
       console.log(e);
       app.client.chat.postMessage({
