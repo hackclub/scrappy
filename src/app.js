@@ -42,20 +42,20 @@ export const execute = (actionToExecute) => {
       await slackObject.ack();
     }
 
-    let userChangeEvent = slackObject.payload.type === "user_change";
-    const metricKey = slackObject.payload.command ?? slackObject.payload.type;
+    let isCommandOrMessage = slackObject.payload.command || slackObject.payload.message;
+    const metricKey = slackObject.payload.command;
     try {
       const metricMsg = `success.${metricKey}`;
       const startTime = new Date().getTime();
       actionToExecute(slackObject, ...props)
         .then(() => {
         const time = (new Date().getTime()) - startTime;
-        if (!userChangeEvent) metrics.timing(metricKey, time);
+        if (isCommandOrMessage) metrics.timing(metricKey, time);
       });
-      if (!userChangeEvent) metrics.increment(metricMsg, 1);
+      if (isCommandOrMessage) metrics.increment(metricMsg, 1);
     } catch (e) {
       const metricMsg = `errors.${metricKey}`;
-      if (!userChangeEvent) metrics.increment(metricMsg, 1);
+      if (isCommandOrMessage) metrics.increment(metricMsg, 1);
       console.log(e);
       app.client.chat.postMessage({
         channel: "C04ULNY90BC",
