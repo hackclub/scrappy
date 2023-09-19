@@ -38,10 +38,8 @@ export default async ({ event }) => {
         github: user.profile.fields["Xf0DMHFDQA"]?.value || undefined,
       },
     });
-    metrics.increment("success.user_change", 1);
   }
   catch (e) {
-    metrics.increment("errors.user_change", 1);
     console.log(e);
   }
 };
