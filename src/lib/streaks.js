@@ -76,6 +76,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
           streakCount: updatedStreakCount,
         },
       });
+      metrics.increment("streak", 1);
       await displayStreaks(userId, updatedStreakCount);
       if (userRecord.newMember && updatedStreakCount === 1) {
         postEphemeral(channel, t("messages.streak.newstreak"), userId);
