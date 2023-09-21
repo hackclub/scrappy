@@ -49,13 +49,17 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   ]).then((values) => {
     if (values[1] === "error") return "error";
   });
-  if (upload === "error") { metrics.increment("errors.video_upload", 1); return "error"; };
+
+  if (upload === "error") { metrics.increment("errors.file_upload", 1); return "error"; };
   let userRecord = await getUserRecord(user);
+
   const date = new Date().toLocaleString("en-US", {
     timeZone: userRecord.timezone,
   });
+
   const convertedDate = new Date(date).toISOString();
   const messageText = await formatText(text);
+
   await prisma.updates.create({
     data: {
       accountsID: userRecord.id,
@@ -72,6 +76,8 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
       channel: channel,
     },
   });
+
+  metrics.increment("new_post", 1);
   await incrementStreakCount(user, channel, messageText, ts);
 };
 
