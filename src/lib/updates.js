@@ -6,6 +6,7 @@ import { getUserRecord } from "./users.js";
 import { formatText } from "./utils.js";
 import { incrementStreakCount } from "./streaks.js";
 import { app } from "../app.js";
+import metrics from "../metrics.js";
 
 export const createUpdate = async (files = [], channel, ts, user, text) => {
   let attachments = [];
