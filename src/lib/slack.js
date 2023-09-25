@@ -9,9 +9,8 @@ export const react = async (addOrRemove, channel, ts, reaction) => {
       name: reaction,
       timestamp: ts,
     });
-    metrics.increment("success.react", 1);
-  } catch {
-    metrics.increment("errors.react", 1);
+  } catch (err) {
+    throw Error(err);
   }
 };
 
@@ -28,9 +27,8 @@ export const reply = async (channel, parentTs, text, unfurl) => {
       unfurl_media: false,
     });
 
-    metrics.increment("success.reply", 1);
   } catch (err) {
-    metrics.increment("errors.reply", 1);
+    throw Error(err);
   }
 }
 
@@ -42,11 +40,9 @@ export const getMessage = async (ts, channel) => {
       limit: 1,
       inclusive: true,
     });
-    metrics.increment("success.get_message", 1);
     return history.messages[0] || null;
   } catch (e) {
-    metrics.increment("errors.get_message", 1);
-    return null;
+    throw Error(e);
   }
 };
 
@@ -59,9 +55,7 @@ export const postEphemeral = async (channel, text, user, threadTs) => {
       user: user,
       thread_ts: threadTs,
     });
-    metrics.increment("success.post_ephemeral", 1);
   } catch (e) {
-    metrics.increment("errors.post_ephemeral", 1);
-    console.log(e);
+    throw Error(e);
   }
 };

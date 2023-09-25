@@ -17,7 +17,6 @@ export const setStatus = async (user, statusText, statusEmoji) => {
       },
     });
 
-  metrics.increment("success.set_status", 1);
   }
   catch(e){
     app.client.chat.postMessage({
@@ -28,7 +27,7 @@ export const setStatus = async (user, statusText, statusEmoji) => {
       channel: "USNPNJXNX",
       text: t("messages.errors.zach"),
     });
-    metrics.increment("errors.set_status", 1);
+    throw Error(e);
   }
 };
 
