@@ -117,6 +117,7 @@ export default async (req, res) => {
     let createdDate = new Date(createdTime)
     let streak = 0
     let k = 0
+    const now = new Date(getNow(timezone));
     const yesterday = new Date(getNow(timezone))
     yesterday.setDate(now.getDate() - 1)
     yesterday.setHours(0)
