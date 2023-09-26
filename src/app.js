@@ -51,10 +51,8 @@ export const execute = (actionToExecute) => {
         .then(() => {
         const time = (new Date().getTime()) - startTime;
         if (isCommandOrMessage) metrics.timing(metricKey, time);
-      })
-      .catch(err => {
-        console.log("failed to execute ", metricMsg, " with reason ", err);
       });
+
       if (isCommandOrMessage) metrics.increment(metricMsg, 1);
     } catch (e) {
       const metricMsg = `errors.${metricKey}`;
