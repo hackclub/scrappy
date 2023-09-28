@@ -28,9 +28,7 @@ export default async ({ event }) => {
     });
     if (!user.profile.fields) return;
     // return if there is no user with this slackID
-    const count = prisma.accounts.count({ where: { slackID: user.id } });
-    if (count < 1) return;
-
+  
     await prisma.accounts.update({
       where: { slackID: user.id },
       data: {
