@@ -28,9 +28,8 @@ export default async ({ event }) => {
     });
     if (!user.profile.fields) return;
     // return if there is no user with this slackID
-    const count = prisma.accounts.count({ where: { slackID: user.id } });
-    if (count < 1) return;
 
+    try {
     await prisma.accounts.update({
       where: { slackID: user.id },
       data: {
@@ -42,6 +41,9 @@ export default async ({ event }) => {
         github: user.profile.fields["Xf0DMHFDQA"]?.value || undefined,
       },
     });
+      } catch (err) {
+      console.log("could not update user with slackId", user.id, " with reason ", err);
+    }
   }
   catch (e) {
     console.log(e);
