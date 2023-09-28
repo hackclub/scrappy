@@ -8,6 +8,7 @@ import { SEASON_EMOJI } from "./seasons.js";
 import channelKeywords from "./channelKeywords.js";
 import { reactBasedOnKeywords } from "./reactions.js";
 import { setStatus } from "./profiles.js";
+import metrics from "../metrics.js";
 
 export const shouldUpdateStreak = async (userId, increment) => {
   const userRecord = await getUserRecord(userId);
