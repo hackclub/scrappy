@@ -2,6 +2,8 @@ import Prisma from "@prisma/client";
 import metrics from "../metrics.js";
 
 let prisma = new Prisma.PrismaClient().$extends({
+  // extend prisma client
+  // to send query metrics such as latency & failures
   query: {
     async $allOperations({ operation, model, args, query }) {
       const metricKey = `${operation}_${model}`;
