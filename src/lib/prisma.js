@@ -6,9 +6,9 @@ let prisma = new Prisma.PrismaClient().$extends({
     async $allOperations({ operation, model, args, query }) {
       const metricKey = `${operation}_${model}`;
       try {
-        const start = new Date().getTime();
+        const start = performance.now();
         const queryResult = await query(args);
-        const time = new Date().getTime() - start;
+        const time = performance.now() - start;
 
         metrics.timing(metricKey, time);
 
