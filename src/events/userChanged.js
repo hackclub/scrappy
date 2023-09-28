@@ -26,8 +26,8 @@ export default async ({ event }) => {
     const info = await app.client.users.info({
       user: user.id,
     });
-    if (!user.profile.fields) return;
     // return if there is no user with this slackID
+    if (!user.profile.fields) return;
     await prisma.accounts.update({
       where: { slackID: user.id },
       data: {
