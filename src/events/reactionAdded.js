@@ -58,7 +58,7 @@ export default async ({ event }) => {
   if (
     reaction === "scrappy-retry" &&
     channel == process.env.CHANNEL &&
-    message
+    message && !message.thread_ts
   ) {
     if (!message.files || message.files.length == 0) {
       postEphemeral(channel, t("messages.errors.anywhere.files"), user);
