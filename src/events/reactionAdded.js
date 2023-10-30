@@ -51,7 +51,20 @@ export default async ({ event }) => {
         postEphemeral(channel, t("messages.errors.anywhere.files"), user);
         return;
       }
-      await createUpdate(message.files, channel, ts, user, message.text);
+      const update = await createUpdate(message.files, channel, ts, user, message.text);
+      message.reactions.forEach(async reaction => {
+        if (
+          reaction.name === "scrappy" ||
+          reaction.name === "scrappy-retry" ||
+          reaction.name === "scrappyparrot"
+        ) return;
+        await prisma.emojiReactions.create({
+          data: {
+            updateId: update.id,
+            emojiTypeName: reaction.name
+          }
+        });
+      });
     }
     return;
   }
