@@ -61,7 +61,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   const convertedDate = new Date(date).toISOString();
   const messageText = await formatText(text);
 
-  await prisma.updates.create({
+  const update = await prisma.updates.create({
     data: {
       accountsID: userRecord.id,
       accountsSlackID: userRecord.slackID,
@@ -80,6 +80,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
 
   metrics.increment("new_post", 1);
   await incrementStreakCount(user, channel, messageText, ts);
+  return update;
 };
 
 export const updateExists = async (updateId) =>
