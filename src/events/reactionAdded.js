@@ -11,6 +11,7 @@ import Bottleneck from "bottleneck";
 const limiter = new Bottleneck({ maxConcurrent: 1 });
 import channelKeywords from "../lib/channelKeywords.js";
 import clubEmojis from "../lib/clubEmojis.js";
+import { commands } from "../commands/commands.js";
 
 export default async ({ event }) => {
   const { item, user, reaction, item_user } = event;
@@ -21,12 +22,12 @@ export default async ({ event }) => {
   if (reaction !== SEASON_EMOJI && user === "U015D6A36AG") return;
   if (
     (await updateExistsTS(ts)) &&
-    (reaction === "scrappy" || reaction === "scrappyparrot") &&
+    (reaction === commands.scrappy || reaction === "scrappyparrot") &&
     channel !== process.env.CHANNEL
   )
     return;
   const message = await getMessage(ts, channel);
-  if ((await updateExistsTS(ts)) && reaction === "scrappy-retry") {
+  if ((await updateExistsTS(ts)) && reaction === commands.scrappyRetryReaction) {
     if (channelKeywords[channel])
       await react("add", channel, ts, channelKeywords[channel]);
     await reactBasedOnKeywords(channel, message.text, ts);
@@ -36,7 +37,7 @@ export default async ({ event }) => {
   }
   // If someone reacted with a Scrappy emoji in a non-#scrapbook channel, then maybe upload it.
   if (
-    (reaction === "scrappy" || reaction === "scrappyparrot") &&
+    (reaction === commands.scrappy || reaction === "scrappyparrot") &&
     channel !== process.env.CHANNEL
   ) {
     if (item_user != user) {
@@ -69,7 +70,7 @@ export default async ({ event }) => {
     return;
   }
   if (
-    reaction === "scrappy-retry" &&
+    reaction === commands.scrappyRetryReaction &&
     channel == process.env.CHANNEL &&
     message && !message.thread_ts
   ) {
