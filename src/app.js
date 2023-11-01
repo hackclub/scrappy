@@ -22,6 +22,7 @@ import forget from "./events/forget.js";
 import noFile, { noFileCheck } from "./events/noFile.js";
 import reactionAdded from "./events/reactionAdded.js";
 import reactionRemoved from "./events/reactionAdded.js";
+import { commands } from "./commands/commands.js";
 import metrics from "./metrics.js";
 
 const receiver = new ExpressReceiver({
@@ -68,23 +69,23 @@ export const execute = (actionToExecute) => {
   };
 };
 
-app.command("/scrappy", execute(help));
+app.command(`/${commands.scrappy}`, execute(help));
 
-app.command("/scrappy-help", execute(help));
+app.command(`/${commands.scrappyHelp}`, execute(help));
 
-app.command("/scrappy-setaudio", execute(setAudio));
+app.command(`/${commands.scrappySetAudio}`, execute(setAudio));
 
-app.command("/scrappy-setcss", execute(setCSS));
+app.command(`/${commands.scrappySetCSS}`, execute(setCSS));
 
-app.command("/scrappy-setdomain", execute(setDomain));
+app.command(`/${commands.scrappySetDomain}`, execute(setDomain));
 
-app.command("/scrappy-displaystreaks", execute(toggleStreaks));
+app.command(`/${commands.scrappyDisplayStreaks}`, execute(toggleStreaks));
 
-app.command("/scrappy-setusername", execute(setUsername));
+app.command(`/${commands.scrappySetUsername}`, execute(setUsername));
 
-app.command("/scrappy-togglestreaks", execute(toggleStreaks));
+app.command(`/${commands.scrappyToggleStreaks}`, execute(toggleStreaks));
 
-app.command("/scrappy-webring", execute(webring));
+app.command(`/${commands.scrappyWebring}`, execute(webring));
 
 app.event("reaction_added", execute(reactionAdded));
 
