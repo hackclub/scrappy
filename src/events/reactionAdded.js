@@ -22,7 +22,7 @@ export default async ({ event }) => {
   if (reaction !== SEASON_EMOJI && user === "U015D6A36AG") return;
   if (
     (await updateExistsTS(ts)) &&
-    (reaction === commands.scrappy || reaction === "scrappyparrot") &&
+    (reaction === commands.scrappy || reaction === commands.scrappyParrotReaction) &&
     channel !== process.env.CHANNEL
   )
     return;
@@ -37,7 +37,7 @@ export default async ({ event }) => {
   }
   // If someone reacted with a Scrappy emoji in a non-#scrapbook channel, then maybe upload it.
   if (
-    (reaction === commands.scrappy || reaction === "scrappyparrot") &&
+    (reaction === commands.scrappy || reaction === commands.scrappyParrotReaction) &&
     channel !== process.env.CHANNEL
   ) {
     if (item_user != user) {
@@ -57,7 +57,7 @@ export default async ({ event }) => {
         if (
           reaction.name === "scrappy" ||
           reaction.name === "scrappy-retry" ||
-          reaction.name === "scrappyparrot"
+          reaction.name ===commands.scrappyParrotReaction 
         ) return;
         await prisma.emojiReactions.create({
           data: {
