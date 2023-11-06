@@ -184,7 +184,7 @@ messages:
       op: |
         Sorry, but only the original message poster can react with :${this.reaction}: to upload to Scrapbook.
       files: |
-        Hmm... :thonk: I don't detect any files in this message.
+        Hmm... :thonk: I don't detect any files in this message. Please attach a video or an image file.
   mentionKeyword:
     - <@${this.user}> no u
     - <@${this.user}> :()
