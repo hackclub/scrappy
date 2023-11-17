@@ -55,11 +55,11 @@ messages:
       A WHOLE WEEK OF STREAKS?!?! https://www.youtube.com/watch?v=i0dmSIAzWeQ
 
       ${this.scrapbookLink}
-    "7+":
+    '7+':
       - Yahoo! ${this.scrapbookLink}
-      - ":yay: ${this.scrapbookLink}"
-      - ":dance::dance1::dance2: ${this.scrapbookLink}"
-      - ":parrotwave1::parrotwave2::parrotwave3::parrotwave4::parrotwave5::parrotwave6::parrotwave7: ${this.scrapbookLink}"
+      - ':yay: ${this.scrapbookLink}'
+      - ':dance::dance1::dance2: ${this.scrapbookLink}'
+      - ':parrotwave1::parrotwave2::parrotwave3::parrotwave4::parrotwave5::parrotwave6::parrotwave7: ${this.scrapbookLink}'
       - |
         Thanks for the memory on ${this.scrapbookLink}!
         —Your future self
@@ -106,9 +106,9 @@ messages:
     random:
       - Put on your clout goggles for a new post from your webring! ${this.randomWebringPost}
       - Bounce on over to this new post from your webring! ${this.randomWebringPost}
-      - "Quick!!!!!!! Go check out this new post from your webring before it blows away: ${this.randomWebringPost}"
-      - "Here, have a new post from your webring to munch on: ${this.randomWebringPost}"
-      - "Check it out!!! Go CHOMP DOWN on this new post from your webring: ${this.randomWebringPost}"
+      - 'Quick!!!!!!! Go check out this new post from your webring before it blows away: ${this.randomWebringPost}'
+      - 'Here, have a new post from your webring to munch on: ${this.randomWebringPost}'
+      - 'Check it out!!! Go CHOMP DOWN on this new post from your webring: ${this.randomWebringPost}'
   css:
     noargs: To link a custom CSS file, type \`/scrappy-setcss\` followed by a link to a CSS file online. Try this one, which sets your background to hot pink! \`/scrappy setcss https://gist.github.com/MatthewStanciu/a0c10a8d4264b737fcc3c1724591c232\`
     removed: Your CSS file has been removed from your profile. If you would like to re-add it, type \`/scrappy-setcss <link to css file>\`.

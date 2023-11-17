@@ -4,7 +4,7 @@ import { getNow, timeout } from '../lib/utils.js'
 import { setStatus } from '../lib/profiles.js'
 import prisma from '../lib/prisma.js'
 import fetch from 'node-fetch'
-import { app } from "../app.js";
+import { app } from '../app.js'
 
 export default async (req, res) => {
   res.status(200).end()
@@ -15,7 +15,7 @@ export default async (req, res) => {
       }
     }
   })
-  users.forEach(async (user) => {
+  users.forEach(async user => {
     await timeout(500)
     const userId = user.slackID
     const timezone = user.timezone
@@ -43,7 +43,7 @@ export default async (req, res) => {
     yesterday.setDate(now.getDate() - 1)
     yesterday.setHours(0)
     yesterday.setMinutes(0)
-    if ((createdDate <= yesterday) && user.streakCount != 0) {
+    if (createdDate <= yesterday && user.streakCount != 0) {
       console.log(
         `It's been more than a day since ${username} last posted. Resetting their streak...`
       )
@@ -54,21 +54,20 @@ export default async (req, res) => {
       if (user.displayStreak) {
         try {
           const info = await app.client.users.info({
-            user: user.slackID 
-          });
-          if(!info.is_admin) await setStatus(userId, '', '')
-        }
-        catch(e) {
+            user: user.slackID
+          })
+          if (!info.is_admin) await setStatus(userId, '', '')
+        } catch (e) {
           app.client.chat.postMessage({
-            channel: "USNPNJXNX",
-            text: t("messages.errors.zach"),
-          });
+            channel: 'USNPNJXNX',
+            text: t('messages.errors.zach')
+          })
         }
         await fetch('https://slack.com/api/chat.postMessage', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+            'Authorization': `Bearer ${process.env.SLACK_BOT_TOKEN}`
           },
           body: JSON.stringify({
             channel: userId, //userId
@@ -87,8 +86,8 @@ export default async (req, res) => {
     include: {
       updates: {
         orderBy: {
-          postTime: 'desc',
-        },
+          postTime: 'desc'
+        }
       }
     },
     where: {
@@ -97,12 +96,12 @@ export default async (req, res) => {
           postTime: {
             lte: twoDaysAhead,
             gte: threeDaysBehind
-          },
+          }
         }
       }
-    },
+    }
   })
-  usersToCalculate.forEach(async (user) => {
+  usersToCalculate.forEach(async user => {
     await timeout(500)
     const userId = user.slackID
     const timezone = user.timezone
@@ -117,23 +116,23 @@ export default async (req, res) => {
     let createdDate = new Date(createdTime)
     let streak = 0
     let k = 0
-    const now = new Date(getNow(timezone));
+    const now = new Date(getNow(timezone))
     const yesterday = new Date(getNow(timezone))
     yesterday.setDate(now.getDate() - 1)
     yesterday.setHours(0)
     yesterday.setMinutes(0)
-    while(createdDate >= yesterday) {
+    while (createdDate >= yesterday) {
       streak++
       k++
       yesterday.setDate(yesterday.getDate() - 1)
       let newCreatedDate = new Date(user.updates[k]?.postTime)
-      while(createdDate.toDateString() == newCreatedDate.toDateString()){
+      while (createdDate.toDateString() == newCreatedDate.toDateString()) {
         k++
         newCreatedDate = new Date(user.updates[k]?.postTime)
       }
       createdDate = newCreatedDate
     }
-    if(streak > 0 && streak > user.streakCount){
+    if (streak > 0 && streak > user.streakCount) {
       await prisma.accounts.update({
         where: { slackID: user.slackID },
         data: { streakCount: streak }

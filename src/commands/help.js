@@ -1,5 +1,5 @@
-import { t } from "../lib/transcript.js";
+import { t } from '../lib/transcript.js'
 
 export default async ({ respond }) => {
-  await respond(t("messages.help"));
-};
+  await respond(t('messages.help'))
+}

@@ -10,8 +10,8 @@
   "scripts": {
     "dev": "nodemon src/app.js",
     "start": "node src/app.js",
-    "format": "prettier --write .",
-    "checkFormat": "prettier --check ."
+    "format": "prettier --ignore-path ./.prettierignore --write .",
+    "checkFormat": "prettier --ignore-path ./.prettierignore --check ."
   },
   "dependencies": {
     "@mux/mux-node": "^7.3.2",

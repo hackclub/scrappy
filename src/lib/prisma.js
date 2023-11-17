@@ -1,26 +1,26 @@
-import Prisma from "@prisma/client";
-import metrics from "../metrics.js";
+import Prisma from '@prisma/client'
+import metrics from '../metrics.js'
 
 let prisma = new Prisma.PrismaClient().$extends({
   // extend prisma client
   // to send query metrics such as latency & failures
   query: {
     async $allOperations({ operation, model, args, query }) {
-      const metricKey = `${operation}_${model}`;
+      const metricKey = `${operation}_${model}`
       try {
-        const start = performance.now();
-        const queryResult = await query(args);
-        const time = performance.now() - start;
+        const start = performance.now()
+        const queryResult = await query(args)
+        const time = performance.now() - start
 
-        metrics.timing(metricKey, time);
+        metrics.timing(metricKey, time)
 
-        return queryResult;
+        return queryResult
       } catch (err) {
-        metrics.increment(`errors.${metricKey}`, 1);
+        metrics.increment(`errors.${metricKey}`, 1)
       }
-      return;
+      return
     }
   }
-});
+})
 
-export default prisma;
+export default prisma
