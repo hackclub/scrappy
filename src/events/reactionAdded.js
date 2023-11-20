@@ -48,11 +48,15 @@ export default async ({ event }) => {
         user
       );
     } else if (message) {
+
+      let update;
+
       if (!message.files || message.files.length == 0) {
-        postEphemeral(channel, t("messages.errors.anywhere.files"), user);
-        return;
+        update = await createUpdate([], channel, ts, user, message.text);
+      } else {
+        update = await createUpdate(message.files, channel, ts, user, message.text);
       }
-      const update = await createUpdate(message.files, channel, ts, user, message.text);
+
       message.reactions.forEach(async reaction => {
         if (
           reaction.name === "scrappy" ||
@@ -90,7 +94,7 @@ export default async ({ event }) => {
     if (!update) return;
     const postExists = await updateExists(update.id);
     const reactionExists = await emojiExists(reaction, update.id);
-    if (Object.keys(clubEmojis).includes(emojiRecord.name)){
+    if (Object.keys(clubEmojis).includes(emojiRecord.name)) {
       await prisma.clubUpdate.create({
         data: {
           update: {
