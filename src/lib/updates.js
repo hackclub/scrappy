@@ -115,4 +115,4 @@ export const deleteUpdate = async (ts) => {
       messageTimestamp: parseFloat(ts),
     },
   });
-};
+}
