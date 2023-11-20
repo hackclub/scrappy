@@ -1,4 +1,4 @@
-mport prisma from "./prisma.js";
+import prisma from "./prisma.js";
 import { react, reply, postEphemeral } from "./slack.js";
 import { getPublicFileUrl } from "./files.js";
 import { t } from "./transcript.js";
