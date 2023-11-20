@@ -50,9 +50,9 @@ export const execute = (actionToExecute) => {
       const startTime = new Date().getTime();
       actionToExecute(slackObject, ...props)
         .then(() => {
-        const time = (new Date().getTime()) - startTime;
-        if (isCommandOrMessage) metrics.timing(metricKey, time);
-      });
+          const time = (new Date().getTime()) - startTime;
+          if (isCommandOrMessage) metrics.timing(metricKey, time);
+        });
       if (isCommandOrMessage) metrics.increment(metricMsg, 1);
     } catch (e) {
       const metricMsg = `errors.${metricKey}`;
@@ -97,7 +97,7 @@ app.event("user_change", execute(userChanged));
 
 app.message(subtype("file_share"), execute(create));
 
-app.message(noFileCheck, execute(noFile));
+// app.message(noFileCheck, execute(noFile));
 
 const messageChanged = (slackObject, ...props) => {
   if (slackObject.event.message.subtype == "tombstone") {

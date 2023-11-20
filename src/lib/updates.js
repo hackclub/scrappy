@@ -12,11 +12,12 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   let attachments = [];
   let videos = [];
   let videoPlaybackIds = [];
+
   const uploadItems = [
     react("add", channel, ts, "beachball"),
   ];
 
-  if (files.length === 0) {
+  if (files.length > 0) {
     uploadItems.push(
       ...files.map(async (file) => {
         const publicUrl = await getPublicFileUrl(file.url_private, channel, user);
@@ -53,8 +54,9 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
       })
     )
   }
+
   const upload = await Promise.all(uploadItems).then((values) => {
-    if (values[1] === "error") return "error";
+    if (values[1] === "error" || !values[1]) return "error";
   });
 
   if (upload === "error") { metrics.increment("errors.file_upload", 1); return "error"; };
