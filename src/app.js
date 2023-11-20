@@ -95,6 +95,8 @@ app.event("member_joined_channel", execute(joined));
 
 app.event("user_change", execute(userChanged));
 
+app.event("message.channels", execute(create));
+
 app.message(subtype("file_share"), execute(create));
 
 // app.message(noFileCheck, execute(noFile));
