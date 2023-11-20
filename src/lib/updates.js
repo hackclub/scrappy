@@ -53,7 +53,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
 
   uploadItems.unshift(react("add", channel, ts, "beachball"));
   const upload = await Promise.all(uploadItems).then((values) => {
-    if (values[1] === "error" || !values[1]) return "error";
+    if (values[1] === "error" || (values.length < 2 && files.length > 0)) return "error";
   });
 
   if (files.length > 0 && upload === "error") { metrics.increment("errors.file_upload", 1); return "error"; };
