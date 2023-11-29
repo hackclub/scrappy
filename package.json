@@ -29,7 +29,7 @@
     "heic-convert": "^1.2.3",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.19",
-    "node-emoji": "^2.1.3",
+    "node-emoji": "^1.11.0",
     "node-fetch": "2.6.1",
     "node-statsd": "^0.1.1",
     "uuid": "^9.0.0"
