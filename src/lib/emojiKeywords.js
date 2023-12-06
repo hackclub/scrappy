@@ -235,5 +235,6 @@ export default {
   "the orpheus podcast": "tos-icon",
   "orpheus podcast": "tos-icon",
   podcast: "studio_microphone",
-  quest: "quests"
+  quest: "quests",
+  puzzmo: "puzzmo"
 };
