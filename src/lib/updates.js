@@ -17,17 +17,11 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(file.url_private, channel, user);
       if (!publicUrl) {
-        await reply(channel, ts, t("messages.errors.filetype"))
+        await postEphemeral(channel, ts, t("messages.errors.filetype"), user)
         return;
       } else if (publicUrl.url.toLowerCase().endsWith("heic")) {
-        await postEphemeral(channel, t("messages.errors.heic"), user)
-        ]);
+        await postEphemeral(channel, t("messages.errors.heic"), user);
         return;
-      } else if (publicUrl.url === "big boy") {
-        await Promise.all([
-          react("remove", channel, ts, "beachball"),
-          reply(channel, ts, t("messages.errors.bigimage")),
-        ]);
       }
       attachments.push(publicUrl.url);
       if (publicUrl.muxId) {
