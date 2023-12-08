@@ -17,16 +17,10 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(file.url_private, channel, user);
       if (!publicUrl) {
-        await Promise.all([
-          react("remove", channel, ts, "beachball"),
-          react("add", channel, ts, "x"),
-          reply(channel, ts, t("messages.errors.filetype")),
-        ]);
-        return "error";
+        await reply(channel, ts, t("messages.errors.filetype"))
+        return;
       } else if (publicUrl.url.toLowerCase().endsWith("heic")) {
         await Promise.all([
-          react("remove", channel, ts, "beachball"),
-          react("add", channel, ts, "x"),
           postEphemeral(channel, t("messages.errors.heic"), user),
           app.client.chat.delete({
             token: process.env.SLACK_USER_TOKEN,
@@ -34,10 +28,9 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
             ts,
           }),
         ]);
-        return "error";
+        return;
       } else if (publicUrl.url === "big boy") {
         await Promise.all([
-          react("remove", channel, ts, "beachball"),
           reply(channel, ts, t("messages.errors.bigimage")),
         ]);
       }
@@ -47,11 +40,17 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
         videoPlaybackIds.push(publicUrl.muxPlaybackId);
       }
     }),
-  ]).then((values) => {
-    if (values[1] === "error") return "error";
-  });
+  ])
 
-  if (upload === "error") { metrics.increment("errors.file_upload", 1); return "error"; };
+  if ((attachments.length + videos.length) === 0) {
+    await Promise.all([
+      react("remove", channel, ts, "beachball"),
+      react("add", channel, ts, "x"),
+    ]);
+    metrics.increment("errors.file_upload", 1);
+    return "error";
+  }
+
   let userRecord = await getUserRecord(user);
 
   const date = new Date().toLocaleString("en-US", {
