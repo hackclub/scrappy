@@ -1408,21 +1408,21 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-heic-convert@^1.2.3:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/heic-convert/-/heic-convert-1.2.4.tgz#605820f98ace3949a40fc7b263ee0bc573a0176b"
-  integrity sha512-klJHyv+BqbgKiCQvCqI9IKIvweCcohDuDl0Jphearj8+16+v8eff2piVevHqq4dW9TK0r1onTR6PKHP1I4hdbA==
+heic-convert@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/heic-convert/-/heic-convert-2.1.0.tgz#7f764529e37591ae263ef49582d1d0c13491526e"
+  integrity sha512-1qDuRvEHifTVAj3pFIgkqGgJIr0M3X7cxEPjEp0oG4mo8GFjq99DpCo8Eg3kg17Cy0MTjxpFdoBHOatj7ZVKtg==
   dependencies:
-    heic-decode "^1.1.2"
-    jpeg-js "^0.4.1"
-    pngjs "^3.4.0"
+    heic-decode "^2.0.0"
+    jpeg-js "^0.4.4"
+    pngjs "^6.0.0"
 
-heic-decode@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/heic-decode/-/heic-decode-1.1.2.tgz#974701666432e31ed64b2263a1ece7cff5218209"
-  integrity sha512-UF8teegxvzQPdSTcx5frIUhitNDliz/9Pui0JFdIqVRE00spVE33DcCYtZqaLNyd4y5RP/QQWZFIc1YWVKKm2A==
+heic-decode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/heic-decode/-/heic-decode-2.0.0.tgz#77ab96ee1a255f0a9952d0e88d584bca30577114"
+  integrity sha512-NU+zsiDvdL+EebyTjrEqjkO2XYI7FgLhQzsbmO8dnnYce3S0PBSDm/ZyI4KpcGPXYEdb5W72vp/AQFuc4F8ASg==
   dependencies:
-    libheif-js "^1.10.0"
+    libheif-js "^1.17.1"
 
 htmlparser2@^8.0.1:
   version "8.0.1"
@@ -1728,7 +1728,7 @@ jmespath@0.16.0:
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.16.0.tgz#b15b0a85dfd4d930d43e69ed605943c802785076"
   integrity sha512-9FzQjJ7MATs1tSpnco1K6ayiYE3figslrXA72G2HQ/n76RzvYlofyi5QM+iX4YRs/pu3yzxlVQSST23+dMDknw==
 
-jpeg-js@^0.4.1:
+jpeg-js@^0.4.4:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.4.4.tgz#a9f1c6f1f9f0fa80cdb3484ed9635054d28936aa"
   integrity sha512-WZzeDOEtTOBK4Mdsar0IqEU5sMr3vSV2RqkAIzUEV2BHnUfKGyswWFPFwK5EeDo93K3FohSHbLAjj0s1Wzd+dg==
@@ -1810,10 +1810,10 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-libheif-js@^1.10.0:
-  version "1.12.0"
-  resolved "https://registry.yarnpkg.com/libheif-js/-/libheif-js-1.12.0.tgz#9ad1ed16a8e6412b4d3d83565d285465a00e7305"
-  integrity sha512-hDs6xQ7028VOwAFwEtM0Q+B2x2NW69Jb2MhQFUbk3rUrHzz4qo5mqS8VrqNgYnSc8TiUGnR691LnO4uIfEE23w==
+libheif-js@^1.17.1:
+  version "1.17.1"
+  resolved "https://registry.yarnpkg.com/libheif-js/-/libheif-js-1.17.1.tgz#7772cc5a31098df0354f0fadb49a939030765acd"
+  integrity sha512-g9wBm/CasGZMjmH3B2sD9+AO7Y5+79F0oPS+sdAulSxQeYeCeiTIP+lDqvlPofD+y76wvfVtotKZ8AuvZQnWgg==
 
 locate-path@^6.0.0:
   version "6.0.0"
@@ -2181,10 +2181,10 @@ please-upgrade-node@^3.2.0:
   dependencies:
     semver-compare "^1.0.0"
 
-pngjs@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.4.0.tgz#99ca7d725965fb655814eaf65f38f12bbdbf555f"
-  integrity sha512-NCrCHhWmnQklfH4MtJMRjZ2a8c80qXeMlQMv2uVp9ISJMTt562SbGd6n2oq0PaPgKm7Z6pL9E2UlLIhC+SHL3w==
+pngjs@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-6.0.0.tgz#ca9e5d2aa48db0228a52c419c3308e87720da821"
+  integrity sha512-TRzzuFRRmEoSW/p1KVAmiOgPco2Irlah+bGFCeNfJXxxYGwSw7YwAOAcd7X28K/m5bjBWKsC29KyoMfHbypayg==
 
 prelude-ls@^1.2.1:
   version "1.2.1"
