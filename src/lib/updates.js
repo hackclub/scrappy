@@ -20,17 +20,12 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
         await reply(channel, ts, t("messages.errors.filetype"))
         return;
       } else if (publicUrl.url.toLowerCase().endsWith("heic")) {
-        await Promise.all([
-          postEphemeral(channel, t("messages.errors.heic"), user),
-          app.client.chat.delete({
-            token: process.env.SLACK_USER_TOKEN,
-            channel,
-            ts,
-          }),
+        await postEphemeral(channel, t("messages.errors.heic"), user)
         ]);
         return;
       } else if (publicUrl.url === "big boy") {
         await Promise.all([
+          react("remove", channel, ts, "beachball"),
           reply(channel, ts, t("messages.errors.bigimage")),
         ]);
       }
