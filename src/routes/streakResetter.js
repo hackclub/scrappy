@@ -5,6 +5,7 @@ import { setStatus } from '../lib/profiles.js'
 import prisma from '../lib/prisma.js'
 import fetch from 'node-fetch'
 import { app } from "../app.js";
+import metrics from '../metrics.js';
 
 export default async (req, res) => {
   res.status(200).end()
@@ -76,6 +77,7 @@ export default async (req, res) => {
           })
         })
       }
+      metrics.increment("streak_reset", 1);
     }
   })
   // Calculate streaks to fix any errors
