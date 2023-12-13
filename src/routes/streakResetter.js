@@ -52,6 +52,7 @@ export default async (req, res) => {
         where: { slackID: user.slackID },
         data: { streakCount: 0 }
       })
+      metrics.increment("streak_reset", 1);
       if (user.displayStreak) {
         try {
           const info = await app.client.users.info({
@@ -77,7 +78,6 @@ export default async (req, res) => {
           })
         })
       }
-      metrics.increment("streak_reset", 1);
     }
   })
   // Calculate streaks to fix any errors
