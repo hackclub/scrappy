@@ -238,5 +238,5 @@ export default {
   quest: "quests",
   puzzmo: "puzzmo",
   "purple bubble": "purplebubble",
-  purplebubble:purplebubble
+  purplebubble: "purplebubble"
 };
