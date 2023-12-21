@@ -6,6 +6,7 @@ import { getUserRecord } from "./users.js";
 import { formatText } from "./utils.js";
 import { incrementStreakCount } from "./streaks.js";
 import { app } from "../app.js";
+import { getPageContent, getUrls, getAndUploadOgImage, extractOgUrl } from "./util.js";
 import metrics from "../metrics.js";
 
 export const createUpdate = async (files = [], channel, ts, user, text) => {
@@ -17,7 +18,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
 
   if (files.length > 0) {
     uploadItems = files.map(async (file) => {
-      const publicUrl = await getPublicFileUrl(file.url_private, channel, user);
+      let publicUrl = await getPublicFileUrl(file.url_private, channel, user);
       if (!publicUrl) {
         await Promise.all([
           react("remove", channel, ts, "beachball"),
@@ -43,6 +44,20 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
           reply(channel, ts, t("messages.errors.bigimage")),
         ]);
       }
+
+      // if there are no attachments, attempt to get some from the links in the text
+      const urls = getUrls(text);
+      for (const url of urls) {
+        const pageContent = await getPageContent(url);
+        const ogUrls = extractOgUrl(pageContent);
+
+        if (!ogUrls) continue;
+
+        let imageUri = await getAndUploadOgImage(ogUrls);
+        publicUrl = { url: imageUri };
+        break;
+      }
+
       attachments.push(publicUrl.url);
       if (publicUrl.muxId) {
         videos.push(publicUrl.muxId);
