@@ -1,6 +1,7 @@
 import emoji from "node-emoji";
 import { getUserRecord } from "./users.js";
 import { app } from "../app.js";
+import { v4 as uuidv4 } from "uuid";
 
 const replaceEmoji = (str) => emoji.emojify(str.replace(/::(.*):/, ":"));
 
@@ -63,8 +64,6 @@ export const getUrlFromString = (str) => {
   if (url.startsWith("<")) url = url.substring(1, url.length - 1);
   return url;
 };
-
-import { v4 as uuidv4 } from "uuid";
 
 // returns the urls that are in the text
 export function getUrls(text) {
