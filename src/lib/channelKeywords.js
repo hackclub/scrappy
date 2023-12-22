@@ -28,4 +28,5 @@ export default {
   C0168BR5PDE: "winter-hardware-wonderland", // #hardware-party
   CDJMS683D: "1234", // #counttoamillion
   CGVCSNLAJ: "first", // #frc
+  C064PGB86JE: "quests" // #quests
 };

@@ -54,4 +54,4 @@ In order to run Scrappy locally, you'll need to [join the Hack Club Slack](https
    - Click the toggle to enable events
    - Update the URL request URL to be `<your-ngrok-url>/api/slack/message`. An example would look like `https://ea61-73-68-194-110.ngrok.io/api/slack/message`
    - Save changes and reinstall the Slack app
-   - This will regenerate Scrappy's [oauth](https://api.slack.com/apps/A015DCRTT43/oauth?) tokens, so make sure to update these in the `.env` file
+   - This will regenerate Scrappy's [oauth](https://api.slack.com/apps/A015DCRTT43/oauth?) tokens, so make sure to update these in the `.env` file 

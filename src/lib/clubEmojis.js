@@ -2,5 +2,6 @@
 
 
 export default {
-	"lioncityhacks999999": "nlcs-singapore"
+	"lioncityhacks999999": "nlcs-singapore",
+	"quest": "quests"
 }

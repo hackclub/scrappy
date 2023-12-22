@@ -5,6 +5,7 @@ import { setStatus } from '../lib/profiles.js'
 import prisma from '../lib/prisma.js'
 import fetch from 'node-fetch'
 import { app } from "../app.js";
+import metrics from '../metrics.js';
 
 export default async (req, res) => {
   res.status(200).end()
@@ -51,6 +52,7 @@ export default async (req, res) => {
         where: { slackID: user.slackID },
         data: { streakCount: 0 }
       })
+      metrics.increment("streak_reset", 1);
       if (user.displayStreak) {
         try {
           const info = await app.client.users.info({
