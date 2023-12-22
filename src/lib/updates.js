@@ -50,6 +50,11 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     await Promise.all([
       react("remove", channel, ts, "beachball"),
       react("add", channel, ts, "x"),
+      app.client.chat.delete({
+        token: process.env.SLACK_USER_TOKEN,
+        channel,
+        ts
+      }),
       postEphemeral(channel, t("messages.delete", { text }), user)
     ]);
     metrics.increment("errors.file_upload", 1);
