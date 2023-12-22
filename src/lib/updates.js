@@ -31,6 +31,21 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     }),
   ])
 
+  // if there are no attachments, attempt to get from the first link having an og image 
+  const urls = getUrls(text);
+  if (urls) {
+    for (const url of urls) {
+      const pageContent = await getPageContent(url);
+      const ogUrls = extractOgUrl(pageContent);
+
+      if (!ogUrls) continue;
+
+      let imageUri = await getAndUploadOgImage(ogUrls);
+      attachments.push(imageUri);
+      break;
+    }
+  }
+
   if ((attachments.length + videos.length) === 0) {
     await Promise.all([
       react("remove", channel, ts, "beachball"),
