@@ -50,6 +50,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     await Promise.all([
       react("remove", channel, ts, "beachball"),
       react("add", channel, ts, "x"),
+      postEphemeral(channel, t("messages.delete", { text }), user)
     ]);
     metrics.increment("errors.file_upload", 1);
     return "error";
