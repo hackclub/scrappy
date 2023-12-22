@@ -32,6 +32,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   ])
 
   // if there are no attachments, attempt to get from the first link having an og image 
+  if (!text) return;
   const urls = getUrls(text);
   if (urls) {
     for (const url of urls) {
