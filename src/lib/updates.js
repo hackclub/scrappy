@@ -3,75 +3,58 @@ import { react, reply, postEphemeral } from "./slack.js";
 import { getPublicFileUrl } from "./files.js";
 import { t } from "./transcript.js";
 import { getUserRecord } from "./users.js";
-import { formatText } from "./utils.js";
+import { formatText, extractOgUrl, getAndUploadOgImage, getUrls, getPageContent } from "./utils.js";
 import { incrementStreakCount } from "./streaks.js";
 import { app } from "../app.js";
-import { getPageContent, getUrls, getAndUploadOgImage, extractOgUrl } from "./util.js";
 import metrics from "../metrics.js";
 
 export const createUpdate = async (files = [], channel, ts, user, text) => {
   let attachments = [];
   let videos = [];
   let videoPlaybackIds = [];
-
-  let uploadItems = [];
-
-  if (files.length > 0) {
-    uploadItems = files.map(async (file) => {
-      let publicUrl = await getPublicFileUrl(file.url_private, channel, user);
+  const upload = await Promise.all([
+    react("add", channel, ts, "beachball"),
+    ...files.map(async (file) => {
+      const publicUrl = await getPublicFileUrl(file.url_private, channel, user);
       if (!publicUrl) {
-        await Promise.all([
-          react("remove", channel, ts, "beachball"),
-          react("add", channel, ts, "x"),
-          reply(channel, ts, t("messages.errors.filetype")),
-        ]);
-        return "error";
+        await postEphemeral(channel, ts, t("messages.errors.filetype"), user)
+        return;
       } else if (publicUrl.url.toLowerCase().endsWith("heic")) {
-        await Promise.all([
-          react("remove", channel, ts, "beachball"),
-          react("add", channel, ts, "x"),
-          postEphemeral(channel, t("messages.errors.heic"), user),
-          app.client.chat.delete({
-            token: process.env.SLACK_USER_TOKEN,
-            channel,
-            ts,
-          }),
-        ]);
-        return "error";
-      } else if (publicUrl.url === "big boy") {
-        await Promise.all([
-          react("remove", channel, ts, "beachball"),
-          reply(channel, ts, t("messages.errors.bigimage")),
-        ]);
+        await postEphemeral(channel, t("messages.errors.heic"), user);
+        return;
       }
-
-      // if there are no attachments, attempt to get some from the links in the text
-      const urls = getUrls(text);
-      for (const url of urls) {
-        const pageContent = await getPageContent(url);
-        const ogUrls = extractOgUrl(pageContent);
-
-        if (!ogUrls) continue;
-
-        let imageUri = await getAndUploadOgImage(ogUrls);
-        publicUrl = { url: imageUri };
-        break;
-      }
-
       attachments.push(publicUrl.url);
       if (publicUrl.muxId) {
         videos.push(publicUrl.muxId);
         videoPlaybackIds.push(publicUrl.muxPlaybackId);
       }
-    })
+    }),
+  ])
+
+  // if there are no attachments, attempt to get from the first link having an og image 
+  const urls = getUrls(text);
+  if (urls) {
+    for (const url of urls) {
+      const pageContent = await getPageContent(url);
+      const ogUrls = extractOgUrl(pageContent);
+
+      if (!ogUrls) continue;
+
+      let imageUri = await getAndUploadOgImage(ogUrls);
+      attachments.push(imageUri);
+      break;
+    }
   }
 
-  uploadItems.unshift(react("add", channel, ts, "beachball"));
-  const upload = await Promise.all(uploadItems).then((values) => {
-    if (values[1] === "error" || (values.length < 2 && files.length > 0)) return "error";
-  });
+  if ((attachments.length + videos.length) === 0) {
+    await Promise.all([
+      react("remove", channel, ts, "beachball"),
+      react("add", channel, ts, "x"),
+    ]);
+    metrics.increment("errors.file_upload", 1);
+    return "error";
+  }
 
-  if (files.length > 0 && upload === "error") { metrics.increment("errors.file_upload", 1); return "error"; };
   let userRecord = await getUserRecord(user);
 
   const date = new Date().toLocaleString("en-US", {
@@ -127,4 +110,4 @@ export const deleteUpdate = async (ts) => {
       messageTimestamp: parseFloat(ts),
     },
   });
-}
+};
