@@ -87,7 +87,7 @@ messages:
         optin: Nice! I\'ll will start counting your streaks. from now on, they\'ll be in your status and on your scrapbook.
         optout: Cool beans, I\'ll stop counting your streaks.
   delete: |
-    WoooOOOAAAh there! You can only share images, audio files, or videos in <#${process.env.CHANNEL}>! I've deleted your message:
+    WoooOOOAAAh there! You can only share images, audio files, videos or links with previews in <#${process.env.CHANNEL}>! I've deleted your message:
 
     ${this.text}
 
