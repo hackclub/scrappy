@@ -72,7 +72,7 @@ export function getUrls(text) {
 }
 
 export function extractOgUrl(htmlDoc) {
-  const result = RegExp("og:image").exec(htmlDoc);
+  const result = RegExp("\"og:image\"").exec(htmlDoc);
 
   if (!result) return;
 
