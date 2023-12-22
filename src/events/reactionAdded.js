@@ -49,13 +49,9 @@ export default async ({ event }) => {
       );
     } else if (message) {
 
-      let update;
-
-      if (!message.files || message.files.length == 0) {
-        update = await createUpdate([], channel, ts, user, message.text);
-      } else {
-        update = await createUpdate(message.files, channel, ts, user, message.text);
-      }
+      let hasNoMediaFiles = !message.files || message.files.length == 0;
+      const files = hasNoMediaFiles ? [] : message.files;
+      const update = await createUpdate(files, channel, ts, user, message.text);
 
       message.reactions.forEach(async reaction => {
         if (
