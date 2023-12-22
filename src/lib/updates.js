@@ -3,7 +3,7 @@ import { react, reply, postEphemeral } from "./slack.js";
 import { getPublicFileUrl } from "./files.js";
 import { t } from "./transcript.js";
 import { getUserRecord } from "./users.js";
-import { formatText } from "./utils.js";
+import { formatText, extractOgUrl, getAndUploadOgImage, getUrls, getPageContent } from "./utils.js";
 import { incrementStreakCount } from "./streaks.js";
 import { app } from "../app.js";
 import metrics from "../metrics.js";
