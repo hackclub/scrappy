@@ -50,9 +50,9 @@ export const execute = (actionToExecute) => {
       const startTime = new Date().getTime();
       actionToExecute(slackObject, ...props)
         .then(() => {
-          const time = (new Date().getTime()) - startTime;
-          if (isCommandOrMessage) metrics.timing(metricKey, time);
-        });
+        const time = (new Date().getTime()) - startTime;
+        if (isCommandOrMessage) metrics.timing(metricKey, time);
+      });
       if (isCommandOrMessage) metrics.increment(metricMsg, 1);
     } catch (e) {
       const metricMsg = `errors.${metricKey}`;
