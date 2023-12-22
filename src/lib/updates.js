@@ -51,11 +51,13 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     await Promise.all([
       react("remove", channel, ts, "beachball"),
       react("add", channel, ts, "x"),
+      // delete message if no media files
       app.client.chat.delete({
         token: process.env.SLACK_USER_TOKEN,
         channel,
         ts
       }),
+      // notify user they need to include an image, video or link with preview
       postEphemeral(channel, t("messages.delete", { text }), user)
     ]);
     metrics.increment("errors.file_upload", 1);

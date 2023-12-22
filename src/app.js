@@ -97,10 +97,6 @@ app.event("user_change", execute(userChanged));
 
 app.event("message", execute(create));
 
-// app.message(subtype("file_share"), execute(create));
-
-// app.message(noFileCheck, execute(noFile));
-
 const messageChanged = (slackObject, ...props) => {
   if (slackObject.event.message.subtype == "tombstone") {
     execute(deleted)(slackObject, ...props);

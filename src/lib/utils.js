@@ -57,6 +57,11 @@ export const formatText = async (text) => {
 };
 
 export const getUrlFromString = (str) => {
+  /**
+   * source: https://github.com/huckbit/extract-urls/blob/dc958a658ebf9d86f4546092d5a3183e9a99eb95/index.js#L5
+   * 
+   * matches http,https,www and urls like raylib.com
+   */
   const urlRegex =
     /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
   let url = str.match(urlRegex)[0];
