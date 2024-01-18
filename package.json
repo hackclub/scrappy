@@ -16,7 +16,7 @@
   "dependencies": {
     "@mux/mux-node": "^7.3.5",
     "@prisma/client": "5.8.1",
-    "@slack/bolt": "^3.17.0",
+    "@slack/bolt": "^3.17.1",
     "airtable-plus": "^1.0.4",
     "aws-sdk": "^2.1536.0",
     "bottleneck": "^2.19.5",
