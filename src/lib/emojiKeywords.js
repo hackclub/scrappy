@@ -238,5 +238,8 @@ export default {
   quest: "quests",
   puzzmo: "puzzmo",
   "purple bubble": "purplebubble",
-  purplebubble: "purplebubble"
+  purplebubble: "purplebubble",
+  summit: "leaders-summit",
+  "summit vision": "summit-vision",
+  "apple vision": "summit-vision"
 };
