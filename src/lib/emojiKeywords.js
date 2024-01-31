@@ -241,5 +241,5 @@ export default {
   purplebubble: "purplebubble",
   summit: "leaders-summit",
   "summit vision": "summit-vision",
-  "apple vision": "summit-vision",
+  "apple vision": "summit-vision"
 };
