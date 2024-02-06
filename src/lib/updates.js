@@ -111,7 +111,7 @@ export const updateExistsTS = async (TS) =>
         messageTimestamp: parseFloat(TS),
       },
     })
-    .then((r) => r.length > 0);
+    .then((r) => r ? r.length > 0 : false);
 
 export const deleteUpdate = async (ts) => {
   return await prisma.updates.deleteMany({
