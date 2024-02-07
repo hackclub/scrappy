@@ -9,6 +9,19 @@ import metrics from '../metrics.js';
 
 export default async (req, res) => {
   res.status(200).end()
+  try {
+    const users = await prisma.accounts.findMany({
+      where: {
+        streakCount: {
+          gt: 0
+        }
+      }
+    })
+    console.log(users);
+  } catch (err) {
+    console.log("Failed with reason -> ", err);
+    return;
+  }
   const users = await prisma.accounts.findMany({
     where: {
       streakCount: {
@@ -56,11 +69,11 @@ export default async (req, res) => {
       if (user.displayStreak) {
         try {
           const info = await app.client.users.info({
-            user: user.slackID 
+            user: user.slackID
           });
-          if(!info.is_admin) await setStatus(userId, '', '')
+          if (!info.is_admin) await setStatus(userId, '', '')
         }
-        catch(e) {
+        catch (e) {
           app.client.chat.postMessage({
             channel: "USNPNJXNX",
             text: t("messages.errors.zach"),
@@ -124,18 +137,18 @@ export default async (req, res) => {
     yesterday.setDate(now.getDate() - 1)
     yesterday.setHours(0)
     yesterday.setMinutes(0)
-    while(createdDate >= yesterday) {
+    while (createdDate >= yesterday) {
       streak++
       k++
       yesterday.setDate(yesterday.getDate() - 1)
       let newCreatedDate = new Date(user.updates[k]?.postTime)
-      while(createdDate.toDateString() == newCreatedDate.toDateString()){
+      while (createdDate.toDateString() == newCreatedDate.toDateString()) {
         k++
         newCreatedDate = new Date(user.updates[k]?.postTime)
       }
       createdDate = newCreatedDate
     }
-    if(streak > 0 && streak > user.streakCount){
+    if (streak > 0 && streak > user.streakCount) {
       await prisma.accounts.update({
         where: { slackID: user.slackID },
         data: { streakCount: streak }
