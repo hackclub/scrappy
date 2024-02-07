@@ -104,14 +104,23 @@ export const updateExists = async (updateId) =>
     })
     .then((r) => r.length > 0);
 
-export const updateExistsTS = async (TS) =>
-  prisma.updates
+export const updateExistsTS = async (TS) => {
+
+  try {
+    const result = await prisma.updates.findMany({ where: { messageTimestamp: parseFloat(TS) } })
+    console.log("updates exists -> ", result);
+  } catch (err) {
+    console.log("Failed with reason -> ", err);
+  }
+
+  return prisma.updates
     .findMany({
       where: {
         messageTimestamp: parseFloat(TS),
       },
     })
-    .then((r) => r ? r.length > 0 : false);
+    .then((r) => r.length > 0)
+}
 
 export const deleteUpdate = async (ts) => {
   return await prisma.updates.deleteMany({
