@@ -17,7 +17,6 @@ Scrappy provides some helpful commands in Slack. These commands are also documen
 - `/scrappy-setdomain`: links a custom domain to your scrapbook profile, e.g. [https://zachlatta.com](https://zachlatta.com)
 - `/scrappy-setusername`: change your profile username
 - `/scrappy-setaudio`: links an audio file to your Scrapbook. [See an example here](https://scrapbook.hackclub.com/matthew)!
-- `/scrappy-setwebhook`: create a Scrappy Webhook we will make a blank fetch request to this URL every time you post
 - `/scrappy-webring`: adds or removes someone to your webring
 - _Remove_ a post: delete the Slack message and Scrappy will automatically update for you
 - _Edit_ a post: edit the Slack message and it will automatically update for you
