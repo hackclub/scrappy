@@ -58,10 +58,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-2.0.2.tgz#d9fae00a2d5cb40f92cfe64b47ad749fbc38f917"
   integrity sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==
 
-"@mux/mux-node@^8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-8.0.0.tgz#f887806d3a4dbffb08c08551991f44255537ebf5"
-  integrity sha512-v1QzZ/XE6LW1NB62M5lXaBUtirThUIsMRZdhEBhUNIoGi7bDIy+LlO7dyOERF2kXEtBnEnMnlJsemKyIWYftFQ==
+"@mux/mux-node@^8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-8.2.0.tgz#5ba98bb3eaa8e706e677dc77706aff55ba9e63a1"
+  integrity sha512-N1FNlseCyV5LChzmxLzeqWz1d57e2ca2DXKUVUflyObwqxDLPyWnGNYrF+AxWQ5zsJGU9QdKk9CLujNht2CVyg==
   dependencies:
     "@types/node" "^18.11.18"
     "@types/node-fetch" "^2.6.4"
