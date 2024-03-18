@@ -18,7 +18,7 @@
     "@prisma/client": "5.10.2",
     "@slack/bolt": "^3.17.1",
     "airtable-plus": "^1.0.4",
-    "aws-sdk": "^2.1574.0",
+    "aws-sdk": "^2.1579.0",
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0-rc.12",
     "date-season": "^0.0.2",
