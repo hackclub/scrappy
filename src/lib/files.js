@@ -64,7 +64,6 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
       method: "POST",
       body: form,
     }).then((r) => r.text());
-    console.log(Video);
     const asset = await mux.video.assets.create({
       input: uploadedUrl,
       playback_policy: "public",
