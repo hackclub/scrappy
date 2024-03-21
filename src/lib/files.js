@@ -8,10 +8,10 @@ import { v4 as uuidv4 } from "uuid";
 import fetch from "node-fetch";
 import FormData from "form-data";
 
-const { Video } = new Mux(
-  process.env.MUX_TOKEN_ID,
-  process.env.MUX_TOKEN_SECRET
-);
+const mux = new Mux({
+  tokenId: process.env.MUX_TOKEN_ID,
+  tokenSecret: process.env.MUX_TOKEN_SECRET
+});
 
 const isFileType = (types, fileName) =>
   types.some((el) => fileName.toLowerCase().endsWith(el));
@@ -40,7 +40,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
     if (isVideo) {
       postEphemeral(channel, t("messages.errors.bigvideo"), user);
       await timeout(30000);
-      const asset = await Video.Assets.create({
+      const asset = await mux.video.assets.create({
         input: directUrl,
         playback_policy: "public",
       });
@@ -64,7 +64,8 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
       method: "POST",
       body: form,
     }).then((r) => r.text());
-    const asset = await Video.Assets.create({
+    console.log(Video);
+    const asset = await mux.video.assets.create({
       input: uploadedUrl,
       playback_policy: "public",
     });
