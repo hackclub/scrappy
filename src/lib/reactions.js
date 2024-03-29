@@ -10,18 +10,31 @@ export const getReactionRecord = async (emoji, updateId) =>
     },
   });
 
-export const reactBasedOnKeywords = (channel, message, ts) => {
-  Object.keys(emojiKeywords).forEach(async (keyword) => {
-    try {
-       if (
-        message?.toLowerCase().search(new RegExp("\\b" + keyword + "\\b", "gi")) !== -1
-      ) {
+export const reactBasedOnKeywords = async (channel, message, ts) => {
+  for (const [keyword, emojiName] of Object.entries(emojiKeywords)) {
+    if (message?.toLowerCase().includes(keyword.toLowerCase())) {
+      try {
         await react("add", channel, ts, emojiKeywords[keyword]);
+
+        const update = await prisma.updates.findFirst({
+          where: { messageTimestamp: parseFloat(ts) },
+        });
+
+        if (update) {
+          const reactionExists = await getReactionRecord(emojiName, update.id);
+
+          if (!reactionExists) {
+            await prisma.emojiReactions.create({
+              data: {
+                updateId: update.id,
+                emojiTypeName: emojiName,
+              },
+            });
+          }
+        }
+      } catch (e) {
+        console.error(`Error processing keyword '${keyword}':`, e);
       }
     }
-    catch (e) {
-      console.log(message)
-      console.log(e)
-    }
-  });
+  }
 };
