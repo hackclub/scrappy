@@ -17,8 +17,8 @@ export const react = async (addOrRemove, channel, ts, reaction) => {
         messageTimestamp: parseFloat(ts),
       },
     });
-    const emojiRecord = await getEmojiRecord(reaction);
 
+    const emojiRecord = await getEmojiRecord(reaction);
     if (update && emojiRecord) {
       if (addOrRemove === 'add') {
         const exists = await emojiExists(reaction, update.id);
@@ -39,10 +39,9 @@ export const react = async (addOrRemove, channel, ts, reaction) => {
         });
       }
     }
-
-    metrics.increment(`success.react`, 1);
+    metrics.increment(`success.react.${addOrRemove}`, 1);
   } catch (error) {
-    metrics.increment(`errors.react`, 1);
+    metrics.increment(`errors.react.${addOrRemove}`, 1);
   }
 };
 
