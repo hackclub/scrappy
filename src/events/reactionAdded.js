@@ -33,28 +33,6 @@ export default async ({ event }) => {
     await reactBasedOnKeywords(channel, message.text, ts);
     await react("remove", channel, ts, "beachball");
     await react("add", channel, ts, SEASON_EMOJI);
-
-   /* // sync season emoji to the update
-    const emojiRecord = await getEmojiRecord(SEASON_EMOJI);
-    const update = await prisma.updates.findFirst({
-      where: {
-        messageTimestamp: parseFloat(ts),
-      },
-    });
-
-    if (update) {
-      const reactionExists = await emojiExists(SEASON_EMOJI, update.id);
-      console.log(`Does emoji reaction exist for ${SEASON_EMOJI}?`, reactionExists);
-
-      if (!reactionExists) {
-        await prisma.emojiReactions.create({
-          data: {
-            updateId: update.id,
-            emojiTypeName: emojiRecord.name,
-          },
-        });
-      }
-    }*/
     return;
   }
   // If someone reacted with a Scrappy emoji in a non-#scrapbook channel, then maybe upload it.

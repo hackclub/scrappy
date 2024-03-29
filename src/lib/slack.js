@@ -40,9 +40,9 @@ export const react = async (addOrRemove, channel, ts, reaction) => {
       }
     }
 
-    metrics.increment(`success.react.${addOrRemove}`, 1);
+    metrics.increment(`success.react`, 1);
   } catch (error) {
-    metrics.increment(`errors.react.${addOrRemove}`, 1);
+    metrics.increment(`errors.react`, 1);
   }
 };
 

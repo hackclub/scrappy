@@ -7,7 +7,6 @@ import { t } from "./transcript.js";
 import { SEASON_EMOJI } from "./seasons.js";
 import channelKeywords from "./channelKeywords.js";
 import { reactBasedOnKeywords } from "./reactions.js";
-import { getEmojiRecord, emojiExists } from "../lib/emojis.js";
 import { setStatus } from "./profiles.js";
 import metrics from "../metrics.js";
 
@@ -48,26 +47,6 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
     await react("remove", channel, ts, "beachball"); // remove beachball react
     await react("add", channel, ts, SEASON_EMOJI);
 
- /*   // sync season emoji to the update
-    const emojiRecord = await getEmojiRecord(SEASON_EMOJI);
-    const update = await prisma.updates.findFirst({
-      where: {
-        messageTimestamp: parseFloat(ts),
-      },
-    });
-
-    if (update) {
-      const reactionExists = await emojiExists(SEASON_EMOJI, update.id);
-
-      if (!reactionExists) {
-        await prisma.emojiReactions.create({
-          data: {
-            updateId: update.id,
-            emojiTypeName: emojiRecord.name,
-          },
-        });
-      }
-    } */
     if (typeof channelKeywords[channel] !== "undefined")
       await react("add", channel, ts, channelKeywords[channel]);
     await reactBasedOnKeywords(channel, message, ts);
