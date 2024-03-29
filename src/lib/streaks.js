@@ -51,18 +51,14 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
 
     // sync season emoji to the update
     const emojiRecord = await getEmojiRecord(SEASON_EMOJI);
-    console.log(`Emoji record for ${SEASON_EMOJI}:`, emojiRecord);
-
     const update = await prisma.updates.findFirst({
       where: {
         messageTimestamp: parseFloat(ts),
       },
     });
-    console.log(`Update record for message ${ts}:`, update);
 
     if (update) {
       const reactionExists = await emojiExists(SEASON_EMOJI, update.id);
-      console.log(`Does emoji reaction exist for ${SEASON_EMOJI}?`, reactionExists);
 
       if (!reactionExists) {
         await prisma.emojiReactions.create({
@@ -71,10 +67,6 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
             emojiTypeName: emojiRecord.name,
           },
         });
-        console.log(`Created emoji reaction in database:`, reactionCreateResult);
-      }
-      else {
-        console.log(`Emoji reaction already exists for ${SEASON_EMOJI}`);
       }
     }
     if (typeof channelKeywords[channel] !== "undefined")
