@@ -7,6 +7,7 @@ import { t } from "./transcript.js";
 import { SEASON_EMOJI } from "./seasons.js";
 import channelKeywords from "./channelKeywords.js";
 import { reactBasedOnKeywords } from "./reactions.js";
+import { getEmojiRecord, emojiExists } from "../lib/emojis.js";
 import { setStatus } from "./profiles.js";
 import metrics from "../metrics.js";
 
