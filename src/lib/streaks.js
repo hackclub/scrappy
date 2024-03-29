@@ -47,9 +47,8 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
       "https://scrapbook.hackclub.com/" + userRecord.username;
     await react("remove", channel, ts, "beachball"); // remove beachball react
     await react("add", channel, ts, SEASON_EMOJI);
-    console.log(`Added ${SEASON_EMOJI} reaction to message ${ts} in channel ${channel}`);
 
-    // sync season emoji to the update
+ /*   // sync season emoji to the update
     const emojiRecord = await getEmojiRecord(SEASON_EMOJI);
     const update = await prisma.updates.findFirst({
       where: {
@@ -68,7 +67,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
           },
         });
       }
-    }
+    } */
     if (typeof channelKeywords[channel] !== "undefined")
       await react("add", channel, ts, channelKeywords[channel]);
     await reactBasedOnKeywords(channel, message, ts);

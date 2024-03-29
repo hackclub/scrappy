@@ -1,5 +1,7 @@
 import { app } from "../app.js";
 import metrics from "../metrics.js"
+import prisma from "../lib/prisma.js";
+import { getEmojiRecord, emojiExists } from "./emojis.js";
 
 // ex. react('add', 'C248d81234', '12384391.12231', 'beachball')
 export const react = async (addOrRemove, channel, ts, reaction) => {
@@ -9,9 +11,38 @@ export const react = async (addOrRemove, channel, ts, reaction) => {
       name: reaction,
       timestamp: ts,
     });
-    metrics.increment("success.react", 1);
-  } catch {
-    metrics.increment("errors.react", 1);
+
+    const update = await prisma.updates.findFirst({
+      where: {
+        messageTimestamp: parseFloat(ts),
+      },
+    });
+    const emojiRecord = await getEmojiRecord(reaction);
+
+    if (update && emojiRecord) {
+      if (addOrRemove === 'add') {
+        const exists = await emojiExists(reaction, update.id);
+        if (!exists) {
+          await prisma.emojiReactions.create({
+            data: {
+              updateId: update.id,
+              emojiTypeName: emojiRecord.name,
+            },
+          });
+        }
+      } else if (addOrRemove === 'remove') {
+        await prisma.emojiReactions.deleteMany({
+          where: {
+            updateId: update.id,
+            emojiTypeName: emojiRecord.name,
+          },
+        });
+      }
+    }
+
+    metrics.increment(`success.react.${addOrRemove}`, 1);
+  } catch (error) {
+    metrics.increment(`errors.react.${addOrRemove}`, 1);
   }
 };
 

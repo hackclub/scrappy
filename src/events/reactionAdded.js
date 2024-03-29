@@ -34,7 +34,7 @@ export default async ({ event }) => {
     await react("remove", channel, ts, "beachball");
     await react("add", channel, ts, SEASON_EMOJI);
 
-    // sync season emoji to the update
+   /* // sync season emoji to the update
     const emojiRecord = await getEmojiRecord(SEASON_EMOJI);
     const update = await prisma.updates.findFirst({
       where: {
@@ -54,7 +54,7 @@ export default async ({ event }) => {
           },
         });
       }
-    }
+    }*/
     return;
   }
   // If someone reacted with a Scrappy emoji in a non-#scrapbook channel, then maybe upload it.

@@ -16,7 +16,7 @@ export const reactBasedOnKeywords = async (channel, message, ts) => {
       try {
         await react("add", channel, ts, emojiKeywords[keyword]);
 
-        const update = await prisma.updates.findFirst({
+   /*     const update = await prisma.updates.findFirst({
           where: { messageTimestamp: parseFloat(ts) },
         });
 
@@ -31,7 +31,7 @@ export const reactBasedOnKeywords = async (channel, message, ts) => {
               },
             });
           }
-        }
+        }*/
       } catch (e) {
         console.error(`Error processing keyword '${keyword}':`, e);
       }
