@@ -137,10 +137,10 @@
   dependencies:
     "@prisma/debug" "5.12.1"
 
-"@slack/bolt@^3.17.1":
-  version "3.17.1"
-  resolved "https://registry.yarnpkg.com/@slack/bolt/-/bolt-3.17.1.tgz#97afcd3f79869591f82bb77ee4e8383607f4be79"
-  integrity sha512-N+4WxpkM59RXi7BL3IXUtENnn9cF7TOBn7ttaHpgvlnjUaro+yQyY60arXTlP4ytVDFJ1w0mSdfftcM17h+i2w==
+"@slack/bolt@^3.18.0":
+  version "3.18.0"
+  resolved "https://registry.yarnpkg.com/@slack/bolt/-/bolt-3.18.0.tgz#e19dcee8cc5917569bf0806db8dc0c54c98680bd"
+  integrity sha512-A7bDi5kY50fS6/nsmURkQdO3iMxD8aX/rA+m1UXEM2ue2z4KijeQtx2sOZ4YkJQ/h7BsgTQM0CYh3qqmo+m5sQ==
   dependencies:
     "@slack/logger" "^4.0.0"
     "@slack/oauth" "^2.6.2"
