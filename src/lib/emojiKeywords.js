@@ -3,6 +3,8 @@ export default {
   OSF: "osf",
   hooray: "tada",
   arrived: "package",
+  bin: "rac_yap",
+  raccoon: "rac_yap",
   draw: "pencil2",
   art: "art",
   paint: "art",
