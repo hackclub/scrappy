@@ -16,7 +16,7 @@ export const timeout = (ms) => {
 export const sample = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 export const getNow = (tz) => {
-  const date = new Date().toLocaleString("en-US", { timeZone: tz });
+  const date = new Date().toLocaleString("en-US", { timeZone: tz ?? undefined });
   return new Date(date).toISOString();
 };
 
@@ -69,7 +69,7 @@ export const getUrlFromString = (str) => {
 export function getUrls(text) {
   /**
    * source: https://github.com/huckbit/extract-urls/blob/dc958a658ebf9d86f4546092d5a3183e9a99eb95/index.js#L5
-   * 
+   *
    * matches http,https,www and urls like raylib.com including scrapbook.hackclub.com
    */
   const matcher = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()'@:%_\+.~#?!&//=]*)/gi;
