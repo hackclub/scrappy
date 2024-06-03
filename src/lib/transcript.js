@@ -37,7 +37,6 @@ const evalTranscript = (target, vars = {}) => {
     t,
   };
   return function () {
-    console.log("Target = ", target);
     return eval("`" + target + "`");
   }.call(context);
 };
