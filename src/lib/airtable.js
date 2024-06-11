@@ -10,9 +10,9 @@ export function getSubcribedApps() {
     base("Update Listeners").select({
         maxRecords: 100,
         view: "Grid view"
-    }).eachPage((records, nextPage) => {
+    }).eachPage((airtableRecords, nextPage) => {
         // adding all records to the records list
-        records.forEach(record => {
+        airtableRecords.forEach(record => {
             records.push({ app: record.get("App"), endpoint: record.get("Endpoint"), status: record.get("Status") });
         });
 
