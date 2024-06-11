@@ -18,8 +18,8 @@ export function getSubcribedApps() {
 
         // get the next set of records
         nextPage();
-    }).catch(err => {
-        throw err;
+    }, (err) => {
+        if (err) throw err
     });
     return records;
 }
