@@ -86,6 +86,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   const messageText = await formatText(text);
 
   const userInfo = app.client.users.info({
+    token: process.env.SLACK_BLOT_TOKEN,
     user: userRecord.slackID
   });
 
@@ -96,7 +97,6 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     userInfo,
     channel
   };
-
  
 
   const update = await prisma.updates.create({
