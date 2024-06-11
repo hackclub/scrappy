@@ -89,13 +89,15 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   const subcribers = await getSubcribedApps();
 
   for (const subcriber of subcribers) {
-    fetch(subcriber.endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(updateInfo)
-    })
+    try {
+      await fetch(subcriber.endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updateInfo)
+      });
+    } catch { } // silently fail to not crash app
   }
 
   const update = await prisma.updates.create({
