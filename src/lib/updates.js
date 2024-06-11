@@ -7,7 +7,7 @@ import { formatText, extractOgUrl, getAndUploadOgImage, getUrls, getPageContent 
 import { incrementStreakCount } from "./streaks.js";
 import { app } from "../app.js";
 import metrics from "../metrics.js";
-import { getSubcribedApps } from "./airtable.js";
+import { base } from "./airtable.js"
 
 export const createUpdate = async (files = [], channel, ts, user, text) => {
   let attachments = [];
