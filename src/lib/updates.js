@@ -97,6 +97,28 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     channel
   };
 
+ 
+
+  const update = await prisma.updates.create({
+    data: {
+      accountsID: userRecord.id,
+      accountsSlackID: userRecord.slackID,
+      postTime: convertedDate,
+      messageTimestamp: parseFloat(ts),
+      text: messageText,
+      attachments: attachments,
+      muxAssetIDs: videos,
+      muxPlaybackIDs: videoPlaybackIds,
+      isLargeVideo: attachments.some(
+        (attachment) => attachment.url === "https://i.imgur.com/UkXMexG.mp4"
+      ),
+      channel: channel,
+    },
+  });
+
+  metrics.increment("new_post", 1);
+  await incrementStreakCount(user, channel, messageText, ts);
+
   // send a copy of the updates to the subcribers
   base("Update Listeners").select({
     maxRecords: 100,
@@ -120,25 +142,6 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     nextPage();
   });
 
-  const update = await prisma.updates.create({
-    data: {
-      accountsID: userRecord.id,
-      accountsSlackID: userRecord.slackID,
-      postTime: convertedDate,
-      messageTimestamp: parseFloat(ts),
-      text: messageText,
-      attachments: attachments,
-      muxAssetIDs: videos,
-      muxPlaybackIDs: videoPlaybackIds,
-      isLargeVideo: attachments.some(
-        (attachment) => attachment.url === "https://i.imgur.com/UkXMexG.mp4"
-      ),
-      channel: channel,
-    },
-  });
-
-  metrics.increment("new_post", 1);
-  await incrementStreakCount(user, channel, messageText, ts);
   return update;
 };
 
