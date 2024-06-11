@@ -122,7 +122,8 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   // send a copy of the updates to the subcribers
   base("Update Listeners").select({
     maxRecords: 100,
-    view: "Grid view"
+    view: "Grid view",
+    filterByFormula: "NOT({Status} = 'Inactive')",
   }).eachPage((records, nextPage) => {
     records.forEach(async record => {
       const subcriber = { app: record.get("App"), endpoint: record.get("Endpoint"), status: record.get("Status") };
