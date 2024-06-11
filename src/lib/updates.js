@@ -87,6 +87,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
 
   // at this point updates can be created and saved
   const subcribers = await getSubcribedApps();
+  console.log("got subcribers", subcribers);
 
   for (const subcriber of subcribers) {
     try {
