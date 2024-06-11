@@ -1,4 +1,8 @@
 import Airtable from "airtable";
+import { config } from "dotenv";
+
+// load environment variables
+config();
 
 // set the api key
 const base = new Airtable({ 
