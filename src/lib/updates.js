@@ -80,7 +80,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
 
   const updateInfo = {
     messageText,
-    postTime,
+    postTime: convertedDate,
     attachments,
     userInfo
   };
