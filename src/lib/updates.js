@@ -82,7 +82,8 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     messageText,
     postTime: convertedDate,
     attachments,
-    userInfo
+    userInfo,
+    channel
   };
 
   // send a copy of the updates to the subcribers
