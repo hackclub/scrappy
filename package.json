@@ -17,6 +17,7 @@
     "@mux/mux-node": "^8.7.1",
     "@prisma/client": "5.14.0",
     "@slack/bolt": "^3.18.0",
+    "airtable": "^0.12.2",
     "airtable-plus": "^1.0.4",
     "aws-sdk": "^2.1637.0",
     "bottleneck": "^2.19.5",
