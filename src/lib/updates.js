@@ -7,6 +7,18 @@ import { formatText, extractOgUrl, getAndUploadOgImage, getUrls, getPageContent 
 import { incrementStreakCount } from "./streaks.js";
 import { app } from "../app.js";
 import metrics from "../metrics.js";
+import { config } from "dotenv";
+import Airtable from "airtable";
+
+// load environment variables
+config()
+
+// initialize the airtable base
+const base = new Airtable({ 
+  apiKey: process.env.PLUGINS_AIRTABLE_API_KEY,
+}).base(process.env.PLUGINS_AIRTABLE_BASE_ID);
+
+
 
 export const createUpdate = async (files = [], channel, ts, user, text) => {
   let attachments = [];
