@@ -8,7 +8,7 @@ console.log("airtable plugins api key", process.env.PLUGINS_AIRTABLE_API_KEY)
 console.log("airtbale plugins base id ", process.env.PLUGINS_AIRTABLE_BASE_ID)
 
 // set the api key
-const base = new Airtable({ 
+export const base = new Airtable({ 
     apiKey: process.env.PLUGINS_AIRTABLE_API_KEY,
 }).base(process.env.PLUGINS_AIRTABLE_BASE_ID);
 

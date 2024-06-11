@@ -85,21 +85,25 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     userInfo
   };
 
-  // at this point updates can be created and saved
-  const subcribers = await getSubcribedApps();
-  console.log("got subcribers", subcribers);
+  // send a copy of the updates to the subcribers
+  base("Update Listeners").select({
+    maxRecords: 100,
+    view: "Grid view"
+  }).eachPage((records, nextPage) => {
+    records.forEach(async record => {
+      const subcriber = { app: record.get("App"), endpoint: record.get("Endpoint"), status: record.get("Status") };
+      try {
+        await fetch(subcriber.endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(updateInfo)
+        });
+      } catch { } // silently fail to not crash app
 
-  for (const subcriber of subcribers) {
-    try {
-      await fetch(subcriber.endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(updateInfo)
-      });
-    } catch { } // silently fail to not crash app
-  }
+    });
+  });
 
   const update = await prisma.updates.create({
     data: {
