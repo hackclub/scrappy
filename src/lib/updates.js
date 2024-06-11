@@ -1,5 +1,6 @@
 import prisma from "./prisma.js";
 import { react, reply, postEphemeral } from "./slack.js";
+import { app } from "../app.js";
 import { getPublicFileUrl } from "./files.js";
 import { t } from "./transcript.js";
 import { getUserRecord } from "./users.js";
@@ -7,6 +8,7 @@ import { formatText, extractOgUrl, getAndUploadOgImage, getUrls, getPageContent 
 import { incrementStreakCount } from "./streaks.js";
 import { app } from "../app.js";
 import metrics from "../metrics.js";
+import { getSubcribedApps } from "./airtable.js";
 
 export const createUpdate = async (files = [], channel, ts, user, text) => {
   let attachments = [];
@@ -72,6 +74,30 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
 
   const convertedDate = new Date(date).toISOString();
   const messageText = await formatText(text);
+
+  const userInfo = app.client.users.info({
+    user: userRecord.slackID
+  });
+
+  const updateInfo = {
+    messageText,
+    postTime,
+    attachments,
+    userInfo
+  };
+
+  // at this point updates can be created and saved
+  const subcribers = await getSubcribedApps();
+
+  for (const subcriber of subcribers) {
+    fetch(subcriber.endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updateInfo)
+    })
+  }
 
   const update = await prisma.updates.create({
     data: {
