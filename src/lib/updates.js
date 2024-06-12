@@ -10,9 +10,6 @@ import metrics from "../metrics.js";
 import { config } from "dotenv";
 import Airtable from "airtable";
 
-// load environment variables
-config()
-
 // initialize the airtable base
 const base = new Airtable({ 
   apiKey: process.env.PLUGINS_AIRTABLE_API_KEY,
@@ -86,7 +83,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   const messageText = await formatText(text);
 
   const userInfo = app.client.users.info({
-    token: process.env.SLACK_BOT_TOKEN,
+    token: process.env.SLACK_USER_TOKEN,
     user: userRecord.slackID
   });
 
