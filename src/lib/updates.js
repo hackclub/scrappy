@@ -83,7 +83,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   const messageText = await formatText(text);
 
   const userInfo = app.client.users.info({
-    token: process.env.SLACK_USER_TOKEN,
+    token: process.env.SLACK_BOT_TOKEN,
     user: userRecord.slackID
   });
 
