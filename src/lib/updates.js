@@ -85,19 +85,13 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   const convertedDate = new Date(date).toISOString();
   const messageText = await formatText(text);
 
-  const userInfo = app.client.users.info({
-    user: userRecord.slackID
-  });
-
   const updateInfo = {
     messageText,
     postTime: convertedDate,
     attachments,
-    userInfo,
+    userName: userRecord.slack.profile.display_name,
     channel
   };
-
- 
 
   const update = await prisma.updates.create({
     data: {
