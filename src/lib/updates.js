@@ -82,6 +82,8 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   const convertedDate = new Date(date).toISOString();
   const messageText = await formatText(text);
 
+  console.log("user record ", userRecord);
+  console.log("slack bot token", process.env.SLACK_BOT_TOKEN);
   const userInfo = app.client.users.info({
     token: process.env.SLACK_BOT_TOKEN,
     user: userRecord.slackID
