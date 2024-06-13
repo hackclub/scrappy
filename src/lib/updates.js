@@ -89,7 +89,10 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     messageText,
     postTime: ts,
     attachments,
-    userName: userRecord.slack.profile.display_name,
+    user: {
+      slackID: userRecord.slackID,
+      name: userRecord.slack.profile.display_name
+    },
     channel
   };
 
