@@ -34,16 +34,23 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   // if there are no attachments, attempt to get from the first link having an og image 
   if (!text) return;
   const urls = getUrls(text);
-  if (urls) {
+  if (urls && urls.length > 0) {
     for (const url of urls) {
-      const pageContent = await getPageContent(url);
-      const ogUrls = extractOgUrl(pageContent);
+      try {
+        const pageContent = await getPageContent(url);
+        const ogUrls = extractOgUrl(pageContent);
 
-      if (!ogUrls) continue;
+        if (!ogUrls) continue;
 
-      let imageUri = await getAndUploadOgImage(ogUrls);
-      attachments.push(imageUri);
-      break;
+        let imageUri = await getAndUploadOgImage(ogUrls);
+        if (!imageUri) {
+          attachments.push(imageUri);
+          break;
+        }
+      } catch {
+        console.error(`Error processing URL ${url}:`, error);
+        continue;
+      }
     }
   }
 

@@ -100,16 +100,21 @@ export async function getPageContent(page) {
 }
 
 export async function getAndUploadOgImage(url) {
-  const file = await fetch(url);
-  let blob = await file.blob();
-  const form = new FormData();
-  form.append("file", blob, `${uuidv4()}.png`);
+  try {
+    const file = await fetch(url);
+    let blob = await file.blob();
+    const form = new FormData();
+    form.append("file", blob, `${uuidv4()}.png`);
 
-  const response = await fetch("https://bucky.hackclub.com", {
-    method: "POST",
-    body: form
-  });
+    const response = await fetch("https://bucky.hackclub.com", {
+      method: "POST",
+      body: form
+    });
 
-  const responseContent = await response.text();
-  return responseContent;
+    const responseContent = await response.text();
+    return responseContent;
+  } catch (error) {
+    console.error('Error fetching or uploading file:', error);
+    return 'An error occurred';
+  }
 }
