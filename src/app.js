@@ -44,7 +44,14 @@ export const execute = (actionToExecute) => {
     }
 
     let isCommandOrMessage = slackObject.payload.command || slackObject.payload.message;
-    const metricKey = slackObject.payload.command;
+    const payload = slackObject.payload;
+    let metricKey;
+    if (payload.type === "message" && payload.subtype) {
+      metricKey = payload.subtype;
+    } else {
+      metricKey = payload.type;
+    }
+
     try {
       const metricMsg = `success.${metricKey}`;
       const startTime = new Date().getTime();
@@ -58,7 +65,7 @@ export const execute = (actionToExecute) => {
       const metricMsg = `errors.${metricKey}`;
       if (isCommandOrMessage) metrics.increment(metricMsg, 1);
       console.log(e);
-      app.client.chat.postMessage({
+      await app.client.chat.postMessage({
         channel: "C04ULNY90BC",
         text: t("error", { e }),
         parse: "mrkdwn",
