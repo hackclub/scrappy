@@ -7,10 +7,8 @@ This is triggered when a new post shows up in the #scrapbook channel
 
 import { createUpdate } from "../lib/updates.js";
 
-export default async (props) => {
-  console.log("got properties from slack", props);
-  const { event } = props;
-  if (event.thread_ts || event.channel != process.env.CHANNEL) return;
+export default async ({ message, event }) => {
+  if (message.subtype || event.thread_ts || event.channel != process.env.CHANNEL) return;
   const { files = [], channel, ts, user, text, thread_ts } = event;
   if (!thread_ts) await createUpdate(files, channel, ts, user, text);
 };
