@@ -24,7 +24,6 @@ import reactionAdded from "./events/reactionAdded.js";
 import reactionRemoved from "./events/reactionAdded.js";
 import { commands } from "./commands/commands.js";
 import metrics from "./metrics.js";
-import e from "express";
 
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -45,15 +44,7 @@ export const execute = (actionToExecute) => {
     }
 
     let isCommandOrMessage = slackObject.payload.command || slackObject.payload.message;
-    let metricKey;
-
-    // send message subtype or payload type as metric
-    if (payload.type === "message" && payload.subtype) {
-      metricKey = slackObject.payload.subtype;
-    } else {
-      metricKey = slackObject.payload.type;
-    }
-
+    const metricKey = slackObject.payload.command;
     try {
       const metricMsg = `success.${metricKey}`;
       const startTime = new Date().getTime();
