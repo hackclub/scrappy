@@ -28,6 +28,8 @@ export default async ({ event }) => {
     });
     // return if there is no user with this slackID
     if (!user.profile.fields) return;
+    // return if we got an unsuccessful response from Slack
+    if (!info.ok) return; 
     await prisma.accounts.update({
       where: { slackID: user.id },
       data: {
