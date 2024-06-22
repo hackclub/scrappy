@@ -14,7 +14,7 @@ import Airtable from "airtable";
 config()
 
 // initialize the airtable base
-const base = new Airtable({ 
+const base = new Airtable({
   apiKey: process.env.PLUGINS_AIRTABLE_API_KEY,
 }).base(process.env.PLUGINS_AIRTABLE_BASE_ID);
 
@@ -43,7 +43,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     }),
   ])
 
-  // if there are no attachments, attempt to get from the first link having an og image 
+  // if there are no attachments, attempt to get from the first link having an og image
   if (!text) return;
   const urls = getUrls(text);
   if (urls && urls.length > 0) {
@@ -59,7 +59,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
           attachments.push(imageUri);
           break;
         }
-      } catch {
+      } catch (error) {
         console.error(`Error processing URL ${url}:`, error);
         continue;
       }
