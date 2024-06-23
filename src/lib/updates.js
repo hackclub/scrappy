@@ -55,7 +55,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
         if (!ogUrls) continue;
 
         let imageUri = await getAndUploadOgImage(ogUrls);
-        if (!imageUri) {
+        if (imageUri) {
           attachments.push(imageUri);
           break;
         }
