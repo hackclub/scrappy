@@ -57,7 +57,6 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
         let imageUri = await getAndUploadOgImage(ogUrls);
         if (imageUri) {
           attachments.push(imageUri);
-          break;
         }
       } catch (error) {
         console.error(`Error processing URL ${url}:`, error);
