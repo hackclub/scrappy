@@ -19,7 +19,7 @@
     "@slack/bolt": "^3.18.0",
     "airtable": "^0.12.2",
     "airtable-plus": "^1.0.4",
-    "aws-sdk": "^2.1642.0",
+    "aws-sdk": "^2.1646.0",
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0-rc.12",
     "date-season": "^0.0.2",
