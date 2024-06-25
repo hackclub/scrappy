@@ -139,12 +139,16 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
           },
           body: JSON.stringify(updateInfo)
         });
-      } catch { } // silently fail to not crash app
+        metrics.increment("success.send_post_update", 1);
+      } catch { metrics.increment("errors.send_post_update", 1); } // silently fail to not crash app
 
     });
 
     // load the next set of documents
     nextPage();
+  }, (error) => {
+    if (error) metrics.increment("errors.airtable_get_post_listeners", 1);
+      metrics.increment("success.airtable_get_post_listeners", 1);
   });
 
   return update;
