@@ -28,8 +28,30 @@ import metrics from "./metrics.js";
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
 });
+
+let requestCount = 0;
+const MAX_REQUESTS_PER_MINUTE = 1000;
+setInterval(() => {
+  // reset the request count
+  requestCount = 0;
+}, 60 * 1000);
+
+function rateLimitMiddleware(request, response, next) {
+  console.log("requested url", request.url)
+  requestCount += 1;
+
+  console.log("Intercepting requests");
+  if (requestCount >= MAX_REQUESTS_PER_MINUTE) {
+    console.log("RATE LIMITING");
+    response.status(429).end();
+  }
+  // call next middleware in the stack if any
+  next();
+}
+
 receiver.router.use(bodyParser.urlencoded({ extended: true }));
 receiver.router.use(bodyParser.json());
+receiver.app.use(rateLimitMiddleware);
 
 export const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -38,6 +60,13 @@ export const app = new App({
 });
 
 export const execute = (actionToExecute) => {
+
+  // console.log("Intercepting slack event");
+  // // count the request
+  // requestsCount += 1;
+
+  // if (requestsCount >= MAX_REQUESTS_PER_MINUTE) return async (_) => {}
+
   return async (slackObject, ...props) => {
     if (slackObject.ack) {
       await slackObject.ack();
