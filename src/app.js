@@ -61,7 +61,7 @@ export const app = new App({
 
 export const execute = (actionToExecute) => {
 
-  // console.log("Intercepting slack event");
+  console.log("Intercepting slack event");
   // // count the request
   // requestsCount += 1;
 
