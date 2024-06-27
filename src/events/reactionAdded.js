@@ -12,6 +12,7 @@ const limiter = new Bottleneck({ maxConcurrent: 1 });
 import channelKeywords from "../lib/channelKeywords.js";
 import clubEmojis from "../lib/clubEmojis.js";
 import { commands } from "../commands/commands.js";
+import metrics from "../metrics.js";
 
 export default async ({ event }) => {
   const { item, user, reaction, item_user } = event;
@@ -51,6 +52,10 @@ export default async ({ event }) => {
 
       let hasNoMediaFiles = !message.files || message.files.length == 0;
       const files = hasNoMediaFiles ? [] : message.files;
+
+      // log reaction used to create the update
+      metrics.increment(`referrer.reaction.${reaction}`, 1);
+
       const update = await createUpdate(files, channel, ts, user, message.text);
 
       message.reactions.forEach(async reaction => {
@@ -78,6 +83,8 @@ export default async ({ event }) => {
       postEphemeral(channel, t("messages.errors.anywhere.files"), user);
       return;
     }
+
+    metrics.increment(`referrer.reaction.${reaction}`, 1);
     await createUpdate(message.files, channel, ts, item_user, message.text);
   }
   limiter.schedule(async () => {
