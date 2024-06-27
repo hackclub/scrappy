@@ -24,6 +24,20 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   let attachments = [];
   let videos = [];
   let videoPlaybackIds = [];
+
+  const channelInfo = await app.client.conversations.info({
+    token: process.env.SLACK_BOT_TOKEN,
+    channel
+  });
+
+  if (channelInfo.ok) {
+    let channelName = channelInfo.channel.name_normalized;
+    metrics.increment(`referrer.channel.${channelName}`, 1);
+  } else {
+    metrics.increment("errors.get_channel_name", 1);
+    console.error(channelInfo.error);
+  }
+
   const upload = await Promise.all([
     react("add", channel, ts, "beachball"),
     ...files.map(async (file) => {
