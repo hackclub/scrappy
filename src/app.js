@@ -104,6 +104,13 @@ app.event("user_change", execute(userChanged));
 
 app.event("message", execute(create));
 
+app.event("message_deleted", messageDeletedPlaceholder);
+
+const messageDeletedPlaceholder = (slackObject, ...props) => {
+  console.log("slackobj event", slackObject.event);
+  // return execute(deleted)(slackObject, ...props);
+};
+
 const messageChanged = (slackObject, ...props) => {
   if (slackObject.event.message.subtype == "tombstone") {
     console.log("slackobj message", slackObject.event.message);
