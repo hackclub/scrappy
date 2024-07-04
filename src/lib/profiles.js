@@ -6,9 +6,17 @@ import metrics from "../metrics.js";
 
 export const setStatus = async (user, statusText, statusEmoji) => {
   try{
+    // don't set status for @zrl or @msw as they're slack owners
     if(user == "U0C7B14Q3" || user == "U0266FRGP") return false
-    const setProfile = app.client.users.profile.set({
+
+    // get user info
+    const userInfo = await app.client.users.info({
       token: process.env.SLACK_USER_TOKEN,
+      user,
+    });
+
+    const setProfile = app.client.users.profile.set({
+      token: userInfo.user.is_admin ? process.env.SLACK_ADMIN_TOKEN : process.env.SLACK_USER_TOKEN,
       user,
       profile: {
         status_text: statusText,
