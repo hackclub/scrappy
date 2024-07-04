@@ -6,9 +6,11 @@ This is triggered when a new post shows up in the #scrapbook channel
 */
 
 import { createUpdate } from "../lib/updates.js";
+import deleted from "./deleted.js";
 
 export default async ({ event }) => {
-  console.log("message message ", event);
+  if (event.subtype == "message_deleted") return await deleted({ event });
+
   if (event.thread_ts || event.channel != process.env.CHANNEL) return;
   const { files = [], channel, ts, user, text, thread_ts } = event;
   if (!thread_ts) await createUpdate(files, channel, ts, user, text);

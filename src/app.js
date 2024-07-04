@@ -104,12 +104,12 @@ app.event("user_change", execute(userChanged));
 
 app.event("message", execute(create));
 
-const messageDeletedPlaceholder = (slackObject, ...props) => {
-  console.log("slackobj event", slackObject.event);
-  // return execute(deleted)(slackObject, ...props);
-};
+// const messageDeletedPlaceholder = (slackObject, ...props) => {
+//   console.log("slackobj event", slackObject.event);
+//   // return execute(deleted)(slackObject, ...props);
+// };
 
-app.event("message_deleted", messageDeletedPlaceholder);
+// app.event("message_deleted", messageDeletedPlaceholder);
 
 const messageChanged = (slackObject, ...props) => {
   if (slackObject.event.message.subtype == "tombstone") {
