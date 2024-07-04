@@ -13,7 +13,8 @@ export default async ({ event }) => {
   console.log("message event", event);
   if (event.subtype == "message_deleted") {
     await deleted({ event });
-    postMessage(
+    // send ephemeral message to signal user the message was deleted
+    await postMessage(
       event.channel,
       "Your scrapbook update has been deleted :boom:",
       event.user
