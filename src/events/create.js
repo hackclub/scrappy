@@ -7,9 +7,18 @@ This is triggered when a new post shows up in the #scrapbook channel
 
 import { createUpdate } from "../lib/updates.js";
 import deleted from "./deleted.js";
+import { postEphemeral } from "../lib/slack.js";
 
 export default async ({ event }) => {
-  if (event.subtype == "message_deleted") return await deleted({ event });
+  console.log("message event", event);
+  if (event.subtype == "message_deleted") {
+    await deleted({ event });
+    postMessage(
+      event.channel,
+      "Your scrapbook update has been deleted :boom:",
+      event.user
+    )
+  }
 
   if (event.thread_ts || event.channel != process.env.CHANNEL) return;
   const { files = [], channel, ts, user, text, thread_ts } = event;
