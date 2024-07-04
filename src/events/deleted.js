@@ -47,6 +47,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
 };
 
 export default async ({ event }) => {
+  console.log("deleted event");
   try {
     const { channel, message, previous_message, deleted_ts } = event;
     const ts = deleted_ts || previous_message?.thread_ts;
