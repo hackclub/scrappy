@@ -113,7 +113,7 @@ app.event("message", execute(create));
 
 const messageChanged = (slackObject, ...props) => {
   if (slackObject.event.message.subtype == "tombstone") {
-    console.log("slackobj message", slackObject.event.message);
+    // console.log("slackobj message", slackObject.event.message);
     execute(deleted)(slackObject, ...props);
   } else {
     return execute(updated)(slackObject, ...props);
