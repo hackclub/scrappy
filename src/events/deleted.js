@@ -10,6 +10,8 @@ import metrics from "../metrics.js";
 const deleteThreadedMessages = async (ts, channel, user) => {
   try {
     let result = await app.client.conversations.replies({ channel, ts });
+    // results of conversation history
+    console.log("conversation history", result);
     await Promise.all(
       result.messages.map(async (msg) => {
         if (msg.ts != msg.thread_ts) {
@@ -18,6 +20,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
             channel,
             ts: msg.ts,
           });
+          console.log("deleted message", deleteM);
           return deleteM;
         } else {
           return null;
@@ -25,7 +28,9 @@ const deleteThreadedMessages = async (ts, channel, user) => {
       })
     );
     const userRecord = await getUserRecord(user);
+    console.log("user record", userRecord);
     const shouldUpdate = await shouldUpdateStreak(user, false);
+    console.log("should update", shouldUpdate);
     if (shouldUpdate) {
       const updatedStreakCount = userRecord.streakCount - 1;
       if (updatedStreakCount >= 0) {
@@ -36,6 +41,7 @@ const deleteThreadedMessages = async (ts, channel, user) => {
         displayStreaks(user, updatedStreakCount);
       }
     }
+    console.log("got to the point of post ephemeral");
     await postEphemeral(
       channel,
       `Your scrapbook update has been deleted :boom:`,
