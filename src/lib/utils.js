@@ -46,9 +46,10 @@ export const formatText = async (text) => {
           .get({ user: u.substring(2, u.length - 1) })
           .then(({ profile }) => profile.display_name || profile.real_name)
           .then((displayName) => (text = text.replace(u, `@${displayName}`)));
-      } else text = text.replace(u, `@${userRecord.username}`);
+      } else text = text.replace(u, ` @${userRecord.username} `);
     })
   );
+  console.log("transformed text", text);
   let channels = text.match(/<#[^|>]+\|\S+>/g) || [];
   channels.forEach(async (channel) => {
     const channelName = channel.split("|")[1].replace(">", "");
