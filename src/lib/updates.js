@@ -104,7 +104,6 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   });
 
   const convertedDate = new Date(date).toISOString();
-  console.log("got message text \n", text);
   const messageText = await formatText(text);
 
   const updateInfo = {

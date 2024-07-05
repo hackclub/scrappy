@@ -36,6 +36,7 @@ export const getDayFromISOString = (ISOString) => {
 export const formatText = async (text) => {
   text = replaceEmoji(text).replace("&amp;", "&");
   let users = text.replaceAll("><@", "> <@").match(/<@U\S+>/g) || [];
+  console.log("got users", users);
   await Promise.all(
     users.map(async (u) => {
       const uID = u.substring(2, u.length - 1);
