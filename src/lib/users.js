@@ -5,7 +5,7 @@ import { sample } from "./utils.js";
 export const getUserRecord = async (userId) => {
   let user
   try {
-    user = await app.client.users.profile.get({ user: userId });
+    user = await app.client.users.profile.get({ token: process.env.SLACK_USER_TOKEN, user: userId });
   }
   catch (e) {
     console.log(userId)
