@@ -62,6 +62,7 @@ export const getUserRecord = async (userId) => {
     }
   }
 
+  console.log("user record", record)
   // update the user email if they don't have one on their account
   if (!record.email) {
     await prisma.accounts.update({
