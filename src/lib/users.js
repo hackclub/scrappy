@@ -34,7 +34,7 @@ export const getUserRecord = async (userId) => {
         slackID: userId,
         username: `${username}${checkIfExists != null ? `-${userId}` : ""}`,
         streakCount: 0,
-        email: user.profile.fields.email,
+        email: user.profile.email,
         website: user.profile.fields["Xf5LNGS86L"]?.value || null,
         github: user.profile.fields["Xf0DMHFDQA"]?.value || null,
         newMember: true,
