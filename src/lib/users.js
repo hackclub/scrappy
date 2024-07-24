@@ -34,7 +34,7 @@ export const getUserRecord = async (userId) => {
         slackID: userId,
         username: `${username}${checkIfExists != null ? `-${userId}` : ""}`,
         streakCount: 0,
-        email: user.profile.fields.email,
+        email: user.profile.email,
         website: user.profile.fields["Xf5LNGS86L"]?.value || null,
         github: user.profile.fields["Xf0DMHFDQA"]?.value || null,
         newMember: true,
@@ -61,8 +61,8 @@ export const getUserRecord = async (userId) => {
       });
     }
   } else {
-    console.log("user record", record)
-    console.log("user profile", user.profile)
+    console.log("user id", userId, "user record", record)
+    console.log("user profile", user.profile.email)
       // update the user email if they don't have one on their account
       if (!record.email) {
         await prisma.accounts.update({
@@ -70,7 +70,7 @@ export const getUserRecord = async (userId) => {
             slackID: userId
           },
           data: {
-            email: user.profile.fields.email
+            email: user.profile.email
           }
         })
       }
