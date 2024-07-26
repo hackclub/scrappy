@@ -71,6 +71,10 @@ export const getUserRecord = async (userId) => {
             where: { slackID: userId },
             data: { email: user.profile.email }
           })
+          console.log({
+            where: { slackID: userId },
+            data: { email: user.profile.email }
+          })
           console.log("SHOULD HAVE UPDATED DB");
         } catch (err) {
           throw err;
