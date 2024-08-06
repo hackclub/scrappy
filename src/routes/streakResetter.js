@@ -20,6 +20,7 @@ export default async (req, res) => {
     await timeout(500)
     const userId = user.slackID
     const timezone = user.timezone
+    console.log("user", user, " does not have a timezone", user.timezone)
     const username = user.username
     let now = new Date(getNow(timezone))
     now.setHours(now.getHours() - 4)
@@ -48,10 +49,13 @@ export default async (req, res) => {
       console.log(
         `It's been more than a day since ${username} last posted. Resetting their streak...`
       )
-      await prisma.accounts.update({
+      const updatedUser = await prisma.accounts.update({
         where: { slackID: user.slackID },
         data: { streakCount: 0 }
       })
+
+      console.log("updated user streak", updatedUser);
+
       metrics.increment("streak_reset", 1);
       if (user.displayStreak) {
         try {
