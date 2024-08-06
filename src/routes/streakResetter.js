@@ -6,7 +6,6 @@ import prisma from '../lib/prisma.js'
 import fetch from 'node-fetch'
 import { app } from "../app.js";
 import metrics from '../metrics.js';
-import { orderBy } from 'lodash';
 
 export default async (req, res) => {
   res.status(200).end()
