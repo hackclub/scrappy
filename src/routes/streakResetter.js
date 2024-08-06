@@ -6,6 +6,7 @@ import prisma from '../lib/prisma.js'
 import fetch from 'node-fetch'
 import { app } from "../app.js";
 import metrics from '../metrics.js';
+import { orderBy } from 'lodash';
 
 export default async (req, res) => {
   res.status(200).end()
@@ -34,7 +35,15 @@ export default async (req, res) => {
         }
       ]
     })
-    console.log("latest update", latestUpdate);
+    const _latestUpdate = await prisma.updates.findFirst({
+      where: {
+        accountsSlackID: userId
+      },
+      orderBy: {
+        postTime: 'desc'
+      }
+    });
+    console.log("latest update", _latestUpdate);
     const createdTime = latestUpdate?.postTime
     if (!createdTime) {
       // @msw: this fixes a bug where a user creates their first post then deletes it before streak resetter runs
