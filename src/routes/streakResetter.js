@@ -34,6 +34,7 @@ export default async (req, res) => {
         }
       ]
     })
+    console.log("latest update", latestUpdate);
     const createdTime = latestUpdate?.postTime
     if (!createdTime) {
       // @msw: this fixes a bug where a user creates their first post then deletes it before streak resetter runs
