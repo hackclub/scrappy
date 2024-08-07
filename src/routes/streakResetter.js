@@ -43,15 +43,12 @@ export default async (req, res) => {
       }
     });
    
-    const updatesDesc = await prisma.updates.findMany({
+    const firstUpdate = await prisma.updates.findFirst({
       where: {
         accountsSlackID: userId
-      },
-      orderBy: {
-        postTime: 'desc'
       }
-    });
-    console.log("updates from user in desc", updatesDesc);
+    })   
+    console.log("first update by this user", firstUpdate);
 
     console.log("latest update", _latestUpdate);
     const createdTime = latestUpdate?.postTime
