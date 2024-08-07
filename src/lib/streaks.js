@@ -20,15 +20,24 @@ export const shouldUpdateStreak = async (userId, increment) => {
       accountsSlackID: userRecord.slackID,
     },
   });
+  // increment = true | usually when they added a new update in slack
+  // increment = false | usually when an update is deleted from slack
+  /*
+    We increment the user's streak if their last post was not made on the same day as today.
+
+    The post we consider to be their last to increment their streak is the the most recent post they made before today. 
+    The time difference between their last and today should tell us whether or not to increment their streak.
+    
+    We are going to decrement their streak if the post the post they made today had incremented their streak.
+  */
   const createdTime = increment
     ? latestUpdates[1]?.postTime
     : latestUpdates[0]?.postTime;
-  console.log("latest updates", latestUpdates);
-  console.log("latest updates 1", latestUpdates[1], "latest updates 0", latestUpdates[0])
+
   const today = getDayFromISOString(getNow(userRecord.timezone));
   const createdDay = getDayFromISOString(createdTime);
   return (
-    today != createdDay || (increment ? !latestUpdates[1] : !latestUpdates[0])
+    today != createdDay
   );
 };
 
