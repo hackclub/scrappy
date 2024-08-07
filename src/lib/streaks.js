@@ -23,6 +23,8 @@ export const shouldUpdateStreak = async (userId, increment) => {
   const createdTime = increment
     ? latestUpdates[1]?.postTime
     : latestUpdates[0]?.postTime;
+  console.log("latest updates", latestUpdates);
+  console.log("latest updates 1", latestUpdates[1], "latest updates 0", latestUpdates[0])
   const today = getDayFromISOString(getNow(userRecord.timezone));
   const createdDay = getDayFromISOString(createdTime);
   return (
