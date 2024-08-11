@@ -21,7 +21,7 @@ import updated from "./events/updated.js";
 import forget from "./events/forget.js";
 import noFile, { noFileCheck } from "./events/noFile.js";
 import reactionAdded from "./events/reactionAdded.js";
-import reactionRemoved from "./events/reactionAdded.js";
+import reactionRemoved from "./events/reactionRemoved.js";
 import { commands } from "./commands/commands.js";
 import metrics from "./metrics.js";
 
