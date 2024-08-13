@@ -21,7 +21,7 @@
     "airtable-plus": "^1.0.4",
     "aws-sdk": "^2.1668.0",
     "bottleneck": "^2.19.5",
-    "cheerio": "^1.0.0-rc.12",
+    "cheerio": "^1.0.0",
     "date-season": "^0.0.2",
     "dotenv": "^16.4.5",
     "eslint": "^9.9.0",
