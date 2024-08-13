@@ -142,10 +142,10 @@
   dependencies:
     "@prisma/debug" "5.18.0"
 
-"@slack/bolt@^3.19.0":
-  version "3.19.0"
-  resolved "https://registry.yarnpkg.com/@slack/bolt/-/bolt-3.19.0.tgz#f49d6162a9029e43e42a4fdb9beb4450a282880f"
-  integrity sha512-P5Yup/PbO8sE5xsuqkBkpSPkxEkfWZ6yo5ZlmBGxRhhoU1usUSU2w0bgZoiDX4WFm7ZX+3x2Dyf4VMa9kzfmVQ==
+"@slack/bolt@^3.20.0":
+  version "3.20.0"
+  resolved "https://registry.yarnpkg.com/@slack/bolt/-/bolt-3.20.0.tgz#94f0545b9cc1eeceb2b5ef0b17c78af5ff208748"
+  integrity sha512-JXQe4oGredj/RREIG8GM/DAZ+B89NuVpdmgejzo9yx4uSE2sUX/NisyMv0B6xJ8cnlLbGpB5gCgbksdQZT/2CQ==
   dependencies:
     "@slack/logger" "^4.0.0"
     "@slack/oauth" "^2.6.2"
@@ -155,7 +155,7 @@
     "@types/express" "^4.16.1"
     "@types/promise.allsettled" "^1.0.3"
     "@types/tsscmp" "^1.0.0"
-    axios "^1.6.0"
+    axios "^1.7.3"
     express "^4.16.4"
     path-to-regexp "^6.2.1"
     please-upgrade-node "^3.2.0"
@@ -530,12 +530,12 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^1.6.0, axios@^1.6.5:
-  version "1.6.5"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.5.tgz#2c090da14aeeab3770ad30c3a1461bc970fb0cd8"
-  integrity sha512-Ii012v05KEVuUoFWmMW/UQv9aRIc3ZwkWDcM+h5Il8izZCtRVpDUfwpoFf7eOtajT3QiGR4yDUx7lPqHJULgbg==
+axios@^1.6.5, axios@^1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.3.tgz#a1125f2faf702bc8e8f2104ec3a76fab40257d85"
+  integrity sha512-Ar7ND9pU99eJ9GpoGQKhKf58GpUOgnzuaB7ueNQ5BMi0p+LZ5oaEnfF999fAArcTIBwXTCHAmGcHOZJaWPq9Nw==
   dependencies:
-    follow-redirects "^1.15.4"
+    follow-redirects "^1.15.6"
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 
@@ -1236,7 +1236,7 @@ flatted@^3.2.9:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.3.1.tgz#21db470729a6734d4997002f439cb308987f567a"
   integrity sha512-X8cqMLLie7KsNUDSdzeN8FYK9rEt4Dt67OsG/DNGnYTSDBG4uFAJFBnUeiV+zCVAvwFy56IjM9sH51jVaEhNxw==
 
-follow-redirects@^1.15.4:
+follow-redirects@^1.15.6:
   version "1.15.6"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
   integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
