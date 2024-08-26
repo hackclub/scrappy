@@ -3,6 +3,7 @@ import { getUserRecord } from "../lib/users.js";
 import Bottleneck from "bottleneck";
 import prisma from "../lib/prisma.js";
 import clubEmojis from "../lib/clubEmojis.js";
+import { getEmojiRecord } from "../lib/emojis.js";
 
 const limiter = new Bottleneck({
   maxConcurrent: 1,
@@ -33,6 +34,7 @@ export default async ({ event }) => {
           id: reactionRecord.id,
         },
       });
+      const emojiRecord = await getEmojiRecord(reaction.emojiTypeName);
       if (Object.keys(clubEmojis).includes(emojiRecord.name)){
         console.log({
             updateId: update.id,
