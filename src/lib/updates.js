@@ -177,14 +177,21 @@ export const updateExists = async (updateId) =>
     })
     .then((r) => r.length > 0);
 
-export const updateExistsTS = async (TS) =>
-  prisma.updates
+export const updateExistsTS = async (TS) => {
+  try {
+  const r = await prisma.updates
     .findMany({
       where: {
         messageTimestamp: parseFloat(TS),
       },
     })
-    .then((r) => r.length > 0);
+    return r.length > 0;
+  } catch {
+    // THis is naughty i know
+    return false;
+  }
+}
+
 
 export const deleteUpdate = async (ts) => {
   return await prisma.updates.deleteMany({
