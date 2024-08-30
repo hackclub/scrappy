@@ -45,9 +45,6 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
       if (!publicUrl) {
         await postEphemeral(channel, ts, t("messages.errors.filetype"), user)
         return;
-      } else if (publicUrl.url.toLowerCase().endsWith("heic")) {
-        await postEphemeral(channel, t("messages.errors.heic"), user);
-        return;
       }
       attachments.push(publicUrl.url);
       if (publicUrl.muxId) {
