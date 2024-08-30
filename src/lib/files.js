@@ -7,6 +7,8 @@ import { timeout } from "./utils.js";
 import { v4 as uuidv4 } from "uuid";
 import fetch from "node-fetch";
 import FormData from "form-data";
+import convert from "heic-convert";
+import stream from "node:stream";
 
 const mux = new Mux({
   tokenId: process.env.MUX_TOKEN_ID,
@@ -17,12 +19,12 @@ const isFileType = (types, fileName) =>
   types.some((el) => fileName.toLowerCase().endsWith(el));
 
 export const getPublicFileUrl = async (urlPrivate, channel, user) => {
-  const fileName = urlPrivate.split("/").pop();
+  let fileName = urlPrivate.split("/").pop();
   const fileId = urlPrivate.split("-")[2].split("/")[0];
-  const isImage = isFileType(["jpg", "jpeg", "png", "gif", "webp"], fileName);
+  const isImage = isFileType(["jpg", "jpeg", "png", "gif", "webp", "heic"], fileName);
   const isAudio = isFileType(["mp3", "wav", "aiff", "m4a"], fileName);
   const isVideo = isFileType(["mp4", "mov", "webm"], fileName);
-  if (fileName.toLowerCase().endsWith("heic")) return { url: "heic" };
+  
   if (!(isImage || isAudio | isVideo)) return null;
   const file = await fetch(urlPrivate, {
     headers: {
@@ -30,6 +32,20 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
     },
   });
   let blob = await file.blob();
+  let mediaStream = blob.stream();
+  if (blob.type === "image/heic") {
+    const blobArrayBuffer = Buffer.from(await blob.arrayBuffer());
+    // convert the image buffer into a jpeg image
+    const outBuffer = await convert({
+      buffer: blobArrayBuffer,
+      format: "JPEG" 
+    });
+
+    // create a readable stream for upload
+    mediaStream = stream.Readable.from(outBuffer);
+
+    fileName = `./${uuidv4()}.jpeg`;
+  } 
   if (blob.size === 19) {
     const publicFile = app.client.files.sharedPublicURL({
       token: process.env.SLACK_USER_TOKEN,
@@ -56,7 +72,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
   }
   if (isVideo) {
     let form = new FormData();
-    form.append("file", blob.stream(), {
+    form.append("file", mediaStream, {
       filename: fileName,
       knownLength: blob.size,
     });
@@ -77,7 +93,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
   let uploadedImage = await S3.upload({
     Bucket: "scrapbook-into-the-redwoods",
     Key: `${uuidv4()}-${fileName}`,
-    Body: blob.stream(),
+    Body: mediaStream,
   }).promise();
   return {
     url: uploadedImage.Location,
