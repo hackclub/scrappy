@@ -1,4 +1,5 @@
 import S3 from "./s3.js";
+import { Upload } from "@aws-sdk/lib-storage";
 import Mux from "@mux/mux-node";
 import { app } from "../app.js";
 import { postEphemeral } from "./slack.js";
@@ -90,11 +91,17 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
       muxPlaybackId: asset.playback_ids[0].id,
     };
   }
-  let uploadedImage = await S3.upload({
-    Bucket: "scrapbook-into-the-redwoods",
-    Key: `${uuidv4()}-${fileName}`,
-    Body: mediaStream,
-  }).promise();
+
+  const uploads = new Upload({
+    client: S3,
+    params: {
+      Bucket: "scrapbook-into-the-redwoods",
+      Key: `${uuidv4()}-${fileName}`,
+      Body: mediaStream,
+    }
+  });
+  const uploadedImage = await uploads.done();
+
   return {
     url: uploadedImage.Location,
     muxId: null,
