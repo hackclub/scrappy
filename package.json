@@ -11,12 +11,13 @@
     "checkFormat": "prettier --check ."
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.637.0",
+    "@aws-sdk/lib-storage": "^3.637.0",
     "@mux/mux-node": "^8.8.0",
     "@prisma/client": "5.19.1",
     "@slack/bolt": "^3.21.1",
     "airtable": "^0.12.2",
     "airtable-plus": "^1.0.4",
-    "aws-sdk": "^2.1687.0",
     "bottleneck": "^2.19.5",
     "cheerio": "^1.0.0",
     "date-season": "^0.0.2",
