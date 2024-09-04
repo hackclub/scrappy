@@ -43,7 +43,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
     ...files.map(async (file) => {
       const publicUrl = await getPublicFileUrl(file.url_private, channel, user);
       if (!publicUrl) {
-        await postEphemeral(channel, ts, t("messages.errors.filetype"), user)
+        await postEphemeral(channel, t("messages.errors.filetype"), user, ts);
         return;
       }
       attachments.push(publicUrl.url);
