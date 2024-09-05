@@ -8,6 +8,7 @@ import { app } from "../app.js";
 import metrics from '../metrics.js';
 
 export default async (req, res) => {
+  console.log("User Agent", req.headers["user-agent"]);
   res.status(200).end()
   const users = await prisma.accounts.findMany({
     where: {
