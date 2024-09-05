@@ -87,65 +87,66 @@ export default async (req, res) => {
     }
   })
   // Calculate streaks to fix any errors
-  let twoDaysAhead = new Date()
-  twoDaysAhead.setDate(twoDaysAhead.getDate() + 2)
-  let threeDaysBehind = new Date()
-  threeDaysBehind.setDate(twoDaysAhead.getDate() - 3)
-  const usersToCalculate = await prisma.accounts.findMany({
-    include: {
-      updates: {
-        orderBy: {
-          postTime: 'desc',
-        },
-      }
-    },
-    where: {
-      updates: {
-        some: {
-          postTime: {
-            lte: twoDaysAhead,
-            gte: threeDaysBehind
-          },
-        }
-      }
-    },
-  })
-  usersToCalculate.forEach(async (user) => {
-    await timeout(500)
-    const userId = user.slackID
-    const timezone = user.timezone
-    const username = user.username
-    const latestUpdate = user.updates[0]
-    const createdTime = latestUpdate?.postTime
-    if (!createdTime) {
-      // @msw: this fixes a bug where a user creates their first post then deletes it before streak resetter runs
-      // this prevents trying to reset streaks based on a user without posts
-      return
-    }
-    let createdDate = new Date(createdTime)
-    let streak = 0
-    let k = 0
-    const now = new Date(getNow(timezone));
-    const yesterday = new Date(getNow(timezone))
-    yesterday.setDate(now.getDate() - 1)
-    yesterday.setHours(0)
-    yesterday.setMinutes(0)
-    while(createdDate >= yesterday) {
-      streak++
-      k++
-      yesterday.setDate(yesterday.getDate() - 1)
-      let newCreatedDate = new Date(user.updates[k]?.postTime)
-      while(createdDate.toDateString() == newCreatedDate.toDateString()){
-        k++
-        newCreatedDate = new Date(user.updates[k]?.postTime)
-      }
-      createdDate = newCreatedDate
-    }
-    if(streak > 0 && streak > user.streakCount){
-      await prisma.accounts.update({
-        where: { slackID: user.slackID },
-        data: { streakCount: streak }
-      })
-    }
-  })
+  // @Josias - Not sure what errors this fixes so I'm commenting this out
+  // let twoDaysAhead = new Date()
+  // twoDaysAhead.setDate(twoDaysAhead.getDate() + 2)
+  // let threeDaysBehind = new Date()
+  // threeDaysBehind.setDate(threeDaysBehind.getDate() - 3)
+  // const usersToCalculate = await prisma.accounts.findMany({
+  //   include: {
+  //     updates: {
+  //       orderBy: {
+  //         postTime: 'desc',
+  //       },
+  //     }
+  //   },
+  //   where: {
+  //     updates: {
+  //       some: {
+  //         postTime: {
+  //           lte: twoDaysAhead,
+  //           gte: threeDaysBehind
+  //         },
+  //       }
+  //     }
+  //   },
+  // })
+  // usersToCalculate.forEach(async (user) => {
+  //   await timeout(500)
+  //   const userId = user.slackID
+  //   const timezone = user.timezone
+  //   const username = user.username
+  //   const latestUpdate = user.updates[0]
+  //   const createdTime = latestUpdate?.postTime
+  //   if (!createdTime) {
+  //     // @msw: this fixes a bug where a user creates their first post then deletes it before streak resetter runs
+  //     // this prevents trying to reset streaks based on a user without posts
+  //     return
+  //   }
+  //   let createdDate = new Date(createdTime)
+  //   let streak = 0
+  //   let k = 0
+  //   const now = new Date(getNow(timezone));
+  //   const yesterday = new Date(getNow(timezone))
+  //   yesterday.setDate(now.getDate() - 1)
+  //   yesterday.setHours(0)
+  //   yesterday.setMinutes(0)
+  //   while(createdDate >= yesterday) {
+  //     streak++
+  //     k++
+  //     yesterday.setDate(yesterday.getDate() - 1)
+  //     let newCreatedDate = new Date(user.updates[k]?.postTime)
+  //     while(createdDate.toDateString() == newCreatedDate.toDateString()){
+  //       k++
+  //       newCreatedDate = new Date(user.updates[k]?.postTime)
+  //     }
+  //     createdDate = newCreatedDate
+  //   }
+  //   if(streak > 0 && streak > user.streakCount){
+  //     await prisma.accounts.update({
+  //       where: { slackID: user.slackID },
+  //       data: { streakCount: streak }
+  //     })
+  //   }
+  // })
 }
