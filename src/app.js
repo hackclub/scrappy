@@ -28,6 +28,15 @@ import metrics from "./metrics.js";
 const receiver = new ExpressReceiver({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
 });
+
+
+let requestCount = 0;
+const MAX_REQUESTS_PER_MINUTE = process.env.MAX_REQUESTS_PER_MINUTE;
+setInterval(() => {
+  // reset the request count
+  requestCount = 0;
+}, 60 * 1000);
+
 receiver.router.use(bodyParser.urlencoded({ extended: true }));
 receiver.router.use(bodyParser.json());
 
@@ -38,6 +47,10 @@ export const app = new App({
 });
 
 export const execute = (actionToExecute) => {
+  requestsCount += 1;
+
+  if (requestsCount >= MAX_REQUESTS_PER_MINUTE) return async (_) => {}
+
   return async (slackObject, ...props) => {
     if (slackObject.ack) {
       await slackObject.ack();
