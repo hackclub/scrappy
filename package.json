@@ -22,7 +22,7 @@
     "cheerio": "^1.0.0",
     "date-season": "^0.0.2",
     "dotenv": "^16.4.5",
-    "eslint": "^9.9.1",
+    "eslint": "^9.13.0",
     "express": "^4.21.1",
     "form-data": "^4.0.0",
     "heic-convert": "^2.1.0",
