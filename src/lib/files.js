@@ -21,6 +21,9 @@ const isFileType = (types, fileName) =>
 
 export const getPublicFileUrl = async (urlPrivate, channel, user) => {
   let fileName = urlPrivate.split("/").pop();
+
+  console.log("getting public file url for", fileName, urlPrivate);
+
   const fileId = urlPrivate.split("-")[2].split("/")[0];
   const isImage = isFileType(["jpg", "jpeg", "png", "gif", "webp", "heic"], fileName);
   const isAudio = isFileType(["mp3", "wav", "aiff", "m4a"], fileName);
@@ -32,9 +35,13 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
       Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
     },
   });
+
+  console.log("got file", file);
+
   let blob = await file.blob();
   let mediaStream = blob.stream();
   if (blob.type === "image/heic") {
+    console.log("attempt converting heic image");
     const blobArrayBuffer = Buffer.from(await blob.arrayBuffer());
     // convert the image buffer into a jpeg image
     const outBuffer = await convert({
@@ -54,6 +61,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
     });
     const pubSecret = publicFile.file.permalink_public.split("-").pop();
     const directUrl = `https://files.slack.com/files-pri/T0266FRGM-${fileId}/${fileName}?pub_secret=${pubSecret}`;
+    console.log("file direct url", directUrl);
     if (isVideo) {
       postEphemeral(channel, t("messages.errors.bigvideo"), user);
       await timeout(30000);
@@ -61,6 +69,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
         input: directUrl,
         playback_policy: "public",
       });
+      console.log("mux video asset", asset);
       return {
         url: "https://i.imgur.com/UkXMexG.mp4",
         muxId: asset.id,
@@ -85,6 +94,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
       input: uploadedUrl,
       playback_policy: "public",
     });
+    console.log("uploaded video location", uploadedUrl);
     return {
       url: uploadedUrl,
       muxId: asset.id,
@@ -102,6 +112,7 @@ export const getPublicFileUrl = async (urlPrivate, channel, user) => {
   });
   const uploadedImage = await uploads.done();
 
+  console.log("uploaded image location", uploadedImage.Location);
   return {
     url: uploadedImage.Location,
     muxId: null,
