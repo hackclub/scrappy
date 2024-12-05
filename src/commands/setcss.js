@@ -30,7 +30,7 @@ export default async ({ command, respond }) => {
         where: { slackID: user.slackID },
         data: { cssURL: url },
       });
-      await respond(t("messages.css.set"));
+      await respond(t("messages.css.set", { url }));
     }
   }
 };
