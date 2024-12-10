@@ -70,6 +70,7 @@ export const incrementStreakCount = (userId, channel, message, ts) =>
           },
         });
       }
+      console.log("setting new streak count to", updatedStreakCount);
       if (
         userRecord.maxStreaks < updatedStreakCount ||
         !userRecord.maxStreaks

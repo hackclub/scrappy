@@ -15,6 +15,7 @@ export default async ({ event }) => {
         (streakCount != statusEmojiCount && streakCount <= 7) ||
         ("7+" != statusEmojiCount && streakCount >= 8)
       ) {
+        console.log(streakCount, statusEmojiCount);
         setStatus(
           user.id,
           `I tried to cheat Scrappy because I’m a clown`,

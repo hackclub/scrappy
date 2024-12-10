@@ -95,6 +95,7 @@ export const createUpdate = async (files = [], channel, ts, user, text) => {
   }
 
   let userRecord = await getUserRecord(user);
+  console.log("user record", userRecord);
 
   const date = new Date().toLocaleString("en-US", {
     timeZone: userRecord.timezone,
