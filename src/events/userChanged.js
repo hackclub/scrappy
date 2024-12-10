@@ -8,7 +8,10 @@ export default async ({ event }) => {
   try {
     const { user } = event;
     const statusEmoji = user.profile.status_emoji;
-    if (statusEmoji?.includes("som-")) {
+    if (statusEmoji?.includes("som-") && 
+    // the character that follows "som-" MUST be a numbe
+    !Number.isNaN(parseInt(statusEmoji?.slice("som-".length)[0]))
+  ) {
       const statusEmojiCount = statusEmoji.split("-")[1].split(":")[0];
       const { streakCount } = await getUserRecord(user.id);
       if (
