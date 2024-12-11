@@ -8,7 +8,7 @@ export default async ({ event }) => {
   try {
     const { user } = event;
     const statusEmoji = user.profile.status_emoji;
-    if (statusEmoji?.includes("som-") && 
+    if (statusEmoji?.startsWith("som-") && 
     // the character that follows "som-" MUST be a numbe
     !Number.isNaN(parseInt(statusEmoji?.slice("som-".length)[0]))
   ) {
