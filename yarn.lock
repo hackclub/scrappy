@@ -708,22 +708,19 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/retry/-/retry-0.4.1.tgz#9a96ce501bc62df46c4031fbd970e3cc6b10f07b"
   integrity sha512-c7hNEllBlenFTHBky65mhq8WD2kbN9Q6gk0bTk8lSBvc554jpXSkST1iePudpt7+A/AQvuHs9EMqjHDXMY1lrA==
 
-"@mux/mux-node@^8.8.0":
-  version "8.8.0"
-  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-8.8.0.tgz#7c082cd6799db4104a762c6aab59581b53e31ced"
-  integrity sha512-7EMuTh62s3Ux+SrcKHoLvXgLDQzeHmbBnOf8xO9hEPLxU9SdV8XX7cqTkWnYlmVdP6ywIoBb4boQX2skI5qk5w==
+"@mux/mux-node@^9.0.1":
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/@mux/mux-node/-/mux-node-9.0.1.tgz#f39df56139fa2f700e920454b1804d25a219be65"
+  integrity sha512-+wSqwCkb3/RplJkhd35R44+Ov1pQTzXDJSCLF8yxBRodUL2uqG/ajCSix+miIiPNY+v/tx0rJ9+t6dxe2ZR/Dg==
   dependencies:
     "@types/node" "^18.11.18"
     "@types/node-fetch" "^2.6.4"
-    "@types/qs" "^6.9.7"
     abort-controller "^3.0.0"
     agentkeepalive "^4.2.1"
     form-data-encoder "1.7.2"
     formdata-node "^4.3.2"
     jose "^4.14.4"
     node-fetch "^2.6.7"
-    qs "^6.10.3"
-    web-streams-polyfill "^3.2.1"
 
 "@prisma/client@5.19.1":
   version "5.19.1"
@@ -1396,14 +1393,7 @@
     "@types/node" "*"
     form-data "^4.0.0"
 
-"@types/node@*", "@types/node@>=18.0.0":
-  version "20.9.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.9.1.tgz#9d578c610ce1e984adda087f685ace940954fe19"
-  integrity sha512-HhmzZh5LSJNS5O8jQKpJ/3ZcrrlG6L70hpGqMIAoM9YVD0YBRNWYsfwcXq8VnSjlNpCpgLzMXdiPo+dxcvSmiA==
-  dependencies:
-    undici-types "~5.26.4"
-
-"@types/node@>=18":
+"@types/node@*", "@types/node@>=18", "@types/node@>=18.0.0":
   version "22.8.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-22.8.5.tgz#a978fb6755dbb32889b0bc3e37554dbc04f261a6"
   integrity sha512-5iYk6AMPtsMbkZqCO1UGF9W5L38twq11S2pYWkybGHH2ogPUvXWNlQqJBzuEZWKj/WRH+QTeiv6ySWqJtvIEgA==
@@ -1422,7 +1412,7 @@
   dependencies:
     undici-types "~5.26.4"
 
-"@types/qs@*", "@types/qs@^6.9.7":
+"@types/qs@*":
   version "6.9.11"
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.11.tgz#208d8a30bc507bd82e03ada29e4732ea46a6bbda"
   integrity sha512-oGk0gmhnEJK4Yyk+oI7EfXsLayXatCWPHary1MtcmbAifkobT9cM9yutG/hZKIseOU0MqbIwQ/u2nn/Gb+ltuQ==
@@ -3292,7 +3282,7 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-qs@6.13.0, qs@^6.10.3:
+qs@6.13.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.13.0.tgz#6ca3bd58439f7e245655798997787b0d88a51906"
   integrity sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==
@@ -3748,11 +3738,6 @@ web-streams-polyfill@4.0.0-beta.3:
   version "4.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-4.0.0-beta.3.tgz#2898486b74f5156095e473efe989dcf185047a38"
   integrity sha512-QW95TCTaHmsYfHDybGMwO5IJIM93I/6vTRk+daHTWFPhwh+C8Cg7j7XyKrwrj8Ib6vYXe0ocYNrmzY4xAAN6ug==
-
-web-streams-polyfill@^3.2.1:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.3.2.tgz#32e26522e05128203a7de59519be3c648004343b"
-  integrity sha512-3pRGuxRF5gpuZc0W+EpwQRmCD7gRqcDOMt688KmdlDAgAyaB1XlN0zq2njfDNm44XVdIouE7pZ6GzbdyH47uIQ==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
