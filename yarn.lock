@@ -771,10 +771,10 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-4.6.0.tgz#3c7c9c46e678feefe7a2e5bb609d3dbd665ffb3f"
   integrity sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==
 
-"@slack/bolt@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@slack/bolt/-/bolt-4.0.1.tgz#111d9c2deb995bd0d5f325a443d90e0dc09f6435"
-  integrity sha512-JcBOe1xfgBxSjgRkoAiQLb5yy+IP/ve6pR+2iZNedyGxEWzGdfCGFIIl4/vug8w3a6U/fW1ArY/C/aQeHBdB5g==
+"@slack/bolt@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@slack/bolt/-/bolt-4.1.1.tgz#5fba71314954e2674912b576622b31b6d058f44d"
+  integrity sha512-Sc8QUnEHCPgRlwrMxmvOl4Vhr/7ZBDXvLR0ir6TO+W5MaDtPsrmWLxqLmb+OhCGSjDp3d4AxO6jdFlC3yNKtsg==
   dependencies:
     "@slack/logger" "^4.0.0"
     "@slack/oauth" "^3"
