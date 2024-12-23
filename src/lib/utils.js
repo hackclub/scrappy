@@ -1,4 +1,4 @@
-import emoji from "node-emoji";
+import * as emoji from "node-emoji";
 import { getUserRecord } from "./users.js";
 import { app } from "../app.js";
 import { v4 as uuidv4 } from "uuid";
