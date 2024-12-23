@@ -2,6 +2,8 @@ import * as emoji from "node-emoji";
 import { getUserRecord } from "./users.js";
 import { app } from "../app.js";
 import { v4 as uuidv4 } from "uuid";
+import { Upload } from "@aws-sdk/lib-storage"
+import S3 from "./s3.js";
 
 const replaceEmoji = (str) => emoji.emojify(str.replace(/::(.*):/, ":"));
 
@@ -99,17 +101,41 @@ export async function getPageContent(page) {
   return content;
 }
 
+async function uploadImageToS3(filename, blob) {
+  let formData = new FormData();
+  formData.append("file", blob, {
+    filename,
+    knownLength: blob.size
+  });
+
+  const uploads = new Upload({
+    client: S3,
+    params: {
+      Bucket: "scrapbook-into-the-redwoods",
+      Key: `${uuidv4()}-${filename}`,
+      Body: blob
+    }
+  });
+
+  const uploadedImage = await uploads.done();
+  return uploadedImage.Location;
+}
+
 export async function getAndUploadOgImage(url) {
   const file = await fetch(url);
   let blob = await file.blob();
   const form = new FormData();
   form.append("file", blob, `${uuidv4()}.${blob.type.split("/")[1]}`);
 
-  const response = await fetch("https://bucky.hackclub.com", {
-    method: "POST",
-    body: form
-  });
+  const imageUrl = await uploadImageToS3(`${uuidv4()}.${blob.type.split("/")[1]}`, blob);
 
-  const responseContent = await response.text();
-  return responseContent;
+  // const response = await fetch("https://bucky.hackclub.com", {
+  //   method: "POST",
+  //   body: form
+  // });
+
+  // const responseContent = await response.text();
+  // return responseContent;
+  console.log("got image url", imageUrl);
+  return imageUrl;
 }
