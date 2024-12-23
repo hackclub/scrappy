@@ -129,13 +129,5 @@ export async function getAndUploadOgImage(url) {
 
   const imageUrl = await uploadImageToS3(`${uuidv4()}.${blob.type.split("/")[1]}`, blob);
 
-  // const response = await fetch("https://bucky.hackclub.com", {
-  //   method: "POST",
-  //   body: form
-  // });
-
-  // const responseContent = await response.text();
-  // return responseContent;
-  console.log("got image url", imageUrl);
   return imageUrl;
 }
