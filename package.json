@@ -34,7 +34,7 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7",
+    "nodemon": "^3.1.9",
     "prettier": "3.4.2",
     "prisma": "5.19.1"
   }
