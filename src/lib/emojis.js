@@ -1,5 +1,5 @@
 import prisma from "../lib/prisma.js";
-import emoji from "node-emoji";
+import * as emoji from "node-emoji";
 import { app } from "../app.js";
 
 export const emojiExists = async (emoji, updateId) =>
