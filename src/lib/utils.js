@@ -103,7 +103,7 @@ export async function getAndUploadOgImage(url) {
   const file = await fetch(url);
   let blob = await file.blob();
   const form = new FormData();
-  form.append("file", blob, `${uuidv4()}.png`);
+  form.append("file", blob, `${uuidv4()}.${blob.type.split("/")[1]}`);
 
   const response = await fetch("https://bucky.hackclub.com", {
     method: "POST",
