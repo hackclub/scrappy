@@ -97,8 +97,8 @@ async function regenerateOGImages() {
 
   postsWithPotentiallyOGImages.forEach(async post => {
     console.log("Working on post", post.id);
-    // check if the post has an image that is hosted on `imgutil.s3.us-east-2.amazonaws.com`
-    const imageWasOnBucky = image => image.includes('imgutil.s3.us-east-2.amazonaws.com');
+    // check if the post has an image that is hosted on `imgutil.s3.us-east-2.amazonaws.com` and it's actually an image
+    const imageWasOnBucky = image => image.includes('imgutil.s3.us-east-2.amazonaws.com') && ["jpg", "jpeg", "png", "gif", "webp", "heic"].some(ext => image.toLowerCase().endsWith(ext))
     const attachmentsOnBucky = post.attachments.filter(attachment => imageWasOnBucky(attachment));
     const attachmentesNotOnBucky = post.attachments.filter(attachment => !imageWasOnBucky(attachment));
 
