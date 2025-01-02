@@ -67,42 +67,51 @@ async function uploadImageToS3(filename, blob) {
 }
 
 export async function getAndUploadOgImage(url) {
-  const file = await fetch(url);
-  let blob = await file.blob();
-  const form = new FormData();
-  form.append("file", blob, `${uuidv4()}.${blob.type.split("/")[1]}`);
+  try {
+    const file = await fetch(url);
+    let blob = await file.blob();
+    const form = new FormData();
+    form.append("file", blob, `${uuidv4()}.${blob.type.split("/")[1]}`);
 
-  const imageUrl = await uploadImageToS3(`${uuidv4()}.${blob.type.split("/")[1]}`, blob);
+    const imageUrl = await uploadImageToS3(`${uuidv4()}.${blob.type.split("/")[1]}`, blob);
 
-  return imageUrl;
+    return imageUrl;
+  } catch (error) {
+    throw error;
+  }
 }
 
-const prismaClient = new PrismaClient();
+async function processPosts() {
+  let processed = 0;
 
-/*
-In order to regenerate the OG images, I need to do the following
-*/
-
-async function regenerateOGImages() {
-  // this is the date when fallbacks to OG images was originally introduced
   const startDate = new Date("2023-12-22");
-
   const postsWithPotentiallyOGImages = await prismaClient.updates.findMany({
     where: {
       postTime: {
         gt: startDate
       }
-    }
-  });
+    },
+  }); 
 
-  postsWithPotentiallyOGImages.forEach(async post => {
+  while (processed <= postsWithPotentiallyOGImages.length) {
+    console.log("Processing posts", processed, "to", processed + 100);
+    await regenerateOGImages(postsWithPotentiallyOGImages.slice(processed, processed + 100));
+    processed += 100;
+  }
+}
+
+async function regenerateOGImages(posts) {
+  const prismaClient = new PrismaClient();
+  // this is the date when fallbacks to OG images was originally introduced
+
+  posts.forEach(async post => {
     console.log("Working on post", post.id);
     // check if the post has an image that is hosted on `imgutil.s3.us-east-2.amazonaws.com` and it's actually an image
     const imageWasOnBucky = image => image.includes('imgutil.s3.us-east-2.amazonaws.com') && ["jpg", "jpeg", "png", "gif", "webp", "heic"].some(ext => image.toLowerCase().endsWith(ext))
     const attachmentsOnBucky = post.attachments.filter(attachment => imageWasOnBucky(attachment));
     const attachmentesNotOnBucky = post.attachments.filter(attachment => !imageWasOnBucky(attachment));
 
-    if (attachmentsOnBucky.length === 0) return;
+    if (post.attachments.length > 0 && attachmentsOnBucky.length === 0) return;
 
     const urls = getUrls(post.text);
     if (!urls || urls.length === 0) return;
@@ -118,7 +127,7 @@ async function regenerateOGImages() {
         let imageUrl = await getAndUploadOgImage(ogUrls);
         return imageUrl;
       } catch (error) {
-        console.log("Failed to get page content for ", url);
+        console.log("Failed to update OG image", url, error);
         return null;
       }
     }));
