@@ -82,6 +82,7 @@ export async function getAndUploadOgImage(url) {
 }
 
 async function processPosts() {
+  const prismaClient = new PrismaClient();
   let processed = 0;
 
   const startDate = new Date("2023-12-22");
@@ -101,7 +102,6 @@ async function processPosts() {
 }
 
 async function regenerateOGImages(posts) {
-  const prismaClient = new PrismaClient();
   // this is the date when fallbacks to OG images was originally introduced
 
   posts.forEach(async post => {
