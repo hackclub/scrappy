@@ -149,4 +149,4 @@ async function regenerateOGImages(posts) {
   console.log("Done!");
 }
 
-regenerateOGImages();
+processPosts();
