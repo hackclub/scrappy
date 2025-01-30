@@ -67,7 +67,8 @@ export const getUserRecord = async (userId) => {
     }
   } else {
     // update the user email if they don't have one on their account
-      if (!record.email) {
+    console.log("got record", record);
+    if (!record.email) {
         await prisma.accounts.update({
           where: {
             slackID: userId
