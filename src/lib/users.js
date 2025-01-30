@@ -15,19 +15,12 @@ export const getUserRecord = async (userId) => {
   if (user.profile === undefined) return;
   // try to find if there's an existing user with the matching Slack ID or email
   // We should update their account
-  /*
-  let record = await prisma.accounts.findUnique({
+  let record = await prisma.accounts.findFirst({
     where: {
       OR: [
         { slackID: userId },
         { email: user.profile.email }
       ]
-    },
-  });
-  */
-  let record = await prisma.accounts.findUnique({
-    where: {
-      slackID: userId,
     },
   });
 
